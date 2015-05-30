@@ -1,0 +1,14 @@
+ <?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="3.4.0" method="upgrade">
+	<name>Activity Package</name>
+	<author>Vinh Nghi</author>
+	<authorEmail>hovnghi@gmail.com</authorEmail>
+	<creationDate>April 2015</creationDate>
+	<version>1.0.0</version>
+	<packagename>activity</packagename>
+	<description>Activity management package</description>
+	<files folder="packages">
+		<file type="component" id="com_activity">com_activity.zip</file>
+		<file type="library" id="activity">lib_activity.zip</file>
+	</files>
+</extension>

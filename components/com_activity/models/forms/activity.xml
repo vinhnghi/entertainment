@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_activity/models/fields">
+		<field name="id" type="text" class="readonly" label="ID"
+			description="" size="10" default="0" readonly="true" />
+
+		<field name="asset_id" type="hidden" filter="unset" />
+
+		<field name="parent_id" type="activitytypes" label="Types"
+			description="" required="true" multiple="true" size="20" />
+
+		<field name="title" type="text" label="Title"
+			description="" class="input-xxlarge input-large-text"
+			size="40" required="true" />
+
+		<field name="alias" type="text" label="Alias"
+			description="" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
+
+		<field name="activitytext" type="editor" label="Activity details"
+			description="" filter="JComponentHelper::filterText" buttons="true" />
+
+		<field name="created" type="calendar" label="Created"
+			description="" size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc"
+			readonly="true" />
+
+		<field name="created_by" type="user" label="Created By"
+			description="" readonly="true" />
+
+		<field name="modified" type="calendar" class="readonly"
+			label="Modified" description="" size="22"
+			readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
+
+		<field name="modified_by" type="user" label="Modified by"
+			class="readonly" readonly="true" filter="unset" />
+
+		<field name="metakey" type="textarea" label="Keywords"
+			description="" rows="3" cols="30" />
+
+		<field name="metadesc" type="textarea" label="Meta Description"
+			description="" rows="3" cols="30" />
+
+	</fieldset>
+
+	<field name="activityimages" type="activityimages" label="Images"
+		description="" blockclass="span5" />
+
+	<field name="activitytalents" type="activitytalents" label="Talents"
+		description="" />
+
+	<field name="activitytalentstags" type="activitytalentstags" label="Talents" separator="; "
+		description="" />
+		
+	<fields name="images" label="Image Options">
+		<field name="image_intro" type="media" label="Intro image"
+			description="" start="true" directory="com_activity" />
+		<field name="image_intro_alt" type="text" label="Alt Text"
+			description="" size="20" />
+		<field name="image_intro_caption" type="text" label="Caption"
+			description="" size="20" end="true" />
+		<field name="image_fulltext" type="media" label="Full Article Image"
+			description="" start="true" directory="com_activity" />
+		<field name="image_fulltext_alt" type="text" label="Alt Text"
+			description="" size="20" />
+		<field name="image_fulltext_caption" type="text" label="Caption"
+			description="" size="20" end="true" />
+	</fields>
+
+	<fields name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+
+			<field name="robots" type="list" label="Robots"
+				description="">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">Index, Follow</option>
+				<option value="noindex, follow">NoIndex, Follow</option>
+				<option value="index, nofollow">Index, NoFollow</option>
+				<option value="noindex, nofollow">NoIndex, NoFollow</option>
+			</field>
+
+			<field name="author" type="text" label="JAUTHOR"
+				description="JFIELD_METADATA_AUTHOR_DESC" size="20" />
+
+			<field name="rights" type="textarea" label="JFIELD_META_RIGHTS_LABEL"
+				description="JFIELD_META_RIGHTS_DESC" required="false" filter="string"
+				cols="30" rows="2" />
+			<field name="xreference" type="text" label="External Reference"
+				description="" size="20" />
+
+		</fieldset>
+	</fields>
+
+	<!-- These fields are used to get labels for the Content History Preview 
+		and Compare Views -->
+	<fields>
+		<field name="introtext" label="Intro text" />
+		<field name="fulltext" label="Full text" />
+	</fields>
+
+</form>

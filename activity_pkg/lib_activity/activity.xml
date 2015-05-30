@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" version="3.4.0" method="upgrade">
+	<name>Activity</name>
+	<libraryname>cms</libraryname>
+	<author>Vinh Nghi</author>
+	<authorEmail>hovnghi@gmail.com</authorEmail>
+	<creationDate>April 2015</creationDate>
+	<version>1.0.0</version>
+	<description>
+		Activity library
+	</description>
+	<files>
+		<folder>helper</folder>
+	</files>
+</extension>

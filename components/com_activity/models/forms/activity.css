@@ -1,0 +1,71 @@
+.com_activity_content_clear {
+	clear: both;
+	line-height: 0;
+	margin: 0;
+	padding: 0;
+	height: 0;
+}
+
+.com_activity_content {
+	
+}
+
+.com_activity_list_content {
+	
+}
+
+.com_activity_list_image_fulltext {
+	
+}
+
+.com_activity_list_description {
+	margin: 10px 0;
+	font-weight: bolder lighter;
+}
+
+.com_activity_list_item {
+	float: left;
+	overflow: hidden;
+	margin: 7px;
+}
+
+.com_activity_list_item_title {
+	
+}
+
+.com_activity_list_item_image_intro {
+	padding: 8px;
+}
+
+.com_activity_list_item_image_intro img {
+	height: 80px;
+}
+
+.com_activity_list_item_introtext {
+	word-wrap: break-word;
+}
+
+.com_activity_list_item_fulltext {
+	word-wrap: break-word;
+}
+
+.com_activity_list_item_readmore {
+	
+}
+
+.com_activity_heading {
+	
+}
+
+div.com_activity_tags {
+	border-bottom: 1px solid #eee;
+	padding: 0 0 15px;
+}
+
+div.ActivityTalentsTags {
+	
+}
+
+.ActivityTalentsTagsItem {
+	
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Create Type" option="Create">
+		<help key="Menus_Menu_Item_Type_Create" />
+		<message>
+			<![CDATA[Create a new activity]]>
+		</message>
+	</layout>
+	<fields name="params">
+	</fields>
+</metadata>

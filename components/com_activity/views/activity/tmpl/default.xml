@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Activity" option="Activity Detail">
+		<help key="Menus_Menu_Item_Activity_Detail" />
+		<message>
+			<![CDATA[Activity Detail]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request"
+			addfieldpath="/administrator/components/com_activity/models/fields">
+			<field name="id" type="text" description="" label="Activity Id"
+				required="true" />
+		</fieldset>
+	</fields>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+
+	</fields>
+</metadata>

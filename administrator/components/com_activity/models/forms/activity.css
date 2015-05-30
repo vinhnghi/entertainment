@@ -1,0 +1,39 @@
+.row-fluid .ActivityImages .span3,.row-fluid .ActivityImages .span4,.row-fluid .ActivityImages .span5,.row-fluid .ActivityImages .span6 {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid green;
+}
+
+.form-horizontal .ActivityImages .controls {
+	margin-left: 70px;
+}
+
+.form-horizontal .ActivityImages .btn {
+	padding: 4px 6px;
+}
+
+.form-horizontal .ActivityImages .input-small {
+	width: 100px;
+}
+
+.imagepreview_container {
+	background-color: white;
+	position: absolute;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+.imagepreview_text {
+	margin-top: 20px;
+	color: black;
+}
+
+.ActivityTalents .btn-wrapper {
+	display: inline-block;
+	margin: 0 0 5px 5px;
+}
+
+.btn-wrapper a, .btn-wrapper a:hover {
+	color: white;
+	text-decoration: none;
+}
