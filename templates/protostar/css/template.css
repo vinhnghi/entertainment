@@ -245,10 +245,10 @@ a:focus {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-	width: 940px;
+	width: 80%;
 }
 .span12 {
-	width: 940px;
+	width: 80%;
 }
 .span11 {
 	width: 860px;
@@ -3357,7 +3357,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-static-top .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-	width: 940px;
+	width: 80%;
 }
 .navbar-fixed-top {
 	top: 0;
@@ -5225,10 +5225,10 @@ a.badge:focus {
 	.navbar-static-top .container,
 	.navbar-fixed-top .container,
 	.navbar-fixed-bottom .container {
-		width: 940px;
+		width: 80%;
 	}
 	.span12 {
-		width: 940px;
+		width: 80%;
 	}
 	.span11 {
 		width: 860px;
@@ -6984,8 +6984,16 @@ body.site.fluid {
 .site-title {
 	font-size: 40px;
 	line-height: 48px;
-	font-weight: bold;
+	display: block;
+	width: 265px;
+	padding: 0 0 10px 0;
+	letter-spacing: -1px;
+	font-style: italic;
 }
+.site-title:first-line {
+	color: #517d62;
+}
+
 .brand {
 	color: #004466;
 	-webkit-transition: color .5s linear;
@@ -7023,7 +7031,7 @@ body.site.fluid {
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 .container {
-	max-width: 960px;
+	/* max-width: 960px; */
 }
 .body .container {
 	background-color: #fff;

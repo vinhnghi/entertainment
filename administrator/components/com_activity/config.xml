@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="titles" label="COM_ACTIVITY_CONFIG_TITLE_SETTINGS_LABEL"
-		description="COM_ACTIVITY_CONFIG_TITLE_SETTINGS_DESC">
-	</fieldset>
-	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL"
-		description="JCONFIG_PERMISSIONS_DESC">
-		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-			class="inputbox" validate="rules" filter="rules" component="com_activity"
-			section="component" />
+	<fieldset name="titles" label="Gallery"
+		description="These settings apply for activity gallery">
+		
+		<field
+			name="gallery_type"
+			type="list"
+			default="pgwSlideshow"
+			label="Type"
+			description="">
+			<option value="pgwSlideshow">Horizontal</option>
+			<option value="pgwSlider">Vertical</option>
+		</field>
+		
+		<field
+			name="gallery_height"
+			type="text"
+			label="Height"
+			description=""
+			default="500"
+		/>
+
+		<field
+			name="gallery_duration"
+			type="text"
+			label="Duration"
+			description=""
+			default="1000"
+		/>
+
 	</fieldset>
 </config>

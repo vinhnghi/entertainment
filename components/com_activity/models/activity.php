@@ -61,9 +61,4 @@ class ActivityModelActivity extends JModelAdmin
 		return $this->loadForm('com_activity.activity', 'activity', array('control' => 'jform', 'load_data' => $loadData));
 	}
 	
-	public function getCss()
-	{
-		return 'components/com_activity/models/forms/activity.css';
-	}
-	
 }

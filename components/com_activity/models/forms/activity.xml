@@ -17,7 +17,7 @@
 			description="" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
 
 		<field name="activitytext" type="editor" label="Activity details"
-			description="" filter="JComponentHelper::filterText" buttons="true" />
+			description="" filter="JComponentHelper::filterText" buttons="true" hide="article,image,pagebreak" />
 
 		<field name="created" type="calendar" label="Created"
 			description="" size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc"
@@ -49,7 +49,10 @@
 
 	<field name="activitytalentstags" type="activitytalentstags" label="Talents" separator="; "
 		description="" />
-		
+
+	<field name="activityslideshow" type="activityslideshow" label="Images"
+		description="" />
+
 	<fields name="images" label="Image Options">
 		<field name="image_intro" type="media" label="Intro image"
 			description="" start="true" directory="com_activity" />

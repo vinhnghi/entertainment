@@ -60,4 +60,27 @@ class ActivityModelTalents extends JModelList
 		
 		return $query;
 	}
+	
+	protected function populateState($ordering = 'ordering', $direction = 'ASC')
+	{
+		$app = JFactory::getApplication();
+	
+		// List state information
+		$value = $app->input->get('limit', $app->get('list_limit', 0), 'uint');
+		$this->setState('list.limit', $value);
+	
+		$value = $app->input->get('limitstart', 0, 'uint');
+		$this->setState('list.start', $value);
+	
+		$params = $app->getParams();
+		$this->setState('params', $params);
+	
+		$this->setState('layout', $app->input->getString('layout'));
+	}
+	
+	public function getStart()
+	{
+		return $this->getState('list.start');
+	}
+	
 }

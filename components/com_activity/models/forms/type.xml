@@ -28,7 +28,7 @@
 			description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
 
 		<field name="typetext" type="editor" label="Type details"
-			description="" filter="JComponentHelper::filterText" buttons="true" />
+			description="" filter="JComponentHelper::filterText" buttons="true" hide="article,image,pagebreak" />
 
 		<field name="created" type="calendar" label="Created" class="readonly"
 			description="" size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc"

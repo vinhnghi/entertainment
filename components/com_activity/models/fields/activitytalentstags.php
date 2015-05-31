@@ -27,12 +27,17 @@ class JFormFieldActivityTalentsTags extends JFormField {
 	}
 	protected function getInput() {
 		$html = array ();
-		$id = strtolower ( "{$this->element ['name']}" );
-		$html [] = "<div class='{$this->type}' id='{$id}'>";
-		foreach ( $this->getTalents () as $talent ) {
-			$html [] = $this->getTalentTag ( $talent );
+		$talents = $this->getTalents ();
+		if(count($talents)) {
+			$id = strtolower ( "{$this->element ['name']}" );
+			$html [] = "<div class='com_activity_tags'>Talents:";
+			$html [] = "<div class='{$this->type}' id='{$id}'>";
+			foreach ( $talents as $talent ) {
+				$html [] = $this->getTalentTag ( $talent );
+			}
+			$html [] = '</div>';
+			$html [] = '</div>';
 		}
-		$html [] = '</div>';
 		return implode ( $html, '' );
 	}
 }

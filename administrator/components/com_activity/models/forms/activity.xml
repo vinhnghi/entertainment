@@ -17,7 +17,7 @@
 			description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
 
 		<field name="activitytext" type="editor" label="Activity details"
-			description="" filter="JComponentHelper::filterText" buttons="true" />
+			description="" filter="JComponentHelper::filterText" buttons="true" hide="article,image,pagebreak" />
 
 		<field name="published" type="list" label="JSTATUS"
 			description="JFIELD_PUBLISHED_DESC" class="chzn-color-state" filter="intval"

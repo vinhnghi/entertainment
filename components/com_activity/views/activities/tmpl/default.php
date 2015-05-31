@@ -10,7 +10,7 @@ $image = $registry->toArray ();
 
 $readmore = JText::_('Readmore');
 $hide = JText::_('Hide description');
-$list_image_fulltext = $image['image_fulltext'] ? $image['image_fulltext'] : $image['image_intro'];
+$list_image_fulltext = $image['image_fulltext'];// ? $image['image_fulltext'] : $image['image_intro'];
 $list_description = $this->activityType->introtext.$this->activityType->fulltext;
 $num_row_item = $this->params->get( 'num_row_item', 3 );
 $item_width = 100/$num_row_item - 2;
