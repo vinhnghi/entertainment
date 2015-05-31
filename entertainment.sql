@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.3.9
+-- version 4.2.8
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 30, 2015 at 09:39 AM
--- Server version: 5.6.23
+-- Host: 127.0.0.1
+-- Generation Time: May 31, 2015 at 04:30 PM
+-- Server version: 5.6.20
 -- PHP Version: 5.3.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `talents`
+-- Database: `entertainment`
 --
 
 -- --------------------------------------------------------
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_activity` (
-  `id` int(10) unsigned NOT NULL COMMENT 'PK',
+`id` int(10) unsigned NOT NULL COMMENT 'PK',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_assets table.',
   `title` varchar(255) NOT NULL DEFAULT '',
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `joomla_activity` (
 --
 
 INSERT INTO `joomla_activity` (`id`, `catid`, `asset_id`, `title`, `alias`, `images`, `urls`, `attribs`, `published`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `metadata`, `ordering`, `introtext`, `fulltext`, `hits`, `language`, `params`) VALUES
-(7, 0, 166, 'Dancesport activity in 2010', 'dancesport-activity-in-2010', '{"image_intro":"images\\/com_activity\\/09_dancesportscropped.jpg","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2015-05-30 02:41:33', 553, '', '2015-05-30 07:55:50', 547, '', '', '{"robots":"","author":"","rights":"","xreference":""}', 1, '<p>The events was organized in 2010 with entertainment freelance talents</p>\r\n<p> </p>\r\n', '\r\n<p> IDSF Grand Slam Latin &amp; Standard</p>\r\n<p><img src="images/Dancesport_events/2010_Tokyo_Grand_Slam_1.jpg" alt="" /></p>\r\n<p>10th SGDF Singapore DanceSport Championship</p>\r\n<p><img src="images/Dancesport_events/10th_Nats_46.jpg" alt="" /></p>', 0, '', '');
+(7, 0, 166, 'Dancesport activity in 2010', 'dancesport-activity-in-2010', '{"image_intro":"images\\/com_activity\\/09_dancesportscropped.jpg","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2015-05-30 02:41:33', 553, '', '2015-05-31 15:19:50', 547, '', '', '{"robots":"","author":"","rights":"","xreference":""}', 1, '<p>The events was organized in 2010 with entertainment freelance talents</p>\r\n<p> </p>\r\n', '\r\n<p> IDSF Grand Slam Latin &amp; Standard</p>\r\n<p><span style="font-size: 12.1599998474121px; line-height: 15.8079996109009px;">10th SGDF Singapore DanceSport Championship</span></p>', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -66,10 +66,10 @@ INSERT INTO `joomla_activity` (`id`, `catid`, `asset_id`, `title`, `alias`, `ima
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_activity_activity_type` (
-  `id` int(10) unsigned NOT NULL COMMENT 'PK',
+`id` int(10) unsigned NOT NULL COMMENT 'PK',
   `activity_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_activity table.',
   `activity_type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_activity_type table.'
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `joomla_activity_activity_type`
@@ -90,7 +90,7 @@ INSERT INTO `joomla_activity_activity_type` (`id`, `activity_id`, `activity_type
 (66, 5, 4),
 (67, 1, 2),
 (68, 6, 2),
-(71, 7, 2);
+(74, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -99,14 +99,27 @@ INSERT INTO `joomla_activity_activity_type` (`id`, `activity_id`, `activity_type
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_activity_assets` (
-  `id` int(10) unsigned NOT NULL COMMENT 'PK',
+`id` int(10) unsigned NOT NULL COMMENT 'PK',
   `activity_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_activity table.',
   `src` mediumtext NOT NULL,
   `alt` mediumtext NOT NULL,
   `caption` mediumtext NOT NULL,
   `media_type` char(4) NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `joomla_activity_assets`
+--
+
+INSERT INTO `joomla_activity_assets` (`id`, `activity_id`, `src`, `alt`, `caption`, `media_type`, `ordering`) VALUES
+(14, 7, 'images/com_activity/09_dancesportscropped.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(15, 7, 'images/com_activity/a0aa5b560ec454a3c56391eddca183db-1.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(16, 7, 'images/com_activity/hiphop1.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(17, 7, 'images/com_activity/martial-arts-21.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(18, 7, 'images/com_activity/pc587rzXi.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0),
+(19, 7, 'images/com_activity/singing-stuttering.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0),
+(20, 7, 'images/com_activity/Salsa_and_merengue_in_Dominican_Republic_Salsa_dance_of_passion_and_love_5547.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `joomla_activity_assets` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_activity_talent` (
-  `id` int(10) unsigned NOT NULL COMMENT 'PK',
+`id` int(10) unsigned NOT NULL COMMENT 'PK',
   `activity_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_activity table.',
   `talent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_talent table.',
   `ordering` int(11) NOT NULL DEFAULT '0',
@@ -149,7 +162,7 @@ INSERT INTO `joomla_activity_talent` (`id`, `activity_id`, `talent_id`, `orderin
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_activity_type` (
-  `id` int(10) unsigned NOT NULL COMMENT 'PK',
+`id` int(10) unsigned NOT NULL COMMENT 'PK',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_assets table.',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -197,7 +210,7 @@ INSERT INTO `joomla_activity_type` (`id`, `catid`, `asset_id`, `parent_id`, `lft
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_assets` (
-  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
+`id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `parent_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set parent.',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
@@ -310,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `joomla_associations` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_banners` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `cid` int(11) NOT NULL DEFAULT '0',
   `type` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '',
@@ -353,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `joomla_banners` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_banner_clients` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `contact` varchar(255) NOT NULL DEFAULT '',
   `email` varchar(255) NOT NULL DEFAULT '',
@@ -389,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `joomla_banner_tracks` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_categories` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
@@ -443,7 +456,7 @@ INSERT INTO `joomla_categories` (`id`, `asset_id`, `parent_id`, `lft`, `rgt`, `l
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_contact_details` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `con_position` varchar(255) DEFAULT NULL,
@@ -493,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `joomla_contact_details` (
 --
 
 INSERT INTO `joomla_contact_details` (`id`, `name`, `alias`, `con_position`, `address`, `suburb`, `state`, `country`, `postcode`, `telephone`, `fax`, `misc`, `image`, `email_to`, `default_con`, `published`, `checked_out`, `checked_out_time`, `ordering`, `params`, `user_id`, `catid`, `access`, `mobile`, `webpage`, `sortname1`, `sortname2`, `sortname3`, `language`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `metadata`, `featured`, `xreference`, `publish_up`, `publish_down`, `version`, `hits`) VALUES
-(2, 'Contact', 'contact', '', 'ION Orchard', '', '', 'Singapore', '', '0065 9xxx xxxx', '', '', '', 'contact@talents.local', 0, 1, 0, '0000-00-00 00:00:00', 2, '{"show_contact_category":"","show_contact_list":"","presentation_style":"","show_tags":"","show_name":"","show_position":"","show_email":"","show_street_address":"","show_suburb":"","show_state":"","show_postcode":"","show_country":"","show_telephone":"","show_mobile":"","show_fax":"","show_webpage":"","show_misc":"","show_image":"","allow_vcard":"","show_articles":"","show_profile":"","show_links":"","linka_name":"","linka":false,"linkb_name":"","linkb":false,"linkc_name":"","linkc":false,"linkd_name":"","linkd":false,"linke_name":"","linke":false,"contact_layout":"","show_email_form":"","show_email_copy":"","banned_email":"","banned_subject":"","banned_text":"","validate_session":"","custom_reply":"","redirect":""}', 550, 4, 1, '0065 9xxx xxxx', 'http://talents.local', '', '', '', '*', '2015-03-25 05:40:34', 547, '', '2015-04-20 09:35:57', 547, '', '', '{"robots":"","rights":""}', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 21);
+(2, 'Contact', 'contact', '', 'ION Orchard', '', '', 'Singapore', '', '0065 9xxx xxxx', '', '', '', 'contact@talents.local', 0, 1, 0, '0000-00-00 00:00:00', 2, '{"show_contact_category":"","show_contact_list":"","presentation_style":"","show_tags":"","show_name":"","show_position":"","show_email":"","show_street_address":"","show_suburb":"","show_state":"","show_postcode":"","show_country":"","show_telephone":"","show_mobile":"","show_fax":"","show_webpage":"","show_misc":"","show_image":"","allow_vcard":"","show_articles":"","show_profile":"","show_links":"","linka_name":"","linka":false,"linkb_name":"","linkb":false,"linkc_name":"","linkc":false,"linkd_name":"","linkd":false,"linke_name":"","linke":false,"contact_layout":"","show_email_form":"","show_email_copy":"","banned_email":"","banned_subject":"","banned_text":"","validate_session":"","custom_reply":"","redirect":""}', 550, 4, 1, '0065 9xxx xxxx', 'http://talents.local', '', '', '', '*', '2015-03-25 05:40:34', 547, '', '2015-04-20 09:35:57', 547, '', '', '{"robots":"","rights":""}', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 2, 23);
 
 -- --------------------------------------------------------
 
@@ -502,7 +515,7 @@ INSERT INTO `joomla_contact_details` (`id`, `name`, `alias`, `con_position`, `ad
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_content` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(255) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -539,7 +552,7 @@ CREATE TABLE IF NOT EXISTS `joomla_content` (
 --
 
 INSERT INTO `joomla_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
-(1, 61, 'Our visions', 'getting-started', '<p>Our web portal is a place to for the freelance talents to display their show case</p>\r\n<p>Our mission is to create a play ground to new entertainments in Singapore</p>', '', 1, 2, '2013-11-16 00:00:00', 547, '', '2015-05-30 06:07:28', 547, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 6, 0, '', '', 1, 587, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(1, 61, 'Our visions', 'getting-started', '<p>Our web portal is a place to for the freelance talents to display their show case</p>\r\n<p>Our mission is to create a play ground to new entertainments in Singapore</p>', '', 1, 2, '2013-11-16 00:00:00', 547, '', '2015-05-30 06:07:28', 547, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 6, 0, '', '', 1, 624, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (2, 65, 'About Us', 'about-us', '', '', 1, 9, '2015-03-25 05:34:04', 547, '', '2015-03-25 05:34:04', 0, 0, '0000-00-00 00:00:00', '2015-03-25 05:34:04', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 0, '', '', 1, 10, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
 
 -- --------------------------------------------------------
@@ -588,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `joomla_content_rating` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_content_types` (
-  `type_id` int(10) unsigned NOT NULL,
+`type_id` int(10) unsigned NOT NULL,
   `type_title` varchar(255) NOT NULL DEFAULT '',
   `type_alias` varchar(255) NOT NULL DEFAULT '',
   `table` varchar(255) NOT NULL DEFAULT '',
@@ -635,7 +648,7 @@ CREATE TABLE IF NOT EXISTS `joomla_core_log_searches` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_extensions` (
-  `extension_id` int(11) NOT NULL,
+`extension_id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `type` varchar(20) NOT NULL,
   `element` varchar(100) NOT NULL,
@@ -792,7 +805,7 @@ INSERT INTO `joomla_extensions` (`extension_id`, `name`, `type`, `element`, `fol
 (600, 'English (en-GB)', 'language', 'en-GB', '', 0, 1, 1, 1, '{"name":"English (en-GB)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.0","description":"en-GB site language","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (601, 'English (en-GB)', 'language', 'en-GB', '', 1, 1, 1, 1, '{"name":"English (en-GB)","type":"language","creationDate":"2013-03-07","author":"Joomla! Project","copyright":"Copyright (C) 2005 - 2015 Open Source Matters. All rights reserved.","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.0","description":"en-GB administrator language","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
 (700, 'files_joomla', 'file', 'joomla', '', 0, 1, 1, 1, '{"name":"files_joomla","type":"file","creationDate":"February 2015","author":"Joomla! Project","copyright":"(C) 2005 - 2015 Open Source Matters. All rights reserved","authorEmail":"admin@joomla.org","authorUrl":"www.joomla.org","version":"3.4.0","description":"FILES_JOOMLA_XML_DESCRIPTION","group":""}', '', '', '', 0, '0000-00-00 00:00:00', 0, 0),
-(734, 'COM_ACTIVITY', 'component', 'com_activity', '', 1, 1, 0, 0, '{"name":"COM_ACTIVITY","type":"component","creationDate":"April 2015","author":"Vinh Nghi","copyright":"","authorEmail":"hovnghi@gmail.com","authorUrl":"","version":"1.0.0","description":"COM_ACTIVITY_DESCRIPTION","group":"","filename":"activity"}', '{}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
+(734, 'COM_ACTIVITY', 'component', 'com_activity', '', 1, 1, 0, 0, '{"name":"COM_ACTIVITY","type":"component","creationDate":"April 2015","author":"Vinh Nghi","copyright":"","authorEmail":"hovnghi@gmail.com","authorUrl":"","version":"1.0.0","description":"COM_ACTIVITY_DESCRIPTION","group":"","filename":"activity"}', '{"gallery_type":"pgwSlider","gallery_height":"500","gallery_duration":"1000"}', '', '', 0, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -801,7 +814,7 @@ INSERT INTO `joomla_extensions` (`extension_id`, `name`, `type`, `element`, `fol
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_finder_filters` (
-  `filter_id` int(10) unsigned NOT NULL,
+`filter_id` int(10) unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `alias` varchar(255) NOT NULL,
   `state` tinyint(1) NOT NULL DEFAULT '1',
@@ -824,7 +837,7 @@ CREATE TABLE IF NOT EXISTS `joomla_finder_filters` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_finder_links` (
-  `link_id` int(10) unsigned NOT NULL,
+`link_id` int(10) unsigned NOT NULL,
   `url` varchar(255) NOT NULL,
   `route` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
@@ -1044,7 +1057,7 @@ CREATE TABLE IF NOT EXISTS `joomla_finder_links_termsf` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_finder_taxonomy` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
@@ -1077,7 +1090,7 @@ CREATE TABLE IF NOT EXISTS `joomla_finder_taxonomy_map` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_finder_terms` (
-  `term_id` int(10) unsigned NOT NULL,
+`term_id` int(10) unsigned NOT NULL,
   `term` varchar(75) NOT NULL,
   `stem` varchar(75) NOT NULL,
   `common` tinyint(1) unsigned NOT NULL DEFAULT '0',
@@ -1263,7 +1276,7 @@ CREATE TABLE IF NOT EXISTS `joomla_finder_tokens_aggregate` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_finder_types` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `title` varchar(100) NOT NULL,
   `mime` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -1275,7 +1288,7 @@ CREATE TABLE IF NOT EXISTS `joomla_finder_types` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_languages` (
-  `lang_id` int(11) unsigned NOT NULL,
+`lang_id` int(11) unsigned NOT NULL,
   `lang_code` char(7) NOT NULL,
   `title` varchar(50) NOT NULL,
   `title_native` varchar(50) NOT NULL,
@@ -1304,7 +1317,7 @@ INSERT INTO `joomla_languages` (`lang_id`, `lang_code`, `title`, `title_native`,
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_menu` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `menutype` varchar(24) NOT NULL COMMENT 'The type of menu this item belongs to. FK to #__menu_types.menutype',
   `title` varchar(255) NOT NULL COMMENT 'The display title of the menu item.',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT 'The SEF alias of the menu item.',
@@ -1380,7 +1393,7 @@ INSERT INTO `joomla_menu` (`id`, `menutype`, `title`, `alias`, `note`, `path`, `
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_menu_types` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `menutype` varchar(24) NOT NULL,
   `title` varchar(48) NOT NULL,
   `description` varchar(255) NOT NULL DEFAULT ''
@@ -1401,7 +1414,7 @@ INSERT INTO `joomla_menu_types` (`id`, `menutype`, `title`, `description`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_messages` (
-  `message_id` int(10) unsigned NOT NULL,
+`message_id` int(10) unsigned NOT NULL,
   `user_id_from` int(10) unsigned NOT NULL DEFAULT '0',
   `user_id_to` int(10) unsigned NOT NULL DEFAULT '0',
   `folder_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -1439,7 +1452,7 @@ CREATE TABLE IF NOT EXISTS `joomla_messages_cfg` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_modules` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the #__assets table.',
   `title` varchar(100) NOT NULL DEFAULT '',
   `note` varchar(255) NOT NULL DEFAULT '',
@@ -1536,7 +1549,7 @@ INSERT INTO `joomla_modules_menu` (`moduleid`, `menuid`) VALUES
 
 CREATE TABLE IF NOT EXISTS `joomla_newsfeeds` (
   `catid` int(11) NOT NULL DEFAULT '0',
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `name` varchar(100) NOT NULL DEFAULT '',
   `alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `link` varchar(200) NOT NULL DEFAULT '',
@@ -1574,7 +1587,7 @@ CREATE TABLE IF NOT EXISTS `joomla_newsfeeds` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_overrider` (
-  `id` int(10) NOT NULL COMMENT 'Primary Key',
+`id` int(10) NOT NULL COMMENT 'Primary Key',
   `constant` varchar(255) NOT NULL,
   `string` text NOT NULL,
   `file` varchar(255) NOT NULL
@@ -1587,7 +1600,7 @@ CREATE TABLE IF NOT EXISTS `joomla_overrider` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_postinstall_messages` (
-  `postinstall_message_id` bigint(20) unsigned NOT NULL,
+`postinstall_message_id` bigint(20) unsigned NOT NULL,
   `extension_id` bigint(20) NOT NULL DEFAULT '700' COMMENT 'FK to #__extensions',
   `title_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for the title',
   `description_key` varchar(255) NOT NULL DEFAULT '' COMMENT 'Lang key for description',
@@ -1621,7 +1634,7 @@ INSERT INTO `joomla_postinstall_messages` (`postinstall_message_id`, `extension_
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_redirect_links` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `old_url` varchar(255) NOT NULL,
   `new_url` varchar(255) DEFAULT NULL,
   `referer` varchar(150) NOT NULL,
@@ -1673,10 +1686,8 @@ CREATE TABLE IF NOT EXISTS `joomla_session` (
 --
 
 INSERT INTO `joomla_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('2o9uljfjrno0vv12nr5e1m5la2', 0, 1, '1432975116', '__default|a:8:{s:15:"session.counter";i:3;s:19:"session.timer.start";i:1432975029;s:18:"session.timer.last";i:1432975032;s:17:"session.timer.now";i:1432975116;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}}s:14:"\\0\\0\\0_authGroups";a:1:{i:0;s:1:"1";}s:14:"\\0\\0\\0_authLevels";a:2:{i:0;i:1;i:1;i:1;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}s:13:"session.token";s:32:"8612773c36fb7fa7f35345203797db31";}', 0, ''),
-('5gbb22ek5s9db24fh4bs4iqrm4', 1, 0, '1432974565', '__default|a:8:{s:15:"session.counter";i:38;s:19:"session.timer.start";i:1432972475;s:18:"session.timer.last";i:1432974562;s:17:"session.timer.now";i:1432974564;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":5:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}s:12:"com_activity";O:8:"stdClass":3:{s:10:"activities";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:8:"activity";O:8:"stdClass":2:{s:2:"id";a:0:{}s:4:"data";N;}}s:5:"types";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}}s:9:"com_menus";O:8:"stdClass":2:{s:5:"items";O:8:"stdClass":3:{s:8:"menutype";s:8:"mainmenu";s:10:"limitstart";i:0;s:4:"list";a:4:{s:9:"direction";s:3:"asc";s:5:"limit";s:2:"20";s:8:"ordering";s:5:"a.lft";s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":1:{s:4:"item";O:8:"stdClass":4:{s:2:"id";a:0:{}s:4:"data";N;s:4:"type";N;s:4:"link";N;}}}s:10:"com_config";O:8:"stdClass":1:{s:6:"config";O:8:"stdClass":1:{s:6:"global";O:8:"stdClass":1:{s:4:"data";a:91:{s:7:"offline";s:1:"0";s:15:"offline_message";s:70:"This site is down for maintenance.<br /> Please check back again soon.";s:23:"display_offline_message";s:1:"1";s:13:"offline_image";s:0:"";s:8:"sitename";s:14:"Entertainments";s:6:"editor";s:7:"tinymce";s:7:"captcha";s:1:"0";s:10:"list_limit";s:2:"20";s:6:"access";s:1:"1";s:5:"debug";s:1:"0";s:10:"debug_lang";s:1:"0";s:6:"dbtype";s:6:"mysqli";s:4:"host";s:9:"localhost";s:4:"user";s:4:"root";s:8:"password";s:5:"mysql";s:2:"db";s:7:"talents";s:8:"dbprefix";s:7:"joomla_";s:9:"live_site";s:0:"";s:6:"secret";s:16:"zsy5kCGzpCWsQ4Nl";s:4:"gzip";s:1:"0";s:15:"error_reporting";s:7:"default";s:7:"helpurl";s:90:"https://help.joomla.org/proxy/index.php?option=com_help&keyref=Help{major}{minor}:{keyref}";s:8:"ftp_host";s:0:"";s:8:"ftp_port";s:0:"";s:8:"ftp_user";s:0:"";s:8:"ftp_pass";s:0:"";s:8:"ftp_root";s:0:"";s:10:"ftp_enable";s:1:"0";s:6:"offset";s:3:"UTC";s:10:"mailonline";s:1:"0";s:6:"mailer";s:4:"mail";s:8:"mailfrom";s:17:"hovnghi@gmail.com";s:8:"fromname";s:7:"Talents";s:8:"sendmail";s:18:"/usr/sbin/sendmail";s:8:"smtpauth";s:1:"0";s:8:"smtpuser";s:0:"";s:8:"smtppass";s:0:"";s:8:"smtphost";s:9:"localhost";s:10:"smtpsecure";s:4:"none";s:8:"smtpport";s:2:"25";s:7:"caching";s:1:"0";s:13:"cache_handler";s:4:"file";s:9:"cachetime";s:2:"15";s:8:"MetaDesc";s:7:"Talents";s:8:"MetaKeys";s:0:"";s:9:"MetaTitle";s:1:"1";s:10:"MetaAuthor";s:1:"1";s:11:"MetaVersion";s:1:"0";s:6:"robots";s:0:"";s:3:"sef";s:1:"1";s:11:"sef_rewrite";s:1:"0";s:10:"sef_suffix";s:1:"0";s:12:"unicodeslugs";s:1:"0";s:10:"feed_limit";s:2:"10";s:8:"log_path";s:47:"/Users/phitien/Documents/workspace/talents/logs";s:8:"tmp_path";s:46:"/Users/phitien/Documents/workspace/talents/tmp";s:8:"lifetime";s:2:"15";s:15:"session_handler";s:8:"database";s:16:"memcache_persist";s:1:"1";s:17:"memcache_compress";s:1:"0";s:20:"memcache_server_host";s:9:"localhost";s:20:"memcache_server_port";s:5:"11211";s:17:"memcached_persist";s:1:"1";s:18:"memcached_compress";s:1:"0";s:21:"memcached_server_host";s:9:"localhost";s:21:"memcached_server_port";s:5:"11211";s:13:"redis_persist";s:1:"1";s:17:"redis_server_host";s:9:"localhost";s:17:"redis_server_port";s:4:"6379";s:17:"redis_server_auth";s:0:"";s:15:"redis_server_db";s:1:"0";s:12:"proxy_enable";s:1:"0";s:10:"proxy_host";s:0:"";s:10:"proxy_port";s:0:"";s:10:"proxy_user";s:0:"";s:10:"proxy_pass";s:0:"";s:11:"massmailoff";s:1:"0";s:10:"MetaRights";s:0:"";s:19:"sitename_pagetitles";s:1:"0";s:9:"force_ssl";s:1:"0";s:28:"session_memcache_server_host";s:9:"localhost";s:28:"session_memcache_server_port";s:5:"11211";s:29:"session_memcached_server_host";s:9:"localhost";s:29:"session_memcached_server_port";s:5:"11211";s:12:"frontediting";s:1:"1";s:10:"feed_email";s:6:"author";s:13:"cookie_domain";s:0:"";s:11:"cookie_path";s:0:"";s:8:"asset_id";i:1;s:7:"filters";a:7:{i:1;a:3:{s:11:"filter_type";s:2:"NH";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:6;a:3:{s:11:"filter_type";s:2:"BL";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:7;a:3:{s:11:"filter_type";s:4:"NONE";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:2;a:3:{s:11:"filter_type";s:2:"NH";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:3;a:3:{s:11:"filter_type";s:2:"BL";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:13;a:3:{s:11:"filter_type";s:2:"BL";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:8;a:3:{s:11:"filter_type";s:4:"NONE";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}}s:5:"rules";a:10:{s:15:"core.login.site";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:1:"1";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:16:"core.login.admin";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:18:"core.login.offline";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:10:"core.admin";a:7:{i:1;s:0:"";i:6;s:0:"";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:1:"1";}s:11:"core.manage";a:7:{i:1;s:0:"";i:6;s:0:"";i:7;s:1:"1";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:11:"core.create";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:1:"1";i:13;s:0:"";i:8;s:0:"";}s:11:"core.delete";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:9:"core.edit";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:15:"core.edit.state";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:13:"core.edit.own";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:1:"1";i:13;s:0:"";i:8;s:0:"";}}}}}}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}}}s:4:"user";O:5:"JUser":28:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"547";s:4:"name";s:10:"Super User";s:8:"username";s:5:"admin";s:5:"email";s:17:"hovnghi@gmail.com";s:8:"password";s:60:"$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-03-24 14:15:41";s:13:"lastvisitDate";s:19:"2015-05-30 05:55:33";s:10:"activation";s:1:"0";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"ba49e3d6f3de2dc472c66e9de8508baa";}', 547, 'admin'),
-('6mn3p3rhq6e7ja4ou2uhb11gn1', 0, 0, '1432974923', '__default|a:9:{s:15:"session.counter";i:63;s:19:"session.timer.start";i:1432972419;s:18:"session.timer.last";i:1432974918;s:17:"session.timer.now";i:1432974923;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":2:{s:12:"com_activity";O:8:"stdClass":3:{s:5:"types";O:8:"stdClass":1:{s:8:"ordercol";N;}s:10:"activities";O:8:"stdClass":1:{s:8:"ordercol";N;}s:4:"edit";O:8:"stdClass":2:{s:4:"type";O:8:"stdClass":1:{s:4:"data";N;}s:8:"activity";O:8:"stdClass":1:{s:4:"data";N;}}}s:5:"users";O:8:"stdClass":1:{s:5:"login";O:8:"stdClass":1:{s:4:"form";O:8:"stdClass":2:{s:6:"return";s:65:"index.php?option=com_activity&view=activity&cid=2&id=7&Itemid=110";s:4:"data";a:0:{}}}}}}s:4:"user";O:5:"JUser":28:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";s:3:"553";s:4:"name";s:11:"Nicholas Ho";s:8:"username";s:8:"vinhnghi";s:5:"email";s:22:"onimusha1985@yahoo.com";s:8:"password";s:60:"$2y$10$Hxj1m6yidn9.R8IliCwyMugMEd2kXItP1iSEuB.elNe1bXAT/VG6O";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"0";s:12:"registerDate";s:19:"2015-05-29 14:17:13";s:13:"lastvisitDate";s:19:"2015-05-30 06:29:23";s:10:"activation";s:0:"";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:2:{i:2;s:1:"2";i:13;s:2:"13";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}}s:14:"\\0\\0\\0_authGroups";a:4:{i:0;i:1;i:1;i:2;i:4;i:3;i:5;i:13;}s:14:"\\0\\0\\0_authLevels";a:4:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"7490276682fe04b7b7ba436d8688d17d";s:20:"com_media.return_url";s:123:"index.php?option=com_media&view=images&tmpl=component&fieldid=jform_activityimages_0_src&e_name=&asset=com_activity&author=";}', 553, 'vinhnghi'),
-('8h08vbbls8ra567svdeh6rrak2', 1, 0, '1432975116', '__default|a:8:{s:15:"session.counter";i:9;s:19:"session.timer.start";i:1432975075;s:18:"session.timer.last";i:1432975113;s:17:"session.timer.now";i:1432975115;s:22:"session.client.browser";s:108:"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":3:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}s:13:"com_installer";O:8:"stdClass":2:{s:7:"message";s:0:"";s:17:"extension_message";s:0:"";}s:10:"com_config";O:8:"stdClass":1:{s:6:"config";O:8:"stdClass":1:{s:6:"global";O:8:"stdClass":1:{s:4:"data";a:91:{s:7:"offline";s:1:"0";s:15:"offline_message";s:70:"This site is down for maintenance.<br /> Please check back again soon.";s:23:"display_offline_message";s:1:"1";s:13:"offline_image";s:0:"";s:8:"sitename";s:23:"Singapore Media Talents";s:6:"editor";s:7:"tinymce";s:7:"captcha";s:1:"0";s:10:"list_limit";s:2:"20";s:6:"access";s:1:"1";s:5:"debug";s:1:"0";s:10:"debug_lang";s:1:"0";s:6:"dbtype";s:6:"mysqli";s:4:"host";s:9:"localhost";s:4:"user";s:4:"root";s:8:"password";s:5:"mysql";s:2:"db";s:7:"talents";s:8:"dbprefix";s:7:"joomla_";s:9:"live_site";s:0:"";s:6:"secret";s:16:"zsy5kCGzpCWsQ4Nl";s:4:"gzip";s:1:"0";s:15:"error_reporting";s:7:"default";s:7:"helpurl";s:90:"https://help.joomla.org/proxy/index.php?option=com_help&keyref=Help{major}{minor}:{keyref}";s:8:"ftp_host";s:0:"";s:8:"ftp_port";s:0:"";s:8:"ftp_user";s:0:"";s:8:"ftp_pass";s:0:"";s:8:"ftp_root";s:0:"";s:10:"ftp_enable";s:1:"0";s:6:"offset";s:3:"UTC";s:10:"mailonline";s:1:"0";s:6:"mailer";s:4:"mail";s:8:"mailfrom";s:17:"hovnghi@gmail.com";s:8:"fromname";s:7:"Talents";s:8:"sendmail";s:18:"/usr/sbin/sendmail";s:8:"smtpauth";s:1:"0";s:8:"smtpuser";s:0:"";s:8:"smtppass";s:0:"";s:8:"smtphost";s:9:"localhost";s:10:"smtpsecure";s:4:"none";s:8:"smtpport";s:2:"25";s:7:"caching";s:1:"0";s:13:"cache_handler";s:4:"file";s:9:"cachetime";s:2:"15";s:8:"MetaDesc";s:7:"Talents";s:8:"MetaKeys";s:0:"";s:9:"MetaTitle";s:1:"1";s:10:"MetaAuthor";s:1:"1";s:11:"MetaVersion";s:1:"0";s:6:"robots";s:0:"";s:3:"sef";s:1:"1";s:11:"sef_rewrite";s:1:"0";s:10:"sef_suffix";s:1:"0";s:12:"unicodeslugs";s:1:"0";s:10:"feed_limit";s:2:"10";s:8:"log_path";s:47:"/Users/phitien/Documents/workspace/talents/logs";s:8:"tmp_path";s:46:"/Users/phitien/Documents/workspace/talents/tmp";s:8:"lifetime";s:2:"15";s:15:"session_handler";s:8:"database";s:16:"memcache_persist";s:1:"1";s:17:"memcache_compress";s:1:"0";s:20:"memcache_server_host";s:9:"localhost";s:20:"memcache_server_port";s:5:"11211";s:17:"memcached_persist";s:1:"1";s:18:"memcached_compress";s:1:"0";s:21:"memcached_server_host";s:9:"localhost";s:21:"memcached_server_port";s:5:"11211";s:13:"redis_persist";s:1:"1";s:17:"redis_server_host";s:9:"localhost";s:17:"redis_server_port";s:4:"6379";s:17:"redis_server_auth";s:0:"";s:15:"redis_server_db";s:1:"0";s:12:"proxy_enable";s:1:"0";s:10:"proxy_host";s:0:"";s:10:"proxy_port";s:0:"";s:10:"proxy_user";s:0:"";s:10:"proxy_pass";s:0:"";s:11:"massmailoff";s:1:"0";s:10:"MetaRights";s:0:"";s:19:"sitename_pagetitles";s:1:"0";s:9:"force_ssl";s:1:"0";s:28:"session_memcache_server_host";s:9:"localhost";s:28:"session_memcache_server_port";s:5:"11211";s:29:"session_memcached_server_host";s:9:"localhost";s:29:"session_memcached_server_port";s:5:"11211";s:12:"frontediting";s:1:"1";s:10:"feed_email";s:6:"author";s:13:"cookie_domain";s:0:"";s:11:"cookie_path";s:0:"";s:8:"asset_id";i:1;s:7:"filters";a:7:{i:1;a:3:{s:11:"filter_type";s:2:"NH";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:6;a:3:{s:11:"filter_type";s:2:"BL";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:7;a:3:{s:11:"filter_type";s:4:"NONE";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:2;a:3:{s:11:"filter_type";s:2:"NH";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:3;a:3:{s:11:"filter_type";s:2:"BL";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:13;a:3:{s:11:"filter_type";s:2:"BL";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}i:8;a:3:{s:11:"filter_type";s:4:"NONE";s:11:"filter_tags";s:0:"";s:17:"filter_attributes";s:0:"";}}s:5:"rules";a:10:{s:15:"core.login.site";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:1:"1";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:16:"core.login.admin";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:18:"core.login.offline";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:10:"core.admin";a:7:{i:1;s:0:"";i:6;s:0:"";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:1:"1";}s:11:"core.manage";a:7:{i:1;s:0:"";i:6;s:0:"";i:7;s:1:"1";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:11:"core.create";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:1:"1";i:13;s:0:"";i:8;s:0:"";}s:11:"core.delete";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:9:"core.edit";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:15:"core.edit.state";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:0:"";i:13;s:0:"";i:8;s:0:"";}s:13:"core.edit.own";a:7:{i:1;s:0:"";i:6;s:1:"1";i:7;s:0:"";i:2;s:0:"";i:3;s:1:"1";i:13;s:0:"";i:8;s:0:"";}}}}}}}}s:4:"user";O:5:"JUser":28:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"547";s:4:"name";s:10:"Super User";s:8:"username";s:5:"admin";s:5:"email";s:17:"hovnghi@gmail.com";s:8:"password";s:60:"$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-03-24 14:15:41";s:13:"lastvisitDate";s:19:"2015-05-30 07:54:39";s:10:"activation";s:1:"0";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"423b132d2f92a245e47afa18312af58c";}', 547, 'admin');
+('4lqfpm8pk7v4j0lln1lkuphfo5', 1, 0, '1433089726', '__default|a:8:{s:15:"session.counter";i:28;s:19:"session.timer.start";i:1433087679;s:18:"session.timer.last";i:1433089725;s:17:"session.timer.now";i:1433089725;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}}}s:4:"user";O:5:"JUser":28:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"547";s:4:"name";s:10:"Super User";s:8:"username";s:5:"admin";s:5:"email";s:17:"hovnghi@gmail.com";s:8:"password";s:60:"$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-03-24 14:15:41";s:13:"lastvisitDate";s:19:"2015-05-31 15:09:19";s:10:"activation";s:1:"0";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"9358cfef9dd4af094827ba414da299b5";}', 547, 'admin'),
+('8oh1fe7ephiksr6jish9t1gs16', 0, 1, '1433089728', '__default|a:8:{s:15:"session.counter";i:81;s:19:"session.timer.start";i:1433083409;s:18:"session.timer.last";i:1433089681;s:17:"session.timer.now";i:1433089728;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:12:"com_activity";O:8:"stdClass":1:{s:10:"activities";O:8:"stdClass":1:{s:8:"ordercol";N;}}}}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}}s:14:"\\0\\0\\0_authGroups";a:1:{i:0;s:1:"1";}s:14:"\\0\\0\\0_authLevels";a:2:{i:0;i:1;i:1;i:1;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}s:13:"session.token";s:32:"77b06e363b06592c5b1da8335a9c7c63";}', 0, '');
 
 -- --------------------------------------------------------
 
@@ -1685,7 +1696,7 @@ INSERT INTO `joomla_session` (`session_id`, `client_id`, `guest`, `time`, `data`
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_tags` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
   `lft` int(11) NOT NULL DEFAULT '0',
   `rgt` int(11) NOT NULL DEFAULT '0',
@@ -1732,7 +1743,7 @@ INSERT INTO `joomla_tags` (`id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `ti
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_talent` (
-  `id` int(10) unsigned NOT NULL COMMENT 'PK',
+`id` int(10) unsigned NOT NULL COMMENT 'PK',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `asset_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_assets table.',
   `title` varchar(255) NOT NULL DEFAULT '',
@@ -1799,7 +1810,7 @@ INSERT INTO `joomla_talent` (`id`, `catid`, `asset_id`, `title`, `alias`, `image
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_template_styles` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `template` varchar(50) NOT NULL DEFAULT '',
   `client_id` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `home` char(7) NOT NULL DEFAULT '0',
@@ -1837,7 +1848,7 @@ CREATE TABLE IF NOT EXISTS `joomla_ucm_base` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_ucm_content` (
-  `core_content_id` int(10) unsigned NOT NULL,
+`core_content_id` int(10) unsigned NOT NULL,
   `core_type_alias` varchar(255) NOT NULL DEFAULT '' COMMENT 'FK to the content types table',
   `core_title` varchar(255) NOT NULL,
   `core_alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
@@ -1878,7 +1889,7 @@ CREATE TABLE IF NOT EXISTS `joomla_ucm_content` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_ucm_history` (
-  `version_id` int(10) unsigned NOT NULL,
+`version_id` int(10) unsigned NOT NULL,
   `ucm_item_id` int(10) unsigned NOT NULL,
   `ucm_type_id` int(10) unsigned NOT NULL,
   `version_note` varchar(255) NOT NULL DEFAULT '' COMMENT 'Optional version name',
@@ -1919,7 +1930,7 @@ INSERT INTO `joomla_ucm_history` (`version_id`, `ucm_item_id`, `ucm_type_id`, `v
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_updates` (
-  `update_id` int(11) NOT NULL,
+`update_id` int(11) NOT NULL,
   `update_site_id` int(11) DEFAULT '0',
   `extension_id` int(11) DEFAULT '0',
   `name` varchar(100) DEFAULT '',
@@ -1949,7 +1960,7 @@ INSERT INTO `joomla_updates` (`update_id`, `update_site_id`, `extension_id`, `na
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_update_sites` (
-  `update_site_id` int(11) NOT NULL,
+`update_site_id` int(11) NOT NULL,
   `name` varchar(100) DEFAULT '',
   `type` varchar(20) DEFAULT '',
   `location` text NOT NULL,
@@ -1963,8 +1974,8 @@ CREATE TABLE IF NOT EXISTS `joomla_update_sites` (
 --
 
 INSERT INTO `joomla_update_sites` (`update_site_id`, `name`, `type`, `location`, `enabled`, `last_check_timestamp`, `extra_query`) VALUES
-(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1432975116, ''),
-(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1432975116, ''),
+(1, 'Joomla! Core', 'collection', 'http://update.joomla.org/core/list.xml', 1, 1433074862, ''),
+(2, 'Joomla! Extension Directory', 'collection', 'http://update.joomla.org/jed/list.xml', 1, 1433074862, ''),
 (3, 'Accredited Joomla! Translations', 'collection', 'http://update.joomla.org/language/translationlist_3.xml', 1, 0, ''),
 (4, 'Joomla! Update Component Update Site', 'extension', 'http://update.joomla.org/core/extensions/com_joomlaupdate.xml', 1, 0, '');
 
@@ -1996,7 +2007,7 @@ INSERT INTO `joomla_update_sites_extensions` (`update_site_id`, `extension_id`) 
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_usergroups` (
-  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
+`id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Adjacency List Reference Id',
   `lft` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set lft.',
   `rgt` int(11) NOT NULL DEFAULT '0' COMMENT 'Nested set rgt.',
@@ -2023,7 +2034,7 @@ INSERT INTO `joomla_usergroups` (`id`, `parent_id`, `lft`, `rgt`, `title`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_users` (
-  `id` int(11) NOT NULL,
+`id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL DEFAULT '',
   `username` varchar(150) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
@@ -2046,7 +2057,7 @@ CREATE TABLE IF NOT EXISTS `joomla_users` (
 --
 
 INSERT INTO `joomla_users` (`id`, `name`, `username`, `email`, `password`, `block`, `sendEmail`, `registerDate`, `lastvisitDate`, `activation`, `params`, `lastResetTime`, `resetCount`, `otpKey`, `otep`, `requireReset`) VALUES
-(547, 'Super User', 'admin', 'hovnghi@gmail.com', '$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i', 0, 1, '2015-03-24 14:15:41', '2015-05-30 08:38:01', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
+(547, 'Super User', 'admin', 'hovnghi@gmail.com', '$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i', 0, 1, '2015-03-24 14:15:41', '2015-05-31 15:54:41', '0', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (548, 'Talent', 'talent', 'talent@talents.com', '$2y$10$m5hNGinKT5ZceBOr/QLS8O8wfgmR91eeNgNQwi7oAFhXlMq5wBnK6', 0, 0, '2015-03-25 03:44:49', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (549, 'Manager', 'manager', 'manager@talents.com', '$2y$10$44nMsURfwcytbn.BX0Dv3eqb6TKwXVtQK0ucDsFjWJRVJ3Dw4fyye', 0, 0, '2015-03-25 03:45:26', '2015-04-29 05:48:29', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
 (550, 'Contact', 'contact', 'contact@talents.com', '$2y$10$4P4SQkN1/3R0fgMyP2O8quXVIbKYGftcGNQXt/Nz/BoBrV6/S0as6', 0, 0, '2015-03-25 05:40:01', '0000-00-00 00:00:00', '', '{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}', '0000-00-00 00:00:00', 0, '', '', 0),
@@ -2060,7 +2071,7 @@ INSERT INTO `joomla_users` (`id`, `name`, `username`, `email`, `password`, `bloc
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_user_keys` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `series` varchar(255) NOT NULL,
@@ -2076,7 +2087,7 @@ CREATE TABLE IF NOT EXISTS `joomla_user_keys` (
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_user_notes` (
-  `id` int(10) unsigned NOT NULL,
+`id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   `catid` int(10) unsigned NOT NULL DEFAULT '0',
   `subject` varchar(100) NOT NULL DEFAULT '',
@@ -2139,7 +2150,7 @@ INSERT INTO `joomla_user_usergroup_map` (`user_id`, `group_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `joomla_viewlevels` (
-  `id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
+`id` int(10) unsigned NOT NULL COMMENT 'Primary Key',
   `title` varchar(100) NOT NULL DEFAULT '',
   `ordering` int(11) NOT NULL DEFAULT '0',
   `rules` varchar(5120) NOT NULL COMMENT 'JSON encoded access control.'
@@ -2164,433 +2175,433 @@ INSERT INTO `joomla_viewlevels` (`id`, `title`, `ordering`, `rules`) VALUES
 -- Indexes for table `joomla_activity`
 --
 ALTER TABLE `joomla_activity`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_activity_activity_type`
 --
 ALTER TABLE `joomla_activity_activity_type`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_activity_assets`
 --
 ALTER TABLE `joomla_activity_assets`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_activity_talent`
 --
 ALTER TABLE `joomla_activity_talent`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_activity_type`
 --
 ALTER TABLE `joomla_activity_type`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_assets`
 --
 ALTER TABLE `joomla_assets`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_asset_name` (`name`), ADD KEY `idx_lft_rgt` (`lft`,`rgt`), ADD KEY `idx_parent_id` (`parent_id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_asset_name` (`name`), ADD KEY `idx_lft_rgt` (`lft`,`rgt`), ADD KEY `idx_parent_id` (`parent_id`);
 
 --
 -- Indexes for table `joomla_associations`
 --
 ALTER TABLE `joomla_associations`
-  ADD PRIMARY KEY (`context`,`id`), ADD KEY `idx_key` (`key`);
+ ADD PRIMARY KEY (`context`,`id`), ADD KEY `idx_key` (`key`);
 
 --
 -- Indexes for table `joomla_banners`
 --
 ALTER TABLE `joomla_banners`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_state` (`state`), ADD KEY `idx_own_prefix` (`own_prefix`), ADD KEY `idx_metakey_prefix` (`metakey_prefix`), ADD KEY `idx_banner_catid` (`catid`), ADD KEY `idx_language` (`language`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_state` (`state`), ADD KEY `idx_own_prefix` (`own_prefix`), ADD KEY `idx_metakey_prefix` (`metakey_prefix`), ADD KEY `idx_banner_catid` (`catid`), ADD KEY `idx_language` (`language`);
 
 --
 -- Indexes for table `joomla_banner_clients`
 --
 ALTER TABLE `joomla_banner_clients`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_own_prefix` (`own_prefix`), ADD KEY `idx_metakey_prefix` (`metakey_prefix`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_own_prefix` (`own_prefix`), ADD KEY `idx_metakey_prefix` (`metakey_prefix`);
 
 --
 -- Indexes for table `joomla_banner_tracks`
 --
 ALTER TABLE `joomla_banner_tracks`
-  ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`), ADD KEY `idx_track_date` (`track_date`), ADD KEY `idx_track_type` (`track_type`), ADD KEY `idx_banner_id` (`banner_id`);
+ ADD PRIMARY KEY (`track_date`,`track_type`,`banner_id`), ADD KEY `idx_track_date` (`track_date`), ADD KEY `idx_track_type` (`track_type`), ADD KEY `idx_banner_id` (`banner_id`);
 
 --
 -- Indexes for table `joomla_categories`
 --
 ALTER TABLE `joomla_categories`
-  ADD PRIMARY KEY (`id`), ADD KEY `cat_idx` (`extension`,`published`,`access`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_path` (`path`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_language` (`language`);
+ ADD PRIMARY KEY (`id`), ADD KEY `cat_idx` (`extension`,`published`,`access`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_path` (`path`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_language` (`language`);
 
 --
 -- Indexes for table `joomla_contact_details`
 --
 ALTER TABLE `joomla_contact_details`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`published`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_featured_catid` (`featured`,`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`published`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_featured_catid` (`featured`,`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
 
 --
 -- Indexes for table `joomla_content`
 --
 ALTER TABLE `joomla_content`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`state`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_featured_catid` (`featured`,`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`state`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_featured_catid` (`featured`,`catid`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
 
 --
 -- Indexes for table `joomla_contentitem_tag_map`
 --
 ALTER TABLE `joomla_contentitem_tag_map`
-  ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`), ADD KEY `idx_tag_type` (`tag_id`,`type_id`), ADD KEY `idx_date_id` (`tag_date`,`tag_id`), ADD KEY `idx_tag` (`tag_id`), ADD KEY `idx_type` (`type_id`), ADD KEY `idx_core_content_id` (`core_content_id`);
+ ADD UNIQUE KEY `uc_ItemnameTagid` (`type_id`,`content_item_id`,`tag_id`), ADD KEY `idx_tag_type` (`tag_id`,`type_id`), ADD KEY `idx_date_id` (`tag_date`,`tag_id`), ADD KEY `idx_tag` (`tag_id`), ADD KEY `idx_type` (`type_id`), ADD KEY `idx_core_content_id` (`core_content_id`);
 
 --
 -- Indexes for table `joomla_content_frontpage`
 --
 ALTER TABLE `joomla_content_frontpage`
-  ADD PRIMARY KEY (`content_id`);
+ ADD PRIMARY KEY (`content_id`);
 
 --
 -- Indexes for table `joomla_content_rating`
 --
 ALTER TABLE `joomla_content_rating`
-  ADD PRIMARY KEY (`content_id`);
+ ADD PRIMARY KEY (`content_id`);
 
 --
 -- Indexes for table `joomla_content_types`
 --
 ALTER TABLE `joomla_content_types`
-  ADD PRIMARY KEY (`type_id`), ADD KEY `idx_alias` (`type_alias`);
+ ADD PRIMARY KEY (`type_id`), ADD KEY `idx_alias` (`type_alias`);
 
 --
 -- Indexes for table `joomla_extensions`
 --
 ALTER TABLE `joomla_extensions`
-  ADD PRIMARY KEY (`extension_id`), ADD KEY `element_clientid` (`element`,`client_id`), ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`), ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
+ ADD PRIMARY KEY (`extension_id`), ADD KEY `element_clientid` (`element`,`client_id`), ADD KEY `element_folder_clientid` (`element`,`folder`,`client_id`), ADD KEY `extension` (`type`,`element`,`folder`,`client_id`);
 
 --
 -- Indexes for table `joomla_finder_filters`
 --
 ALTER TABLE `joomla_finder_filters`
-  ADD PRIMARY KEY (`filter_id`);
+ ADD PRIMARY KEY (`filter_id`);
 
 --
 -- Indexes for table `joomla_finder_links`
 --
 ALTER TABLE `joomla_finder_links`
-  ADD PRIMARY KEY (`link_id`), ADD KEY `idx_type` (`type_id`), ADD KEY `idx_title` (`title`), ADD KEY `idx_md5` (`md5sum`), ADD KEY `idx_url` (`url`(75)), ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`), ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
+ ADD PRIMARY KEY (`link_id`), ADD KEY `idx_type` (`type_id`), ADD KEY `idx_title` (`title`), ADD KEY `idx_md5` (`md5sum`), ADD KEY `idx_url` (`url`(75)), ADD KEY `idx_published_list` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`list_price`), ADD KEY `idx_published_sale` (`published`,`state`,`access`,`publish_start_date`,`publish_end_date`,`sale_price`);
 
 --
 -- Indexes for table `joomla_finder_links_terms0`
 --
 ALTER TABLE `joomla_finder_links_terms0`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms1`
 --
 ALTER TABLE `joomla_finder_links_terms1`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms2`
 --
 ALTER TABLE `joomla_finder_links_terms2`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms3`
 --
 ALTER TABLE `joomla_finder_links_terms3`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms4`
 --
 ALTER TABLE `joomla_finder_links_terms4`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms5`
 --
 ALTER TABLE `joomla_finder_links_terms5`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms6`
 --
 ALTER TABLE `joomla_finder_links_terms6`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms7`
 --
 ALTER TABLE `joomla_finder_links_terms7`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms8`
 --
 ALTER TABLE `joomla_finder_links_terms8`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_terms9`
 --
 ALTER TABLE `joomla_finder_links_terms9`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_termsa`
 --
 ALTER TABLE `joomla_finder_links_termsa`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_termsb`
 --
 ALTER TABLE `joomla_finder_links_termsb`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_termsc`
 --
 ALTER TABLE `joomla_finder_links_termsc`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_termsd`
 --
 ALTER TABLE `joomla_finder_links_termsd`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_termse`
 --
 ALTER TABLE `joomla_finder_links_termse`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_links_termsf`
 --
 ALTER TABLE `joomla_finder_links_termsf`
-  ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
+ ADD PRIMARY KEY (`link_id`,`term_id`), ADD KEY `idx_term_weight` (`term_id`,`weight`), ADD KEY `idx_link_term_weight` (`link_id`,`term_id`,`weight`);
 
 --
 -- Indexes for table `joomla_finder_taxonomy`
 --
 ALTER TABLE `joomla_finder_taxonomy`
-  ADD PRIMARY KEY (`id`), ADD KEY `parent_id` (`parent_id`), ADD KEY `state` (`state`), ADD KEY `ordering` (`ordering`), ADD KEY `access` (`access`), ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
+ ADD PRIMARY KEY (`id`), ADD KEY `parent_id` (`parent_id`), ADD KEY `state` (`state`), ADD KEY `ordering` (`ordering`), ADD KEY `access` (`access`), ADD KEY `idx_parent_published` (`parent_id`,`state`,`access`);
 
 --
 -- Indexes for table `joomla_finder_taxonomy_map`
 --
 ALTER TABLE `joomla_finder_taxonomy_map`
-  ADD PRIMARY KEY (`link_id`,`node_id`), ADD KEY `link_id` (`link_id`), ADD KEY `node_id` (`node_id`);
+ ADD PRIMARY KEY (`link_id`,`node_id`), ADD KEY `link_id` (`link_id`), ADD KEY `node_id` (`node_id`);
 
 --
 -- Indexes for table `joomla_finder_terms`
 --
 ALTER TABLE `joomla_finder_terms`
-  ADD PRIMARY KEY (`term_id`), ADD UNIQUE KEY `idx_term` (`term`), ADD KEY `idx_term_phrase` (`term`,`phrase`), ADD KEY `idx_stem_phrase` (`stem`,`phrase`), ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
+ ADD PRIMARY KEY (`term_id`), ADD UNIQUE KEY `idx_term` (`term`), ADD KEY `idx_term_phrase` (`term`,`phrase`), ADD KEY `idx_stem_phrase` (`stem`,`phrase`), ADD KEY `idx_soundex_phrase` (`soundex`,`phrase`);
 
 --
 -- Indexes for table `joomla_finder_terms_common`
 --
 ALTER TABLE `joomla_finder_terms_common`
-  ADD KEY `idx_word_lang` (`term`,`language`), ADD KEY `idx_lang` (`language`);
+ ADD KEY `idx_word_lang` (`term`,`language`), ADD KEY `idx_lang` (`language`);
 
 --
 -- Indexes for table `joomla_finder_tokens`
 --
 ALTER TABLE `joomla_finder_tokens`
-  ADD KEY `idx_word` (`term`), ADD KEY `idx_context` (`context`);
+ ADD KEY `idx_word` (`term`), ADD KEY `idx_context` (`context`);
 
 --
 -- Indexes for table `joomla_finder_tokens_aggregate`
 --
 ALTER TABLE `joomla_finder_tokens_aggregate`
-  ADD KEY `token` (`term`), ADD KEY `keyword_id` (`term_id`);
+ ADD KEY `token` (`term`), ADD KEY `keyword_id` (`term_id`);
 
 --
 -- Indexes for table `joomla_finder_types`
 --
 ALTER TABLE `joomla_finder_types`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `title` (`title`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `title` (`title`);
 
 --
 -- Indexes for table `joomla_languages`
 --
 ALTER TABLE `joomla_languages`
-  ADD PRIMARY KEY (`lang_id`), ADD UNIQUE KEY `idx_sef` (`sef`), ADD UNIQUE KEY `idx_image` (`image`), ADD UNIQUE KEY `idx_langcode` (`lang_code`), ADD KEY `idx_access` (`access`), ADD KEY `idx_ordering` (`ordering`);
+ ADD PRIMARY KEY (`lang_id`), ADD UNIQUE KEY `idx_sef` (`sef`), ADD UNIQUE KEY `idx_image` (`image`), ADD UNIQUE KEY `idx_langcode` (`lang_code`), ADD KEY `idx_access` (`access`), ADD KEY `idx_ordering` (`ordering`);
 
 --
 -- Indexes for table `joomla_menu`
 --
 ALTER TABLE `joomla_menu`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`), ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`), ADD KEY `idx_menutype` (`menutype`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_path` (`path`(255)), ADD KEY `idx_language` (`language`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_client_id_parent_id_alias_language` (`client_id`,`parent_id`,`alias`,`language`), ADD KEY `idx_componentid` (`component_id`,`menutype`,`published`,`access`), ADD KEY `idx_menutype` (`menutype`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_path` (`path`(255)), ADD KEY `idx_language` (`language`);
 
 --
 -- Indexes for table `joomla_menu_types`
 --
 ALTER TABLE `joomla_menu_types`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_menutype` (`menutype`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_menutype` (`menutype`);
 
 --
 -- Indexes for table `joomla_messages`
 --
 ALTER TABLE `joomla_messages`
-  ADD PRIMARY KEY (`message_id`), ADD KEY `useridto_state` (`user_id_to`,`state`);
+ ADD PRIMARY KEY (`message_id`), ADD KEY `useridto_state` (`user_id_to`,`state`);
 
 --
 -- Indexes for table `joomla_messages_cfg`
 --
 ALTER TABLE `joomla_messages_cfg`
-  ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
+ ADD UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`);
 
 --
 -- Indexes for table `joomla_modules`
 --
 ALTER TABLE `joomla_modules`
-  ADD PRIMARY KEY (`id`), ADD KEY `published` (`published`,`access`), ADD KEY `newsfeeds` (`module`,`published`), ADD KEY `idx_language` (`language`);
+ ADD PRIMARY KEY (`id`), ADD KEY `published` (`published`,`access`), ADD KEY `newsfeeds` (`module`,`published`), ADD KEY `idx_language` (`language`);
 
 --
 -- Indexes for table `joomla_modules_menu`
 --
 ALTER TABLE `joomla_modules_menu`
-  ADD PRIMARY KEY (`moduleid`,`menuid`);
+ ADD PRIMARY KEY (`moduleid`,`menuid`);
 
 --
 -- Indexes for table `joomla_newsfeeds`
 --
 ALTER TABLE `joomla_newsfeeds`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`published`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_state` (`published`), ADD KEY `idx_catid` (`catid`), ADD KEY `idx_createdby` (`created_by`), ADD KEY `idx_language` (`language`), ADD KEY `idx_xreference` (`xreference`);
 
 --
 -- Indexes for table `joomla_overrider`
 --
 ALTER TABLE `joomla_overrider`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_postinstall_messages`
 --
 ALTER TABLE `joomla_postinstall_messages`
-  ADD PRIMARY KEY (`postinstall_message_id`);
+ ADD PRIMARY KEY (`postinstall_message_id`);
 
 --
 -- Indexes for table `joomla_redirect_links`
 --
 ALTER TABLE `joomla_redirect_links`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_link_old` (`old_url`), ADD KEY `idx_link_modifed` (`modified_date`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_link_old` (`old_url`), ADD KEY `idx_link_modifed` (`modified_date`);
 
 --
 -- Indexes for table `joomla_schemas`
 --
 ALTER TABLE `joomla_schemas`
-  ADD PRIMARY KEY (`extension_id`,`version_id`);
+ ADD PRIMARY KEY (`extension_id`,`version_id`);
 
 --
 -- Indexes for table `joomla_session`
 --
 ALTER TABLE `joomla_session`
-  ADD PRIMARY KEY (`session_id`), ADD KEY `userid` (`userid`), ADD KEY `time` (`time`);
+ ADD PRIMARY KEY (`session_id`), ADD KEY `userid` (`userid`), ADD KEY `time` (`time`);
 
 --
 -- Indexes for table `joomla_tags`
 --
 ALTER TABLE `joomla_tags`
-  ADD PRIMARY KEY (`id`), ADD KEY `tag_idx` (`published`,`access`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_path` (`path`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_language` (`language`);
+ ADD PRIMARY KEY (`id`), ADD KEY `tag_idx` (`published`,`access`), ADD KEY `idx_access` (`access`), ADD KEY `idx_checkout` (`checked_out`), ADD KEY `idx_path` (`path`), ADD KEY `idx_left_right` (`lft`,`rgt`), ADD KEY `idx_alias` (`alias`), ADD KEY `idx_language` (`language`);
 
 --
 -- Indexes for table `joomla_talent`
 --
 ALTER TABLE `joomla_talent`
-  ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `joomla_template_styles`
 --
 ALTER TABLE `joomla_template_styles`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_template` (`template`), ADD KEY `idx_home` (`home`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_template` (`template`), ADD KEY `idx_home` (`home`);
 
 --
 -- Indexes for table `joomla_ucm_base`
 --
 ALTER TABLE `joomla_ucm_base`
-  ADD PRIMARY KEY (`ucm_id`), ADD KEY `idx_ucm_item_id` (`ucm_item_id`), ADD KEY `idx_ucm_type_id` (`ucm_type_id`), ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
+ ADD PRIMARY KEY (`ucm_id`), ADD KEY `idx_ucm_item_id` (`ucm_item_id`), ADD KEY `idx_ucm_type_id` (`ucm_type_id`), ADD KEY `idx_ucm_language_id` (`ucm_language_id`);
 
 --
 -- Indexes for table `joomla_ucm_content`
 --
 ALTER TABLE `joomla_ucm_content`
-  ADD PRIMARY KEY (`core_content_id`), ADD KEY `tag_idx` (`core_state`,`core_access`), ADD KEY `idx_access` (`core_access`), ADD KEY `idx_alias` (`core_alias`), ADD KEY `idx_language` (`core_language`), ADD KEY `idx_title` (`core_title`), ADD KEY `idx_modified_time` (`core_modified_time`), ADD KEY `idx_created_time` (`core_created_time`), ADD KEY `idx_content_type` (`core_type_alias`), ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`), ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`), ADD KEY `idx_core_created_user_id` (`core_created_user_id`), ADD KEY `idx_core_type_id` (`core_type_id`);
+ ADD PRIMARY KEY (`core_content_id`), ADD KEY `tag_idx` (`core_state`,`core_access`), ADD KEY `idx_access` (`core_access`), ADD KEY `idx_alias` (`core_alias`), ADD KEY `idx_language` (`core_language`), ADD KEY `idx_title` (`core_title`), ADD KEY `idx_modified_time` (`core_modified_time`), ADD KEY `idx_created_time` (`core_created_time`), ADD KEY `idx_content_type` (`core_type_alias`), ADD KEY `idx_core_modified_user_id` (`core_modified_user_id`), ADD KEY `idx_core_checked_out_user_id` (`core_checked_out_user_id`), ADD KEY `idx_core_created_user_id` (`core_created_user_id`), ADD KEY `idx_core_type_id` (`core_type_id`);
 
 --
 -- Indexes for table `joomla_ucm_history`
 --
 ALTER TABLE `joomla_ucm_history`
-  ADD PRIMARY KEY (`version_id`), ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`), ADD KEY `idx_save_date` (`save_date`);
+ ADD PRIMARY KEY (`version_id`), ADD KEY `idx_ucm_item_id` (`ucm_type_id`,`ucm_item_id`), ADD KEY `idx_save_date` (`save_date`);
 
 --
 -- Indexes for table `joomla_updates`
 --
 ALTER TABLE `joomla_updates`
-  ADD PRIMARY KEY (`update_id`);
+ ADD PRIMARY KEY (`update_id`);
 
 --
 -- Indexes for table `joomla_update_sites`
 --
 ALTER TABLE `joomla_update_sites`
-  ADD PRIMARY KEY (`update_site_id`);
+ ADD PRIMARY KEY (`update_site_id`);
 
 --
 -- Indexes for table `joomla_update_sites_extensions`
 --
 ALTER TABLE `joomla_update_sites_extensions`
-  ADD PRIMARY KEY (`update_site_id`,`extension_id`);
+ ADD PRIMARY KEY (`update_site_id`,`extension_id`);
 
 --
 -- Indexes for table `joomla_usergroups`
 --
 ALTER TABLE `joomla_usergroups`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`), ADD KEY `idx_usergroup_title_lookup` (`title`), ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`), ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_usergroup_parent_title_lookup` (`parent_id`,`title`), ADD KEY `idx_usergroup_title_lookup` (`title`), ADD KEY `idx_usergroup_adjacency_lookup` (`parent_id`), ADD KEY `idx_usergroup_nested_set_lookup` (`lft`,`rgt`) USING BTREE;
 
 --
 -- Indexes for table `joomla_users`
 --
 ALTER TABLE `joomla_users`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_name` (`name`), ADD KEY `idx_block` (`block`), ADD KEY `username` (`username`), ADD KEY `email` (`email`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_name` (`name`), ADD KEY `idx_block` (`block`), ADD KEY `username` (`username`), ADD KEY `email` (`email`);
 
 --
 -- Indexes for table `joomla_user_keys`
 --
 ALTER TABLE `joomla_user_keys`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `series` (`series`), ADD UNIQUE KEY `series_2` (`series`), ADD UNIQUE KEY `series_3` (`series`), ADD KEY `user_id` (`user_id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `series` (`series`), ADD UNIQUE KEY `series_2` (`series`), ADD UNIQUE KEY `series_3` (`series`), ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `joomla_user_notes`
 --
 ALTER TABLE `joomla_user_notes`
-  ADD PRIMARY KEY (`id`), ADD KEY `idx_user_id` (`user_id`), ADD KEY `idx_category_id` (`catid`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idx_user_id` (`user_id`), ADD KEY `idx_category_id` (`catid`);
 
 --
 -- Indexes for table `joomla_user_profiles`
 --
 ALTER TABLE `joomla_user_profiles`
-  ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
+ ADD UNIQUE KEY `idx_user_id_profile_key` (`user_id`,`profile_key`);
 
 --
 -- Indexes for table `joomla_user_usergroup_map`
 --
 ALTER TABLE `joomla_user_usergroup_map`
-  ADD PRIMARY KEY (`user_id`,`group_id`);
+ ADD PRIMARY KEY (`user_id`,`group_id`);
 
 --
 -- Indexes for table `joomla_viewlevels`
 --
 ALTER TABLE `joomla_viewlevels`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `idx_assetgroup_title_lookup` (`title`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -2600,197 +2611,197 @@ ALTER TABLE `joomla_viewlevels`
 -- AUTO_INCREMENT for table `joomla_activity`
 --
 ALTER TABLE `joomla_activity`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=8;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `joomla_activity_activity_type`
 --
 ALTER TABLE `joomla_activity_activity_type`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=72;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `joomla_activity_assets`
 --
 ALTER TABLE `joomla_activity_assets`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK';
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `joomla_activity_talent`
 --
 ALTER TABLE `joomla_activity_talent`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=69;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `joomla_activity_type`
 --
 ALTER TABLE `joomla_activity_type`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=8;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `joomla_assets`
 --
 ALTER TABLE `joomla_assets`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=167;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=167;
 --
 -- AUTO_INCREMENT for table `joomla_banners`
 --
 ALTER TABLE `joomla_banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_banner_clients`
 --
 ALTER TABLE `joomla_banner_clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_categories`
 --
 ALTER TABLE `joomla_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `joomla_contact_details`
 --
 ALTER TABLE `joomla_contact_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `joomla_content`
 --
 ALTER TABLE `joomla_content`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `joomla_content_types`
 --
 ALTER TABLE `joomla_content_types`
-  MODIFY `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+MODIFY `type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `joomla_extensions`
 --
 ALTER TABLE `joomla_extensions`
-  MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=735;
+MODIFY `extension_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=735;
 --
 -- AUTO_INCREMENT for table `joomla_finder_filters`
 --
 ALTER TABLE `joomla_finder_filters`
-  MODIFY `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `filter_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_finder_links`
 --
 ALTER TABLE `joomla_finder_links`
-  MODIFY `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `link_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_finder_taxonomy`
 --
 ALTER TABLE `joomla_finder_taxonomy`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `joomla_finder_terms`
 --
 ALTER TABLE `joomla_finder_terms`
-  MODIFY `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `term_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_finder_types`
 --
 ALTER TABLE `joomla_finder_types`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_languages`
 --
 ALTER TABLE `joomla_languages`
-  MODIFY `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `lang_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `joomla_menu`
 --
 ALTER TABLE `joomla_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=219;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=219;
 --
 -- AUTO_INCREMENT for table `joomla_menu_types`
 --
 ALTER TABLE `joomla_menu_types`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `joomla_messages`
 --
 ALTER TABLE `joomla_messages`
-  MODIFY `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `joomla_modules`
 --
 ALTER TABLE `joomla_modules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=94;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=94;
 --
 -- AUTO_INCREMENT for table `joomla_newsfeeds`
 --
 ALTER TABLE `joomla_newsfeeds`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_overrider`
 --
 ALTER TABLE `joomla_overrider`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'Primary Key';
 --
 -- AUTO_INCREMENT for table `joomla_postinstall_messages`
 --
 ALTER TABLE `joomla_postinstall_messages`
-  MODIFY `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `postinstall_message_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `joomla_redirect_links`
 --
 ALTER TABLE `joomla_redirect_links`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_tags`
 --
 ALTER TABLE `joomla_tags`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `joomla_talent`
 --
 ALTER TABLE `joomla_talent`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=30;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT for table `joomla_template_styles`
 --
 ALTER TABLE `joomla_template_styles`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `joomla_ucm_content`
 --
 ALTER TABLE `joomla_ucm_content`
-  MODIFY `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `core_content_id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_ucm_history`
 --
 ALTER TABLE `joomla_ucm_history`
-  MODIFY `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+MODIFY `version_id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `joomla_updates`
 --
 ALTER TABLE `joomla_updates`
-  MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `update_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `joomla_update_sites`
 --
 ALTER TABLE `joomla_update_sites`
-  MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `update_site_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `joomla_usergroups`
 --
 ALTER TABLE `joomla_usergroups`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=14;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `joomla_users`
 --
 ALTER TABLE `joomla_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=554;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=554;
 --
 -- AUTO_INCREMENT for table `joomla_user_keys`
 --
 ALTER TABLE `joomla_user_keys`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_user_notes`
 --
 ALTER TABLE `joomla_user_notes`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `joomla_viewlevels`
 --
 ALTER TABLE `joomla_viewlevels`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=7;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary Key',AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
