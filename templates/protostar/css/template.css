@@ -7478,3 +7478,6 @@ code {
 	font-weight: bold;
 	padding: 1px 4px;
 }
+.banner img {
+	width: 100%;
+}

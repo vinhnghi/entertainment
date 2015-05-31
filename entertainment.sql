@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2015 at 04:30 PM
+-- Generation Time: May 31, 2015 at 04:37 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.3.29
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `joomla_activity` (
 --
 
 INSERT INTO `joomla_activity` (`id`, `catid`, `asset_id`, `title`, `alias`, `images`, `urls`, `attribs`, `published`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `metadata`, `ordering`, `introtext`, `fulltext`, `hits`, `language`, `params`) VALUES
-(7, 0, 166, 'Dancesport activity in 2010', 'dancesport-activity-in-2010', '{"image_intro":"images\\/com_activity\\/09_dancesportscropped.jpg","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2015-05-30 02:41:33', 553, '', '2015-05-31 15:19:50', 547, '', '', '{"robots":"","author":"","rights":"","xreference":""}', 1, '<p>The events was organized in 2010 with entertainment freelance talents</p>\r\n<p> </p>\r\n', '\r\n<p> IDSF Grand Slam Latin &amp; Standard</p>\r\n<p><span style="font-size: 12.1599998474121px; line-height: 15.8079996109009px;">10th SGDF Singapore DanceSport Championship</span></p>', 0, '', '');
+(7, 0, 166, 'Dancesport activity in 2010', 'dancesport-activity-in-2010', '{"image_intro":"images\\/com_activity\\/09_dancesportscropped.jpg","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2015-05-30 02:41:33', 553, '', '2015-05-31 16:31:56', 547, '', '', '{"robots":"","author":"","rights":"","xreference":""}', 1, '<p>The events was organized in 2010 with entertainment freelance talents</p>\r\n', '\r\n<p> IDSF Grand Slam Latin &amp; Standard</p>\r\n<p><span style="font-size: 12.1599998474121px; line-height: 15.8079996109009px;">10th SGDF Singapore DanceSport Championship</span></p>', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `joomla_activity_activity_type` (
 `id` int(10) unsigned NOT NULL COMMENT 'PK',
   `activity_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_activity table.',
   `activity_type_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_activity_type table.'
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `joomla_activity_activity_type`
@@ -90,7 +90,7 @@ INSERT INTO `joomla_activity_activity_type` (`id`, `activity_id`, `activity_type
 (66, 5, 4),
 (67, 1, 2),
 (68, 6, 2),
-(74, 7, 2);
+(75, 7, 2);
 
 -- --------------------------------------------------------
 
@@ -106,20 +106,20 @@ CREATE TABLE IF NOT EXISTS `joomla_activity_assets` (
   `caption` mediumtext NOT NULL,
   `media_type` char(4) NOT NULL,
   `ordering` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `joomla_activity_assets`
 --
 
 INSERT INTO `joomla_activity_assets` (`id`, `activity_id`, `src`, `alt`, `caption`, `media_type`, `ordering`) VALUES
-(14, 7, 'images/com_activity/09_dancesportscropped.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
-(15, 7, 'images/com_activity/a0aa5b560ec454a3c56391eddca183db-1.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
-(16, 7, 'images/com_activity/hiphop1.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
-(17, 7, 'images/com_activity/martial-arts-21.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
-(18, 7, 'images/com_activity/pc587rzXi.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0),
-(19, 7, 'images/com_activity/singing-stuttering.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0),
-(20, 7, 'images/com_activity/Salsa_and_merengue_in_Dominican_Republic_Salsa_dance_of_passion_and_love_5547.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0);
+(21, 7, 'images/com_activity/09_dancesportscropped.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(22, 7, 'images/com_activity/a0aa5b560ec454a3c56391eddca183db-1.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(23, 7, 'images/com_activity/hiphop1.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(24, 7, 'images/com_activity/martial-arts-21.jpg', '', ' IDSF Grand Slam Latin & Standard', '', 0),
+(25, 7, 'images/com_activity/pc587rzXi.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0),
+(26, 7, 'images/com_activity/singing-stuttering.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0),
+(27, 7, 'images/com_activity/Salsa_and_merengue_in_Dominican_Republic_Salsa_dance_of_passion_and_love_5547.jpg', '', '10th SGDF Singapore DanceSport Championship', '', 0);
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `joomla_activity_talent` (
   `hits` int(10) unsigned NOT NULL DEFAULT '0',
   `language` char(7) NOT NULL,
   `params` varchar(1024) NOT NULL DEFAULT ''
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `joomla_activity_talent`
@@ -153,7 +153,27 @@ INSERT INTO `joomla_activity_talent` (`id`, `activity_id`, `talent_id`, `orderin
 (65, 1, 1, 0, '', '', 0, '', ''),
 (66, 1, 12, 0, '', '', 0, '', ''),
 (67, 1, 14, 0, '', '', 0, '', ''),
-(68, 1, 15, 0, '', '', 0, '', '');
+(68, 1, 15, 0, '', '', 0, '', ''),
+(69, 7, 1, 0, '', '', 0, '', ''),
+(70, 7, 10, 0, '', '', 0, '', ''),
+(71, 7, 11, 0, '', '', 0, '', ''),
+(72, 7, 12, 0, '', '', 0, '', ''),
+(73, 7, 13, 0, '', '', 0, '', ''),
+(74, 7, 14, 0, '', '', 0, '', ''),
+(75, 7, 15, 0, '', '', 0, '', ''),
+(76, 7, 16, 0, '', '', 0, '', ''),
+(77, 7, 17, 0, '', '', 0, '', ''),
+(78, 7, 18, 0, '', '', 0, '', ''),
+(79, 7, 19, 0, '', '', 0, '', ''),
+(80, 7, 2, 0, '', '', 0, '', ''),
+(81, 7, 20, 0, '', '', 0, '', ''),
+(82, 7, 21, 0, '', '', 0, '', ''),
+(83, 7, 22, 0, '', '', 0, '', ''),
+(84, 7, 23, 0, '', '', 0, '', ''),
+(85, 7, 24, 0, '', '', 0, '', ''),
+(86, 7, 25, 0, '', '', 0, '', ''),
+(87, 7, 26, 0, '', '', 0, '', ''),
+(88, 7, 27, 0, '', '', 0, '', '');
 
 -- --------------------------------------------------------
 
@@ -199,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `joomla_activity_type` (
 
 INSERT INTO `joomla_activity_type` (`id`, `catid`, `asset_id`, `parent_id`, `lft`, `rgt`, `level`, `path`, `extension`, `title`, `alias`, `images`, `urls`, `attribs`, `published`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `metakey`, `metadesc`, `metadata`, `ordering`, `introtext`, `fulltext`, `hits`, `language`, `params`) VALUES
 (1, 0, 0, 0, 0, 21, 0, '', 'system', 'ROOT', 'root', '', '', '', 1, '2011-01-01 00:00:01', 547, '', '0000-00-00 00:00:00', 0, '', '', '{}', 0, '', '', 0, '*', '{}'),
-(2, 0, 147, 1, 0, 21, 1, '', 'com_activity', 'Dance', 'dance', '{"image_intro":"images\\/Salsa_and_merengue_in_Dominican_Republic_Salsa_dance_of_passion_and_love_5547.jpg","image_intro_alt":"asda","image_intro_caption":"sd","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2011-01-01 00:00:01', 547, '', '2015-05-30 06:36:16', 547, 'asd as', 'sdasasd', '{"robots":"","author":"","rights":"","xreference":""}', 0, '<p>Feel with music, move with melody ...</p>', '', 0, '*', '{}'),
+(2, 0, 147, 1, 0, 21, 1, '', 'com_activity', 'Dance', 'dance', '{"image_intro":"images\\/com_activity\\/dancer-clip-art-jcxEg8zcE.jpeg","image_intro_alt":"asda","image_intro_caption":"sd","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2011-01-01 00:00:01', 547, '', '2015-05-31 16:32:38', 547, 'asd as', 'sdasasd', '{"robots":"","author":"","rights":"","xreference":""}', 0, '<p>Feel with music, move with melody ...</p>', '', 0, '*', '{}'),
 (6, 0, 151, 1, 0, 0, 1, '', 'com_activity', 'Music', 'music', '{"image_intro":"images\\/com_activity\\/singing-stuttering.jpg","image_intro_alt":"","image_intro_caption":"","image_fulltext":"images\\/com_activity\\/singing-stuttering.jpg","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2015-05-29 14:12:02', 547, '', '2015-05-29 14:12:57', 547, '', '', '{"robots":"","author":"","rights":"","xreference":""}', 1, '', '', 0, '', ''),
 (7, 0, 152, 1, 0, 0, 1, '', 'com_activity', 'Martial arts', 'martial-arts', '{"image_intro":"images\\/com_activity\\/martial-arts-21.jpg","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '', '', 1, '2015-05-30 06:33:40', 553, '', '2015-05-30 06:35:11', 547, '', '', '{"robots":"","author":"","rights":"","xreference":""}', 2, '<p><b style="color: #252525; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px;">Martial arts</b><span style="color: #252525; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px;"> are codified systems and traditions of </span><a style="color: #0b0080; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;" title="Combat" href="http://en.wikipedia.org/wiki/Combat">combat</a><span style="color: #252525; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px;"> practices, which are practiced for a variety of reasons: </span><a style="color: #0b0080; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;" title="Self-defense" href="http://en.wikipedia.org/wiki/Self-defense">self-defense</a><span style="color: #252525; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px;">, </span><a style="color: #0b0080; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px; background-image: none; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;" title="Combat sport" href="http://en.wikipedia.org/wiki/Combat_sport">competition</a><span style="color: #252525; font-family: sans-serif; font-size: 14px; line-height: 22.3999996185303px;">, physical health and fitness, entertainment, as well as mental, physical, and spiritual development.</span></p>', '', 0, '', '');
 
@@ -281,7 +301,7 @@ INSERT INTO `joomla_assets` (`id`, `parent_id`, `lft`, `rgt`, `level`, `name`, `
 (56, 18, 90, 91, 2, 'com_modules.module.89', 'Release News', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
 (57, 18, 92, 93, 2, 'com_modules.module.90', 'Latest Articles', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
 (58, 18, 94, 95, 2, 'com_modules.module.91', 'User Menu', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
-(59, 18, 96, 97, 2, 'com_modules.module.92', 'Image Module', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
+(59, 18, 96, 97, 2, 'com_modules.module.92', 'Image Module', '{"core.delete":{"6":1},"core.edit":{"6":1},"core.edit.state":{"6":1},"module.edit.frontend":[]}'),
 (60, 18, 98, 99, 2, 'com_modules.module.93', 'Search', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
 (61, 27, 21, 22, 3, 'com_content.article.1', 'Our visions', '{"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1}}'),
 (63, 7, 16, 17, 2, 'com_contact.category.8', 'Talents', '{"core.create":{"6":1,"3":1},"core.delete":{"6":1},"core.edit":{"6":1,"4":1},"core.edit.state":{"6":1,"5":1},"core.edit.own":{"6":1,"3":1}}'),
@@ -552,7 +572,7 @@ CREATE TABLE IF NOT EXISTS `joomla_content` (
 --
 
 INSERT INTO `joomla_content` (`id`, `asset_id`, `title`, `alias`, `introtext`, `fulltext`, `state`, `catid`, `created`, `created_by`, `created_by_alias`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `publish_up`, `publish_down`, `images`, `urls`, `attribs`, `version`, `ordering`, `metakey`, `metadesc`, `access`, `hits`, `metadata`, `featured`, `language`, `xreference`) VALUES
-(1, 61, 'Our visions', 'getting-started', '<p>Our web portal is a place to for the freelance talents to display their show case</p>\r\n<p>Our mission is to create a play ground to new entertainments in Singapore</p>', '', 1, 2, '2013-11-16 00:00:00', 547, '', '2015-05-30 06:07:28', 547, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 6, 0, '', '', 1, 624, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
+(1, 61, 'Our visions', 'getting-started', '<p>Our web portal is a place to for the freelance talents to display their show case</p>\r\n<p>Our mission is to create a play ground to new entertainments in Singapore</p>', '', 1, 2, '2013-11-16 00:00:00', 547, '', '2015-05-30 06:07:28', 547, 0, '0000-00-00 00:00:00', '2013-11-16 00:00:00', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 6, 0, '', '', 1, 626, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', ''),
 (2, 65, 'About Us', 'about-us', '', '', 1, 9, '2015-03-25 05:34:04', 547, '', '2015-03-25 05:34:04', 0, 0, '0000-00-00 00:00:00', '2015-03-25 05:34:04', '0000-00-00 00:00:00', '{"image_intro":"","float_intro":"","image_intro_alt":"","image_intro_caption":"","image_fulltext":"","float_fulltext":"","image_fulltext_alt":"","image_fulltext_caption":""}', '{"urla":false,"urlatext":"","targeta":"","urlb":false,"urlbtext":"","targetb":"","urlc":false,"urlctext":"","targetc":""}', '{"show_title":"","link_titles":"","show_tags":"","show_intro":"","info_block_position":"","show_category":"","link_category":"","show_parent_category":"","link_parent_category":"","show_author":"","link_author":"","show_create_date":"","show_modify_date":"","show_publish_date":"","show_item_navigation":"","show_icons":"","show_print_icon":"","show_email_icon":"","show_vote":"","show_hits":"","show_noauth":"","urls_position":"","alternative_readmore":"","article_layout":"","show_publishing_options":"","show_article_options":"","show_urls_images_backend":"","show_urls_images_frontend":""}', 1, 0, '', '', 1, 10, '{"robots":"","author":"","rights":"","xreference":""}', 0, '*', '');
 
 -- --------------------------------------------------------
@@ -1497,7 +1517,7 @@ INSERT INTO `joomla_modules` (`id`, `asset_id`, `title`, `note`, `content`, `ord
 (89, 56, 'Release News', '', '', 0, 'postinstall', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_feed', 1, 1, '{"rssurl":"http:\\/\\/www.joomla.org\\/announcements\\/release-news.feed","rssrtl":"0","rsstitle":"1","rssdesc":"1","rssimage":"1","rssitems":"3","rssitemdesc":"1","word_count":"0","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 1, '*'),
 (90, 57, 'Latest Articles', '', '', 1, 'position-7', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 'mod_articles_latest', 1, 1, '{"catid":[""],"count":"5","show_featured":"","ordering":"c_dsc","user_id":"0","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
 (91, 58, 'User Menu', '', '', 3, 'position-7', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_menu', 1, 1, '{"menutype":"usermenu","base":"","startLevel":"1","endLevel":"0","showAllChildren":"0","tag_id":"","class_sfx":"","window_open":"","layout":"_:default","moduleclass_sfx":"_menu","cache":"1","cache_time":"900","cachemode":"itemid","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
-(92, 59, 'Image Module', '', '<p><img src="images/headers/blue-flower.jpg" alt="Blue Flower" /></p>', 0, 'position-3', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"1","backgroundimage":"","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
+(92, 59, 'Image Module', '', '<p><img src="images/headers/blue-flower.jpg" alt="Blue Flower" /></p>', 1, 'position-3', 547, '2015-05-31 16:35:19', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_custom', 1, 0, '{"prepare_content":"1","backgroundimage":"","layout":"_:default","moduleclass_sfx":" banner","cache":"1","cache_time":"900","cachemode":"static","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*'),
 (93, 60, 'Search', '', '', 0, 'position-0', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 1, 'mod_search', 1, 1, '{"label":"","width":"20","text":"","button":"0","button_pos":"right","imagebutton":"1","button_text":"","opensearch":"1","opensearch_title":"","set_itemid":"0","layout":"_:default","moduleclass_sfx":"","cache":"1","cache_time":"900","cachemode":"itemid","module_tag":"div","bootstrap_size":"0","header_tag":"h3","header_class":"","style":"0"}', 0, '*');
 
 -- --------------------------------------------------------
@@ -1686,8 +1706,8 @@ CREATE TABLE IF NOT EXISTS `joomla_session` (
 --
 
 INSERT INTO `joomla_session` (`session_id`, `client_id`, `guest`, `time`, `data`, `userid`, `username`) VALUES
-('4lqfpm8pk7v4j0lln1lkuphfo5', 1, 0, '1433089726', '__default|a:8:{s:15:"session.counter";i:28;s:19:"session.timer.start";i:1433087679;s:18:"session.timer.last";i:1433089725;s:17:"session.timer.now";i:1433089725;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}}}s:4:"user";O:5:"JUser":28:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"547";s:4:"name";s:10:"Super User";s:8:"username";s:5:"admin";s:5:"email";s:17:"hovnghi@gmail.com";s:8:"password";s:60:"$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-03-24 14:15:41";s:13:"lastvisitDate";s:19:"2015-05-31 15:09:19";s:10:"activation";s:1:"0";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"9358cfef9dd4af094827ba414da299b5";}', 547, 'admin'),
-('8oh1fe7ephiksr6jish9t1gs16', 0, 1, '1433089728', '__default|a:8:{s:15:"session.counter";i:81;s:19:"session.timer.start";i:1433083409;s:18:"session.timer.last";i:1433089681;s:17:"session.timer.now";i:1433089728;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:12:"com_activity";O:8:"stdClass":1:{s:10:"activities";O:8:"stdClass":1:{s:8:"ordercol";N;}}}}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}}s:14:"\\0\\0\\0_authGroups";a:1:{i:0;s:1:"1";}s:14:"\\0\\0\\0_authLevels";a:2:{i:0;i:1;i:1;i:1;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}s:13:"session.token";s:32:"77b06e363b06592c5b1da8335a9c7c63";}', 0, '');
+('4lqfpm8pk7v4j0lln1lkuphfo5', 1, 0, '1433090119', '__default|a:9:{s:15:"session.counter";i:51;s:19:"session.timer.start";i:1433087679;s:18:"session.timer.last";i:1433090119;s:17:"session.timer.now";i:1433090119;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":3:{s:11:"application";O:8:"stdClass":1:{s:4:"lang";s:5:"en-GB";}s:12:"com_activity";O:8:"stdClass":4:{s:10:"activities";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}s:4:"edit";O:8:"stdClass":2:{s:8:"activity";O:8:"stdClass":2:{s:2:"id";a:0:{}s:4:"data";N;}s:4:"type";O:8:"stdClass":2:{s:2:"id";a:0:{}s:4:"data";N;}}s:7:"talents";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}s:5:"types";O:8:"stdClass":2:{s:8:"ordercol";N;s:4:"list";a:4:{s:9:"direction";N;s:5:"limit";s:2:"20";s:8:"ordering";N;s:5:"start";d:0;}}}s:11:"com_modules";O:8:"stdClass":3:{s:7:"modules";O:8:"stdClass":1:{s:6:"filter";O:8:"stdClass":1:{s:18:"client_id_previous";i:0;}}s:4:"edit";O:8:"stdClass":1:{s:6:"module";O:8:"stdClass":2:{s:2:"id";a:1:{i:0;i:92;}s:4:"data";N;}}s:3:"add";O:8:"stdClass":1:{s:6:"module";O:8:"stdClass":2:{s:12:"extension_id";N;s:6:"params";N;}}}}}s:4:"user";O:5:"JUser":28:{s:9:"\\0\\0\\0isRoot";b:1;s:2:"id";s:3:"547";s:4:"name";s:10:"Super User";s:8:"username";s:5:"admin";s:5:"email";s:17:"hovnghi@gmail.com";s:8:"password";s:60:"$2y$10$4f4mgkFMSowLIwUxN6Tezus/D/pexNNNNjAxd4D65TjYVpTbWrA1i";s:14:"password_clear";s:0:"";s:5:"block";s:1:"0";s:9:"sendEmail";s:1:"1";s:12:"registerDate";s:19:"2015-03-24 14:15:41";s:13:"lastvisitDate";s:19:"2015-05-31 15:09:19";s:10:"activation";s:1:"0";s:6:"params";s:92:"{"admin_style":"","admin_language":"","language":"","editor":"","helpsite":"","timezone":""}";s:6:"groups";a:1:{i:8;s:1:"8";}s:5:"guest";i:0;s:13:"lastResetTime";s:19:"0000-00-00 00:00:00";s:10:"resetCount";s:1:"0";s:12:"requireReset";s:1:"0";s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":6:{s:11:"admin_style";s:0:"";s:14:"admin_language";s:0:"";s:8:"language";s:0:"";s:6:"editor";s:0:"";s:8:"helpsite";s:0:"";s:8:"timezone";s:0:"";}}s:14:"\\0\\0\\0_authGroups";a:2:{i:0;i:1;i:1;i:8;}s:14:"\\0\\0\\0_authLevels";a:5:{i:0;i:1;i:1;i:1;i:2;i:2;i:3;i:3;i:4;i:6;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;s:6:"otpKey";s:0:"";s:4:"otep";s:0:"";}s:13:"session.token";s:32:"9358cfef9dd4af094827ba414da299b5";s:20:"com_media.return_url";s:115:"index.php?option=com_media&view=images&tmpl=component&fieldid=jform_images_image_intro&e_name=&asset=147&author=547";}', 547, 'admin'),
+('8oh1fe7ephiksr6jish9t1gs16', 0, 1, '1433090237', '__default|a:8:{s:15:"session.counter";i:93;s:19:"session.timer.start";i:1433083409;s:18:"session.timer.last";i:1433090215;s:17:"session.timer.now";i:1433090237;s:22:"session.client.browser";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.81 Safari/537.36";s:8:"registry";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":1:{s:12:"com_activity";O:8:"stdClass":2:{s:10:"activities";O:8:"stdClass":1:{s:8:"ordercol";N;}s:5:"types";O:8:"stdClass":1:{s:8:"ordercol";N;}}}}s:4:"user";O:5:"JUser":26:{s:9:"\\0\\0\\0isRoot";b:0;s:2:"id";i:0;s:4:"name";N;s:8:"username";N;s:5:"email";N;s:8:"password";N;s:14:"password_clear";s:0:"";s:5:"block";N;s:9:"sendEmail";i:0;s:12:"registerDate";N;s:13:"lastvisitDate";N;s:10:"activation";N;s:6:"params";N;s:6:"groups";a:1:{i:0;s:1:"9";}s:5:"guest";i:1;s:13:"lastResetTime";N;s:10:"resetCount";N;s:12:"requireReset";N;s:10:"\\0\\0\\0_params";O:24:"Joomla\\Registry\\Registry":1:{s:7:"\\0\\0\\0data";O:8:"stdClass":0:{}}s:14:"\\0\\0\\0_authGroups";a:1:{i:0;s:1:"1";}s:14:"\\0\\0\\0_authLevels";a:2:{i:0;i:1;i:1;i:1;}s:15:"\\0\\0\\0_authActions";N;s:12:"\\0\\0\\0_errorMsg";N;s:13:"\\0\\0\\0userHelper";O:18:"JUserWrapperHelper":0:{}s:10:"\\0\\0\\0_errors";a:0:{}s:3:"aid";i:0;}s:13:"session.token";s:32:"77b06e363b06592c5b1da8335a9c7c63";}', 0, '');
 
 -- --------------------------------------------------------
 
@@ -2616,17 +2636,17 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT
 -- AUTO_INCREMENT for table `joomla_activity_activity_type`
 --
 ALTER TABLE `joomla_activity_activity_type`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=75;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=76;
 --
 -- AUTO_INCREMENT for table `joomla_activity_assets`
 --
 ALTER TABLE `joomla_activity_assets`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=21;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `joomla_activity_talent`
 --
 ALTER TABLE `joomla_activity_talent`
-MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=69;
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',AUTO_INCREMENT=89;
 --
 -- AUTO_INCREMENT for table `joomla_activity_type`
 --
