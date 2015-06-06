@@ -29,4 +29,12 @@ abstract class ActivityHelper
 		
 		return $result;
 	}
+	
+	public static function truncate($string = "", $max_words)
+	{
+		$array = array_filter( explode(' ', $string), 'strlen');
+		if(count($array) > $max_words && $max_words > 0)
+			$string = implode(' ', array_slice($array, 0, $max_words)) . '...';
+		return $string;
+	}
 }

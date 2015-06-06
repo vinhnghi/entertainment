@@ -33,7 +33,7 @@ $base_url = 'index.php?option=com_activity&view=activity&cid=';
 		<?php if ($image['image_intro']):?>
 		<div class="com_activity_list_item_image_intro"><img alt="<?php echo $image['image_intro_alt'];?>" src="<?php echo $image['image_intro'];?>"></div>
 		<?php endif; ?>
-		<div class="com_activity_list_item_introtext"><?php echo $row->introtext;?></div>
+		<div class="com_activity_list_item_introtext"><?php echo ActivityHelper::truncate( strip_tags($row->introtext), 20);?></div>
 		<?php if ($row->fulltext):?>
 		<!-- 
 		<div class="com_activity_list_item_fulltext" style="display:none;"><?php echo $row->fulltext;?></div>
