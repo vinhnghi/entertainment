@@ -118,6 +118,17 @@
 				<option value="1">PLG_USER_PROFILE_OPTION_AGREE</option>
 				<option value="">JNO</option>
 			</field>
+			
+			<field
+				name="user_type"
+				type="list"
+				label="Type"
+				required="true"
+				description="">
+					<option value="Client">Client</option>
+					<option value="Talent">Talent</option>
+			</field>
+
 		</fieldset>
 	</fields>
 </form>

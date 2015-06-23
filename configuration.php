@@ -29,7 +29,7 @@ class JConfig {
 	public $ftp_root = '';
 	public $ftp_enable = '0';
 	public $offset = 'UTC';
-	public $mailonline = '0';
+	public $mailonline = '1';
 	public $mailer = 'mail';
 	public $mailfrom = 'hovnghi@gmail.com';
 	public $fromname = 'SG Media Talents';
@@ -54,7 +54,7 @@ class JConfig {
 	public $sef_suffix = '0';
 	public $unicodeslugs = '0';
 	public $feed_limit = '10';
-	public $log_path = '';
+	public $log_path = '/Users/sgp0458/Documents/entertainment/logs';
 	public $tmp_path = '';
 	public $lifetime = '15';
 	public $session_handler = 'database';

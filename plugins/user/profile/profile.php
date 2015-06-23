@@ -394,6 +394,27 @@ class PlgUserProfile extends JPlugin
 
 				return false;
 			}
+			
+			//set user group
+			$user_type = $data['profile']['user_type'];
+			if ($user_type)
+			{
+				$db = JFactory::getDBO ();
+				$query = $db->getQuery ( true );
+				$query->select ( 'id' );
+				$query->from ( '#__usergroups' );
+				$query->where ( 'title LIKE ' . $db->quote ( $user_type ) );
+				$db->setQuery ( $query );
+				$groupId = $db->loadResult ();
+				if ($groupId) 
+				{
+					$groups = array (
+							2,
+							$groupId 
+					);
+					JUserHelper::setUserGroups ( $userId, $groups );
+				}
+			}
 		}
 
 		return true;
@@ -439,6 +460,6 @@ class PlgUserProfile extends JPlugin
 			}
 		}
 
-		return true;
+		return false;
 	}
 }

@@ -1,15 +1,14 @@
 <?php
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-class PlgSearchActivityType extends JPlugin {
+class PlgSearchActivity extends JPlugin {
 	function onContentSearchAreas() {
 		static $areas = array (
-				'activitytype' => 'Activity Type' 
+				'activity' => 'Search - Activity/Activity Type' 
 		);
 		return $areas;
 	}
-	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null) 
-	{
-		$db = JFactory::getDbo();
+	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null) {
+		$db = JFactory::getDbo ();
 		
 		$user = JFactory::getUser ();
 		$groups = implode ( ',', $user->getAuthorisedViewLevels () );
@@ -89,7 +88,7 @@ class PlgSearchActivityType extends JPlugin {
 		$query->order ( $order );
 		
 		// Set query
-		$limit = $this->params->def('search_limit', 50);
+		$limit = $this->params->def ( 'search_limit', 50 );
 		$db->setQuery ( $query, 0, $limit );
 		$rows = $db->loadObjectList ();
 		

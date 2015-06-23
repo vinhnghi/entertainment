@@ -1,17 +1,14 @@
 <?php
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-class PlgSearchActivityType extends JPlugin {
+class PlgSearchActivity extends JPlugin {
 	function onContentSearchAreas() {
 		static $areas = array (
-				'activitytype' => 'Activity Type' 
+				'activity' => 'Search - Activity/Activity Type' 
 		);
 		return $areas;
 	}
-	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null) 
-	{
-		require_once JPATH_SITE . '/components/com_activity/router.php';
-		
-		$db = JFactory::getDbo();
+	public function onContentSearch($text, $phrase = '', $ordering = '', $areas = null) {
+		$db = JFactory::getDbo ();
 		
 		$user = JFactory::getUser ();
 		$groups = implode ( ',', $user->getAuthorisedViewLevels () );
@@ -79,11 +76,11 @@ class PlgSearchActivityType extends JPlugin {
 		}
 		
 		// Replace nameofplugin
-		$section = JText::_ ( 'ActivityType' );
+		$section = JText::_ ( 'Activity Type' );
 		
 		// The database query; differs per situation! It will look something like this (example from newsfeed search plugin):
 		$query = $db->getQuery ( true );
-		$query->select ( 'a.title AS title, a.title AS text, a.created AS created, a.id' );
+		$query->select ( 'a.title AS title, a.id, a.introtext as text, a.created' );
 		$query->select ( $db->Quote ( $section ) . ' AS section' );
 		$query->select ( '"1" AS browsernav' );
 		$query->from ( '#__activity_type AS a' );
@@ -91,6 +88,7 @@ class PlgSearchActivityType extends JPlugin {
 		$query->order ( $order );
 		
 		// Set query
+		$limit = $this->params->def ( 'search_limit', 50 );
 		$db->setQuery ( $query, 0, $limit );
 		$rows = $db->loadObjectList ();
 		
