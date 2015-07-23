@@ -51,6 +51,7 @@ class MediaViewImages extends JViewLegacy
 		$this->state = $this->get('state');
 		$this->folderList = $this->get('folderList');
 		$this->require_ftp = $ftp;
+		$this->listType = JRequest::getString('listType', 'images');
 
 		parent::display($tpl);
 	}

@@ -43,7 +43,7 @@ echo $params->get('image_path', 'images'); ?>/';
 		</div>
 	</div>
 
-	<iframe id="imageframe" name="imageframe" src="index.php?option=com_media&amp;view=imagesList&amp;tmpl=component&amp;folder=<?php echo $this->state->folder?>&amp;asset=<?php echo $input->getCmd('asset');?>&amp;author=<?php echo $input->getCmd('author');?>"></iframe>
+	<iframe id="imageframe" name="imageframe" src="index.php?option=com_media&amp;view=<?php echo $this->listType?>List&amp;tmpl=component&amp;folder=<?php echo $this->state->folder?>&amp;asset=<?php echo $input->getCmd('asset');?>&amp;author=<?php echo $input->getCmd('author');?>"></iframe>
 
 	<div class="well">
 		<div class="row">

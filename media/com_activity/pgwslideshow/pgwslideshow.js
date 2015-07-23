@@ -67,7 +67,7 @@
 
                     var maxHeight = pgwSlideshow.plugin.find('.ps-current > ul > li.elt_' + pgwSlideshow.currentSlide + ' img').height();
                     updateHeight(maxHeight);
-
+                    
                     if (pgwSlideshow.config.displayList) {
                         checkList();
                         checkSelectedItem();
@@ -86,6 +86,7 @@
         // Update the current height
         var updateHeight = function(height, animate) {
 
+        	height = 400;
             // Check maxHeight
             if (pgwSlideshow.config.maxHeight) {
                 if (height + pgwSlideshow.plugin.find('.ps-list').height() > pgwSlideshow.config.maxHeight) {
@@ -220,10 +221,22 @@
                 // Set element in the current list
                 var currentElement = $('<li class="elt_' + elementId + '"></li>');
 
+                var height = 370;
+                
                 if (element.image) {
-                    currentElement.html('<img src="' + element.image + '" alt="' + (element.title ? element.title : '') + '">');
+                	if (element.image.indexOf( '/thumbs/' ) > 0) {
+                    	currentElement.html('<video src="' + element.image.replace('/thumbs/', '/').replace('.jpg', '') + '" height="'+height+'" controls>Your browser does not support the video tag.</video>');
+                    }
+                    else {
+                    	currentElement.html('<img src="' + element.image + '" alt="' + (element.title ? element.title : '') + '" height="'+height+'">');
+                    }
                 } else if (element.thumbnail) {
-                    currentElement.html('<img src="' + element.thumbnail + '" alt="' + (element.title ? element.title : '') + '">');
+                	if (element.thumbnail.indexOf( '/thumbs/' ) > 0) {
+                    	currentElement.html('<video src="' + element.thumbnail.replace('/thumbs/', '/').replace('.jpg', '') + '" height="'+height+'" controls>Your browser does not support the video tag.</video>');
+                    }
+                    else {
+                    	currentElement.html('<img src="' + element.thumbnail + '" alt="' + (element.title ? element.title : '') + '" height="'+height+'">');
+                    }
                 }
 
                 if (element.link) {

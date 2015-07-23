@@ -45,7 +45,7 @@ class ActivityViewActivity extends JViewLegacy
 		$document->addStyleSheet( JURI::root () . "components/com_activity/models/forms/activity.css" );
 		$document->addStyleSheet( JURI::root () . "media/com_activity/{$folder}/{$folder}.min.css" );
 		
-		$document->addScript( JURI::root () . "media/com_activity/{$folder}/{$folder}.min.js", null, true );
+		$document->addScript( JURI::root () . "media/com_activity/{$folder}/{$folder}.js", null, true );
 		
 		$content = 'jQuery(document).ready(function() {var ' . $galleryType . ' = jQuery(".' . $galleryType . '").' . $galleryType . '({maxHeight : ' . $height . ',transitionEffect : \'fading\',adaptiveDuration : ' . $duration . '});/*' . $galleryType . '.startSlide();*/});';
 		$document->addScriptDeclaration( $content );
