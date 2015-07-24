@@ -3,7 +3,7 @@
 	<fieldset name="titles" label="Gallery"
 		description="These settings apply for activity gallery">
 		
-		<field
+<!-- 		<field
 			name="gallery_type"
 			type="list"
 			default="pgwSlideshow"
@@ -12,22 +12,22 @@
 			<option value="pgwSlideshow">Horizontal</option>
 			<option value="pgwSlider">Vertical</option>
 		</field>
-		
-		<field
+ -->
+  		<field
 			name="gallery_height"
 			type="text"
 			label="Height"
 			description=""
-			default="500"
+			default="360"
 		/>
 
-		<field
+<!-- 		<field
 			name="gallery_duration"
 			type="text"
 			label="Duration"
 			description=""
-			default="1000"
+			default="3000"
 		/>
-
-	</fieldset>
+ -->
+ 	</fieldset>
 </config>

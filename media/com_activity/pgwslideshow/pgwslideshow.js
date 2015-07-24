@@ -50,6 +50,7 @@
 
             // Merge user options with the default configuration
             pgwSlideshow.config = $.extend({}, defaults, options);
+            pgwSlideshow.config.height = pgwSlideshow.config.height ? pgwSlideshow.config.height : 360;
 
             // Setup
             setup();
@@ -59,14 +60,15 @@
                 checkList();
             }
 
+            window.pgwSlideshow = pgwSlideshow;
             // Resize trigger
             pgwSlideshow.window.resize(function() {
                 clearTimeout(pgwSlideshow.resizeEvent);
                 pgwSlideshow.resizeEvent = setTimeout(function() {
                     setSizeClass();
 
-                    var maxHeight = pgwSlideshow.plugin.find('.ps-current > ul > li.elt_' + pgwSlideshow.currentSlide + ' img').height();
-                    updateHeight(maxHeight);
+//                    var maxHeight = pgwSlideshow.plugin.find('.ps-current > ul > li.elt_' + pgwSlideshow.currentSlide + ' img').height();
+                    updateHeight(pgwSlideshow.config.height);
                     
                     if (pgwSlideshow.config.displayList) {
                         checkList();
@@ -86,7 +88,7 @@
         // Update the current height
         var updateHeight = function(height, animate) {
 
-        	height = 400;
+//        	height = 400;
             // Check maxHeight
             if (pgwSlideshow.config.maxHeight) {
                 if (height + pgwSlideshow.plugin.find('.ps-list').height() > pgwSlideshow.config.maxHeight) {
@@ -221,7 +223,7 @@
                 // Set element in the current list
                 var currentElement = $('<li class="elt_' + elementId + '"></li>');
 
-                var height = 370;
+                var height = pgwSlideshow.config.height;
                 
                 if (element.image) {
                 	if (element.image.indexOf( '/thumbs/' ) > 0) {
@@ -285,7 +287,7 @@
                 setSizeClass();
 
                 var maxHeight = pgwSlideshow.plugin.find('.ps-current > ul > li.elt_1 img').height();
-                updateHeight(maxHeight);
+                updateHeight(pgwSlideshow.config.height);
             });
 
             // Enable slideshow
@@ -389,7 +391,7 @@
 
             // Set the container height
             var maxHeight = pgwSlideshow.plugin.find('.ps-current .elt_' + element.id + ' img').height();
-            updateHeight(maxHeight, true);
+            updateHeight(pgwSlideshow.config.height , true);
 
             return true;
         }
@@ -862,7 +864,7 @@
                     setSizeClass();
 
                     var maxHeight = pgwSlideshow.plugin.find('.ps-current > ul > li.elt_' + pgwSlideshow.currentSlide + ' img').css('max-height', '').height();
-                    updateHeight(maxHeight);
+                    updateHeight(pgwSlideshow.config.height);
 
                     if (pgwSlideshow.config.displayList) {
                         checkList();
