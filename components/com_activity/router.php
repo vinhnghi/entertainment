@@ -82,8 +82,6 @@ class ActivityRouter extends JComponentRouterBase
 
 		if ($view == 'activity')
 		{
-			if (!$menuItemGiven)
-				$segments[] = $view;
 			if (isset($query['cid'])) {
 				$cid = $query['cid'];
 				unset($query['cid']);
@@ -153,31 +151,42 @@ class ActivityRouter extends JComponentRouterBase
 		$count = count($segments);
 		if (!isset($item))
 		{
-			$vars['view'] = $segments[0];
-			$vars['cid'] = $segments[$count - 1];
-			return $vars;
+			//view activities
+			if ($count == 2) 
+			{
+				$vars['view'] = 'activities';
+				$vars['cid'] = (int) $segments[0];
+			}
+			//view activity
+			else 
+			{
+				$vars['view'] = 'activity';
+				$vars['cid'] = (int) $segments[0];
+				$vars['id'] = (int) $segments[2];
+			}
 		}
-
-		$app = JFactory::getApplication();
-		$pathway = $app->getPathway();
-		if ($count == 2) { // view is activities
-			if ($segments [0][count($segments) - 1] == 't') {
-				$vars ['view'] = 'activities';
-				$vars ['cid'] = ( int ) $segments [0];
-				$pathway->addItem ( $this->getRecord ( '#__activity_type', $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activities&cid={$vars['cid']}" ) );
-			}
-			else  {
+		else 
+		{
+			$app = JFactory::getApplication();
+			$pathway = $app->getPathway();
+			if ($count == 2) { // view is activities
+				if ($segments [0][count($segments) - 1] == 't') {
+					$vars ['view'] = 'activities';
+					$vars ['cid'] = ( int ) $segments [0];
+					$pathway->addItem ( $this->getRecord ( '#__activity_type', $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activities&cid={$vars['cid']}" ) );
+				}
+				else  {
+					$vars ['view'] = 'activity';
+					$vars ['id'] = ( int ) $segments [0];
+					$pathway->addItem ( $this->getRecord ( '#__activity', $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activity&id={$vars['id']}" ) );
+				}
+			} else {
 				$vars ['view'] = 'activity';
-				$vars ['id'] = ( int ) $segments [0];
-				$pathway->addItem ( $this->getRecord ( '#__activity', $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activity&id={$vars['id']}" ) );
+				$vars ['cid'] = ( int ) $segments [0];
+				$vars ['id'] = ( int ) $segments [2];
+				$pathway->addItem ( $this->getRecord ( '#__activity_type', $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activities&cid={$vars['cid']}" ) );
+				$pathway->addItem ( $this->getRecord ( '#__activity', $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activity&cid={$vars['cid']}&id={$vars['id']}" ) );
 			}
-		} else {
-			$vars ['view'] = 'activity';
-			$vars ['cid'] = ( int ) $segments [0];
-			$vars ['id'] = ( int ) $segments [2];
-			$pathway->addItem ( $this->getRecord ( '#__activity_type', $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activities&cid={$vars['cid']}" ) );
-			$pathway->addItem ( $this->getRecord ( '#__activity', $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_activity&view=activity&cid={$vars['cid']}&id={$vars['id']}" ) );
-			return $vars;
 		}
 		return $vars;
 	}

@@ -90,14 +90,37 @@ class PlgSearchActivity extends JPlugin {
 		// Set query
 		$limit = $this->params->def ( 'search_limit', 50 );
 		$db->setQuery ( $query, 0, $limit );
-		$rows = $db->loadObjectList ();
+		$types = $db->loadObjectList ();
 		
 		// The 'output' of the displayed link. Again a demonstration from the newsfeed search plugin
-		foreach ( $rows as $key => $row ) {
-			$rows [$key]->href = 'index.php?option=com_activity&view=activities&cid=' . $row->id;
+		foreach ( $types as $key => $row ) {
+			$types [$key]->href = 'index.php?option=com_activity&view=activities&cid=' . $row->id;
+		}
+
+		$section = JText::_ ( 'Activity' );
+		// The database query; differs per situation! It will look something like this (example from newsfeed search plugin):
+		$query = $db->getQuery ( true );
+		$query->select ( 'a.title AS title, a.id, a.introtext as text, a.created, c.id as cid' );
+		$query->select ( $db->Quote ( $section ) . ' AS section' );
+		$query->select ( '"1" AS browsernav' );
+		$query->from ( '#__activity AS a' );
+		$query->leftJoin ( '#__activity_activity_type AS b ON a.id=b.activity_id' );
+		$query->leftJoin ( '#__activity_type AS c ON c.id=b.activity_type_id' );
+		$query->where ( '(' . $where . ')' . 'AND a.published = 1' );
+		$query->order ( $order );
+		
+		// Set query
+		$limit = $this->params->def ( 'search_limit', 50 );
+		$db->setQuery ( $query, 0, $limit );
+		$activities = $db->loadObjectList ();
+		
+		// The 'output' of the displayed link. Again a demonstration from the newsfeed search plugin
+		foreach ( $activities as $key => $row ) {
+			$activities [$key]->href = 'index.php?option=com_activity&view=activity&cid=' . $row->cid . '&id=' . $row->id;
 		}
 		
+		
 		// Return the search results in an array
-		return $rows;
+		return array_merge($types, $activities);
 	}
 }
