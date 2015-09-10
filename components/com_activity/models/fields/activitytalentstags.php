@@ -7,10 +7,29 @@ class JFormFieldActivityTalentsTags extends JFormField {
 		$jinput = JFactory::getApplication ()->input;
 		
 		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->select ( 'DISTINCT b.*' );
-		$query->from ( '#__activity_talent AS a' );
-		$query->leftJoin ( '#__talent AS b ON (a.talent_id=b.id)' );
-		$query->where ( '(a.activity_id = ' . $jinput->get ( 'id', 0 ) . ')' );
+		$query = $db->getQuery ( true );
+		$fields = array (
+				'a.*',
+				'c.id AS cid',
+				'c.title AS type',
+				'c.alias AS type_alias',
+				'd.email',
+				'd.id AS user_id',
+				'd.name AS title',
+				'd.username AS alias' 
+		);
+		
+		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__talent AS a' );
+		$query->leftJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
+		$query->leftJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
+		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
+		$query->leftJoin ( '#__activity_talent AS e ON a.id = b.talent_id' );
+		$query->where ( 'a.published = 1' );
+		$query->where ( 'c.published = 1' );
+		$query->where ( 'd.block = 0' );
+		$query->where ( 'd.activation = ""' );
+		$query->where ( 'e.activity_id = ' . ( int ) $jinput->get ( 'id', 0 ) );
+		
 		$db->setQuery ( $query );
 		
 		return $db->loadObjectList ();
@@ -28,7 +47,7 @@ class JFormFieldActivityTalentsTags extends JFormField {
 	protected function getInput() {
 		$html = array ();
 		$talents = $this->getTalents ();
-		if(count($talents)) {
+		if (count ( $talents )) {
 			$id = strtolower ( "{$this->element ['name']}" );
 			$html [] = "<div class='com_activity_tags'>Talents:";
 			$html [] = "<div class='{$this->type}' id='{$id}'>";

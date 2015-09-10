@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_talent/models/fields">
+		<field name="id" type="text" class="readonly" label="ID"
+			description="" size="10" default="0" readonly="true" />
+
+		<field name="talenttext" type="editor" label="Activity details"
+			description="" filter="JComponentHelper::filterText" buttons="true"
+			hide="article,image,pagebreak" />
+
+	</fieldset>
+
+	<field name="talentslideshow" type="talentslideshow" label="Images"
+		description="" />
+
+	<fields name="images" label="Image Options">
+		<field name="image_intro" type="media" label="Intro image"
+			description="" start="true" directory="com_talent" />
+		<field name="image_intro_alt" type="text" label="Alt Text"
+			description="" size="20" />
+		<field name="image_intro_caption" type="text" label="Caption"
+			description="" size="20" end="true" />
+		<field name="image_fulltext" type="media" label="Full Article Image"
+			description="" start="true" directory="com_talent" />
+		<field name="image_fulltext_alt" type="text" label="Alt Text"
+			description="" size="20" />
+		<field name="image_fulltext_caption" type="text" label="Caption"
+			description="" size="20" end="true" />
+	</fields>
+
+	<fields>
+		<field name="introtext" label="Intro text" />
+		<field name="fulltext" label="Full text" />
+	</fields>
+
+</form>

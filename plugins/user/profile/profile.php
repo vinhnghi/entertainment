@@ -399,16 +399,9 @@ class PlgUserProfile extends JPlugin
 			$app =& JFactory::getApplication();
 			if ($app->isSite()) 
 			{
-				$user_type = $data['profile']['user_type'];
-				if ($user_type)
+				$groupId = $data['profile']['group_id'];
+				if ($groupId)
 				{
-					$db = JFactory::getDBO ();
-					$query = $db->getQuery ( true );
-					$query->select ( 'id' );
-					$query->from ( '#__usergroups' );
-					$query->where ( 'title LIKE ' . $db->quote ( $user_type ) );
-					$db->setQuery ( $query );
-					$groupId = $db->loadResult ();
 					JUserHelper::addUserToGroup ( $userId, $groupId );
 				}
 			}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="List talents of a type" option="List talents of a type">
+		<help key="Menus_Menu_Item_Talent_List" />
+		<message>
+			<![CDATA[List talents of a type]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="Page params">
+			<field name="cid" type="sql" default="" label="Type"
+				query="SELECT id, title FROM #__talent_type WHERE published = 1"
+				key_field="id" value_field="title" required="true">
+				<option value="">Please select type</option>
+			</field>
+			<field name="num_items" type="list" label="Number of items on a row"
+				default="3" description="">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</field>
+
+		</fieldset>
+	</fields>
+</metadata>

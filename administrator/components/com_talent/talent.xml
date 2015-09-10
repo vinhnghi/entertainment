@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.4.0" method="upgrade">
+
+	<name>COM_TALENT</name>
+	<description>COM_TALENT_DESCRIPTION</description>
+
+	<scriptfile>script.php</scriptfile>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+	<uninstall> <!-- Runs on uninstall -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+	<update> <!-- Runs on update; New since J2.5 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<files folder="site">
+		<filename>talent.php</filename>
+		<filename>controller.php</filename>
+		<filename>router.php</filename>
+		<filename>metadata.xml</filename>
+		<folder>controllers</folder>
+		<folder>views</folder>
+		<folder>models</folder>
+	</files>
+
+	<languages folder="site/language">
+		<language tag="en-GB">en-GB/en-GB.com_talent.ini</language>
+	</languages>
+
+	<media>
+		<folder>pgwslider</folder>
+		<folder>pgwslideshow</folder>
+	</media>
+
+	<administration>
+		<menu link='index.php?option=com_talent' img="">COM_TALENT_MENU
+		</menu>
+		<submenu>
+			<menu>COM_TALENT_MENU_TALENTS</menu>
+			<menu view="agents">COM_TALENT_MENU_AGENTS</menu>
+		</submenu>
+		<files folder="admin">
+			<filename>talent.php</filename>
+			<filename>config.xml</filename>
+			<filename>controller.php</filename>
+			<filename>access.xml</filename>
+			<folder>sql</folder>
+			<folder>tables</folder>
+			<folder>models</folder>
+			<folder>views</folder>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+		</files>
+		<languages folder="admin/language">
+			<language tag="en-GB">en-GB/en-GB.com_talent.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_talent.sys.ini</language>
+		</languages>
+	</administration>
+
+</extension>

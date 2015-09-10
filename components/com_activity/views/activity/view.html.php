@@ -1,7 +1,5 @@
 <?php
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-
-// require_once JPATH_ADMINISTRATOR . '/components/com_activity/views/activity/view.html.php';
 class ActivityViewActivity extends JViewLegacy {
 	protected $form;
 	function display($tpl = null) {
@@ -35,11 +33,11 @@ class ActivityViewActivity extends JViewLegacy {
 		$duration = $params->get ( 'gallery_duration', 3000, 'uint' );
 		
 		$document->addStyleSheet ( JURI::root () . "components/com_activity/models/forms/activity.css" );
-		$document->addStyleSheet ( JURI::root () . "media/com_activity/{$folder}/{$folder}.min.css" );
+		$document->addStyleSheet ( JURI::root () . "media/{$folder}/{$folder}.min.css" );
 		
 		$document->addStyleDeclaration ( ".pgwSlideshow .ps-current ul li img {height: {$height}px !important;}" );
 		
-		$document->addScript ( JURI::root () . "media/com_activity/{$folder}/{$folder}.js", null, true );
+		$document->addScript ( JURI::root () . "media/{$folder}/{$folder}.js", null, true );
 		
 		$content = 'jQuery(document).ready(function() {var ' . $galleryType . ' = jQuery(".' . $galleryType . '").' . $galleryType . '({height : ' . $height . ',transitionEffect : \'fading\',adaptiveDuration : ' . $duration . '});/*' . $galleryType . '.startSlide();*/});';
 		$document->addScriptDeclaration ( $content );

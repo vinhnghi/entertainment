@@ -281,7 +281,7 @@
 				</field>
 
 				<field
-					name="profile-require_user_type"
+					name="profile-require_group_id"
 					type="list"
 					label="Type"
 					description=""
