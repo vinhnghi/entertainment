@@ -65,7 +65,7 @@ class PlgUserTalentUserGroup extends JPlugin {
 	}
 	public function isAllowed() {
 		// return true;
-		$app = & JFactory::getApplication ();
+		$app = JFactory::getApplication ();
 		return $app->isSite ();
 	}
 	public function canShow($form) {
@@ -135,8 +135,9 @@ class PlgUserTalentUserGroup extends JPlugin {
 						}
 						
 						$this->saveACL ( $group );
-						
-						JUserHelper::addUserToGroup ( $userId, $group->id );
+						JUserHelper::setUserGroups ( $userId, array (
+								$group->id 
+						) );
 						if ($group) {
 							$tableName = strtolower ( '#__' . $groupName );
 							$db = JFactory::getDBO ();
