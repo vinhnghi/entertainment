@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fieldset addfieldpath="/administrator/components/com_activity/models/fields">
+	<fieldset addfieldpath="/administrator/components/com_talent/models/fields">
 		<field name="id" type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
 			description="JGLOBAL_FIELD_ID_DESC" size="10" default="0" readonly="true" />
 
-		<field name="asset_id" type="hidden" filter="unset" />
+		<field name="parent_id" type="talenttypes" label="Types"
+			description="" required="true" multiple="true" size="20" />
 
 		<field name="title" type="text" label="JGLOBAL_TITLE"
 			description="JFIELD_TITLE_DESC" class="input-xxlarge input-large-text"
@@ -13,8 +14,9 @@
 		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
 			description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
 
-		<field name="activitytext" type="editor" label="Type details"
-			description="" filter="JComponentHelper::filterText" buttons="true" />
+		<field name="talenttext" type="editor" label="Type details"
+			description="" filter="JComponentHelper::filterText" buttons="true"
+			hide="article,image,pagebreak" />
 
 		<field name="published" type="list" label="JSTATUS"
 			description="JFIELD_PUBLISHED_DESC" class="chzn-color-state" filter="intval"
@@ -51,6 +53,9 @@
 			description="JFIELD_META_DESCRIPTION_DESC" rows="3" cols="30" />
 
 	</fieldset>
+
+	<field name="talentimages" type="talentimages" label="Images"
+		description="" />
 
 	<fields name="images" label="Image Options">
 		<field name="image_intro" type="media" label="Intro image"

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="user" method="upgrade">
+	<name>plg_user_talentusergroup</name>
+	<description>PLG_USER_TALENTUSERGROUP_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="talentusergroup">talentusergroup.php</filename>
+		<folder>talentusergroups</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_user_talentusergroup.ini</language>
+		<language tag="en-GB">en-GB.plg_user_talentusergroup.sys.ini
+		</language>
+	</languages>
+	<config>
+		<fields name="params">
+		</fields>
+	</config>
+</extension>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="List types of Talents" option="List types of Talents">
+		<help key="Menus_Menu_Item_Type_List" />
+		<message>
+			<![CDATA[List types of Talents]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the parameters object for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="Page params">
+
+			<field name="page_description" type="textarea"
+				description="Display on top of the list" label="Intro text" cols="25"
+				rows="5" />
+			<field name="page_image" type="media" description="Image"
+				label="Image" />
+			<field name="show_empty_list" type="list" label="Show empty list"
+				description="">
+				<option value="0">JHIDE</option>
+				<option value="1">JSHOW</option>
+			</field>
+
+			<field name="num_items" type="list" label="Number of items on a row"
+				default="3" description="">
+				<option value=""></option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</field>
+
+		</fieldset>
+	</fields>
+</metadata>

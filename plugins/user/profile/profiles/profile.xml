@@ -47,11 +47,6 @@
 				<option value="1">PLG_USER_PROFILE_OPTION_AGREE</option>
 				<option value="">JNO</option>
 			</field>
-			<field name="group_id" type="sql" default="" label="Type"
-				query="SELECT id, title FROM #__usergroups WHERE title IN ('Talent', 'Client', 'ProductionHouse')"
-				key_field="id" value_field="title" required="true">
-				<option value="">Please select type</option>
-			</field>
 
 		</fieldset>
 	</fields>

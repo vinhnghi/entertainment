@@ -395,16 +395,6 @@ class PlgUserProfile extends JPlugin
 				return false;
 			}
 			
-			//set user group
-			$app =& JFactory::getApplication();
-			if ($app->isSite()) 
-			{
-				$groupId = $data['profile']['group_id'];
-				if ($groupId)
-				{
-					JUserHelper::addUserToGroup ( $userId, $groupId );
-				}
-			}
 		}
 
 		return true;

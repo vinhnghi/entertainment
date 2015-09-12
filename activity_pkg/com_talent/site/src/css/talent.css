@@ -1,0 +1,87 @@
+.com_talent_content_clear {
+	clear: both;
+	line-height: 0;
+	margin: 0;
+	padding: 0;
+	height: 0;
+}
+
+.com_talent_content {
+	
+}
+
+.com_talent_list_content {
+	
+}
+
+.com_talent_list_image_fulltext {
+	float: left;
+	height: 150px;
+	overflow: hidden;
+	margin-right: 15px;
+}
+
+.com_talent_list_image_fulltext img {
+	height: 100%;
+}
+
+.com_talent_list_description {
+	margin: 10px 0;
+	font-weight: bolder lighter;
+}
+
+.com_talent_list_item {
+	float: left;
+	overflow: hidden;
+	margin: 7px;
+}
+
+.com_talent_list_item_title {
+	font-size: 18px;
+}
+
+.com_talent_list_item_image_intro {
+	padding: 11px 0px;
+}
+
+.com_talent_list_item_image_intro img {
+	height: 80px;
+}
+
+.com_talent_list_item_introtext {
+	word-wrap: break-word;
+}
+
+.com_talent_list_item_fulltext {
+	word-wrap: break-word;
+}
+
+.com_talent_list_item_readmore {
+	
+}
+
+.com_talent_heading {
+	
+}
+
+div.com_talent_tags {
+	border-bottom: 1px solid #eee;
+	padding: 0 0 15px;
+}
+
+div.ActivityTalentsTags {
+	
+}
+
+.ActivityTalentsTagsItem {
+	
+}
+
+.pgwSlideshow .ps-current {
+	padding-bottom: 40px;
+}
+
+.pgwSlideshow ul {
+	margin: 0;
+	padding: 0;
+}

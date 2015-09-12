@@ -1,36 +1,25 @@
 <?php
-
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-
-class TalentViewTalents extends JViewLegacy 
-{
-	
-	function display($tpl = null) 
-	{
-		$this->activityType = $this->get ( 'ActivityType' );
+class TalentViewTalents extends JViewLegacy {
+	function display($tpl = null) {
+		$this->type = $this->get ( 'Type' );
 		$this->items = $this->get ( 'Items' );
 		$this->pagination = $this->get ( 'Pagination' );
-		$this->params = JFactory::getApplication()->getParams();
-		$this->heading = $this->activityType->title;	
-		// Display the template
+		$this->params = JFactory::getApplication ()->getParams ();
+		$this->heading = $this->type->title;
 		parent::display ( $tpl );
-		
-		// Set the document
 		$this->setDocument ();
 	}
-	
-	protected function setDocument() 
-	{
+	protected function setDocument() {
 		$document = JFactory::getDocument ();
 		
-		$title = $this->params->get('page_title', '');
-		if (!$title) {
-			$title = $this->activityType->title;
+		$title = $this->params->get ( 'page_title', '' );
+		if (! $title) {
+			$title = $this->type->title;
+		} else {
+			$title = "{$title} - {$this->type->title}";
 		}
-		else {
-			$title = "{$title} - {$this->activityType->title}";
-		}
-		$document->setTitle ( $title  );
-		$document->addStyleSheet( JURI::root () . $this->get ( 'Css' ) );
+		$document->setTitle ( $title );
+		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
 	}
 }

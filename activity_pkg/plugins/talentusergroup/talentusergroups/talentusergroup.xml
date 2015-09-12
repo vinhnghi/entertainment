@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fields name="talentusergroup">
+		<fieldset name="talentusergroup" label="">
+			<field name="talentusergroup" type="list" default="" required="true"
+				label="User Type">
+				<option value="">Please select type</option>
+				<option value="agent">Agent (ProductionHouse)</option>
+				<option value="client">Client</option>
+				<option value="talent">Talent</option>
+			</field>
+			<!-- <field name="talentusergroup" type="sql" default="" label="Type" 
+				query="SELECT id, title FROM #__usergroups WHERE title IN ('Talent', 'Client', 
+				'ProductionHouse')" key_field="id" value_field="title" required="true"> <option 
+				value="">PLG_USER_TALENTUSERGROUP_SELCT_TYPE</option> </field> -->
+		</fieldset>
+	</fields>
+</form>

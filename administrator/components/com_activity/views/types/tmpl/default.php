@@ -14,7 +14,10 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 			<?php echo JText::_('COM_ACTIVITY_FILTER'); ?>
 			<?php
 			echo JLayoutHelper::render ( 'joomla.searchtools.default', array (
-					'view' => $this 
+					'view' => $this,
+					'options' => array (
+							'filtersHidden' => false 
+					) 
 			) );
 			?>
 		</div>

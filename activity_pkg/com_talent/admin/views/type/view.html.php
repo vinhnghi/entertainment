@@ -1,22 +1,21 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-
-class ActivityViewType extends JViewLegacy 
-{
+class TalentViewType extends JViewLegacy {
 	protected $form;
 	protected $item;
 	protected $script;
 	protected $canDo;
-
-	public function display($tpl = null) 
-	{
+	public function display($tpl = null) {
 		// Get the Data
-		if (!$this->form) $this->form = $this->get ( 'Form' );
-		if (!$this->item) $this->item = $this->get ( 'Item' );
-		if (!$this->canDo) $this->canDo = ActivityHelper::getActions ( $this->item->id );
-		
-		// Check for errors.
+		if (! $this->form)
+			$this->form = $this->get ( 'Form' );
+		if (! $this->item)
+			$this->item = $this->get ( 'Item' );
+		if (! $this->canDo)
+			$this->canDo = TalentHelper::getActions ( $this->item->id );
+			
+			// Check for errors.
 		if (count ( $errors = $this->get ( 'Errors' ) )) {
 			JError::raiseError ( 500, implode ( '<br />', $errors ) );
 			
@@ -31,9 +30,7 @@ class ActivityViewType extends JViewLegacy
 		// Set the document
 		$this->setDocument ();
 	}
-	
-	protected function addToolBar() 
-	{
+	protected function addToolBar() {
 		$input = JFactory::getApplication ()->input;
 		
 		// Hide Joomla Administrator Main menu
@@ -41,7 +38,7 @@ class ActivityViewType extends JViewLegacy
 		
 		$isNew = ($this->item->id == 0);
 		
-		JToolBarHelper::title ( $isNew ? JText::_ ( 'COM_ACTIVITY_MANAGER_TYPE_NEW' ) : JText::_ ( 'COM_ACTIVITY_MANAGER_TYPE_EDIT' ), 'type' );
+		JToolBarHelper::title ( $isNew ? JText::_ ( 'COM_TALENT_MANAGER_TYPE_NEW' ) : JText::_ ( 'COM_TALENT_MANAGER_TYPE_EDIT' ), 'type' );
 		// Build the actions for new and existing records.
 		if ($isNew) {
 			// For new records, check the create permission.
@@ -69,14 +66,12 @@ class ActivityViewType extends JViewLegacy
 			JToolBarHelper::cancel ( 'type.cancel', 'JTOOLBAR_CLOSE' );
 		}
 	}
-
-	protected function setDocument() 
-	{
+	protected function setDocument() {
 		$isNew = ($this->item->id == 0);
 		$document = JFactory::getDocument ();
-		$document->setTitle ( $isNew ? JText::_ ( 'COM_ACTIVITY_TYPE_CREATING' ) : JText::_ ( 'COM_ACTIVITY_TYPE_EDITING' ) );
+		$document->setTitle ( $isNew ? JText::_ ( 'COM_TALENT_TYPE_CREATING' ) : JText::_ ( 'COM_TALENT_TYPE_EDITING' ) );
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
-		$document->addStyleSheet( JURI::root () . $this->get ( 'Css' ) );		
-		JText::script ( 'COM_ACTIVITY_TYPE_ERROR_UNACCEPTABLE' );
+		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
+		JText::script ( 'COM_TALENT_TYPE_ERROR_UNACCEPTABLE' );
 	}
 }

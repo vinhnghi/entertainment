@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="titles" label="COM_ACTIVITY_CONFIG_TITLE_SETTINGS_LABEL"
-		description="COM_ACTIVITY_CONFIG_TITLE_SETTINGS_DESC">
+	<fieldset name="titles" label="COM_TALENT_CONFIG_TITLE_SETTINGS_LABEL"
+		description="COM_TALENT_CONFIG_TITLE_SETTINGS_DESC">
 	</fieldset>
 	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
 		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-			class="inputbox" validate="rules" filter="rules" component="com_activity"
-			section="component" />
+	class="inputbox" validate="rules" filter="rules" component="com_talent"
+	section="component" />
 	</fieldset>
 </config>

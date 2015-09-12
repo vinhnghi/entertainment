@@ -1,0 +1,40 @@
+.row-fluid .TalentImages .span3, .row-fluid .TalentImages .span4,
+	.row-fluid .TalentImages .span5, .row-fluid .TalentImages .span6 {
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px solid green;
+}
+
+.form-horizontal .TalentImages .controls {
+	margin-left: 0px;
+}
+
+.form-horizontal .TalentImages .btn {
+	padding: 4px 6px;
+}
+
+.form-horizontal .TalentImages .input-small {
+	width: 100px;
+}
+
+.imagepreview_container {
+	background-color: white;
+	position: absolute;
+	padding: 10px;
+	border: 1px solid black;
+}
+
+.imagepreview_text {
+	margin-top: 20px;
+	color: black;
+}
+
+.TalentTalents .btn-wrapper {
+	display: inline-block;
+	margin: 0 0 5px 5px;
+}
+
+.btn-wrapper a, .btn-wrapper a:hover {
+	color: white;
+	text-decoration: none;
+}

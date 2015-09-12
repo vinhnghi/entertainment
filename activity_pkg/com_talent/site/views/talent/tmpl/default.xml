@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="TalTalent detailent" option="Talent detail">
+		<help key="Menus_Menu_Item_Talent" />
+		<message>
+			<![CDATA[Talent detail]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="params">
+		<fieldset name="basic" label="Page params">
+			<field name="cid" type="sql" default="" label="Type"
+				query="SELECT id, title FROM #__talent_type WHERE published = 1"
+				key_field="id" value_field="title" required="true">
+				<option value="">Please select type</option>
+			</field>
+			<field name="id" type="sql" default="" label="Talent"
+				query="SELECT a.id, b.name AS title FROM #__talent AS a LEFT JOIN #__users AS b ON a.user_id = b.id AND b.block = 0 AND b.activation = '' WHERE published = 1"
+				key_field="id" value_field="title" required="true">
+				<option value="">Please select talent</option>
+			</field>
+		</fieldset>
+	</fields>
+</metadata>

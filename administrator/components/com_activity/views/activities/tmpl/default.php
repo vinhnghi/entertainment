@@ -1,41 +1,44 @@
 <?php
 // No direct access to this file
-defined('_JEXEC') or die('Restricted Access');
- 
-JHtml::_('formbehavior.chosen', 'select');
- 
-$listOrder     = $this->escape($this->filter_order);
-$listDirn      = $this->escape($this->filter_order_Dir);
+defined ( '_JEXEC' ) or die ( 'Restricted Access' );
+
+JHtml::_ ( 'formbehavior.chosen', 'select' );
+
+$listOrder = $this->escape ( $this->filter_order );
+$listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
-<form action="index.php?option=com_activity&view=activities" method="post" id="adminForm" name="adminForm">
+<form action="index.php?option=com_activity&view=activities"
+	method="post" id="adminForm" name="adminForm">
 	<div class="row-fluid">
 		<div class="span6">
 			<?php echo JText::_('COM_ACTIVITY_FILTER'); ?>
 			<?php
-				echo JLayoutHelper::render(
-					'joomla.searchtools.default',
-					array('view' => $this)
-				);
+			echo JLayoutHelper::render ( 'joomla.searchtools.default', array (
+					'view' => $this,
+					'options' => array (
+							'filtersHidden' => false 
+					) 
+			) );
 			?>
 		</div>
 	</div>
 	<table class="table table-striped table-hover">
 		<thead>
-		<tr>
-			<th width="1%"><?php echo JText::_('COM_ACTIVITY_NUM'); ?></th>
-			<th width="2%">
+			<tr>
+				<th width="1%"><?php echo JText::_('COM_ACTIVITY_NUM'); ?></th>
+				<th width="2%">
 				<?php echo JHtml::_('grid.checkall'); ?>
 			</th>
-			<th width="90%">
+				<th width="90%">
 				<?php echo JHtml::_('grid.sort', 'COM_ACTIVITY_NAME', 'title', $listDirn, $listOrder); ?>
 			</th>
-			<th width="5%">
+				<th width="5%">
 				<?php echo JHtml::_('grid.sort', 'COM_ACTIVITY_PUBLISHED', 'published', $listDirn, $listOrder); ?>
 			</th>
-			<th width="2%">
+				<th width="2%">
 				<?php echo JHtml::_('grid.sort', 'COM_ACTIVITY_ID', 'id', $listDirn, $listOrder); ?>
 			</th>
-		</tr>
+			</tr>
 		</thead>
 		<tfoot>
 			<tr>
@@ -46,33 +49,34 @@ $listDirn      = $this->escape($this->filter_order_Dir);
 		</tfoot>
 		<tbody>
 			<?php if (!empty($this->items)) : ?>
-				<?php foreach ($this->items as $i => $row) :
-					$link = JRoute::_('index.php?option=com_activity&task=activity.edit&id=' . $row->id);
-				?>
+				<?php
+				
+				foreach ( $this->items as $i => $row ) :
+					$link = JRoute::_ ( 'index.php?option=com_activity&task=activity.edit&id=' . $row->id );
+					?>
 					<tr>
-						<td><?php echo $this->pagination->getRowOffset($i); ?></td>
-						<td>
+				<td><?php echo $this->pagination->getRowOffset($i); ?></td>
+				<td>
 							<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 						</td>
-						<td>
-							<a href="<?php echo $link; ?>" title="<?php echo JText::_('COM_ACTIVITY_EDIT_ACTIVITY'); ?>">
+				<td><a href="<?php echo $link; ?>"
+					title="<?php echo JText::_('COM_ACTIVITY_EDIT_ACTIVITY'); ?>">
 								<?php echo $row->title; ?>
-							</a>
-						</td>
-						<td align="center">
+							</a></td>
+				<td align="center">
 							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'activities.', true, 'cb'); ?>
 						</td>
-						<td align="center">
+				<td align="center">
 							<?php echo $row->id; ?>
 						</td>
-					</tr>
+			</tr>
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</tbody>
 	</table>
-	<input type="hidden" name="task" value=""/>
-	<input type="hidden" name="boxchecked" value="0"/>
-	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>"/>
-	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>"/>
+	<input type="hidden" name="task" value="" /> <input type="hidden"
+		name="boxchecked" value="0" /> <input type="hidden"
+		name="filter_order" value="<?php echo $listOrder; ?>" /> <input
+		type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 	<?php echo JHtml::_('form.token'); ?>
 </form>
