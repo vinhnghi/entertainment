@@ -83,7 +83,7 @@ abstract class TalentHelper {
 		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
 		return $query;
 	}
-	public function updateTalentData($talent) {
+	public static function updateTalentData($talent) {
 		if ($talent) {
 			// Convert the metadata field to an array.
 			$registry = new Registry ();
