@@ -8,7 +8,7 @@ abstract class TalentHelper {
 			$string = implode ( ' ', array_slice ( $array, 0, $max_words ) ) . '...';
 		return $string;
 	}
-	public static function getListTypesQuery() {
+	public static function getListTalentTypesQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );

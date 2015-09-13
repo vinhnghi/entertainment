@@ -6,7 +6,7 @@ class TalentModelTypes extends JModelList {
 		$jinput = JFactory::getApplication ()->input;
 		$db = JFactory::getDbo ();
 		// Initialize variables.
-		$query = TalentHelper::getListTypesQuery ();
+		$query = TalentHelper::getListTalentTypesQuery ();
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {

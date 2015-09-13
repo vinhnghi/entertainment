@@ -3,7 +3,7 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentViewTalent extends JViewLegacy {
 	protected $form;
 	function display($tpl = null) {
-		$this->type = $this->get ( 'Type' );
+		$this->type = $this->get ( 'TalentType' );
 		$this->params = JFactory::getApplication ()->getParams ();
 		$this->form = $this->get ( 'Form' );
 		$this->item = $this->get ( 'Item' );

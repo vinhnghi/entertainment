@@ -2,7 +2,6 @@
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 
-use Joomla\Registry\Registry;
 class TalentModelType extends JModelAdmin {
 	protected $text_prefix = 'COM_TALENT';
 	public $typeAlias = 'com_talent.type';
@@ -90,7 +89,7 @@ class TalentModelType extends JModelAdmin {
 		$parentTable = clone $table;
 	}
 	public function getItem($pk = null) {
-		if ($item = TalentHelper::getType ( JFactory::getApplication ()->input->get ( 'id', 0 ) )) {
+		if ($item = TalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'id', 0 ) )) {
 			// Convert the metadata field to an array.
 			$registry = new Registry ();
 			$registry->loadString ( $item->metadata );

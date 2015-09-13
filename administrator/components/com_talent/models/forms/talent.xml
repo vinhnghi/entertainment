@@ -1,18 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
+	<fields name="user_details" label="Talent details">
+		<field name="id" type="hidden" class="readonly" size="10"
+			default="0" readonly="true" />
+
+		<field name="name" type="text" description="" label="Name"
+			required="true" size="30" />
+
+		<field name="username" type="text" description="" label="Username"
+			required="true" size="30" />
+
+		<field name="password" type="password" autocomplete="off"
+			class="validate-password" description="" filter="raw" validate="password"
+			label="Password" size="30" />
+
+		<field name="password2" type="password" autocomplete="off"
+			class="validate-password" description="" filter="raw" label="Confirm password"
+			size="30" validate="equals" field="user_details.password" />
+
+		<field name="dob" type="calendar" label="Date of Birth"
+			description="" info="" format="%Y-%m-%d" filter="server_utc" />
+
+		<field name="email" type="email" description="" label="Email"
+			required="true" size="30" validate="email" />
+
+		<field name="tel" type="tel" description="" label="Tel" filter="string"
+			size="30" />
+
+		<field name="gender" type="radio" default="" label="Gender"
+			required="true">
+			<option value="1">Male</option>
+			<option value="0">Female</option>
+		</field>
+	</fields>
 	<fieldset addfieldpath="/administrator/components/com_talent/models/fields">
-		<field name="id" type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
-			description="JGLOBAL_FIELD_ID_DESC" size="10" default="0" readonly="true" />
+		<field name="id" type="hidden" class="readonly" size="10"
+			default="0" readonly="true" />
 
 		<field name="parent_id" type="talenttypes" label="Types"
 			description="" required="true" multiple="true" size="20" />
-
-		<field name="title" type="text" label="JGLOBAL_TITLE"
-			description="JFIELD_TITLE_DESC" class="input-xxlarge input-large-text"
-			size="40" required="true" />
-
-		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
-			description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
 
 		<field name="talenttext" type="editor" label="Type details"
 			description="" filter="JComponentHelper::filterText" buttons="true"
@@ -29,23 +55,6 @@
 			</option>
 		</field>
 
-		<field name="created" type="calendar" label="Created" class="readonly"
-			description="" size="22" format="%Y-%m-%d %H:%M:%S" filter="user_utc"
-			readonly="true" />
-
-		<field name="created_by" type="user" label="Created By" class="readonly"
-			description="" readonly="true" />
-
-		<field name="modified" type="calendar" class="readonly"
-			label="JGLOBAL_FIELD_MODIFIED_LABEL" description="" size="22"
-			readonly="true" format="%Y-%m-%d %H:%M:%S" filter="user_utc" />
-
-		<field name="modified_by" type="user" label="JGLOBAL_FIELD_MODIFIED_BY_LABEL"
-			class="readonly" readonly="true" filter="unset" />
-
-		<field name="ordering" type="text" label="JFIELD_ORDERING_LABEL"
-			description="JFIELD_ORDERING_DESC" size="6" default="0" />
-
 		<field name="metakey" type="textarea" label="JFIELD_META_KEYWORDS_LABEL"
 			description="JFIELD_META_KEYWORDS_DESC" rows="3" cols="30" />
 
@@ -58,14 +67,14 @@
 		description="" />
 
 	<fields name="images" label="Image Options">
-		<field name="image_intro" type="media" label="Intro image"
-			description="" start="true" />
+		<field name="image_intro" type="media" label="List Image"
+			description="" start="true" directory="com_talent" />
 		<field name="image_intro_alt" type="text" label="Alt Text"
 			description="" size="20" />
 		<field name="image_intro_caption" type="text" label="Caption"
 			description="" size="20" end="true" />
-		<field name="image_fulltext" type="media" label="Full Article Image"
-			description="" start="true" />
+		<field name="image_fulltext" type="media" label="Detail Image"
+			description="" start="true" directory="com_talent" />
 		<field name="image_fulltext_alt" type="text" label="Alt Text"
 			description="" size="20" />
 		<field name="image_fulltext_caption" type="text" label="Caption"

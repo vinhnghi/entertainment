@@ -17,7 +17,7 @@ class PlgUserTalentUserGroup extends JPlugin {
 		if (is_object ( $data )) {
 			$userId = isset ( $data->id ) ? $data->id : 0;
 			
-			if (! isset ( $data->profile ) and $userId > 0) {
+			if (! isset ( $data->{$this->key} ) and $userId > 0) {
 				// Load the profile data from the database.
 				$db = JFactory::getDbo ();
 				$db->setQuery ( 'SELECT profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $userId . " AND profile_key = 'profile.{$this->key}'" );

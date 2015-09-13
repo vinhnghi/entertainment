@@ -6,7 +6,7 @@ class TalentModelTypes extends JModelList {
 		$jinput = JFactory::getApplication ()->input;
 		$db = JFactory::getDbo ();
 		// Initialize variables.
-		$query = TalentHelper::getListTypesQuery ();
+		$query = TalentHelper::getListTalentTypesQuery ();
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
@@ -21,7 +21,7 @@ class TalentModelTypes extends JModelList {
 		
 		$params = $jinput->getArray ( array () );
 		if (isset ( $params ['id'] )) {
-			$ids = implode ( ',', $params ['id'] );
+			$ids = implode ( ',', array_filter ( explode ( ',', $params ['id'] ), 'strlen' ) );
 			if ($ids)
 				$query->where ( "(id NOT IN ({$ids}))" );
 		}
@@ -30,6 +30,7 @@ class TalentModelTypes extends JModelList {
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
 		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
 		$query->order ( 'id asc' );
+		
 		return $query;
 	}
 }

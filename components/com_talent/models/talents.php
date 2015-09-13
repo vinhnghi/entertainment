@@ -2,8 +2,8 @@
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelTalents extends JModelList {
-	public function getType() {
-		return TalentHelper::getType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+	public function getTalentType() {
+		return TalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
 	protected function getListQuery() {
 		$db = JFactory::getDbo ();

@@ -176,8 +176,12 @@ jQuery(function() {
 			}
 		}
 	}
-	document.formvalidator.setHandler('title', function(value) {
+	document.formvalidator.setHandler('name', function(value) {
 		regex = /^[\w\W]+$/;
+		return regex.test(value);
+	});
+	document.formvalidator.setHandler('dob', function(value) {
+		regex = /^\d{4}-\d{2}-\d{2}$/;
 		return regex.test(value);
 	});
 	TalentImages.run();

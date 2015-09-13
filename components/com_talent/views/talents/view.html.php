@@ -2,7 +2,7 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentViewTalents extends JViewLegacy {
 	function display($tpl = null) {
-		$this->type = $this->get ( 'Type' );
+		$this->type = $this->get ( 'TalentType' );
 		$this->items = $this->get ( 'Items' );
 		$this->pagination = $this->get ( 'Pagination' );
 		$this->params = JFactory::getApplication ()->getParams ();

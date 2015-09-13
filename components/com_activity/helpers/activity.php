@@ -1,14 +1,14 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-abstract class TalentHelper {
+abstract class ActivityHelper {
 	public static function truncate($string = "", $max_words) {
 		$array = array_filter ( explode ( ' ', $string ), 'strlen' );
 		if (count ( $array ) > $max_words && $max_words > 0)
 			$string = implode ( ' ', array_slice ( $array, 0, $max_words ) ) . '...';
 		return $string;
 	}
-	public static function getListTypesQuery() {
+	public static function getListTalentTypesQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );
@@ -42,7 +42,7 @@ abstract class TalentHelper {
 		
 		return $db->loadObject ();
 	}
-	public static function getTalentQuery() {
+	public static function getActivityQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );
@@ -66,28 +66,28 @@ abstract class TalentHelper {
 		$query->where ( 'd.activation = ""' );
 		return $query;
 	}
-	public static function getTalent($id) {
+	public static function getActivity($id) {
 		if (! $id) {
-			throw new Exception ( JText::_ ( 'Talent id not found' ) );
+			throw new Exception ( JText::_ ( 'Activity id not found' ) );
 			return;
 		}
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getTalentQuery ();
+		$query = ActivityHelper::getActivityQuery ();
 		$query->where ( 'a.id = ' . ( int ) $id );
 		$db->setQuery ( $query );
 		return $db->loadObject ();
 	}
-	public static function getListTalentsQuery($cid) {
+	public static function getListActivitysQuery($cid) {
 		if (! $cid) {
 			throw new Exception ( JText::_ ( 'Type id not found' ) );
 			return;
 		}
 		
-		$query = TalentHelper::getTalentQuery ();
+		$query = ActivityHelper::getActivityQuery ();
 		$query->where ( 'b.talent_type_id = ' . ( int ) $cid );
 		return $query;
 	}
-	public static function getTalentImages($id) {
+	public static function getActivityImages($id) {
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true )->select ( 'a.*' );
 		$query->from ( '#__talent_assets AS a' );

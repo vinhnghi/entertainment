@@ -31,7 +31,7 @@ abstract class TalentHelper {
 			$string = implode ( ' ', array_slice ( $array, 0, $max_words ) ) . '...';
 		return $string;
 	}
-	public static function getListTypesQuery() {
+	public static function getListTalentTypesQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );
@@ -66,7 +66,7 @@ abstract class TalentHelper {
 		// Create the base select statement.
 		$fields = array (
 				'a.*',
-				'd.email',
+				'd.*',
 				'd.id AS user_id',
 				'd.name AS title',
 				'd.username AS alias' 

@@ -3,8 +3,8 @@ defined ( '_JEXEC' ) or die ();
 
 use Joomla\Registry\Registry;
 class TalentModelTalent extends JModelAdmin {
-	public function getType() {
-		return TalentHelper::getType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+	public function getTalentType() {
+		return TalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
 	public function getItem($pk = null) {
 		return TalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
