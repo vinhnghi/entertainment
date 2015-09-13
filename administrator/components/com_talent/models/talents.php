@@ -22,9 +22,15 @@ class TalentModelTalents extends JModelList {
 		
 		$params = $jinput->getArray ( array () );
 		if (isset ( $params ['id'] )) {
-			$ids = implode ( ',', $params ['id'] );
+			$ids = array ();
+			foreach ( $params ['id'] as $id ) {
+				if (is_numeric ( $id )) {
+					array_push ( $ids, $id );
+				}
+			}
+			$ids = implode ( ',', $ids );
 			if ($ids)
-				$query->where ( "(id NOT IN ({$ids}))" );
+				$query->where ( "(a.id NOT IN ({$ids}))" );
 		}
 		
 		// Add the list ordering clause.
@@ -32,6 +38,7 @@ class TalentModelTalents extends JModelList {
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
 		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
 		$query->order ( 'id asc' );
+
 		return $query;
 	}
 }

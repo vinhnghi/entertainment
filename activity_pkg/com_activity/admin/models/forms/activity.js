@@ -220,6 +220,10 @@ var ActivityTalents = new function() {
 	};
 }
 
+function addTalents(elId, items) {
+	ActivityTalents.addItems(elId, items);
+}
+
 jQuery(function() {
 	Joomla.submitbutton = function(task) {
 		if (task == '') {

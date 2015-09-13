@@ -32,21 +32,18 @@ var talents= <?php echo json_encode($this->items);?>;
 var elId= '<?php echo JFactory::getApplication()->input->get('elId', 'activitytalents');?>';
 </script>
 <form
-	action="index.php?option=com_activity&view=talents&layout=modal&tmpl=component"
+	action="index.php?option=com_talent&view=talents&layout=modal&tmpl=component"
 	method="post" id="adminForm" name="adminForm">
 	<div class="row-fluid js-stools">
-		<?php echo JText::_('COM_ACTIVITY_FILTER'); ?>
+		<?php echo JText::_('Filter'); ?>
 		<?php
 		echo JLayoutHelper::render ( 'joomla.searchtools.default', array (
-				'view' => $this,
-				'options' => array (
-						'filtersHidden' => false 
-				) 
+				'view' => $this 
 		) );
 		?>
 		<div class="btn-wrapper">
 			<button type="button"
-				onclick="window.parent.ActivityTalents.addItems(elId,getSelectedTalents());"
+				onclick="window.parent.addTalents(elId,getSelectedTalents());"
 				class="btn btn-small btn-success">
 				<span class="icon-new icon-white"></span>Add Talent
 			</button>
@@ -55,15 +52,15 @@ var elId= '<?php echo JFactory::getApplication()->input->get('elId', 'activityta
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
-				<th width="1%"><?php echo JText::_('COM_ACTIVITY_NUM'); ?></th>
+				<th width="1%"><?php echo JText::_('#'); ?></th>
 				<th width="2%">
 				<?php echo JHtml::_('grid.checkall'); ?>
 			</th>
 				<th width="95%">
-				<?php echo JHtml::_('grid.sort', 'COM_ACTIVITY_NAME', 'title', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'Name', 'title', $listDirn, $listOrder); ?>
 			</th>
 				<th width="2%">
-				<?php echo JHtml::_('grid.sort', 'COM_ACTIVITY_ID', 'id', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'ID', 'id', $listDirn, $listOrder); ?>
 			</th>
 			</tr>
 		</thead>

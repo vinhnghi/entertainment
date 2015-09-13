@@ -168,7 +168,7 @@ var ActivityTalents = new function() {
 		jQuery(itemEl).remove();
 	};
 	this.getListTalentsUrl = function(el) {
-		var list_talent_url = 'index.php?option=com_activity&view=talents&layout=modal&tmpl=component&elId='+el.id;
+		var list_talent_url = window.talentListURL + '&elId=' + el.id;
 		var checkBoxes = jQuery('#'+el.id+' input.'+el.id+'checkbox');
 		var addedTalents = [];
 		if (checkBoxes) {
@@ -223,6 +223,10 @@ var ActivityTalents = new function() {
 
 		return html.join('');
 	};
+}
+
+function addTalents(elId, items) {
+	ActivityTalents.addItems(elId, items);
 }
 
 jQuery(function() {

@@ -3,32 +3,19 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class JFormFieldActivityTalentsTags extends JFormField {
 	protected $type = 'ActivityTalentsTags';
+	protected $talent_list_url = 'index.php?option=com_talent&view=talent';
 	protected function getTalents() {
 		$jinput = JFactory::getApplication ()->input;
 		
 		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true );
-		$fields = array (
-				'a.*',
-				'c.id AS cid',
-				'c.title AS type',
-				'c.alias AS type_alias',
-				'd.email',
-				'd.id AS user_id',
-				'd.name AS title',
-				'd.username AS alias' 
-		);
-		
-		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__talent AS a' );
-		$query->leftJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
-		$query->leftJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
-		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
-		$query->leftJoin ( '#__activity_talent AS e ON a.id = b.talent_id' );
-		$query->where ( 'a.published = 1' );
-		$query->where ( 'c.published = 1' );
-		$query->where ( 'd.block = 0' );
-		$query->where ( 'd.activation = ""' );
-		$query->where ( 'e.activity_id = ' . ( int ) $jinput->get ( 'id', 0 ) );
+		$query = $db->getQuery ( true )->select ( 'DISTINCT b.*, c.name as title, c.email' );
+		$query->from ( '#__activity_talent AS a' );
+		$query->leftJoin ( '#__talent AS b ON a.talent_id=b.id' );
+		$query->leftJoin ( '#__users AS c ON b.user_id=c.id' );
+		$query->where ( 'a.activity_id = ' . $jinput->get ( 'id', 0 ) );
+		$query->where ( 'b.published = 1' );
+		$query->where ( 'c.block = 0' );
+		$query->where ( 'c.activation = ""' );
 		
 		$db->setQuery ( $query );
 		
@@ -36,8 +23,10 @@ class JFormFieldActivityTalentsTags extends JFormField {
 	}
 	protected function getTalentTag($talent) {
 		$html = array ();
+// 		$url = JRoute::_ ( "{$this->talent_detail_url}&id={$talent->id}" );
+		$url = "{$this->talent_detail_url}&id={$talent->id}";
 		$html [] = "<span class='ActivityTalentsTagsItem'>";
-		$html [] = "<a href='#;' onclick='alert(\"TODO: intergrate with talents component to open a link to {$talent->title} page\");return false;'>";
+		$html [] = "<a href='{$url}' target='_blank'>";
 		$html [] = $talent->title;
 		$html [] = '</a>';
 		$html [] = '</span>';
@@ -45,6 +34,9 @@ class JFormFieldActivityTalentsTags extends JFormField {
 		return implode ( $html, '' );
 	}
 	protected function getInput() {
+		$params = JComponentHelper::getParams ( 'com_activity' );
+		$this->talent_detail_url = $params->get ( 'talent_detail_url', '' );
+		
 		$html = array ();
 		$talents = $this->getTalents ();
 		if (count ( $talents )) {

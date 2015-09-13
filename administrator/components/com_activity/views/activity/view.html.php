@@ -1,20 +1,18 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-
-class ActivityViewActivity extends JViewLegacy 
-{
+class ActivityViewActivity extends JViewLegacy {
 	protected $form;
 	protected $item;
 	protected $canDo;
-
-	public function display($tpl = null) 
-	{
+	public function display($tpl = null) {
 		// Get the Data
-		if (!$this->form) $this->form = $this->get ( 'Form' );
-		if (!$this->item) $this->item = $this->get ( 'Item' );
-				
-		// What Access Permissions does this user have? What can (s)he do?
+		if (! $this->form)
+			$this->form = $this->get ( 'Form' );
+		if (! $this->item)
+			$this->item = $this->get ( 'Item' );
+			
+			// What Access Permissions does this user have? What can (s)he do?
 		$this->canDo = ActivityHelper::getActions ( $this->item->id );
 		
 		// Check for errors.
@@ -33,9 +31,7 @@ class ActivityViewActivity extends JViewLegacy
 		// Set the document
 		$this->setDocument ();
 	}
-	
-	protected function addToolBar() 
-	{
+	protected function addToolBar() {
 		$input = JFactory::getApplication ()->input;
 		
 		// Hide Joomla Administrator Main menu
@@ -71,14 +67,17 @@ class ActivityViewActivity extends JViewLegacy
 			JToolBarHelper::cancel ( 'activity.cancel', 'JTOOLBAR_CLOSE' );
 		}
 	}
-
-	protected function setDocument() 
-	{
+	protected function setDocument() {
 		$isNew = ($this->item->id == 0);
 		$document = JFactory::getDocument ();
 		$document->setTitle ( $isNew ? JText::_ ( 'COM_ACTIVITY_ACTIVITY_CREATING' ) : JText::_ ( 'COM_ACTIVITY_ACTIVITY_EDITING' ) );
+		
+		$params = JComponentHelper::getParams ( 'com_activity' );
+		$talent_list_url = $params->get ( 'talent_list_url', '' );
+		$document->addScriptDeclaration ( "window.talentListURL = '{$talent_list_url}'" );
+		
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
-		$document->addStyleSheet( JURI::root () . $this->get ( 'Css' ) );
+		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
 		JText::script ( 'COM_ACTIVITY_ACTIVITY_ERROR_UNACCEPTABLE' );
 	}
 }

@@ -2,32 +2,22 @@
 <config>
 	<fieldset name="titles" label="Gallery"
 		description="These settings apply for activity gallery">
-		
-<!-- 		<field
-			name="gallery_type"
-			type="list"
-			default="pgwSlideshow"
-			label="Type"
-			description="">
-			<option value="pgwSlideshow">Horizontal</option>
-			<option value="pgwSlider">Vertical</option>
-		</field>
- -->
-  		<field
-			name="gallery_height"
-			type="text"
-			label="Height"
-			description=""
-			default="360"
-		/>
 
-<!-- 		<field
-			name="gallery_duration"
-			type="text"
-			label="Duration"
+		<!-- <field name="gallery_type" type="list" default="pgwSlideshow" label="Type" 
+			description=""> <option value="pgwSlideshow">Horizontal</option> <option 
+			value="pgwSlider">Vertical</option> </field> -->
+		<field name="talent_list_url" type="text" label="Talent List URL"
 			description=""
-			default="3000"
-		/>
- -->
- 	</fieldset>
+			default="index.php?option=com_talent&amp;view=talents&amp;layout=modal&amp;tmpl=component" />
+
+		<field name="talent_detail_url" type="text" label="Talent Detail URL"
+			description=""
+			default="index.php?option=com_talent&amp;view=talent&amp;itemId=110" />
+
+		<field name="gallery_height" type="text" label="Height"
+			description="" default="360" />
+
+		<!-- <field name="gallery_duration" type="text" label="Duration" description="" 
+			default="3000" /> -->
+	</fieldset>
 </config>
