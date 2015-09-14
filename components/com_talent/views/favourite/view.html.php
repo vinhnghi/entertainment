@@ -19,6 +19,9 @@ class TalentViewFavourite extends JViewLegacy {
 			return false;
 		}
 		
+		$isNew = ($this->item->id == 0);
+		$this->heading = $isNew ? JText::_ ( 'COM_TALENT_FAVOURITE_CREATING' ) : JText::_ ( 'COM_TALENT_FAVOURITE_EDITING' );
+		
 		// Set the toolbar
 		$this->addToolBar ();
 		// Display the template
@@ -64,9 +67,8 @@ class TalentViewFavourite extends JViewLegacy {
 		}
 	}
 	protected function setDocument() {
-		$isNew = ($this->item->id == 0);
 		$document = JFactory::getDocument ();
-		$document->setTitle ( $isNew ? JText::_ ( 'COM_TALENT_FAVOURITE_CREATING' ) : JText::_ ( 'COM_TALENT_FAVOURITE_EDITING' ) );
+		$document->setTitle ( $this->heading );
 		$talent_list_url = "index.php?option=com_talent&view=talents&layout=modal&tmpl=component";
 		$document->addScriptDeclaration ( "window.talentListURL = '{$talent_list_url}'" );
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );

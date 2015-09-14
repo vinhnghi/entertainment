@@ -12,15 +12,6 @@ JHtml::_ ( 'behavior.formvalidation' );
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'general', JText::_('Content', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
 			<div class="span9">
-				<?php foreach ($this->form->getGroup('images') as $field) : ?>
-				<?php if ($field->getAttribute('start') == true):?>
-				<div class="span6">
-				<?php endif;?>
-						<?php echo $field->getControlGroup(); ?>
-				<?php if ($field->getAttribute('end') == true):?>
-				</div>
-				<?php endif;?>
-				<?php endforeach; ?>
 				<fieldset class="adminform">
 					<?php echo $this->form->getInput('favouritetext'); ?>
 				</fieldset>
@@ -34,8 +25,15 @@ JHtml::_ ( 'behavior.formvalidation' );
 	
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'publishing', JText::_('Publishing', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
+			<div class="span6">
+				<?php foreach ($this->form->getGroup('images') as $field) : ?>
+						<?php echo $field->getControlGroup(); ?>
+				<?php endforeach; ?>
+			</div>
+			<div class="span6">
 				<?php echo JLayoutHelper::render('joomla.edit.publishingdata', $this); ?>
 				<?php echo JLayoutHelper::render('joomla.edit.metadata', $this); ?>
+			</div>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 		
