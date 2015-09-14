@@ -1,9 +1,9 @@
 <?php
 // No direct access
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-class TalentTableFavorite extends JTable {
+class TalentTableFavourite extends JTable {
 	function __construct(&$db) {
-		parent::__construct ( '#__agent_favorite', 'id', $db );
+		parent::__construct ( '#__agent_favourite', 'id', $db );
 	}
 	public function bind($array, $ignore = '') {
 		$this->data = $array;
@@ -11,7 +11,7 @@ class TalentTableFavorite extends JTable {
 	}
 	protected function countTalents() {
 		$count = 0;
-		$talents = $this->data ['favoritetalents'];
+		$talents = $this->data ['favouritetalents'];
 		if ($talents && count ( $talents )) {
 			foreach ( $talents as $talent ) {
 				$count ++;
@@ -24,21 +24,21 @@ class TalentTableFavorite extends JTable {
 		if ($result) {
 			if ($this->data) {
 				$db = JFactory::getDbo ();
-				// save favorite talents
+				// save favourite talents
 				$query = $db->getQuery ( true );
-				$query->delete ( $db->quoteName ( '#__agent_favorite_talent' ) );
+				$query->delete ( $db->quoteName ( '#__agent_favourite_talent' ) );
 				$query->where ( array (
-						$db->quoteName ( 'agent_favorite_id' ) . '=' . $this->id 
+						$db->quoteName ( 'agent_favourite_id' ) . '=' . $this->id 
 				) );
 				$db->setQuery ( $query );
 				$db->execute ();
 				if ($this->countTalents ()) {
 					$columns = array (
-							'agent_favorite_id',
+							'agent_favourite_id',
 							'talent_id' 
 					);
-					$query->insert ( $db->quoteName ( '#__agent_favorite_talent' ) )->columns ( $db->quoteName ( $columns ) );
-					foreach ( $this->data ['favoritetalents'] as $talent ) {
+					$query->insert ( $db->quoteName ( '#__agent_favourite_talent' ) )->columns ( $db->quoteName ( $columns ) );
+					foreach ( $this->data ['favouritetalents'] as $talent ) {
 						if (( int ) $talent > 0)
 							$query->values ( "{$this->id},{$talent}" );
 					}

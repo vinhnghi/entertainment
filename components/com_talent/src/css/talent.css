@@ -88,7 +88,8 @@ div.ActivityTalentsTags {
 }
 
 .detail_talendetail {
-	padding-left: 20px; margin-bottom : 10px;
+	padding-left: 20px;
+	margin-bottom: 10px;
 	margin-right: 20px;
 	float: left;
 	margin-bottom: 10px;
@@ -104,4 +105,26 @@ div.ActivityTalentsTags {
 
 .detail_talendetail_value {
 	float: left;
+}
+
+.form-horizontal .control-label {
+	width: 100px !important;
+}
+
+.form-horizontal .controls {
+	margin-left: 120px !important;
+}
+
+.form-horizontal .control-label {
+	text-align: left !important;
+}
+
+.TalentTalents .btn-wrapper, .FavouriteTalents .btn-wrapper {
+	display: inline-block;
+	margin: 0 0 5px 5px;
+}
+
+.btn-wrapper a, .btn-wrapper a:hover {
+	color: white;
+	text-decoration: none;
 }

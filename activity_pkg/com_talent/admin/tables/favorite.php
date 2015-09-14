@@ -1,8 +1,8 @@
 <?php
 // No direct access
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-class TalentTableFavorite extends JTable {
+class TalentTableFavourite extends JTable {
 	function __construct(&$db) {
-		parent::__construct ( '#__agent_favorite', 'id', $db );
+		parent::__construct ( '#__agent_favourite', 'id', $db );
 	}
 }

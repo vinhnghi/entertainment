@@ -5,7 +5,7 @@
 			description="JGLOBAL_FIELD_ID_DESC" size="10" default="0" readonly="true" />
 
 		<field name="agent_id" type="sql" label="Agent" description=""
-			query="SELECT DISTINCT a.id, b.name AS title FROM #__agent AS a LEFT JOIN #__users AS b ON a.user_id = b.id ORDER BY b.name ASC"
+			query="SELECT DISTINCT a.id, b.name AS title FROM #__agent AS a LEFT JOIN #__users AS b ON a.user_id = b.id WHERE a.published = 1 AND b.block = 0 AND b.activation = '' ORDER BY b.name ASC"
 			key_field="id" value_field="title" required="true">
 			<option value="">Please select agent</option>
 		</field>
@@ -17,7 +17,7 @@
 		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
 			description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
 
-		<field name="favoritetext" type="editor" label="Introduction"
+		<field name="favouritetext" type="editor" label="Introduction"
 			description="" filter="JComponentHelper::filterText" buttons="true"
 			hide="article,image,pagebreak" />
 
@@ -43,7 +43,7 @@
 
 	</fieldset>
 
-	<field name="favoritetalents" type="favoritetalents" label="Talents"
+	<field name="favouritetalents" type="favouritetalents" label="Talents"
 		description="" />
 
 	<fields name="images" label="Image Options">

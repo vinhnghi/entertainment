@@ -3,22 +3,22 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 
 use Joomla\Registry\Registry;
-class TalentModelFavorite extends JModelAdmin {
+class TalentModelFavourite extends JModelAdmin {
 	protected $text_prefix = 'COM_TALENT';
-	public $typeAlias = 'com_talent.favorite';
-	public function getTable($type = 'Favorite', $prefix = 'TalentTable', $config = array()) {
+	public $typeAlias = 'com_talent.favourite';
+	public function getTable($type = 'Favourite', $prefix = 'TalentTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
 	protected function canDelete($record) {
 		if (! empty ( $record->id )) {
-			return TalentHelper::getActions ( ( int ) $record->id, 'favorite' )->get ( 'core.delete' );
+			return TalentHelper::getActions ( ( int ) $record->id, 'favourite' )->get ( 'core.delete' );
 		}
 	}
 	protected function canEditState($record) {
 		$user = JFactory::getUser ();
 		// Check for existing article.
 		if (! empty ( $record->id )) {
-			return TalentHelper::getActions ( ( int ) $record->id, 'favorite' )->get ( 'core.edit.state' );
+			return TalentHelper::getActions ( ( int ) $record->id, 'favourite' )->get ( 'core.edit.state' );
 		} else {
 			return parent::canEditState ( 'com_talent' );
 		}
@@ -59,7 +59,7 @@ class TalentModelFavorite extends JModelAdmin {
 			// Set ordering to the last item if not set
 			if (empty ( $table->ordering )) {
 				$db = JFactory::getDbo ();
-				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__agent_favorite' );
+				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__agent_favourite' );
 				
 				$db->setQuery ( $query );
 				$max = $db->loadResult ();
@@ -69,13 +69,13 @@ class TalentModelFavorite extends JModelAdmin {
 		}
 	}
 	public function getItem($pk = null) {
-		return TalentHelper::getFavorite ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
+		return TalentHelper::getFavourite ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
 	}
 	public function getForm($data = array(), $loadData = true) {
 		$jinput = JFactory::getApplication ()->input;
 		
 		// Get the form.
-		$form = $this->loadForm ( 'com_talent.favorite', 'favorite', array (
+		$form = $this->loadForm ( 'com_talent.favourite', 'favourite', array (
 				'control' => 'jform',
 				'load_data' => $loadData 
 		) );
@@ -84,12 +84,12 @@ class TalentModelFavorite extends JModelAdmin {
 		}
 		$id = $jinput->get ( 'id', 0 );
 		// Determine correct permissions to check.
-		if ($this->getState ( 'favorite.id' )) {
-			$id = $this->getState ( 'favorite.id' );
+		if ($this->getState ( 'favourite.id' )) {
+			$id = $this->getState ( 'favourite.id' );
 		}
 		
 		// Modify the form based on Edit State access controls.
-		if ($id != 0 && ! TalentHelper::getActions ( ( int ) $id, 'favorite' )->get ( 'core.edit.state' )) {
+		if ($id != 0 && ! TalentHelper::getActions ( ( int ) $id, 'favourite' )->get ( 'core.edit.state' )) {
 			// Disable fields for display.
 			$form->setFieldAttribute ( 'ordering', 'disabled', 'true' );
 			$form->setFieldAttribute ( 'published', 'disabled', 'true' );
@@ -105,18 +105,18 @@ class TalentModelFavorite extends JModelAdmin {
 	protected function loadFormData() {
 		// Check the session for previously entered form data.
 		$app = JFactory::getApplication ();
-		$data = $app->getUserState ( 'com_talent.edit.favorite.data', array () );
+		$data = $app->getUserState ( 'com_talent.edit.favourite.data', array () );
 		
 		if (empty ( $data )) {
 			$data = $this->getItem ();
 			
 			// Prime some default values.
-			if ($this->getState ( 'favorite.id' ) == 0) {
-				$filters = ( array ) $app->getUserState ( 'com_talent.favorites.filter' );
+			if ($this->getState ( 'favourite.id' ) == 0) {
+				$filters = ( array ) $app->getUserState ( 'com_talent.favourites.filter' );
 			}
 		}
 		
-		$this->preprocessData ( 'com_talent.favorite', $data );
+		$this->preprocessData ( 'com_talent.favourite', $data );
 		
 		return $data;
 	}
@@ -127,12 +127,12 @@ class TalentModelFavorite extends JModelAdmin {
 			$data ['alias'] = JFilterOutput::stringURLSafe ( $data ['title'] );
 		
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
-		$tagPos = preg_match ( $pattern, $data ['favoritetext'] );
+		$tagPos = preg_match ( $pattern, $data ['favouritetext'] );
 		if ($tagPos == 0) {
-			$data ['introtext'] = $data ['favoritetext'];
+			$data ['introtext'] = $data ['favouritetext'];
 			$data ['fulltext'] = '';
 		} else {
-			list ( $data ['introtext'], $data ['fulltext'] ) = preg_split ( $pattern, $data ['favoritetext'], 2 );
+			list ( $data ['introtext'], $data ['fulltext'] ) = preg_split ( $pattern, $data ['favouritetext'], 2 );
 		}
 		
 		if (isset ( $data ['images'] ) && is_array ( $data ['images'] )) {
@@ -150,20 +150,24 @@ class TalentModelFavorite extends JModelAdmin {
 	public function save($data) {
 		$this->buildData ( $data );
 		$table = $this->getTable ();
+		$table->load ( array (
+				'alias' => $data ['alias'],
+				'agent_id' => $data ['agent_id'] 
+		) );
 		if ($table->load ( array (
 				'alias' => $data ['alias'],
 				'agent_id' => $data ['agent_id'] 
 		) ) && $table->id != $data ['id']) {
-			$this->setError ( JText::_ ( 'This favorite already exists.' ) );
+			$this->setError ( JText::_ ( 'This favourite already exists.' ) );
 			return false;
 		}
 		
 		return parent::save ( $data );
 	}
 	public function getScript() {
-		return 'administrator/components/com_talent/src/js/favorite.js';
+		return 'administrator/components/com_talent/src/js/favourite.js';
 	}
 	public function getCss() {
-		return 'administrator/components/com_talent/src/css/talent.css';
+		return 'components/com_talent/src/css/talent.css';
 	}
 }

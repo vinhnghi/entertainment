@@ -6,7 +6,7 @@ abstract class TalentHelper {
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TYPES' ), 'index.php?option=com_talent&view=types', $submenu == 'types' );
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TALENTS' ), 'index.php?option=com_talent&view=talents', $submenu == 'talents' );
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_AGENTS' ), 'index.php?option=com_talent&view=agents', $submenu == 'agents' );
-		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_FAVORITES' ), 'index.php?option=com_talent&view=favorites', $submenu == 'favorites' );
+		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_FAVOURITES' ), 'index.php?option=com_talent&view=favourites', $submenu == 'favourites' );
 	}
 	public static function getActions($messageId = 0, $asset = 'talent') {
 		$result = new JObject ();

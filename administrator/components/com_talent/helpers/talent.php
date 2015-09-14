@@ -7,7 +7,7 @@ abstract class TalentHelper {
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TYPES' ), 'index.php?option=com_talent&view=types', $submenu == 'types' );
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TALENTS' ), 'index.php?option=com_talent&view=talents', $submenu == 'talents' );
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_AGENTS' ), 'index.php?option=com_talent&view=agents', $submenu == 'agents' );
-		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_FAVORITES' ), 'index.php?option=com_talent&view=favorites', $submenu == 'favorites' );
+		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_FAVOURITES' ), 'index.php?option=com_talent&view=favourites', $submenu == 'favourites' );
 	}
 	public static function getActions($messageId = 0, $asset = 'talent') {
 		$result = new JObject ();
@@ -161,6 +161,16 @@ abstract class TalentHelper {
 		$query->where ( '(a.talent_id = ' . ( int ) $id . ')' );
 		$db->setQuery ( $query );
 		return $db->loadObjectList ();
+	}
+	public static function isAgent($user) {
+		if ($user) {
+			$agentUserGroup = TalentHelper::getAgentUserGroup ();
+			$groups = isset ( $user->groups ) ? $user->groups : array ();
+			if ($groups && in_array ( $agentUserGroup->id, $groups )) {
+				return true;
+			}
+		}
+		return false;
 	}
 	public static function canShowTalentInfo($user, $talent) {
 		if ($user && $talent) {
@@ -335,8 +345,8 @@ abstract class TalentHelper {
 		$query = TalentHelper::getAgentQuery ();
 		return $query;
 	}
-	// for agent favorite
-	public static function getFavoriteQuery() {
+	// for agent favourite
+	public static function getFavouriteQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );
@@ -347,47 +357,59 @@ abstract class TalentHelper {
 				'd.name AS agent' 
 		);
 		
-		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent_favorite AS a' );
+		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent_favourite AS a' );
 		$query->leftJoin ( '#__agent AS b ON b.id=a.agent_id' );
 		$query->leftJoin ( '#__users AS d ON d.id=b.user_id' );
 		return $query;
 	}
-	public static function updateFavoriteData($favorite) {
-		if ($favorite) {
+	public static function updateFavouriteData($favourite) {
+		if ($favourite) {
 			// Convert the metadata field to an array.
 			$registry = new Registry ();
-			$registry->loadString ( $favorite->metadata );
-			$favorite->metadata = $registry->toArray ();
+			$registry->loadString ( $favourite->metadata );
+			$favourite->metadata = $registry->toArray ();
 			
 			// Convert the images field to an array.
 			$registry = new Registry ();
-			$registry->loadString ( $favorite->images );
-			$favorite->images = $registry->toArray ();
-			$favorite->favoritetext = trim ( $favorite->fulltext ) != '' ? $favorite->introtext . "<hr id=\"system-readmore\" />" . $favorite->fulltext : $favorite->introtext;
+			$registry->loadString ( $favourite->images );
+			$favourite->images = $registry->toArray ();
+			$favourite->favouritetext = trim ( $favourite->fulltext ) != '' ? $favourite->introtext . "<hr id=\"system-readmore\" />" . $favourite->fulltext : $favourite->introtext;
 			
-			$favorite->agent = TalentHelper::getAgent ( $favorite->agent_id );
+			$favourite->agent = TalentHelper::getAgent ( $favourite->agent_id );
 		} else {
-			$favorite = new stdClass ();
-			$favorite->id = '';
+			$favourite = new stdClass ();
+			$favourite->id = '';
 		}
-		return $favorite;
+		return $favourite;
 	}
-	public static function getFavorite($id) {
+	public static function getFavourite($id) {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getFavoriteQuery ();
+		$query = TalentHelper::getFavouriteQuery ();
 		$query->where ( 'a.id = ' . ( int ) $id );
 		$db->setQuery ( $query );
-		return TalentHelper::updateFavoriteData ( $db->loadObject () );
+		return TalentHelper::updateFavouriteData ( $db->loadObject () );
 	}
-	public static function getFavoriteByAgentId($agentId) {
+	public static function getFavouriteByAgentId($agentId) {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getFavoriteQuery ();
+		$query = TalentHelper::getFavouriteQuery ();
 		$query->where ( 'a.agent_id = ' . ( int ) $agentId );
 		$db->setQuery ( $query );
-		return TalentHelper::updateFavoriteData ( $db->loadObject () );
+		return TalentHelper::updateFavouriteData ( $db->loadObject () );
 	}
-	public static function getListFavoritesQuery($cid) {
-		$query = TalentHelper::getFavoriteQuery ();
+	public static function getListFavouritesQuery($cid) {
+		$query = TalentHelper::getFavouriteQuery ();
+		return $query;
+	}
+	public static function getListTalentQueryOfFavourite($favouriteId) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true )->select ( 'DISTINCT b.*, c.name as title, c.email' );
+		$query->from ( '#__agent_favourite_talent AS a' );
+		$query->leftJoin ( '#__talent AS b ON a.talent_id=b.id' );
+		$query->leftJoin ( '#__users AS c ON b.user_id=c.id' );
+		$query->where ( 'a.agent_favourite_id = ' . ( int ) $favouriteId );
+		$query->where ( 'b.published = 1' );
+		$query->where ( 'c.block = 0' );
+		$query->where ( 'c.activation = ""' );
 		return $query;
 	}
 }

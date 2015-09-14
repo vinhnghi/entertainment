@@ -1,12 +1,12 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-class TalentViewFavorites extends JViewLegacy {
+class TalentViewFavourites extends JViewLegacy {
 	protected $canDo;
 	function display($tpl = null) {
 		// Get application
 		$app = JFactory::getApplication ();
-		$context = "talent.list.admin.favorites";
+		$context = "talent.list.admin.favourites";
 		// Get data from the model
 		$this->items = $this->get ( 'Items' );
 		$this->pagination = $this->get ( 'Pagination' );
@@ -25,37 +25,19 @@ class TalentViewFavorites extends JViewLegacy {
 			
 			return false;
 		}
-		// Set the submenu
-		TalentHelper::addSubmenu ( 'favorites' );
-		// Set the toolbar and number of found items
-		$this->addToolBar ();
 		// Display the template
 		parent::display ( $tpl );
 		// Set the document
 		$this->setDocument ();
 	}
-	protected function addToolBar() {
-		$title = JText::_ ( 'COM_TALENT_MANAGER_FAVORITES' );
-		if ($this->pagination->total) {
-			$title .= "<span style='font-size: 0.5em; vertical-align: middle;'>(" . $this->pagination->total . ")</span>";
-		}
-		JToolBarHelper::title ( $title, 'favorite' );
-		if ($this->canDo->get ( 'core.create' )) {
-			JToolBarHelper::addNew ( 'favorite.add', 'JTOOLBAR_NEW' );
-		}
-		if ($this->canDo->get ( 'core.edit' )) {
-			JToolBarHelper::editList ( 'favorite.edit', 'JTOOLBAR_EDIT' );
-		}
-		if ($this->canDo->get ( 'core.delete' )) {
-			JToolBarHelper::deleteList ( 'Do you really want to delete?', 'favorites.delete', 'JTOOLBAR_DELETE' );
-		}
-		if ($this->canDo->get ( 'core.admin' )) {
-			JToolBarHelper::divider ();
-			JToolBarHelper::preferences ( 'com_talent' );
-		}
-	}
 	protected function setDocument() {
+		$this->params = JFactory::getApplication ()->getParams ();
+		$this->heading = $this->params->get ( 'page_title', JText::_ ( 'COM_TALENT_FAVOURITE_LIST_TITLE' ) );
+		
 		$document = JFactory::getDocument ();
-		$document->setTitle ( JText::_ ( 'COM_TALENT_ADMINISTRATION' ) );
+		
+		$title = $this->heading;
+		$document->setTitle ( $title );
+		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
 	}
 }

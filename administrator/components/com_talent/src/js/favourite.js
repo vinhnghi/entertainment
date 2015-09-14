@@ -1,5 +1,5 @@
-var FavoriteTalents = new function() {
-	var className = 'FavoriteTalents';
+var FavouriteTalents = new function() {
+	var className = 'FavouriteTalents';
 	this.elements = [];
 	this.run = function() {
 		this.elements = jQuery('.'+className);
@@ -73,10 +73,10 @@ var FavoriteTalents = new function() {
 	this.buildHtml = function(el) {
 		var html = [];
 		html.push('<div class="btn-wrapper">');
-		html.push('<button type="button" class="btn btn-small btn-success"><a href="#" id="'+el.id+'_add" onclick="this.href=FavoriteTalents.getListTalentsUrl(jQuery(\'#'+el.id+'\')[0]);return false;" rel="{handler: \'iframe\', size: {x: 1000, y: 600}}"><span class="icon-new icon-white"></span>Add Talent</a></button>');
+		html.push('<button type="button" class="btn btn-small btn-success"><a href="#" id="'+el.id+'_add" onclick="this.href=FavouriteTalents.getListTalentsUrl(jQuery(\'#'+el.id+'\')[0]);return false;" rel="{handler: \'iframe\', size: {x: 1000, y: 600}}"><span class="icon-new icon-white"></span>Add Talent</a></button>');
 		html.push('</div>');
 		html.push('<div class="btn-wrapper">');
-		html.push('<button type="button" onclick="FavoriteTalents.removeItems(jQuery(\'#'+el.id+'\')[0])" class="btn btn-small"><span class="icon-trash"></span>Delete</button>');
+		html.push('<button type="button" onclick="FavouriteTalents.removeItems(jQuery(\'#'+el.id+'\')[0])" class="btn btn-small"><span class="icon-trash"></span>Delete</button>');
 		html.push('</div>');
 
 		html.push('<table class="table table-striped table-hover">');
@@ -118,7 +118,7 @@ var FavoriteTalents = new function() {
 }
 
 function addTalents(elId, items) {
-	FavoriteTalents.addItems(elId, items);
+	FavouriteTalents.addItems(elId, items);
 }
 
 jQuery(function() {
@@ -142,7 +142,7 @@ jQuery(function() {
 				Joomla.submitform(task);
 				return true;
 			} else {
-				alert(Joomla.JText._('COM_TALENT_FAVORITE_ERROR_UNACCEPTABLE',
+				alert(Joomla.JText._('COM_TALENT_FAVOURITE_ERROR_UNACCEPTABLE',
 						'Some values are unacceptable'));
 				return false;
 			}
@@ -152,5 +152,5 @@ jQuery(function() {
 		regex = /^[\w\W]+$/;
 		return regex.test(value);
 	});
-	FavoriteTalents.run();
+	FavouriteTalents.run();
 });

@@ -22,7 +22,7 @@ JHtml::_ ( 'behavior.formvalidation' );
 				<?php endif;?>
 				<?php endforeach; ?>
 				<fieldset class="adminform">
-					<?php echo $this->form->getInput('favoritetext'); ?>
+					<?php echo $this->form->getInput('favouritetext'); ?>
 				</fieldset>
 			</div>
 			<div class="span3">
@@ -41,13 +41,13 @@ JHtml::_ ( 'behavior.formvalidation' );
 		
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'talents', JText::_('Talents', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
-			<?php echo $this->form->getInput('favoritetalents'); ?>
+			<?php echo $this->form->getInput('favouritetalents'); ?>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 		
 	<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 	</div>
-	<input type="hidden" name="task" value="favorite.edit" />
+	<input type="hidden" name="task" value="favourite.edit" />
 	
 	<?php echo JHtml::_('form.token'); ?>
 </form>

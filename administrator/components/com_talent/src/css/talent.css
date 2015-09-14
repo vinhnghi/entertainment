@@ -1,23 +1,23 @@
 .row-fluid .TalentImages .span3, .row-fluid .TalentImages .span4,
 	.row-fluid .TalentImages .span5, .row-fluid .TalentImages .span6,
-	.row-fluid .FavoriteImages .span3, .row-fluid .FavoriteImages .span4,
-	.row-fluid .FavoriteImages .span5, .row-fluid .FavoriteImages .span6 {
+	.row-fluid .FavouriteImages .span3, .row-fluid .FavouriteImages .span4,
+	.row-fluid .FavouriteImages .span5, .row-fluid .FavouriteImages .span6 {
 	margin-top: 10px;
 	padding-top: 10px;
 	border-top: 1px solid green;
 }
 
-.form-horizontal .TalentImages .controls, .form-horizontal .FavoriteImages .controls
+.form-horizontal .TalentImages .controls, .form-horizontal .FavouriteImages .controls
 	{
 	margin-left: 0px;
 }
 
-.form-horizontal .TalentImages .btn, .form-horizontal .FavoriteImages .btn
+.form-horizontal .TalentImages .btn, .form-horizontal .FavouriteImages .btn
 	{
 	padding: 4px 6px;
 }
 
-.form-horizontal .TalentImages .input-small, .form-horizontal .FavoriteImages .input-small
+.form-horizontal .TalentImages .input-small, .form-horizontal .FavouriteImages .input-small
 	{
 	width: 100px;
 }
@@ -34,7 +34,7 @@
 	color: black;
 }
 
-.TalentTalents .btn-wrapper, .FavoriteTalents .btn-wrapper {
+.TalentTalents .btn-wrapper, .FavouriteTalents .btn-wrapper {
 	display: inline-block;
 	margin: 0 0 5px 5px;
 }

@@ -7,7 +7,7 @@ JHtml::_ ( 'formbehavior.chosen', 'select' );
 $listOrder = $this->escape ( $this->filter_order );
 $listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
-<form action="index.php?option=com_talent&view=favorites" method="post"
+<form action="index.php?option=com_talent&view=favourites" method="post"
 	id="adminForm" name="adminForm">
 	<div class="row-fluid">
 		<div class="span6">
@@ -55,7 +55,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 				<?php
 				
 				foreach ( $this->items as $i => $row ) :
-					$link = JRoute::_ ( 'index.php?option=com_talent&task=favorite.edit&id=' . $row->id );
+					$link = JRoute::_ ( 'index.php?option=com_talent&task=favourite.edit&id=' . $row->id );
 					?>
 					<tr>
 				<td><?php echo $this->pagination->getRowOffset($i); ?></td>
@@ -63,14 +63,14 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 							<?php echo JHtml::_('grid.id', $i, $row->id); ?>
 						</td>
 				<td><a href="<?php echo $link; ?>"
-					title="<?php echo JText::_('COM_TALENT_EDIT_FAVORITE'); ?>">
+					title="<?php echo JText::_('COM_TALENT_EDIT_FAVOURITE'); ?>">
 								<?php echo $row->title; ?>
 							</a></td>
 				<td align="center">
 							<?php echo $row->agent; ?>
 						</td>
 				<td align="center">
-							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'favorites.', true, 'cb'); ?>
+							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'favourites.', true, 'cb'); ?>
 						</td>
 				<td align="center">
 							<?php echo $row->id; ?>

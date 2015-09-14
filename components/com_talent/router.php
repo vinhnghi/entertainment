@@ -47,6 +47,12 @@ class TalentRouter extends JComponentRouterBase {
 			unset ( $query ['id'] );
 			return $segments;
 		}
+		
+		// Are we dealing with an talent that is attached to a menu item?
+		if ($query ['view'] == 'favourites' || $query ['view'] == 'favourite') {
+			return $segments;
+		}
+		
 		unset ( $query ['view'] );
 		
 		if ($view == 'talent') {
@@ -86,7 +92,7 @@ class TalentRouter extends JComponentRouterBase {
 				return $segments;
 		} else {
 			$segments [] = $view;
-			$segments [] = $query ['layout'];
+			$segments [] = isset ( $query ['layout'] ) ? $query ['layout'] : 'default';
 		}
 		
 		if (($menuItemGiven && isset ( $menuItem->query ['layout'] ) && isset ( $query ['layout'] )) || (isset ( $query ['layout'] ) && $query ['layout'] == 'default')) {
@@ -105,12 +111,10 @@ class TalentRouter extends JComponentRouterBase {
 		// Count route segments
 		$count = count ( $segments );
 		if (! isset ( $item )) {
-			// view talents
-			if ($count == 2) {
+			if ($count == 2) { // view talents
 				$vars ['view'] = 'talents';
 				$vars ['cid'] = ( int ) $segments [0];
-			}  // view talent
-else {
+			} else { // view talent
 				$vars ['view'] = 'talent';
 				$vars ['cid'] = ( int ) $segments [0];
 				$vars ['id'] = ( int ) $segments [2];
