@@ -169,7 +169,7 @@ abstract class TalentHelper {
 			}
 			$agentUserGroup = TalentHelper::getAgentUserGroup ();
 			$groups = isset ( $user->groups ) ? $user->groups : array ();
-
+			
 			if ($groups && in_array ( $agentUserGroup->id, $groups )) {
 				return true;
 			}
@@ -255,5 +255,137 @@ abstract class TalentHelper {
 				'title' => $group->title,
 				'rules' => json_encode ( array_unique ( $rule_array ) ) 
 		) );
+	}
+	// for agent
+	public static function getAgentQuery() {
+		// Initialize variables.
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		
+		// Create the base select statement.
+		$fields = array (
+				'a.*',
+				'd.name as title',
+				'd.username as alias',
+				'd.name',
+				'd.username',
+				'd.email',
+				'd.password',
+				'd.block',
+				'd.activation' 
+		);
+		
+		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent AS a' );
+		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
+		return $query;
+	}
+	public static function updateAgentData($agent) {
+		if ($agent) {
+			// Convert the metadata field to an array.
+			$registry = new Registry ();
+			$registry->loadString ( $agent->metadata );
+			$agent->metadata = $registry->toArray ();
+			
+			// Convert the images field to an array.
+			$registry = new Registry ();
+			$registry->loadString ( $agent->images );
+			$agent->images = $registry->toArray ();
+			$agent->agenttext = trim ( $agent->fulltext ) != '' ? $agent->introtext . "<hr id=\"system-readmore\" />" . $agent->fulltext : $agent->introtext;
+			
+			$user = JFactory::getUser ( $agent->user_id );
+			$agent->user_details = array (
+					'id' => $user->id,
+					'name' => $user->name,
+					'username' => $user->username,
+					'email' => $user->email 
+			);
+			// Load the profile data from the database.
+			$db = JFactory::getDbo ();
+			$db->setQuery ( 'SELECT profile_key, profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $user->id . " AND profile_key LIKE 'profile.%'" . ' ORDER BY ordering' );
+			$results = $db->loadRowList ();
+			// Merge the profile data.
+			foreach ( $results as $v ) {
+				$k = str_replace ( 'profile.', '', $v [0] );
+				$agent->user_details [$k] = json_decode ( $v [1], true );
+				if ($agent->user_details [$k] === null) {
+					$agent->user_details [$k] = $v [1];
+				}
+			}
+		} else {
+			$agent = new stdClass ();
+			$agent->id = '';
+		}
+		return $agent;
+	}
+	public static function getAgent($id) {
+		$db = JFactory::getDbo ();
+		$query = TalentHelper::getAgentQuery ();
+		$query->where ( 'a.id = ' . ( int ) $id );
+		$db->setQuery ( $query );
+		return TalentHelper::updateAgentData ( $db->loadObject () );
+	}
+	public static function getAgentByUserId($userId) {
+		$db = JFactory::getDbo ();
+		$query = TalentHelper::getAgentQuery ();
+		$query->where ( 'a.user_id = ' . ( int ) $userId );
+		$db->setQuery ( $query );
+		return TalentHelper::updateAgentData ( $db->loadObject () );
+	}
+	public static function getListAgentsQuery($cid) {
+		$query = TalentHelper::getAgentQuery ();
+		return $query;
+	}
+	// for agent favorite
+	public static function getFavoriteQuery() {
+		// Initialize variables.
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		
+		// Create the base select statement.
+		$fields = array (
+				'a.*' 
+		);
+		
+		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent_favorite AS a' );
+		$query->leftJoin ( '#__agent AS d ON d.id=a.agent_id' );
+		return $query;
+	}
+	public static function updateFavoriteData($favorite) {
+		if ($favorite) {
+			// Convert the metadata field to an array.
+			$registry = new Registry ();
+			$registry->loadString ( $favorite->metadata );
+			$favorite->metadata = $registry->toArray ();
+			
+			// Convert the images field to an array.
+			$registry = new Registry ();
+			$registry->loadString ( $favorite->images );
+			$favorite->images = $registry->toArray ();
+			$favorite->favoritetext = trim ( $favorite->fulltext ) != '' ? $favorite->introtext . "<hr id=\"system-readmore\" />" . $favorite->fulltext : $favorite->introtext;
+			
+			$favorite->agent = TalentHelper::getAgent ( $favorite->agent_id );
+		} else {
+			$favorite = new stdClass ();
+			$favorite->id = '';
+		}
+		return $favorite;
+	}
+	public static function getFavorite($id) {
+		$db = JFactory::getDbo ();
+		$query = TalentHelper::getFavoriteQuery ();
+		$query->where ( 'a.id = ' . ( int ) $id );
+		$db->setQuery ( $query );
+		return TalentHelper::updateFavoriteData ( $db->loadObject () );
+	}
+	public static function getFavoriteByAgentId($agentId) {
+		$db = JFactory::getDbo ();
+		$query = TalentHelper::getFavoriteQuery ();
+		$query->where ( 'a.agent_id = ' . ( int ) $agentId );
+		$db->setQuery ( $query );
+		return TalentHelper::updateFavoriteData ( $db->loadObject () );
+	}
+	public static function getListFavoritesQuery($cid) {
+		$query = TalentHelper::getFavoriteQuery ();
+		return $query;
 	}
 }

@@ -3,37 +3,26 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 
 use Joomla\Registry\Registry;
-class TalentModelTalent extends JModelAdmin {
+class TalentModelAgent extends JModelAdmin {
 	protected $text_prefix = 'COM_TALENT';
-	public $typeAlias = 'com_talent.talent';
+	public $typeAlias = 'com_talent.agent';
 	protected $profileFields = array (
-			'dob',
 			'tel',
-			'gender',
-			'race',
-			'location',
-			'height',
-			'weight',
-			'chest',
-			'hip',
-			'chest',
-			'shoe_size',
-			'hair_color',
-			'eye_color' 
+			'location' 
 	);
-	public function getTable($type = 'Talent', $prefix = 'TalentTable', $config = array()) {
+	public function getTable($type = 'Agent', $prefix = 'TalentTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
 	protected function canDelete($record) {
 		if (! empty ( $record->id )) {
-			return TalentHelper::getActions ( ( int ) $record->id, 'talent' )->get ( 'core.delete' );
+			return TalentHelper::getActions ( ( int ) $record->id, 'agent' )->get ( 'core.delete' );
 		}
 	}
 	protected function canEditState($record) {
 		$user = JFactory::getUser ();
 		// Check for existing article.
 		if (! empty ( $record->id )) {
-			return TalentHelper::getActions ( ( int ) $record->id, 'talent' )->get ( 'core.edit.state' );
+			return TalentHelper::getActions ( ( int ) $record->id, 'agent' )->get ( 'core.edit.state' );
 		} else {
 			return parent::canEditState ( 'com_talent' );
 		}
@@ -46,7 +35,7 @@ class TalentModelTalent extends JModelAdmin {
 			// Set ordering to the last item if not set
 			if (empty ( $table->ordering )) {
 				$db = JFactory::getDbo ();
-				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__talent' );
+				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__agent' );
 				$db->setQuery ( $query );
 				$max = $db->loadResult ();
 				$table->ordering = $max + 1;
@@ -55,13 +44,13 @@ class TalentModelTalent extends JModelAdmin {
 		return clone $table;
 	}
 	public function getItem($pk = null) {
-		return TalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
+		return TalentHelper::getAgent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
 	}
 	public function getForm($data = array(), $loadData = true) {
 		$jinput = JFactory::getApplication ()->input;
 		
 		// Get the form.
-		$form = $this->loadForm ( 'com_talent.talent', 'talent', array (
+		$form = $this->loadForm ( 'com_talent.agent', 'agent', array (
 				'control' => 'jform',
 				'load_data' => $loadData 
 		) );
@@ -70,12 +59,12 @@ class TalentModelTalent extends JModelAdmin {
 		}
 		$id = $jinput->get ( 'id', 0 );
 		// Determine correct permissions to check.
-		if ($this->getState ( 'talent.id' )) {
-			$id = $this->getState ( 'talent.id' );
+		if ($this->getState ( 'agent.id' )) {
+			$id = $this->getState ( 'agent.id' );
 		}
 		
 		// Modify the form based on Edit State access controls.
-		if ($id != 0 && ! TalentHelper::getActions ( ( int ) $id, 'talent' )->get ( 'core.edit.state' )) {
+		if ($id != 0 && ! TalentHelper::getActions ( ( int ) $id, 'agent' )->get ( 'core.edit.state' )) {
 			// Disable fields for display.
 			$form->setFieldAttribute ( 'ordering', 'disabled', 'true' );
 			$form->setFieldAttribute ( 'published', 'disabled', 'true' );
@@ -91,18 +80,18 @@ class TalentModelTalent extends JModelAdmin {
 	protected function loadFormData() {
 		// Check the session for previously entered form data.
 		$app = JFactory::getApplication ();
-		$data = $app->getUserState ( 'com_talent.edit.talent.data', array () );
+		$data = $app->getUserState ( 'com_talent.edit.agent.data', array () );
 		
 		if (empty ( $data )) {
 			$data = $this->getItem ();
 			
 			// Prime some default values.
-			if ($this->getState ( 'talent.id' ) == 0) {
-				$filters = ( array ) $app->getUserState ( 'com_talent.talents.filter' );
+			if ($this->getState ( 'agent.id' ) == 0) {
+				$filters = ( array ) $app->getUserState ( 'com_talent.agents.filter' );
 			}
 		}
 		
-		$this->preprocessData ( 'com_talent.talent', $data );
+		$this->preprocessData ( 'com_talent.agent', $data );
 		
 		return $data;
 	}
@@ -110,7 +99,7 @@ class TalentModelTalent extends JModelAdmin {
 		$user_data = array (
 				'id' => $data ['user_details'] ['id'],
 				'groups' => array (
-						TalentHelper::getTalentUserGroup ()->id 
+						TalentHelper::getAgentUserGroup ()->id 
 				),
 				'name' => $data ['user_details'] ['name'],
 				'username' => $data ['user_details'] ['username'],
@@ -122,43 +111,42 @@ class TalentModelTalent extends JModelAdmin {
 		$data ['user'] = $user_data;
 		
 		$profile_data = array (
-				'talentusergroup' => 'Talent' 
+				'talentusergroup' => 'Agent' 
 		);
 		foreach ( $this->profileFields as $field ) {
 			$profile_data [$field] = $data ['user_details'] [$field];
 		}
 		$data ['profile'] = $profile_data;
 		
-		$talent_data = array (
+		$agent_data = array (
 				'id' => $data ['id'],
 				'parent_id' => $data ['parent_id'],
 				'published' => $data ['published'],
 				'metakey' => $data ['metakey'],
-				'metadesc' => $data ['metadesc'],
-				'talentimages' => $data ['talentimages'] 
+				'metadesc' => $data ['metadesc'] 
 		);
 		
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
-		$tagPos = preg_match ( $pattern, $data ['talenttext'] );
+		$tagPos = preg_match ( $pattern, $data ['agenttext'] );
 		if ($tagPos == 0) {
-			$talent_data ['introtext'] = $data ['talenttext'];
-			$talent_data ['fulltext'] = '';
+			$agent_data ['introtext'] = $data ['agenttext'];
+			$agent_data ['fulltext'] = '';
 		} else {
-			list ( $talent_data ['introtext'], $talent_data ['fulltext'] ) = preg_split ( $pattern, $data ['talenttext'], 2 );
+			list ( $agent_data ['introtext'], $agent_data ['fulltext'] ) = preg_split ( $pattern, $data ['agenttext'], 2 );
 		}
 		
 		if (isset ( $data ['images'] ) && is_array ( $data ['images'] )) {
 			$registry = new Registry ();
 			$registry->loadArray ( $data ['images'] );
-			$talent_data ['images'] = ( string ) $registry;
+			$agent_data ['images'] = ( string ) $registry;
 		}
 		
 		if (isset ( $data ['metadata'] ) && is_array ( $data ['metadata'] )) {
 			$registry = new Registry ();
 			$registry->loadArray ( $data ['metadata'] );
-			$talent_data ['metadata'] = ( string ) $registry;
+			$agent_data ['metadata'] = ( string ) $registry;
 		}
-		$data ['talent'] = $talent_data;
+		$data ['agent'] = $agent_data;
 	}
 	public function save($data) {
 		$this->buildData ( $data );
@@ -166,8 +154,8 @@ class TalentModelTalent extends JModelAdmin {
 		$this->saveUser ( $data ['user'] );
 		// save user profile
 		$this->saveProfile ( $data ['profile'] );
-		// save talent
-		$this->saveTalent ( $data ['talent'] );
+		// save agent
+		$this->saveAgent ( $data ['agent'] );
 		return true;
 	}
 	public function saveUser($data) {
@@ -217,7 +205,7 @@ class TalentModelTalent extends JModelAdmin {
 		$db->execute ();
 		return true;
 	}
-	public function saveTalent($data) {
+	public function saveAgent($data) {
 		$data ['user_id'] = ( int ) $this->getState ( 'user.id' );
 		return parent::save ( $data );
 	}
@@ -236,9 +224,9 @@ class TalentModelTalent extends JModelAdmin {
 		}
 		// Iterate the items to delete each one.
 		foreach ( $pks as $i => $pk ) {
-			$talent = TalentHelper::getTalent ( $pk );
-			if ($talent) {
-				$userId = $talent->user_id;
+			$agent = TalentHelper::getAgent ( $pk );
+			if ($agent) {
+				$userId = $agent->user_id;
 				if ($table->load ( $userId )) {
 					// Access checks.
 					$allow = $user->authorise ( 'core.delete', 'com_users' );
@@ -253,7 +241,7 @@ class TalentModelTalent extends JModelAdmin {
 							return false;
 						} else {
 							$this->deleteProfile ( $userId );
-							$this->deleteTalent ( $userId );
+							$this->deleteAgent ( $userId );
 						}
 					} else {
 						// Prune items that you can't change.
@@ -274,16 +262,10 @@ class TalentModelTalent extends JModelAdmin {
 		$db->setQuery ( $query );
 		$db->execute ();
 	}
-	public function deleteTalent($userId) {
-		$talent = TalentHelper::getTalentByUserId ( $userId );
+	public function deleteAgent($userId) {
+		$agent = TalentHelper::getAgentByUserId ( $userId );
 		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__talent_type_talent' ) )->where ( $db->quoteName ( 'talent_id' ) . ' = ' . ( int ) $talent->id );
-		$db->setQuery ( $query );
-		$db->execute ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__talent_assets' ) )->where ( $db->quoteName ( 'talent_id' ) . ' = ' . ( int ) $talent->id );
-		$db->setQuery ( $query );
-		$db->execute ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__talent' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId );
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__agent' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId );
 		$db->setQuery ( $query );
 		$db->execute ();
 	}

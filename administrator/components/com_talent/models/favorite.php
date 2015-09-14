@@ -1,24 +1,24 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-class TalentModelType extends JModelAdmin {
+
+use Joomla\Registry\Registry;
+class TalentModelFavorite extends JModelAdmin {
 	protected $text_prefix = 'COM_TALENT';
-	public $typeAlias = 'com_talent.type';
-	protected $canDo;
-	public function getTable($type = 'Type', $prefix = 'TalentTable', $config = array()) {
+	public $typeAlias = 'com_talent.favorite';
+	public function getTable($type = 'Favorite', $prefix = 'TalentTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
 	protected function canDelete($record) {
 		if (! empty ( $record->id )) {
-			return TalentHelper::getActions ( ( int ) $record->id, 'type' )->get ( 'core.delete' );
+			return TalentHelper::getActions ( ( int ) $record->id, 'favorite' )->get ( 'core.delete' );
 		}
 	}
 	protected function canEditState($record) {
 		$user = JFactory::getUser ();
-		
 		// Check for existing article.
 		if (! empty ( $record->id )) {
-			return TalentHelper::getActions ( ( int ) $record->id, 'type' )->get ( 'core.edit.state' );
+			return TalentHelper::getActions ( ( int ) $record->id, 'favorite' )->get ( 'core.edit.state' );
 		} else {
 			return parent::canEditState ( 'com_talent' );
 		}
@@ -27,7 +27,6 @@ class TalentModelType extends JModelAdmin {
 		$date = JFactory::getDate ();
 		$user = JFactory::getUser ();
 		$input = JFactory::getApplication ()->input;
-		
 		if ($input->get ( 'task' ) == 'save2copy') {
 			$origTable = clone $this->getTable ();
 			$origTable->load ( $input->getInt ( 'id' ) );
@@ -52,10 +51,11 @@ class TalentModelType extends JModelAdmin {
 				else
 					$table->alias = JFilterOutput::stringURLSafe ( $table->title );
 				$origTable = clone $this->getTable ();
-				$type = $origTable->load ( array (
-						'alias' => $table->alias 
+				$favorite = $origTable->load ( array (
+						'alias' => $table->alias,
+						'agent_id' => $table->agent_id 
 				) );
-				if ($type) {
+				if ($favorite) {
 					$msg = JText::_ ( 'Alias already existed so a number was added at the end.' );
 				}
 				list ( $table->title, $table->alias ) = $this->generateNewTitle ( '', $table->alias, $table->title );
@@ -65,88 +65,41 @@ class TalentModelType extends JModelAdmin {
 		}
 		
 		if (empty ( $table->id )) {
-			$table->created = $date->toSql ();
-			$table->created_by = $user->get ( 'id' );
 			// Set ordering to the last item if not set
 			if (empty ( $table->ordering )) {
 				$db = JFactory::getDbo ();
-				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__talent_type' );
+				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__agent_favorite' );
 				
 				$db->setQuery ( $query );
 				$max = $db->loadResult ();
 				
 				$table->ordering = $max + 1;
 			}
-		} else {
-			// Set the values
-			$table->modified = $date->toSql ();
-			$table->modified_by = $user->get ( 'id' );
 		}
-		
 		return clone $table;
 	}
 	public function getItem($pk = null) {
-		if ($item = TalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'id', 0 ) )) {
-			// Convert the metadata field to an array.
-			$registry = new Registry ();
-			$registry->loadString ( $item->metadata );
-			$item->metadata = $registry->toArray ();
-			
-			// Convert the images field to an array.
-			$registry = new Registry ();
-			$registry->loadString ( $item->images );
-			$item->images = $registry->toArray ();
-			
-			$item->typetext = trim ( $item->fulltext ) != '' ? $item->introtext . "<hr id=\"system-readmore\" />" . $item->fulltext : $item->introtext;
-			// Load associated content items
-			$app = JFactory::getApplication ();
-			$assoc = JLanguageAssociations::isEnabled ();
-			
-			if ($assoc) {
-				$item->associations = array ();
-				if ($item->id != null) {
-					$associations = JLanguageAssociations::getAssociations ( 'com_talent', '#__talent_type', 'com_talent.type', $item->id );
-					foreach ( $associations as $tag => $association ) {
-						$item->associations [$tag] = $association->id;
-					}
-				}
-			}
-			
-			return $item;
-		}
-		$item = new stdClass ();
-		$item->id = '';
-		return $item;
+		return TalentHelper::getFavorite ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
 	}
 	public function getForm($data = array(), $loadData = true) {
 		$jinput = JFactory::getApplication ()->input;
 		
 		// Get the form.
-		$form = $this->loadForm ( 'com_talent.type', 'type', array (
+		$form = $this->loadForm ( 'com_talent.favorite', 'favorite', array (
 				'control' => 'jform',
 				'load_data' => $loadData 
 		) );
 		if (empty ( $form )) {
 			return false;
 		}
-		
-		// The front end calls this model and uses a_id to avoid id clashes so we need to check for that first.
-		if ($jinput->get ( 'a_id' )) {
-			$id = $jinput->get ( 'a_id', 0 );
-		}  // The back end uses id so we use that the rest of the time and set it to 0 by default.
-else {
-			$id = $jinput->get ( 'id', 0 );
-		}
+		$id = $jinput->get ( 'id', 0 );
 		// Determine correct permissions to check.
-		if ($this->getState ( 'type.id' )) {
-			$id = $this->getState ( 'type.id' );
+		if ($this->getState ( 'favorite.id' )) {
+			$id = $this->getState ( 'favorite.id' );
 		}
 		
-		$user = JFactory::getUser ();
-		
-		// Check for existing article.
 		// Modify the form based on Edit State access controls.
-		if ($id != 0 && (! TalentHelper::getActions ( ( int ) $id, 'type' )->get ( 'core.edit.state' ))) {
+		if ($id != 0 && ! TalentHelper::getActions ( ( int ) $id, 'favorite' )->get ( 'core.edit.state' )) {
 			// Disable fields for display.
 			$form->setFieldAttribute ( 'ordering', 'disabled', 'true' );
 			$form->setFieldAttribute ( 'published', 'disabled', 'true' );
@@ -162,33 +115,29 @@ else {
 	protected function loadFormData() {
 		// Check the session for previously entered form data.
 		$app = JFactory::getApplication ();
-		$data = $app->getUserState ( 'com_talent.edit.type.data', array () );
+		$data = $app->getUserState ( 'com_talent.edit.favorite.data', array () );
 		
 		if (empty ( $data )) {
 			$data = $this->getItem ();
 			
 			// Prime some default values.
-			if ($this->getState ( 'type.id' ) == 0) {
-				$filters = ( array ) $app->getUserState ( 'com_talent.types.filter' );
+			if ($this->getState ( 'favorite.id' ) == 0) {
+				$filters = ( array ) $app->getUserState ( 'com_talent.favorites.filter' );
 			}
 		}
 		
-		$this->preprocessData ( 'com_talent.type', $data );
+		$this->preprocessData ( 'com_talent.favorite', $data );
 		
 		return $data;
 	}
-	public function save($data) {
-		$this->bind ( $data );
-		return parent::save ( $data );
-	}
-	public function bind(&$data) {
+	public function buildData(&$data) {
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
-		$tagPos = preg_match ( $pattern, $data ['typetext'] );
+		$tagPos = preg_match ( $pattern, $data ['talenttext'] );
 		if ($tagPos == 0) {
-			$data ['introtext'] = $data ['typetext'];
+			$data ['introtext'] = $data ['talenttext'];
 			$data ['fulltext'] = '';
 		} else {
-			list ( $data ['introtext'], $data ['fulltext'] ) = preg_split ( $pattern, $data ['typetext'], 2 );
+			list ( $data ['introtext'], $data ['fulltext'] ) = preg_split ( $pattern, $data ['talenttext'], 2 );
 		}
 		
 		if (isset ( $data ['images'] ) && is_array ( $data ['images'] )) {
@@ -203,7 +152,14 @@ else {
 			$data ['metadata'] = ( string ) $registry;
 		}
 	}
+	public function save($data) {
+		$this->buildData ( $data );
+		return parent::save ( $data );
+	}
 	public function getScript() {
-		return 'administrator/components/com_talent/src/js/type.js';
+		return 'administrator/components/com_talent/src/js/talent.js';
+	}
+	public function getCss() {
+		return 'administrator/components/com_talent/src/css/talent.css';
 	}
 }

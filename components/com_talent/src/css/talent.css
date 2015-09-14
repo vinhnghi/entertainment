@@ -38,6 +38,7 @@
 
 .com_talent_list_item_title {
 	font-size: 18px;
+	margin-bottom: 10px;
 }
 
 .com_talent_list_item_image_intro {
@@ -87,10 +88,10 @@ div.ActivityTalentsTags {
 }
 
 .detail_talendetail {
-	padding-left: 20px;
-	margin-bottom: 10px;
+	padding-left: 20px; margin-bottom : 10px;
 	margin-right: 20px;
 	float: left;
+	margin-bottom: 10px;
 }
 
 .detail_talendetail_label {

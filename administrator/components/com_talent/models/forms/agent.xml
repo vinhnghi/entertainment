@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-	<fields name="user_details" label="Talent details">
+	<fields name="user_details" label="Agent details">
 		<fieldset name="user_details_basic" label="Basic">
 			<field name="id" type="hidden" class="readonly" size="10"
 				default="0" readonly="true" />
@@ -19,39 +19,16 @@
 				class="validate-password" description="" filter="raw" label="Confirm password"
 				size="30" validate="equals" field="user_details.password" />
 
-			<field name="dob" type="calendar" label="Date of Birth"
-				description="" info="" format="%Y-%m-%d" filter="server_utc" />
-
 			<field name="email" type="email" description="" label="Email"
 				required="true" size="30" validate="email" />
 
 			<field name="tel" type="tel" description="" label="Tel" filter="string"
 				size="30" />
 
-			<field name="gender" type="radio" default="" label="Gender"
-				required="true">
-				<option value="1">Male</option>
-				<option value="0">Female</option>
-			</field>
 		</fieldset>
 		<fieldset name="user_details_extra" label="Extra">
-			<field name="race" type="text" description="" label="Race"
-				size="30" />
 			<field name="location" type="text" description="" label="Location"
 				size="200" />
-			<field name="height" type="text" description="" label="Height"
-				size="30" />
-			<field name="weight" type="text" description="" label="Weight"
-				size="30" />
-			<field name="chest" type="text" description="" label="Chest"
-				size="30" />
-			<field name="hip" type="text" description="" label="Hip" size="30" />
-			<field name="shoe_size" type="text" description="" label="Shoe Size"
-				size="30" />
-			<field name="hair_color" type="text" description="" label="Hair Color"
-				size="30" />
-			<field name="eye_color" type="text" description="" label="Eye Color"
-				size="30" />
 		</fieldset>
 
 	</fields>
@@ -59,10 +36,7 @@
 		<field name="id" type="hidden" class="readonly" size="10"
 			default="0" readonly="true" />
 
-		<field name="parent_id" type="talenttypes" label="Types"
-			description="" required="true" multiple="true" size="20" />
-
-		<field name="talenttext" type="editor" label="Introduction"
+		<field name="agenttext" type="editor" label="Introduction"
 			description="" filter="JComponentHelper::filterText" buttons="true"
 			hide="article,image,pagebreak" />
 
@@ -84,9 +58,6 @@
 			description="JFIELD_META_DESCRIPTION_DESC" rows="3" cols="30" />
 
 	</fieldset>
-
-	<field name="talentimages" type="talentimages" label="Images"
-		description="" />
 
 	<fields name="images" label="Image Options">
 		<field name="image_intro" type="media" label="List Image"
@@ -125,13 +96,6 @@
 				description="" size="20" />
 
 		</fieldset>
-	</fields>
-
-	<!-- These fields are used to get labels for the Content History Preview 
-		and Compare Views -->
-	<fields>
-		<field name="introtext" label="Intro text" />
-		<field name="fulltext" label="Full text" />
 	</fields>
 
 </form>

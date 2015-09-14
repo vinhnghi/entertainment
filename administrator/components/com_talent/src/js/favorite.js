@@ -77,11 +77,11 @@ var ActivityImages = new function() {
 		var media_manager_url = 'index.php?option=com_media&view=images&tmpl=component&asset=com_activity&author=&fieldid='+id+'_src&folder=com_activity';
 		html.push('<div class="'+el.getAttribute('blockclass')+'" id="'+id+'">');
 		html.push('<div class="control-group">');
-		html.push('<div class="control-label"><label id="'+id+'-lbl" for="'+id+'_src" class="">Image</label></div>');
+//		html.push('<div class="control-label"><label id="'+id+'-lbl" for="'+id+'_src" class="">Image</label></div>');
 		html.push('<div class="controls">');
 		html.push('<div class="input-prepend input-append">');
 		html.push('<div class="media-preview add-on" id="'+id+'_showimagepreview" ><span class="hasTipPreview" title=""><i class="icon-eye"></i></span></div>');
-		html.push('<input type="text" id="'+id+'_src" name="jform['+el.id+']['+i+'][src]" class="input-small hasTipImgpath" value="'+item.src+'" readonly="readonly"/>');
+		html.push('<input type="text" placeholder="image/video path" id="'+id+'_src" name="jform['+el.id+']['+i+'][src]" class="input-small hasTipImgpath" value="'+item.src+'" readonly="readonly"/>');
 		html.push('<a href="'+media_manager_url+'" onclick="return false;" id="'+id+'_select" class="modal btn" rel="{handler: \'iframe\', size: {x: 1000, y: 600}}" title="Select">Select</a>');
 		html.push('<a href="#" onclick="jInsertFieldValue(\'\', \''+id+'_src\');return false;" data-original-title="Clear" class="btn hasTooltip" title="Clear"> <i class="icon-remove"></i></a>');
 		html.push('<a href="#" onclick="ActivityImages.removeItem(jQuery(\'#'+id+'\')[0],'+i+')" data-original-title="Clear" class="btn hasTooltip" title="Delete"> <i class="icon-trash"></i></a>');
@@ -89,15 +89,15 @@ var ActivityImages = new function() {
 		html.push('</div>');
 		html.push('</div>');
 		html.push('<div class="control-group">');
-		html.push('<div class="control-label"><label id="'+id+'_alt-lbl" for="'+id+'_alt" class="">Alt Text</label></div>');
+//		html.push('<div class="control-label"><label id="'+id+'_alt-lbl" for="'+id+'_alt" class="">Alt Text</label></div>');
 		html.push('<div class="controls">');
-		html.push('<input type="text" name="jform['+el.id+']['+i+'][alt]" id="'+id+'_alt" value="'+item.alt+'" size="20">');
+		html.push('<input type="text" placeholder="Alt text" name="jform['+el.id+']['+i+'][alt]" id="'+id+'_alt" value="'+item.alt+'" size="20">');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('<div class="control-group">');
-		html.push('<div class="control-label"><label id="'+id+'_caption-lbl" for="'+id+'_caption" class="">Caption</label></div>');
+//		html.push('<div class="control-label"><label id="'+id+'_caption-lbl" for="'+id+'_caption" class="">Caption</label></div>');
 		html.push('<div class="controls">');
-		html.push('<input type="text" name="jform['+el.id+']['+i+'][caption]" id="'+id+'_caption" value="'+item.caption+'" size="20">');
+		html.push('<input type="text" placeholder="Caption" name="jform['+el.id+']['+i+'][caption]" id="'+id+'_caption" value="'+item.caption+'" size="20">');
 		html.push('</div>');
 		html.push('</div>');
 		html.push('</div>');
@@ -120,8 +120,6 @@ var ActivityTalents = new function() {
 	}
 	this.addItems = function(elId,items) {
 		SqueezeBox.close();
-		console.log(elId);
-		console.log(items);
 		if	(items) {
 			for(var i=0;i<items.length;i++) {
 				this.addItem(jQuery('#'+elId)[0], items[i], i);
@@ -129,17 +127,22 @@ var ActivityTalents = new function() {
 		}
 	};
 	this.addItem = function(el, item, i) {
-		if (!item) {
-			item = {
-				id:0,
-				title:''
-			};
-			var data = this.getData(el);
-			data.push(item);
-			i = data.length - 1;
+		var data = this.getData(el);
+		var exists = false;
+		for (var j=0;j<data.length;j++) {
+			if (data[j].id == item.id) {
+				if(data[j].added === undefined)
+					data[j].added = false;
+				exists = data[j].added;
+				break;
+			}
 		}
-		jQuery('#'+el.id+' tbody').append(this.buildItemHtml(el, item, i));
-		this.bindItemEvents(el,item,i);
+		if (!exists) {
+			item.added = true;
+			data.push(item);
+			jQuery('#'+el.id+' tbody').append(this.buildItemHtml(el, item, i));
+			this.bindItemEvents(el,item,i);
+		} 
 	};
 	this.bindItemEvents = function(el,item,i) {
 	}
@@ -160,11 +163,12 @@ var ActivityTalents = new function() {
 	};
 	this.removeItem = function(itemEl,i) {
 		var data = this.getData(jQuery(itemEl).closest('.'+className)[0]);
+		data[i].added = false;
 		data.splice(i,1);
 		jQuery(itemEl).remove();
 	};
 	this.getListTalentsUrl = function(el) {
-		var list_talent_url = 'index.php?option=com_activity&view=talents&layout=modal&tmpl=component&elId='+el.id;
+		var list_talent_url = window.talentListURL + '&elId=' + el.id;
 		var checkBoxes = jQuery('#'+el.id+' input.'+el.id+'checkbox');
 		var addedTalents = [];
 		if (checkBoxes) {
@@ -175,7 +179,6 @@ var ActivityTalents = new function() {
 		return list_talent_url;
 	};
 	this.buildHtml = function(el) {
-		var data = this.getData(el);
 		var html = [];
 		html.push('<div class="btn-wrapper">');
 		html.push('<button type="button" class="btn btn-small btn-success"><a href="#" id="'+el.id+'_add" onclick="this.href=ActivityTalents.getListTalentsUrl(jQuery(\'#'+el.id+'\')[0]);return false;" rel="{handler: \'iframe\', size: {x: 1000, y: 600}}"><span class="icon-new icon-white"></span>Add Talent</a></button>');
@@ -198,12 +201,14 @@ var ActivityTalents = new function() {
 		html.push('</table>');
 		
 		el.innerHTML = html.join('');
-		for (var i=0;i<data.length;i++) {
-			this.addItem(el, data[i], i);
-		}
 		SqueezeBox.assign(jQuery('a#'+el.id+'_add').get(), {
 			parse: 'rel'
 		});
+
+		var data = this.getData(el);
+		for (var i=0;i<data.length;i++) {
+			this.addItem(el, data[i], i);
+		}
 	};
 	this.buildItemHtml = function(el, item, i) {
 		var html = [];
@@ -218,6 +223,10 @@ var ActivityTalents = new function() {
 
 		return html.join('');
 	};
+}
+
+function addTalents(elId, items) {
+	ActivityTalents.addItems(elId, items);
 }
 
 jQuery(function() {

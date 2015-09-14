@@ -60,6 +60,8 @@ CREATE TABLE IF NOT EXISTS`joomla_agent_favorite` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
 `catid` int(10) unsigned NOT NULL DEFAULT '0',
 `agent_id` int(10) unsigned NOT NULL DEFAULT '0',
+`title` varchar(255) NOT NULL,
+`alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
 `images` text NOT NULL,
 `published` tinyint(1) NOT NULL DEFAULT '0',
 `metakey` text NOT NULL,

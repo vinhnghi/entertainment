@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset addfieldpath="/administrator/components/com_talent/models/fields">
+		<field name="id" type="text" class="readonly" label="JGLOBAL_FIELD_ID_LABEL"
+			description="JGLOBAL_FIELD_ID_DESC" size="10" default="0" readonly="true" />
+
+		<field name="agent_id" type="sql" label="Agent" description=""
+			query="SELECT DISTINCT a.id, b.name AS title FROM #__agent AS a LEFT JOIN #__users AS b ON a.user_id = b.id ORDER BY b.name ASC"
+			key_field="id" value_field="title" required="true">
+			<option value="">Please select agent</option>
+		</field>
+
+		<field name="title" type="text" label="JGLOBAL_TITLE"
+			description="JFIELD_TITLE_DESC" class="input-xxlarge input-large-text"
+			size="40" required="true" />
+
+		<field name="alias" type="text" label="JFIELD_ALIAS_LABEL"
+			description="JFIELD_ALIAS_DESC" hint="JFIELD_ALIAS_PLACEHOLDER" size="40" />
+
+		<field name="favoritetext" type="editor" label="Introduction"
+			description="" filter="JComponentHelper::filterText" buttons="true"
+			hide="article,image,pagebreak" />
+
+		<field name="published" type="list" label="JSTATUS"
+			description="JFIELD_PUBLISHED_DESC" class="chzn-color-state" filter="intval"
+			size="1" default="1">
+			<option value="1">
+				JPUBLISHED
+			</option>
+			<option value="0">
+				JUNPUBLISHED
+			</option>
+		</field>
+
+		<field name="ordering" type="text" label="JFIELD_ORDERING_LABEL"
+			description="JFIELD_ORDERING_DESC" size="6" default="0" />
+
+		<field name="metakey" type="textarea" label="JFIELD_META_KEYWORDS_LABEL"
+			description="JFIELD_META_KEYWORDS_DESC" rows="3" cols="30" />
+
+		<field name="metadesc" type="textarea" label="JFIELD_META_DESCRIPTION_LABEL"
+			description="JFIELD_META_DESCRIPTION_DESC" rows="3" cols="30" />
+
+	</fieldset>
+
+	<field name="favoritetalents" type="favoritetalents" label="Talents"
+		description="" />
+
+	<fields name="images" label="Image Options">
+		<field name="image_intro" type="media" label="Intro image"
+			description="" start="true" directory="com_talent" />
+		<field name="image_intro_alt" type="text" label="Alt Text"
+			description="" size="20" />
+		<field name="image_intro_caption" type="text" label="Caption"
+			description="" size="20" end="true" />
+		<field name="image_fulltext" type="media" label="Full Article Image"
+			description="" start="true" directory="com_talent" />
+		<field name="image_fulltext_alt" type="text" label="Alt Text"
+			description="" size="20" />
+		<field name="image_fulltext_caption" type="text" label="Caption"
+			description="" size="20" end="true" />
+	</fields>
+
+	<fields name="metadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+		<fieldset name="jmetadata" label="JGLOBAL_FIELDSET_METADATA_OPTIONS">
+
+			<field name="robots" type="list" label="JFIELD_METADATA_ROBOTS_LABEL"
+				description="JFIELD_METADATA_ROBOTS_DESC">
+				<option value="">JGLOBAL_USE_GLOBAL</option>
+				<option value="index, follow">JGLOBAL_INDEX_FOLLOW</option>
+				<option value="noindex, follow">JGLOBAL_NOINDEX_FOLLOW</option>
+				<option value="index, nofollow">JGLOBAL_INDEX_NOFOLLOW</option>
+				<option value="noindex, nofollow">JGLOBAL_NOINDEX_NOFOLLOW</option>
+			</field>
+
+			<field name="author" type="text" label="JAUTHOR"
+				description="JFIELD_METADATA_AUTHOR_DESC" size="20" />
+
+			<field name="rights" type="textarea" label="JFIELD_META_RIGHTS_LABEL"
+				description="JFIELD_META_RIGHTS_DESC" required="false" filter="string"
+				cols="30" rows="2" />
+			<field name="xreference" type="text" label="External Reference"
+				description="" size="20" />
+
+		</fieldset>
+	</fields>
+
+</form>
