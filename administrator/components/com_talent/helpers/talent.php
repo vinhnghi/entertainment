@@ -162,8 +162,38 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return $db->loadObjectList ();
 	}
+	public static function canShowTalentInfo($user, $talent) {
+		if ($user && $talent) {
+			if ($user->id == $talent->user_id) {
+				return true;
+			}
+			$agentUserGroup = TalentHelper::getAgentUserGroup ();
+			$groups = isset ( $user->groups ) ? $user->groups : array ();
+
+			if ($groups && in_array ( $agentUserGroup->id, $groups )) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public static function getTalentUserGroup() {
 		$groupName = 'Talent';
+		$group = TalentHelper::getGroupByName ( $groupName );
+		if (! $group) {
+			$registeredGroup = TalentHelper::getGroupByName ( 'Public' );
+			$table = JTable::getInstance ( 'UserGroup' );
+			$table->save ( array (
+					'parent_id' => $registeredGroup->id,
+					'title' => $groupName 
+			) );
+			$table->rebuild ();
+			$group = TalentHelper::getGroupByName ( $groupName );
+			TalentHelper::saveACL ( $group );
+		}
+		return $group;
+	}
+	public static function getAgentUserGroup() {
+		$groupName = 'Agent';
 		$group = TalentHelper::getGroupByName ( $groupName );
 		if (! $group) {
 			$registeredGroup = TalentHelper::getGroupByName ( 'Public' );
@@ -220,7 +250,7 @@ abstract class TalentHelper {
 				( int ) $groupId 
 		);
 		JTable::addIncludePath ( JPATH_ADMINISTRATOR . '/libraries/joomla/table' );
-		$row = JTable::getInstance ( 'Viewlevel' );
+		$row = JTable::getInstance ( 'ViewLevel' );
 		$row->save ( array (
 				'title' => $group->title,
 				'rules' => json_encode ( array_unique ( $rule_array ) ) 

@@ -9,7 +9,17 @@ class TalentModelTalent extends JModelAdmin {
 	protected $profileFields = array (
 			'dob',
 			'tel',
-			'gender' 
+			'gender',
+			'race',
+			'location',
+			'height',
+			'weight',
+			'chest',
+			'hip',
+			'chest',
+			'shoe_size',
+			'hair_color',
+			'eye_color' 
 	);
 	public function getTable($type = 'Talent', $prefix = 'TalentTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );

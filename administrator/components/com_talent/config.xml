@@ -1,12 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="titles" label="COM_TALENT_CONFIG_TITLE_SETTINGS_LABEL"
-		description="COM_TALENT_CONFIG_TITLE_SETTINGS_DESC">
+	<fieldset name="titles" label="Pulic User"
+		description="Display talent information for public user">
+		<field name="public_email" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Email">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_phone" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Phone">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_dob" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Birthday">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_gender" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Gender">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_race" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Race">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_location" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Location">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_height" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Height">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_weight" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Weight">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_chest" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Chest">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_hip" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Hip">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_shoe_size" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Shoe Size">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_hair_color" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Hair Color">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="public_eye_color" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Eye Color">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+	</fieldset>
+	<fieldset name="agent_titles" label="Agent (ProductionHouse)"
+		description="Display talent information for agent">
+		<field name="agent_email" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Email">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_phone" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Phone">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_dob" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Birthday">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_gender" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Gender">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_race" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Race">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_location" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Location">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_height" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Height">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_weight" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Weight">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_chest" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Chest">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_hip" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Hip">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_shoe_size" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Shoe Size">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_hair_color" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Hair Color">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
+		<field name="agent_eye_color" type="radio" class="btn-group btn-group-yesno"
+			default="1" label="Eye Color">
+			<option value="1">JYES</option>
+			<option value="0">JNO</option>
+		</field>
 	</fieldset>
 	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL"
 		description="JCONFIG_PERMISSIONS_DESC">
 		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL"
-	class="inputbox" validate="rules" filter="rules" component="com_talent"
-	section="component" />
+			class="inputbox" validate="rules" filter="rules" component="com_talent"
+			section="component" />
 	</fieldset>
 </config>

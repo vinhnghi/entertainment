@@ -1,37 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields name="user_details" label="Talent details">
-		<field name="id" type="hidden" class="readonly" size="10"
-			default="0" readonly="true" />
+		<fieldset name="user_details_basic" label="Basic">
+			<field name="id" type="hidden" class="readonly" size="10"
+				default="0" readonly="true" />
 
-		<field name="name" type="text" description="" label="Name"
-			required="true" size="30" />
+			<field name="name" type="text" description="" label="Name"
+				required="true" size="30" />
 
-		<field name="username" type="text" description="" label="Username"
-			required="true" size="30" />
+			<field name="username" type="text" description="" label="Username"
+				required="true" size="30" />
 
-		<field name="password" type="password" autocomplete="off"
-			class="validate-password" description="" filter="raw" validate="password"
-			label="Password" size="30" />
+			<field name="password" type="password" autocomplete="off"
+				class="validate-password" description="" filter="raw" validate="password"
+				label="Password" size="30" />
 
-		<field name="password2" type="password" autocomplete="off"
-			class="validate-password" description="" filter="raw" label="Confirm password"
-			size="30" validate="equals" field="user_details.password" />
+			<field name="password2" type="password" autocomplete="off"
+				class="validate-password" description="" filter="raw" label="Confirm password"
+				size="30" validate="equals" field="user_details.password" />
 
-		<field name="dob" type="calendar" label="Date of Birth"
-			description="" info="" format="%Y-%m-%d" filter="server_utc" />
+			<field name="dob" type="calendar" label="Date of Birth"
+				description="" info="" format="%Y-%m-%d" filter="server_utc" />
 
-		<field name="email" type="email" description="" label="Email"
-			required="true" size="30" validate="email" />
+			<field name="email" type="email" description="" label="Email"
+				required="true" size="30" validate="email" />
 
-		<field name="tel" type="tel" description="" label="Tel" filter="string"
-			size="30" />
+			<field name="tel" type="tel" description="" label="Tel" filter="string"
+				size="30" />
 
-		<field name="gender" type="radio" default="" label="Gender"
-			required="true">
-			<option value="1">Male</option>
-			<option value="0">Female</option>
-		</field>
+			<field name="gender" type="radio" default="" label="Gender"
+				required="true">
+				<option value="1">Male</option>
+				<option value="0">Female</option>
+			</field>
+		</fieldset>
+		<fieldset name="user_details_extra" label="Extra">
+			<field name="race" type="text" description="" label="Race"
+				size="30" />
+			<field name="location" type="text" description="" label="Location"
+				size="200" />
+			<field name="height" type="text" description="" label="Height"
+				size="30" />
+			<field name="weight" type="text" description="" label="Weight"
+				size="30" />
+			<field name="chest" type="text" description="" label="Chest"
+				size="30" />
+			<field name="hip" type="text" description="" label="Hip" size="30" />
+			<field name="shoe_size" type="text" description="" label="Shoe Size"
+				size="30" />
+			<field name="hair_color" type="text" description="" label="Hair Color"
+				size="30" />
+			<field name="eye_color" type="text" description="" label="Eye Color"
+				size="30" />
+		</fieldset>
+
 	</fields>
 	<fieldset addfieldpath="/administrator/components/com_talent/models/fields">
 		<field name="id" type="hidden" class="readonly" size="10"

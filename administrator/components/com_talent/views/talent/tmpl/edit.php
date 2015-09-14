@@ -2,6 +2,7 @@
 // No direct access
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 JHtml::_ ( 'behavior.formvalidation' );
+
 ?>
 <form
 	action="<?php echo JRoute::_('index.php?option=com_talent&layout=edit&id=' . (int) $this->item->id); ?>"
@@ -10,12 +11,17 @@ JHtml::_ ( 'behavior.formvalidation' );
 	<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'user_details')); ?>
 		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'user_details', JText::_('Talent details', true)); ?>
 		<div class="row-fluid form-horizontal-desktop">
-			<div class="span9">
-				<?php foreach ($this->form->getGroup('user_details') as $field) : ?>
+			<div class="span5">
+				<?php foreach ($this->form->getFieldset('user_details_basic') as $field) : ?>
 				<?php echo $field->getControlGroup(); ?>
 				<?php endforeach; ?>
 			</div>
-			<div class="span3">
+			<div class="span5">
+				<?php foreach ($this->form->getFieldset('user_details_extra') as $field) : ?>
+				<?php echo $field->getControlGroup(); ?>
+				<?php endforeach; ?>
+			</div>
+			<div class="span2">
 				<?php echo JLayoutHelper::render('joomla.edit.global', $this); ?>
 			</div>
 		</div>
