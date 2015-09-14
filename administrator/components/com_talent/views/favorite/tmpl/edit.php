@@ -39,6 +39,12 @@ JHtml::_ ( 'behavior.formvalidation' );
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 		
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'talents', JText::_('Talents', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<?php echo $this->form->getInput('favoritetalents'); ?>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		
 	<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 	</div>
 	<input type="hidden" name="task" value="favorite.edit" />

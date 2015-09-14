@@ -17,8 +17,14 @@ class TalentModelFavorites extends JModelList {
 		
 		// Filter by published state
 		$published = $this->getState ( 'filter.published' );
-		if ($published !== null && $published !== '')
+		if ($published !== null && $published !== '') {
 			$query->where ( 'a.published = ' . ( int ) $published );
+		}
+		// Filter: like / search
+		$agent_id = $this->getState ( 'filter.agent_id' );
+		if (! empty ( $agent_id )) {
+			$query->where ( 'a.agent_id = ' . ( int ) $agent_id );
+		}
 		
 		$params = $jinput->getArray ( array () );
 		if (isset ( $params ['id'] )) {

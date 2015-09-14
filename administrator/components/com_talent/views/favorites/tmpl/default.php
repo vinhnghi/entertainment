@@ -33,7 +33,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 				<?php echo JHtml::_('grid.sort', 'COM_TALENT_NAME', 'title', $listDirn, $listOrder); ?>
 			</th>
 				<th width="10%">
-				<?php echo JHtml::_('grid.sort', 'COM_TALENT_AGENT_ID', 'id', $listDirn, $listOrder); ?>
+				<?php echo JHtml::_('grid.sort', 'COM_TALENT_AGENT', 'agent', $listDirn, $listOrder); ?>
 			</th>
 				<th width="5%">
 				<?php echo JHtml::_('grid.sort', 'COM_TALENT_PUBLISHED', 'published', $listDirn, $listOrder); ?>
@@ -67,7 +67,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 								<?php echo $row->title; ?>
 							</a></td>
 				<td align="center">
-							<?php echo $row->agent_id; ?>
+							<?php echo $row->agent; ?>
 						</td>
 				<td align="center">
 							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'favorites.', true, 'cb'); ?>

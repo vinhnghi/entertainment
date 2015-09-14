@@ -67,6 +67,8 @@ class TalentViewFavorite extends JViewLegacy {
 		$isNew = ($this->item->id == 0);
 		$document = JFactory::getDocument ();
 		$document->setTitle ( $isNew ? JText::_ ( 'COM_TALENT_FAVORITE_CREATING' ) : JText::_ ( 'COM_TALENT_FAVORITE_EDITING' ) );
+		$talent_list_url = "index.php?option=com_talent&view=talents&layout=modal&tmpl=component";
+		$document->addScriptDeclaration ( "window.talentListURL = '{$talent_list_url}'" );
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
 		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
 		JText::script ( 'COM_TALENT_FAVORITE_ERROR_UNACCEPTABLE' );

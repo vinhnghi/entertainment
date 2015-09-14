@@ -23,44 +23,35 @@ class TalentModelFavorite extends JModelAdmin {
 			return parent::canEditState ( 'com_talent' );
 		}
 	}
+	protected function generateNewTitle($agent_id, $alias, $title) {
+		// Alter the title & alias
+		$table = $this->getTable ();
+		while ( $table->load ( array (
+				'alias' => $alias,
+				'agent_id' => $agent_id 
+		) ) ) {
+			$title = JString::increment ( $title );
+			$alias = JString::increment ( $alias, 'dash' );
+		}
+		return array (
+				$title,
+				$alias 
+		);
+	}
 	protected function prepareTable($table) {
-		$date = JFactory::getDate ();
 		$user = JFactory::getUser ();
 		$input = JFactory::getApplication ()->input;
-		if ($input->get ( 'task' ) == 'save2copy') {
-			$origTable = clone $this->getTable ();
-			$origTable->load ( $input->getInt ( 'id' ) );
-			if ($table->title == $origTable->title)
-				list ( $this->title, $table->alias ) = $this->generateNewTitle ( '', $table->alias, $table->title );
-			else {
-				if ($table->alias == $origTable->alias)
-					$table->alias = '';
-			}
-			$table->published = 0;
-		}
-		
 		// Automatic handling of alias for empty fields
 		if (in_array ( $input->get ( 'task' ), array (
 				'apply',
 				'save',
 				'save2new' 
-		) ) && ( int ) $input->get ( 'id' ) == 0) {
+		) )) {
 			if (! $table->alias) {
 				if (JFactory::getConfig ()->get ( 'unicodeslugs' ) == 1)
 					$table->alias = JFilterOutput::stringURLUnicodeSlug ( $table->title );
 				else
 					$table->alias = JFilterOutput::stringURLSafe ( $table->title );
-				$origTable = clone $this->getTable ();
-				$favorite = $origTable->load ( array (
-						'alias' => $table->alias,
-						'agent_id' => $table->agent_id 
-				) );
-				if ($favorite) {
-					$msg = JText::_ ( 'Alias already existed so a number was added at the end.' );
-				}
-				list ( $table->title, $table->alias ) = $this->generateNewTitle ( '', $table->alias, $table->title );
-				if (isset ( $msg ))
-					JFactory::getApplication ()->enqueueMessage ( $msg, 'warning' );
 			}
 		}
 		
@@ -76,7 +67,6 @@ class TalentModelFavorite extends JModelAdmin {
 				$table->ordering = $max + 1;
 			}
 		}
-		return clone $table;
 	}
 	public function getItem($pk = null) {
 		return TalentHelper::getFavorite ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
@@ -131,13 +121,18 @@ class TalentModelFavorite extends JModelAdmin {
 		return $data;
 	}
 	public function buildData(&$data) {
+		if (JFactory::getConfig ()->get ( 'unicodeslugs' ) == 1)
+			$data ['alias'] = JFilterOutput::stringURLUnicodeSlug ( $data ['title'] );
+		else
+			$data ['alias'] = JFilterOutput::stringURLSafe ( $data ['title'] );
+		
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
-		$tagPos = preg_match ( $pattern, $data ['talenttext'] );
+		$tagPos = preg_match ( $pattern, $data ['favoritetext'] );
 		if ($tagPos == 0) {
-			$data ['introtext'] = $data ['talenttext'];
+			$data ['introtext'] = $data ['favoritetext'];
 			$data ['fulltext'] = '';
 		} else {
-			list ( $data ['introtext'], $data ['fulltext'] ) = preg_split ( $pattern, $data ['talenttext'], 2 );
+			list ( $data ['introtext'], $data ['fulltext'] ) = preg_split ( $pattern, $data ['favoritetext'], 2 );
 		}
 		
 		if (isset ( $data ['images'] ) && is_array ( $data ['images'] )) {
@@ -154,10 +149,19 @@ class TalentModelFavorite extends JModelAdmin {
 	}
 	public function save($data) {
 		$this->buildData ( $data );
+		$table = $this->getTable ();
+		if ($table->load ( array (
+				'alias' => $data ['alias'],
+				'agent_id' => $data ['agent_id'] 
+		) ) && $table->id != $data ['id']) {
+			$this->setError ( JText::_ ( 'This favorite already exists.' ) );
+			return false;
+		}
+		
 		return parent::save ( $data );
 	}
 	public function getScript() {
-		return 'administrator/components/com_talent/src/js/talent.js';
+		return 'administrator/components/com_talent/src/js/favorite.js';
 	}
 	public function getCss() {
 		return 'administrator/components/com_talent/src/css/talent.css';

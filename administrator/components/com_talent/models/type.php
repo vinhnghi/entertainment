@@ -1,6 +1,7 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
+use Joomla\Registry\Registry;
 class TalentModelType extends JModelAdmin {
 	protected $text_prefix = 'COM_TALENT';
 	public $typeAlias = 'com_talent.type';
@@ -27,18 +28,6 @@ class TalentModelType extends JModelAdmin {
 		$date = JFactory::getDate ();
 		$user = JFactory::getUser ();
 		$input = JFactory::getApplication ()->input;
-		
-		if ($input->get ( 'task' ) == 'save2copy') {
-			$origTable = clone $this->getTable ();
-			$origTable->load ( $input->getInt ( 'id' ) );
-			if ($table->title == $origTable->title)
-				list ( $this->title, $table->alias ) = $this->generateNewTitle ( '', $table->alias, $table->title );
-			else {
-				if ($table->alias == $origTable->alias)
-					$table->alias = '';
-			}
-			$table->published = 0;
-		}
 		
 		// Automatic handling of alias for empty fields
 		if (in_array ( $input->get ( 'task' ), array (
@@ -82,8 +71,6 @@ class TalentModelType extends JModelAdmin {
 			$table->modified = $date->toSql ();
 			$table->modified_by = $user->get ( 'id' );
 		}
-		
-		return clone $table;
 	}
 	public function getItem($pk = null) {
 		if ($item = TalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'id', 0 ) )) {
@@ -131,12 +118,7 @@ class TalentModelType extends JModelAdmin {
 		}
 		
 		// The front end calls this model and uses a_id to avoid id clashes so we need to check for that first.
-		if ($jinput->get ( 'a_id' )) {
-			$id = $jinput->get ( 'a_id', 0 );
-		}  // The back end uses id so we use that the rest of the time and set it to 0 by default.
-else {
-			$id = $jinput->get ( 'id', 0 );
-		}
+		$id = $jinput->get ( 'id', 0 );
 		// Determine correct permissions to check.
 		if ($this->getState ( 'type.id' )) {
 			$id = $this->getState ( 'type.id' );

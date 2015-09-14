@@ -343,11 +343,13 @@ abstract class TalentHelper {
 		
 		// Create the base select statement.
 		$fields = array (
-				'a.*' 
+				'a.*',
+				'd.name AS agent' 
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent_favorite AS a' );
-		$query->leftJoin ( '#__agent AS d ON d.id=a.agent_id' );
+		$query->leftJoin ( '#__agent AS b ON b.id=a.agent_id' );
+		$query->leftJoin ( '#__users AS d ON d.id=b.user_id' );
 		return $query;
 	}
 	public static function updateFavoriteData($favorite) {

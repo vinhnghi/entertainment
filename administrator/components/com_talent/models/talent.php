@@ -52,7 +52,6 @@ class TalentModelTalent extends JModelAdmin {
 				$table->ordering = $max + 1;
 			}
 		}
-		return clone $table;
 	}
 	public function getItem($pk = null) {
 		return TalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
