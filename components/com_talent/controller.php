@@ -1,5 +1,6 @@
 <?php
 defined ( '_JEXEC' ) or die ();
+//
 class TalentController extends JControllerLegacy {
 	public function __construct($config = array()) {
 		$this->input = JFactory::getApplication ()->input;

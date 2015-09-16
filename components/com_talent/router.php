@@ -1,6 +1,8 @@
 <?php
 defined ( '_JEXEC' ) or die ();
-JLoader::register ( 'TalentHelper', JPATH_ADMINISTRATOR . '/components/com_talent/helpers/talent.php' );
+//
+JLoader::register ( 'SiteTalentHelper', JPATH_SITE . '/components/com_talent/helpers/talent.php' );
+//
 class TalentRouter extends JComponentRouterBase {
 	public function __construct($app = null, $menu = null) {
 		parent::__construct ( $app, $menu );
@@ -63,13 +65,13 @@ class TalentRouter extends JComponentRouterBase {
 					$cid = $menuItem->query ['id'];
 				elseif (! $cid)
 					$cid = 0;
-				$typeAlias = TalentHelper::getTalentType ( $cid )->alias;
+				$typeAlias = SiteTalentHelper::getTalentType ( $cid )->alias;
 				if ($typeAlias)
 					$segments [] = "{$cid}t{$this->_separator}{$typeAlias}";
 			}
 			
 			if (isset ( $query ['id'] ) && $query ['id']) {
-				$alias = TalentHelper::getTalent ( $query ['id'] )->alias;
+				$alias = SiteTalentHelper::getTalent ( $query ['id'] )->alias;
 				$segments [] = "{$query ['id']}a{$this->_separator}{$alias}";
 			} else {
 				return $segments;
@@ -84,7 +86,7 @@ class TalentRouter extends JComponentRouterBase {
 					$cid = $menuItem->query ['cid'];
 			}
 			unset ( $query ['cid'] );
-			$typeAlias = TalentHelper::getTalentType ( $cid )->alias;
+			$typeAlias = SiteTalentHelper::getTalentType ( $cid )->alias;
 			
 			if ($typeAlias)
 				$segments [] = "{$cid}t{$this->_separator}{$typeAlias}";
@@ -126,18 +128,18 @@ class TalentRouter extends JComponentRouterBase {
 				if ($segments [0] [count ( $segments ) - 1] == 't') {
 					$vars ['view'] = 'talents';
 					$vars ['cid'] = ( int ) $segments [0];
-					$pathway->addItem ( TalentHelper::getTalentType ( $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talents&cid={$vars['cid']}" ) );
+					$pathway->addItem ( SiteTalentHelper::getTalentType ( $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talents&cid={$vars['cid']}" ) );
 				} else {
 					$vars ['view'] = 'talent';
 					$vars ['id'] = ( int ) $segments [0];
-					$pathway->addItem ( TalentHelper::getTalent ( $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talent&id={$vars['id']}" ) );
+					$pathway->addItem ( SiteTalentHelper::getTalent ( $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talent&id={$vars['id']}" ) );
 				}
 			} else {
 				$vars ['view'] = 'talent';
 				$vars ['cid'] = ( int ) $segments [0];
 				$vars ['id'] = ( int ) $segments [2];
-				$pathway->addItem ( TalentHelper::getTalentType ( $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talents&cid={$vars['cid']}" ) );
-				$pathway->addItem ( TalentHelper::getTalent ( $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talent&cid={$vars['cid']}&id={$vars['id']}" ) );
+				$pathway->addItem ( SiteTalentHelper::getTalentType ( $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talents&cid={$vars['cid']}" ) );
+				$pathway->addItem ( SiteTalentHelper::getTalent ( $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talent&cid={$vars['cid']}&id={$vars['id']}" ) );
 			}
 		}
 		return $vars;

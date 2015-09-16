@@ -40,14 +40,21 @@ class TalentViewFavourites extends JViewLegacy {
 			$title .= "<span style='font-size: 0.5em; vertical-align: middle;'>(" . $this->pagination->total . ")</span>";
 		}
 		JToolBarHelper::title ( $title, 'favourite' );
-		if ($this->canDo->get ( 'core.create' )) {
-			JToolBarHelper::addNew ( 'favourite.add', 'JTOOLBAR_NEW' );
-		}
-		if ($this->canDo->get ( 'core.edit' )) {
-			JToolBarHelper::editList ( 'favourite.edit', 'JTOOLBAR_EDIT' );
-		}
-		if ($this->canDo->get ( 'core.delete' )) {
-			JToolBarHelper::deleteList ( 'Do you really want to delete?', 'favourites.delete', 'JTOOLBAR_DELETE' );
+		$jinput = JFactory::getApplication ()->input;
+		$id = $jinput->get ( 'id', 0 );
+		if (! $id) {
+			if ($this->canDo->get ( 'core.create' )) {
+				JToolBarHelper::addNew ( 'favourite.add', 'JTOOLBAR_NEW' );
+			}
+			if ($this->canDo->get ( 'core.edit' )) {
+				JToolBarHelper::editList ( 'favourite.edit', 'JTOOLBAR_EDIT' );
+			}
+			if ($this->canDo->get ( 'core.delete' )) {
+				JToolBarHelper::deleteList ( 'Do you really want to delete?', 'favourites.delete', 'JTOOLBAR_DELETE' );
+			}
+		} else {
+			JToolBarHelper::archiveList ( 'favourite.add', 'COM_TALENT_ADD_TO_FAVOURITE' );
+			JToolBarHelper::unarchiveList ( 'favourite.delete', 'COM_TALENT_REMOVE_FROM_FAVOURITE' );
 		}
 		if ($this->canDo->get ( 'core.admin' )) {
 			JToolBarHelper::divider ();

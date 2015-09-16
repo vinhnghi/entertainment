@@ -3,11 +3,11 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelTalents extends JModelList {
 	public function getTalentType() {
-		return TalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+		return SiteTalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
 	protected function getListQuery() {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getListTalentsQuery ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+		$query = SiteTalentHelper::getListTalentsQuery ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'name' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );

@@ -17,7 +17,7 @@ class TalentViewFavourites extends JViewLegacy {
 		$this->activeFilters = $this->get ( 'ActiveFilters' );
 		
 		// What Access Permissions does this user have? What can (s)he do?
-		$this->canDo = TalentHelper::getActions ();
+		$this->canDo = SiteTalentHelper::getActions ();
 		
 		// Check for errors.
 		if (count ( $errors = $this->get ( 'Errors' ) )) {

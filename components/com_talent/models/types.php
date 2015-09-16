@@ -5,7 +5,7 @@ class TalentModelTypes extends JModelList {
 	protected function getListQuery() {
 		$db = JFactory::getDbo ();
 		// Initialize variables.
-		$query = TalentHelper::getListTalentTypesQuery ();
+		$query = SiteTalentHelper::getListTalentTypesQuery ();
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );

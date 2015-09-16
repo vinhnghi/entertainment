@@ -24,7 +24,7 @@ $registry = new Registry ();
 	<?php if ($list_description):?>
 	<div class="com_talent_list_description"><?php echo $list_description;?></div>
 	<?php endif; ?>	
-	<div class="com_talent_content_clear"></div>
+	<div class="clearfix"></div>
 <?php if (!empty($this->items)) : foreach ( $this->items as $i => $row ) : $link = JRoute::_ ( $base_url . $row->id );$registry->loadString ( $row->images );$image = $registry->toArray ();?>
 	<div class="com_talent_list_item" style="width: <?php echo $item_width?>%">
 		<div class="com_talent_list_item_title">
@@ -36,12 +36,12 @@ $registry = new Registry ();
 				src="<?php echo $image['image_intro'];?>">
 		</div>
 		<?php endif; ?>
-		<div class="com_talent_list_item_introtext"><?php echo TalentHelper::truncate( strip_tags($row->introtext), 20);?></div>
+		<div class="com_talent_list_item_introtext"><?php echo SiteTalentHelper::truncate( strip_tags($row->introtext), 20);?></div>
 		<?php if ($row->fulltext):?>
 		<?php endif; ?>
 	</div>
 	<?php if ($i%$num_items==$num_items-1):?>
-	<div class="com_talent_content_clear"></div>
+	<div class="clearfix"></div>
 	<?php endif; ?>
 <?php endforeach; endif; ?>
 </div>

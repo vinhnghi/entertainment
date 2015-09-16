@@ -184,7 +184,7 @@ class JFormFieldTalentSlideShow extends JFormField {
 		return false;
 	}
 	protected function getImages() {
-		return TalentHelper::getTalentImages ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
+		return SiteTalentHelper::getTalentImages ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
 	}
 	protected function generateVideoThumbnail($src) {
 		$folder = $_SERVER ['DOCUMENT_ROOT'] . "/" . dirname ( $src );

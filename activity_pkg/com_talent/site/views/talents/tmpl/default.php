@@ -45,7 +45,7 @@ $base_url = 'index.php?option=com_talent&view=talent&cid=';
 		<?php endif; ?>
 	</div>
 	<?php if ($i%$num_row_item==$num_row_item-1):?>
-	<div class="com_talent_content_clear"></div>
+	<div class="clearfix"></div>
 	<?php endif; ?>
 <?php endforeach; endif; ?>
 </div>

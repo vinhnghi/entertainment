@@ -58,34 +58,7 @@ DROP TABLE IF EXISTS`joomla_agent_favourite`;
 
 CREATE TABLE IF NOT EXISTS`joomla_agent_favourite` (
 `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
-`catid` int(10) unsigned NOT NULL DEFAULT '0',
 `agent_id` int(10) unsigned NOT NULL DEFAULT '0',
-`title` varchar(255) NOT NULL,
-`alias` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
-`images` text NOT NULL,
-`published` tinyint(1) NOT NULL DEFAULT '0',
-`metakey` text NOT NULL,
-`metadesc` text NOT NULL,
-`metadata` text NOT NULL,
-`ordering` int(11) NOT NULL DEFAULT '0',
-`introtext` mediumtext NOT NULL,
-`fulltext` mediumtext NOT NULL,
-`language` char(7) NOT NULL,
-`params`  VARCHAR(1024) NOT NULL DEFAULT '',
- PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table`joomla_agent_favourite_talent`
---
-
-DROP TABLE IF EXISTS`joomla_agent_favourite_talent`;
-
-CREATE TABLE IF NOT EXISTS`joomla_agent_favourite_talent` (
-`id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'PK',
-`agent_favourite_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_agent_favourite table.',
 `talent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'FK to the joomla_talent table.',
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
