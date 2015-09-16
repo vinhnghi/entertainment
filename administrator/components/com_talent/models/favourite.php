@@ -1,0 +1,295 @@
+<?php
+// No direct access to this file
+defined ( '_JEXEC' ) or die ( 'Restricted access' );
+
+use Joomla\Registry\Registry;
+class TalentModelTalent extends JModelAdmin {
+	protected $text_prefix = 'COM_TALENT';
+	public $typeAlias = 'com_talent.talent';
+	protected $profileFields = array (
+			'dob',
+			'tel',
+			'gender',
+			'race',
+			'location',
+			'height',
+			'weight',
+			'chest',
+			'hip',
+			'chest',
+			'shoe_size',
+			'hair_color',
+			'eye_color' 
+	);
+	public function getTable($type = 'Talent', $prefix = 'TalentTable', $config = array()) {
+		return JTable::getInstance ( $type, $prefix, $config );
+	}
+	protected function canDelete($record) {
+		if (! empty ( $record->id )) {
+			return TalentHelper::getActions ( ( int ) $record->id, 'talent' )->get ( 'core.delete' );
+		}
+	}
+	protected function canEditState($record) {
+		$user = JFactory::getUser ();
+		// Check for existing article.
+		if (! empty ( $record->id )) {
+			return TalentHelper::getActions ( ( int ) $record->id, 'talent' )->get ( 'core.edit.state' );
+		} else {
+			return parent::canEditState ( 'com_talent' );
+		}
+	}
+	protected function prepareTable($table) {
+		$date = JFactory::getDate ();
+		$user = JFactory::getUser ();
+		$input = JFactory::getApplication ()->input;
+		if (empty ( $table->id )) {
+			// Set ordering to the last item if not set
+			if (empty ( $table->ordering )) {
+				$db = JFactory::getDbo ();
+				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__talent' );
+				$db->setQuery ( $query );
+				$max = $db->loadResult ();
+				$table->ordering = $max + 1;
+			}
+		}
+	}
+	public function getItem($pk = null) {
+		return TalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
+	}
+	public function getForm($data = array(), $loadData = true) {
+		$jinput = JFactory::getApplication ()->input;
+		
+		// Get the form.
+		$form = $this->loadForm ( 'com_talent.talent', 'talent', array (
+				'control' => 'jform',
+				'load_data' => $loadData 
+		) );
+		if (empty ( $form )) {
+			return false;
+		}
+		$id = $jinput->get ( 'id', 0 );
+		// Determine correct permissions to check.
+		if ($this->getState ( 'talent.id' )) {
+			$id = $this->getState ( 'talent.id' );
+		}
+		
+		// Modify the form based on Edit State access controls.
+		if ($id != 0 && ! TalentHelper::getActions ( ( int ) $id, 'talent' )->get ( 'core.edit.state' )) {
+			// Disable fields for display.
+			$form->setFieldAttribute ( 'ordering', 'disabled', 'true' );
+			$form->setFieldAttribute ( 'published', 'disabled', 'true' );
+			
+			// Disable fields while saving.
+			// The controller has already verified this is an article you can edit.
+			$form->setFieldAttribute ( 'ordering', 'filter', 'unset' );
+			$form->setFieldAttribute ( 'published', 'filter', 'unset' );
+		}
+		
+		return $form;
+	}
+	protected function loadFormData() {
+		// Check the session for previously entered form data.
+		$app = JFactory::getApplication ();
+		$data = $app->getUserState ( 'com_talent.edit.talent.data', array () );
+		
+		if (empty ( $data )) {
+			$data = $this->getItem ();
+			
+			// Prime some default values.
+			if ($this->getState ( 'talent.id' ) == 0) {
+				$filters = ( array ) $app->getUserState ( 'com_talent.talents.filter' );
+			}
+		}
+		
+		$this->preprocessData ( 'com_talent.talent', $data );
+		
+		return $data;
+	}
+	public function buildData(&$data) {
+		$user_data = array (
+				'id' => $data ['user_details'] ['id'],
+				'groups' => array (
+						TalentHelper::getTalentUserGroup ()->id 
+				),
+				'name' => $data ['user_details'] ['name'],
+				'username' => $data ['user_details'] ['username'],
+				'email' => $data ['user_details'] ['email'] 
+		);
+		if ($data ['user_details'] ['password']) {
+			$user_data ['password'] = $data ['user_details'] ['password'];
+		}
+		$data ['user'] = $user_data;
+		
+		$profile_data = array (
+				'talentusergroup' => 'Talent' 
+		);
+		foreach ( $this->profileFields as $field ) {
+			$profile_data [$field] = $data ['user_details'] [$field];
+		}
+		$data ['profile'] = $profile_data;
+		
+		$talent_data = array (
+				'id' => $data ['id'],
+				'parent_id' => $data ['parent_id'],
+				'published' => $data ['published'],
+				'metakey' => $data ['metakey'],
+				'metadesc' => $data ['metadesc'],
+				'talentimages' => $data ['talentimages'] 
+		);
+		
+		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
+		$tagPos = preg_match ( $pattern, $data ['talenttext'] );
+		if ($tagPos == 0) {
+			$talent_data ['introtext'] = $data ['talenttext'];
+			$talent_data ['fulltext'] = '';
+		} else {
+			list ( $talent_data ['introtext'], $talent_data ['fulltext'] ) = preg_split ( $pattern, $data ['talenttext'], 2 );
+		}
+		
+		if (isset ( $data ['images'] ) && is_array ( $data ['images'] )) {
+			$registry = new Registry ();
+			$registry->loadArray ( $data ['images'] );
+			$talent_data ['images'] = ( string ) $registry;
+		}
+		
+		if (isset ( $data ['metadata'] ) && is_array ( $data ['metadata'] )) {
+			$registry = new Registry ();
+			$registry->loadArray ( $data ['metadata'] );
+			$talent_data ['metadata'] = ( string ) $registry;
+		}
+		$data ['talent'] = $talent_data;
+	}
+	public function save($data) {
+		$this->buildData ( $data );
+		// save user
+		$this->saveUser ( $data ['user'] );
+		// save user profile
+		$this->saveProfile ( $data ['profile'] );
+		// save talent
+		$this->saveTalent ( $data ['talent'] );
+		return true;
+	}
+	public function saveUser($data) {
+		$pk = (! empty ( $data ['id'] )) ? $data ['id'] : ( int ) $this->getState ( 'user.id' );
+		$user = JUser::getInstance ( $pk );
+		$my = JFactory::getUser ();
+		// Make sure that we are not removing ourself from Super Admin group
+		$iAmSuperAdmin = $my->authorise ( 'core.admin' );
+		if ($iAmSuperAdmin && $my->get ( 'id' ) == $pk) {
+			// Check that at least one of our new groups is Super Admin
+			$stillSuperAdmin = false;
+			$myNewGroups = $data ['groups'];
+			foreach ( $myNewGroups as $group ) {
+				$stillSuperAdmin = ($stillSuperAdmin) ? ($stillSuperAdmin) : JAccess::checkGroup ( $group, 'core.admin' );
+			}
+			if (! $stillSuperAdmin) {
+				$this->setError ( JText::_ ( 'COM_USERS_USERS_ERROR_CANNOT_DEMOTE_SELF' ) );
+				return false;
+			}
+		}
+		// Bind the data.
+		if (! $user->bind ( $data )) {
+			$this->setError ( $user->getError () );
+			return false;
+		}
+		// Store the data.
+		if (! $user->save ()) {
+			$this->setError ( $user->getError () );
+			return false;
+		}
+		$this->setState ( 'user.id', $user->id );
+		return true;
+	}
+	public function saveProfile($data) {
+		$userId = ( int ) $this->getState ( 'user.id' );
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__user_profiles' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $db->quoteName ( 'profile_key' ) . ' LIKE ' . $db->quote ( 'profile.%' ) );
+		$db->setQuery ( $query );
+		$db->execute ();
+		
+		$tuples = array ();
+		$order = 1;
+		foreach ( $data as $k => $v ) {
+			$tuples [] = '(' . $userId . ', ' . $db->quote ( 'profile.' . $k ) . ', ' . $db->quote ( json_encode ( $v ) ) . ', ' . ($order ++) . ')';
+		}
+		$db->setQuery ( 'INSERT INTO #__user_profiles VALUES ' . implode ( ', ', $tuples ) );
+		$db->execute ();
+		return true;
+	}
+	public function saveTalent($data) {
+		$data ['user_id'] = ( int ) $this->getState ( 'user.id' );
+		return parent::save ( $data );
+	}
+	public function delete(&$pks) {
+		$user = JFactory::getUser ();
+		$table = JTable::getInstance ( 'User', 'JTable' );
+		$pks = ( array ) $pks;
+		
+		// Check if I am a Super Admin
+		$iAmSuperAdmin = $user->authorise ( 'core.admin' );
+		
+		if (in_array ( $user->id, $pks )) {
+			$this->setError ( JText::_ ( 'COM_USERS_USERS_ERROR_CANNOT_DELETE_SELF' ) );
+			
+			return false;
+		}
+		// Iterate the items to delete each one.
+		foreach ( $pks as $i => $pk ) {
+			$talent = TalentHelper::getTalent ( $pk );
+			if ($talent) {
+				$userId = $talent->user_id;
+				if ($table->load ( $userId )) {
+					// Access checks.
+					$allow = $user->authorise ( 'core.delete', 'com_users' );
+					// Don't allow non-super-admin to delete a super admin
+					$allow = (! $iAmSuperAdmin && JAccess::check ( $userId, 'core.admin' )) ? false : $allow;
+					if ($allow) {
+						// Get users data for the users to delete.
+						$user_to_delete = JFactory::getUser ( $userId );
+						// Fire the before delete event.
+						if (! $table->delete ( $userId )) {
+							$this->setError ( $table->getError () );
+							return false;
+						} else {
+							$this->deleteProfile ( $userId );
+							$this->deleteTalent ( $userId );
+						}
+					} else {
+						// Prune items that you can't change.
+						unset ( $pks [$i] );
+						JError::raiseWarning ( 403, JText::_ ( 'JERROR_CORE_DELETE_NOT_PERMITTED' ) );
+					}
+				} else {
+					$this->setError ( $table->getError () );
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	public function deleteProfile($userId) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__user_profiles' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $db->quoteName ( 'profile_key' ) . ' LIKE ' . $db->quote ( 'profile.%' ) );
+		$db->setQuery ( $query );
+		$db->execute ();
+	}
+	public function deleteTalent($userId) {
+		$talent = TalentHelper::getTalentByUserId ( $userId );
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__talent_type_talent' ) )->where ( $db->quoteName ( 'talent_id' ) . ' = ' . ( int ) $talent->id );
+		$db->setQuery ( $query );
+		$db->execute ();
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__talent_assets' ) )->where ( $db->quoteName ( 'talent_id' ) . ' = ' . ( int ) $talent->id );
+		$db->setQuery ( $query );
+		$db->execute ();
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__talent' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId );
+		$db->setQuery ( $query );
+		$db->execute ();
+	}
+	public function getScript() {
+		return 'administrator/components/com_talent/src/js/talent.js';
+	}
+	public function getCss() {
+		return 'administrator/components/com_talent/src/css/talent.css';
+	}
+}
