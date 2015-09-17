@@ -9,9 +9,6 @@ JLoader::register ( 'JToolBarHelper', JPATH_ADMINISTRATOR . '/includes/toolbar.p
 JLoader::register ( 'JSubMenuHelper', JPATH_ADMINISTRATOR . '/includes/subtoolbar.php' );
 JLoader::register ( 'TalentRouter', JPATH_SITE . '/components/com_talent/router.php' );
 //
-$lang = & JFactory::getLanguage ();
-$lang->load ( 'com_talent', JPATH_ROOT, 'en', true );
-//
 class SiteTalentHelper extends TalentHelper {
 	//
 	public static function getTalentDetailsHtml($obj) {
