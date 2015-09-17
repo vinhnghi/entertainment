@@ -8,6 +8,7 @@ class TalentViewTalent extends JViewLegacy {
 		$this->form = $this->get ( 'Form' );
 		$this->item = $this->get ( 'Item' );
 		$this->heading = $this->item->title;
+		$this->return_page = base64_encode ( JURI::current () );
 		// Display the template
 		parent::display ( $tpl );
 		// Set the document
@@ -31,8 +32,6 @@ class TalentViewTalent extends JViewLegacy {
 		
 		$height = $params->get ( 'gallery_height', 360, 'uint' );
 		$duration = $params->get ( 'gallery_duration', 3000, 'uint' );
-		
-		$document->addScript ( JURI::root () . $this->get ( 'Js' ) );
 		
 		$document->addStyleSheet ( JURI::root () . "components/com_talent/src/css/talent.css" );
 		$document->addStyleSheet ( JURI::root () . "media/{$folder}/{$folder}.min.css" );

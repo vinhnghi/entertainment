@@ -14,8 +14,15 @@ $lang->load ( 'com_talent', JPATH_ROOT, 'en', true );
 //
 class SiteTalentHelper extends TalentHelper {
 	//
-	public static function getTalentDetailsHtml($id) {
-		$talent = self::getTalent ( $id );
+	public static function getTalentDetailsHtml($obj) {
+		if (is_string ( $obj )) {
+			$talent = static::getTalent ( $obj );
+			$talent->index = 0;
+		} else {
+			$talent = static::getTalent ( $obj->id );
+			$talent->index = $obj->index;
+		}
+		
 		if ($talent) {
 			self::normaliseTalentDetails ( $talent->user_details );
 			$layout = new JLayoutFile ( 'talent_details', JPATH_SITE . '/components/com_talent/layouts' );

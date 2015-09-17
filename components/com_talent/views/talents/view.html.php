@@ -7,12 +7,15 @@ class TalentViewTalents extends JViewLegacy {
 		$this->pagination = $this->get ( 'Pagination' );
 		$this->params = JFactory::getApplication ()->getParams ();
 		$this->heading = $this->type->title;
-		parent::display ( $tpl );
+		$this->return_page = base64_encode ( JURI::current () );
+		JHtml::stylesheet ( JURI::root () . $this->get ( 'Css' ) );
+		
 		$this->setDocument ();
+		
+		parent::display ( $tpl );
 	}
 	protected function setDocument() {
 		$document = JFactory::getDocument ();
-		
 		$title = $this->params->get ( 'page_title', '' );
 		if (! $title) {
 			$title = $this->type->title;
@@ -20,7 +23,5 @@ class TalentViewTalents extends JViewLegacy {
 			$title = "{$title} - {$this->type->title}";
 		}
 		$document->setTitle ( $title );
-		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
-		$document->addScript ( JURI::root () . $this->get ( 'Js' ) );
 	}
 }

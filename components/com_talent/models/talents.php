@@ -17,8 +17,5 @@ class TalentModelTalents extends JModelList {
 	public function getCss() {
 		return 'components/com_talent/src/css/talent.css';
 	}
-	public function getJs() {
-		return 'components/com_talent/src/js/talent.js';
-	}
 }
 

@@ -47,12 +47,13 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 					title="<?php echo $row->title ?>">
 								<?php echo $row->title?>
 							</a></td>
-				<td align="center"><?php echo JHtml::_('jgrid.published', 0, $i, 'favourites.', true, 'cb') ?></td>
+				<td align="center"><?php echo JHtml::_('jgrid.published', 2, $i, 'favourites.', true, 'cb') ?></td>
 			</tr>
 				<?php endforeach ?>
 			<?php endif ?>
 		</tbody>
 	</table>
+	<input type="hidden" name="return" value="<?php echo $this->return_page; ?>" />
 	<input type="hidden" name="task" value="" /> <input type="hidden"
 		name="boxchecked" value="0" /> <input type="hidden"
 		name="filter_order" value="<?php echo $listOrder ?>" /> <input

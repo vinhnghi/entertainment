@@ -80,7 +80,7 @@ abstract class TalentHelper {
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__talent AS a' );
 		$query->innerJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
 		$query->innerJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
-		$query->innerJoin( '#__users AS d ON d.id=a.user_id' );
+		$query->innerJoin ( '#__users AS d ON d.id=a.user_id' );
 		return $query;
 	}
 	public static function updateTalentData($talent) {
@@ -371,5 +371,14 @@ abstract class TalentHelper {
 	public static function getListFavouritesQuery($cid) {
 		$query = TalentHelper::getFavouriteQuery ();
 		return $query;
+	}
+	//
+	public static function getFavourite($talent_id, $agent_id) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		$query->select ( 'a.id' )->from ( '#__agent_favourite AS a' );
+		$query->where ( 'a.talent_id = ' . ( int ) $talent_id );
+		$query->where ( 'a.agent_id = ' . ( int ) $agent_id );
+		return $db->setQuery($query)->loadResult();
 	}
 }

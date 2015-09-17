@@ -19,7 +19,4 @@ class TalentModelTalent extends JModelAdmin {
 	public function getCss() {
 		return 'components/com_talent/src/css/talent.css';
 	}
-	public function getJs() {
-		return 'components/com_talent/src/js/talent.js';
-	}
 }

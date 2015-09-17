@@ -32,9 +32,26 @@ class TalentModelFavourites extends JModelList {
 		return $query;
 	}
 	//
-	public function removeTalentsToFavourite($ids, $value) {
+	public function removeTalentsFromFavourite($ids) {
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__agent_favourite' ) )->where ( $db->quoteName ( 'talent_id' ) . ' IN (' . implode ( ',', $ids ) . ')' );
+		$db->setQuery ( $query );
+		$db->execute ();
+	}
+	//
+	public function addTalentsToFavourite($ids) {
+		static::removeTalentsFromFavourite ( $ids );
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		$query->insert ( $db->quoteName ( '#__agent_favourite' ) )->columns ( $db->quoteName ( array (
+				'agent_id',
+				'talent_id' 
+		) ) );
+		$user = JFactory::getUser ();
+		$agent = SiteTalentHelper::getAgentByUserId ( $user->id );
+		foreach ( $ids as $talent_id ) {
+			$query->values ( $agent->id . ',' . $talent_id );
+		}
 		$db->setQuery ( $query );
 		$db->execute ();
 	}
