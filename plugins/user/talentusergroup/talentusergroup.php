@@ -93,7 +93,7 @@ class PlgUserTalentUserGroup extends JPlugin {
 		$rule_array ['core.create'] [$groupId] = 1;
 		$rule_array ['core.delete'] [$groupId] = 1;
 		$rule_array ['core.edit'] [$groupId] = 1;
-		unset ( $rule_array ['core.edit.state'] [$groupId] );
+		$rule_array ['core.edit.state'] [$groupId] = 1;
 		$rule_array ['core.edit.own'] [$groupId] = 1;
 		
 		$rules->loadArray ( $rule_array );

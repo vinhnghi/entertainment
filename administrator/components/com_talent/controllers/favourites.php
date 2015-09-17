@@ -7,4 +7,8 @@ class TalentControllerFavourites extends JControllerAdmin {
 		$model = parent::getModel ( $name, $prefix, $config );
 		return $model;
 	}
+	public function publish() {
+	}
+	public function unpublish() {
+	}
 }

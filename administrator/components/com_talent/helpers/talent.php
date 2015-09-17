@@ -78,9 +78,9 @@ abstract class TalentHelper {
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__talent AS a' );
-		$query->leftJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
-		$query->leftJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
-		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
+		$query->innerJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
+		$query->innerJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
+		$query->innerJoin( '#__users AS d ON d.id=a.user_id' );
 		return $query;
 	}
 	public static function updateTalentData($talent) {
@@ -247,7 +247,7 @@ abstract class TalentHelper {
 		$rule_array ['core.create'] [$groupId] = 1;
 		$rule_array ['core.delete'] [$groupId] = 1;
 		$rule_array ['core.edit'] [$groupId] = 1;
-		unset ( $rule_array ['core.edit.state'] [$groupId] );
+		$rule_array ['core.edit.state'] [$groupId] = 1;
 		$rule_array ['core.edit.own'] [$groupId] = 1;
 		
 		$rules->loadArray ( $rule_array );
@@ -287,7 +287,7 @@ abstract class TalentHelper {
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent AS a' );
-		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
+		$query->innerJoin ( '#__users AS d ON d.id=a.user_id' );
 		return $query;
 	}
 	public static function updateAgentData($agent) {
@@ -362,8 +362,8 @@ abstract class TalentHelper {
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent_favourite AS a' );
-		$query->leftJoin ( '#__agent AS b ON b.id=a.agent_id' );
-		$query->leftJoin ( '#__users AS d ON d.id=b.user_id' );
+		$query->innerJoin ( '#__agent AS b ON b.id=a.agent_id' );
+		$query->innerJoin ( '#__users AS d ON d.id=b.user_id' );
 		$query->group ( 'agent_id' );
 		
 		return $query;

@@ -104,6 +104,10 @@ class TalentRouter extends JComponentRouterBase {
 		return $segments;
 	}
 	public function parse(&$segments) {
+		if (!$segments || count($segments) <= 1) {
+			return $segments;
+		}
+		
 		$total = count ( $segments );
 		$vars = array ();
 		// Get the active menu item.

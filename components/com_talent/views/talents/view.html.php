@@ -21,5 +21,6 @@ class TalentViewTalents extends JViewLegacy {
 		}
 		$document->setTitle ( $title );
 		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
+		$document->addScript ( JURI::root () . $this->get ( 'Js' ) );
 	}
 }

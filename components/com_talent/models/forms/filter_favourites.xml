@@ -3,17 +3,5 @@
 	<fields name="filter">
 		<field name="search" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
 			hint="JSEARCH_FILTER" class="js-stools-search-string" />
-		<field name="agent_id" type="sql" label="Agent" description=""
-			query="SELECT DISTINCT a.id, b.name AS title FROM #__agent AS a LEFT JOIN #__users AS b ON a.user_id = b.id WHERE a.published = 1 AND b.block = 0 AND b.activation = '' ORDER BY b.name ASC"
-			key_field="id" value_field="title" onchange="this.form.submit();">
-			<option value="">Please select agent</option>
-		</field>
-
-		<field name="published" type="list" label="JOPTION_SELECT_PUBLISHED"
-			description="JOPTION_SELECT_PUBLISHED_DESC" onchange="this.form.submit();">
-			<option value="">JOPTION_SELECT_PUBLISHED</option>
-			<option value="0">JUNPUBLISHED</option>
-			<option value="1">JPUBLISHED</option>
-		</field>
 	</fields>
 </form>

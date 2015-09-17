@@ -16,10 +16,11 @@ class TalentViewTalent extends JViewLegacy {
 	protected function setDocument() {
 		$document = JFactory::getDocument ();
 		$title = $this->params->get ( 'page_title', '' );
+		$append = $this->type ? "{$this->type->title} - {$this->item->title}" : "{$this->item->title}";
 		if (! $title) {
-			$title = "{$this->type->title} - {$this->item->title}";
+			$title = $append;
 		} else {
-			$title = "{$title} - {$this->type->title} - {$this->item->title}";
+			$title = "{$title} - {$append}";
 		}
 		$document->setTitle ( $title );
 		
@@ -30,6 +31,8 @@ class TalentViewTalent extends JViewLegacy {
 		
 		$height = $params->get ( 'gallery_height', 360, 'uint' );
 		$duration = $params->get ( 'gallery_duration', 3000, 'uint' );
+		
+		$document->addScript ( JURI::root () . $this->get ( 'Js' ) );
 		
 		$document->addStyleSheet ( JURI::root () . "components/com_talent/src/css/talent.css" );
 		$document->addStyleSheet ( JURI::root () . "media/{$folder}/{$folder}.min.css" );

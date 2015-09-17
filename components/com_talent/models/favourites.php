@@ -12,11 +12,8 @@ class TalentModelFavourites extends JModelList {
 		$agent = SiteTalentHelper::getAgentByUserId ( $user->id );
 		
 		$db = JFactory::getDbo ();
-		// Initialize variables.
 		$query = TalentHelper::getListTalentsQuery ( null );
-		$query->leftJoin ( '#__agent AS e ON d.id=e.user_id' );
-		$query->leftJoin ( '#__agent_favourite AS f ON e.id=f.agent_id' );
-		$query->where ( 'f.agent_id = ' . $agent->id );
+		$query->innerJoin ( '#__agent_favourite AS z ON z.talent_id = a.id AND z.agent_id = ' . $agent->id );
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
@@ -33,5 +30,12 @@ class TalentModelFavourites extends JModelList {
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
 		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
 		return $query;
+	}
+	//
+	public function removeTalentsToFavourite($ids, $value) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__agent_favourite' ) )->where ( $db->quoteName ( 'talent_id' ) . ' IN (' . implode ( ',', $ids ) . ')' );
+		$db->setQuery ( $query );
+		$db->execute ();
 	}
 }

@@ -9,16 +9,25 @@ JLoader::register ( 'JToolBarHelper', JPATH_ADMINISTRATOR . '/includes/toolbar.p
 JLoader::register ( 'JSubMenuHelper', JPATH_ADMINISTRATOR . '/includes/subtoolbar.php' );
 JLoader::register ( 'TalentRouter', JPATH_SITE . '/components/com_talent/router.php' );
 //
+$lang = & JFactory::getLanguage ();
+$lang->load ( 'com_talent', JPATH_ROOT, 'en', true );
+//
 class SiteTalentHelper extends TalentHelper {
+	//
 	public static function getTalentDetailsHtml($id) {
 		$talent = self::getTalent ( $id );
 		if ($talent) {
+			self::normaliseTalentDetails ( $talent->user_details );
 			$layout = new JLayoutFile ( 'talent_details', JPATH_SITE . '/components/com_talent/layouts' );
 			return $layout->render ( $talent );
 		}
 		return '';
 	}
 	//
+	public static function normaliseTalentDetails(&$details) {
+		$lang = & JFactory::getLanguage ();
+		$details ['gender'] = $details ['gender'] ? JText::_ ( 'COM_TALENT_MALE' ) : JText::_ ( 'COM_TALENT_FEMALE' );
+	}
 	public static function getImages($obj) {
 		if (is_string ( $obj )) {
 			$registry = new Registry ();

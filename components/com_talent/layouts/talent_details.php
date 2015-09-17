@@ -10,24 +10,24 @@ $params = JComponentHelper::getParams ( 'com_talent' );
 $user = JFactory::getUser ();
 $canShow = SiteTalentHelper::canShowTalentInfo ( $user, $talent );
 $prefix = $user->guest ? 'public' : 'agent';
-// echo '<pre>';print_r($canShow);die;
 ?>
 <?php if ($user_details && count($user_details)):?>
-<div class="detail_talendetail">
+<form action="index.php?option=com_talent&view=favourites" method="post"
+	name="adminForm">
+	<div class="detail_talendetail">
 <?php foreach ($user_details as $k =>$v): if ($params->get("{$prefix}_{$k}", false)):?>
 	<div class="detail_talendetail_label"><?php echo JText::_( strtoupper("COM_TALENT_$k"))?></div>
-	<div class="detail_talendetail_value"><?php echo $v?></div>
-	<div class="clearfix"></div>
+		<div class="detail_talendetail_value"><?php echo $v?></div>
+		<div class="clearfix"></div>
 <?php endif ?>
 <?php endforeach?>
 <?php if ($canShow):?>
-	<div class="btn-toolbar">
-		<div class="btn-group">
-			<button type="button" class="btn btn-primary" onclick="">
-				<span class="icon-ok"></span><?php echo JText::_('JSAVE')?>
-				</button>
-		</div>
-	</div>
+	<?php echo JHtml::_('grid.id', 0, $talent->id)?>
+	<?php echo JHtml::_('jgrid.published', 1, 0, 'favourites.', true, 'cb')?>
 <?php endif ?>
 </div>
 <?php endif ?>
+	<input type="hidden" name="task" value="" /> <input type="hidden"
+		name="boxchecked" value="0" /> 
+	<?php echo JHtml::_('form.token'); ?>
+</form>

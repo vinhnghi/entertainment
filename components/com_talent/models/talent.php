@@ -16,4 +16,10 @@ class TalentModelTalent extends JModelAdmin {
 				'load_data' => $loadData 
 		) );
 	}
+	public function getCss() {
+		return 'components/com_talent/src/css/talent.css';
+	}
+	public function getJs() {
+		return 'components/com_talent/src/js/talent.js';
+	}
 }
