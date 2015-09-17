@@ -29,7 +29,6 @@ class SiteTalentHelper extends TalentHelper {
 	}
 	//
 	public static function normaliseTalentDetails(&$details) {
-		$lang = & JFactory::getLanguage ();
 		$details ['gender'] = $details ['gender'] ? JText::_ ( 'COM_TALENT_MALE' ) : JText::_ ( 'COM_TALENT_FEMALE' );
 	}
 	public static function getImages($obj) {
