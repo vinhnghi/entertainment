@@ -15,11 +15,9 @@ class SiteTalentHelper extends TalentHelper {
 		if (is_string ( $obj )) {
 			$talent = static::getTalent ( $obj );
 			$talent->index = 0;
-			$talent->favourite = 0;
 		} else {
 			$talent = static::getTalent ( $obj->id );
 			$talent->index = $obj->index;
-			$talent->favourite = $obj->favourite;
 		}
 		
 		if ($talent) {

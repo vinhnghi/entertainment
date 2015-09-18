@@ -3,7 +3,10 @@
 defined ( '_JEXEC' ) or die ( 'Restricted Access' );
 
 JHtml::_ ( 'formbehavior.chosen', 'select' );
-
+//
+$user = JFactory::getUser ();
+$agent = SiteTalentHelper::getAgentByUserId ( $user->id );
+//
 $listOrder = $this->escape ( $this->filter_order );
 $listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
@@ -47,16 +50,17 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 					title="<?php echo $row->title ?>">
 								<?php echo $row->title?>
 							</a></td>
-				<td align="center"><?php echo SiteTalentHelper::getAddRemoveTalentButton($i, $row)?></td>
+				<td align="center"><?php echo SiteTalentHelper::getAddRemoveTalentButton($i, $agent->id, $row->id)?></td>
 			</tr>
 				<?php endforeach ?>
 			<?php endif ?>
 		</tbody>
 	</table>
-	<input type="hidden" name="return" value="<?php echo $this->return_page; ?>" />
-	<input type="hidden" name="task" value="" /> <input type="hidden"
-		name="boxchecked" value="0" /> <input type="hidden"
-		name="filter_order" value="<?php echo $listOrder ?>" /> <input
-		type="hidden" name="filter_order_Dir" value="<?php echo $listDirn ?>" />
+	<input type="hidden" name="return"
+		value="<?php echo $this->return_page; ?>" /> <input type="hidden"
+		name="task" value="" /> <input type="hidden" name="boxchecked"
+		value="0" /> <input type="hidden" name="filter_order"
+		value="<?php echo $listOrder ?>" /> <input type="hidden"
+		name="filter_order_Dir" value="<?php echo $listDirn ?>" />
 	<?php echo JHtml::_('form.token')?>
 </form>

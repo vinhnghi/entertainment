@@ -8,8 +8,6 @@ class TalentModelTalent extends JModelAdmin {
 	}
 	public function getItem($pk = null) {
 		$item = SiteTalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
-		$agent = SiteTalentHelper::getAgentByUserId ( JFactory::getUser ()->id );
-		$item->favourite = SiteTalentHelper::getFavourite ( $item->id, $agent->id );
 		return $item;
 	}
 	public function getForm($data = array(), $loadData = true) {

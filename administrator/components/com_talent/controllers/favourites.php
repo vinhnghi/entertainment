@@ -36,9 +36,8 @@ class TalentControllerFavourites extends JControllerAdmin {
 			
 			$message = JText::_ ( 'COM_TALENT_ADD_TALENT_TO_FAVOURITE_SUCCESSFULLY' );
 		}
-		$return_page = $this->input->get ( 'return', '' );
-		$return_page = base64_decode ( $return_page );
-		$this->setRedirect ( JRoute::_ ( $return_page, false ), $message );
+		
+		$this->setRedirect ( JRoute::_ ( 'index.php?option=com_talent&view=favourites&layout=talentlist&id=' . $this->input->get ( 'id' ), false ), $message );
 	}
 	public function remove() {
 		// Check for request forgeries
@@ -69,8 +68,7 @@ class TalentControllerFavourites extends JControllerAdmin {
 			
 			$message = JText::_ ( 'COM_TALENT_REMOVE_TALENT_FROM_FAVOURITE_SUCCESSFULLY' );
 		}
-		$return_page = $this->input->get ( 'return', '' );
-		$return_page = base64_decode ( $return_page );
-		$this->setRedirect ( JRoute::_ ( $return_page, false ), $message );
+		
+		$this->setRedirect ( JRoute::_ ( 'index.php?option=com_talent&view=favourites&layout=talentlist&id=' . $this->input->get ( 'id' ), false ), $message );
 	}
 }

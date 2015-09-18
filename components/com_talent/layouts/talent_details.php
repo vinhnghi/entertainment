@@ -25,7 +25,7 @@ $prefix = $user->guest ? 'public' : 'agent';
 <?php endforeach?>
 <?php if ($canShow):?>
 	<div style="display: none !important"><?php echo JHtml::_('grid.id', $displayData->index, $talent->id)?></div>
-	<?php echo SiteTalentHelper::getAddRemoveTalentButton($displayData->index, $talent)?>
+	<?php echo SiteTalentHelper::getAddRemoveTalentButton($displayData->index, $agent->id, $talent->id)?>
 <?php endif ?>
 </div>
 <?php endif ?>

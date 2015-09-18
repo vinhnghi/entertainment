@@ -382,8 +382,27 @@ abstract class TalentHelper {
 		return $db->setQuery ( $query )->loadResult ();
 	}
 	//
-	public static function getAddRemoveTalentButton($i, $talent) {
-		print_r($talent);
-		return JHtml::_ ( 'jgrid.action', $i, $talent->favourite ? 'remove' : 'add', 'favourites.', $talent->title, 'COM_TALENT_ADD_TO_FAVOURITE', 'COM_TALENT_REMOVE_FROM_FAVOURITE', true, 'plus-2', 'remove', true );
+	public static function getCountTalentsOfAgent($agent_id) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		$query->select ( 'count(a.talent_id)' )->from ( '#__agent_favourite AS a' );
+		$query->where ( 'a.agent_id = ' . ( int ) $agent_id );
+		return $db->setQuery ( $query )->loadResult ();
+	}
+	//
+	public static function getAddRemoveTalentButton($i, $agent_id, $talent_id) {
+		$favourite = static::getFavourite ( $talent_id, $agent_id );
+		$options = array (
+				'active_title' => $favourite ? 'COM_TALENT_REMOVE_FROM_FAVOURITE' : 'COM_TALENT_ADD_TO_FAVOURITE',
+				'inactive_title' => $favourite ? 'COM_TALENT_REMOVE_FROM_FAVOURITE' : 'COM_TALENT_ADD_TO_FAVOURITE',
+				'tip' => true,
+				'active_class' => $favourite ? 'remove' : 'plus-2',
+				'inactive_class' => $favourite ? 'remove' : 'plus-2',
+				'enabled' => true,
+				'translate' => true,
+				'checkbox' => 'cb',
+				'prefix' => 'favourites.' 
+		);
+		return JHtml::_ ( 'jgrid.action', $i, $favourite ? 'remove' : 'add', $options );
 	}
 }

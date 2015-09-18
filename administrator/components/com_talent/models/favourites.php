@@ -12,6 +12,10 @@ class TalentModelFavourites extends JModelList {
 			foreach ( $items as $item ) {
 				$item->favourite = TalentHelper::getFavourite ( $item->id, $agent->id );
 			}
+		} else {
+			foreach ( $items as $item ) {
+				$item->count = TalentHelper::getCountTalentsOfAgent ( $item->id );
+			}
 		}
 		return $items;
 	}
@@ -82,9 +86,8 @@ class TalentModelFavourites extends JModelList {
 		) ) );
 		$jinput = JFactory::getApplication ()->input;
 		$id = $jinput->get ( 'id', 0 );
-		$agent = TalentHelper::getAgentByUserId ( $id );
 		foreach ( $ids as $talent_id ) {
-			$query->values ( $agent->id . ',' . $talent_id );
+			$query->values ( $id . ',' . $talent_id );
 		}
 		$this->_db->setQuery ( $query );
 		$this->_db->execute ();

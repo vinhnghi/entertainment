@@ -7,8 +7,7 @@ JHtml::_ ( 'formbehavior.chosen', 'select' );
 $listOrder = $this->escape ( $this->filter_order );
 $listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
-<form action="index.php?option=com_talent&view=favourites" method="post"
-	id="adminForm" name="adminForm">
+<form method="post" id="adminForm" name="adminForm">
 	<div class="row-fluid">
 		<div class="span6">
 			<?php echo JText::_('COM_TALENT_FILTER')?>
@@ -46,7 +45,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 				<td><?php echo JHtml::_('grid.id', $i, $row->id) ?></td>
 				<td><a href="<?php echo $link ?>" target="_blank"
 					title="<?php echo JText::_('COM_TALENT_EDIT_TALENT') ?>"><?php echo $row->title ?></a></td>
-				<td align="center"><?php echo TalentHelper::getAddRemoveTalentButton($i, $row) ?></td>
+				<td align="center"><?php echo TalentHelper::getAddRemoveTalentButton($i, $this->id, $row->id) ?></td>
 				<td align="center"><?php echo $row->id ?></td>
 			</tr>
 				<?php endforeach ?>
@@ -54,8 +53,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 		</tbody>
 	</table>
 	<input type="hidden" name="id" value="<?php echo $this->id ?>" /> <input
-		type="hidden" name="return" value="<?php echo $this->return_page ?>" />
-	<input type="hidden" name="task" value="" /> <input type="hidden"
+		type="hidden" name="task" value="" /> <input type="hidden"
 		name="boxchecked" value="0" /> <input type="hidden"
 		name="filter_order" value="<?php echo $listOrder ?>" /> <input
 		type="hidden" name="filter_order_Dir" value="<?php echo $listDirn ?>" />

@@ -2,14 +2,6 @@
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelFavourites extends JModelList {
-	public function getItems() {
-		$items = parent::getItems ();
-		foreach ( $items as $item ) {
-			$item->favourite = 1;
-		}
-		return $items;
-	}
-	//
 	protected function getListQuery() {
 		$user = JFactory::getUser ();
 		if (! SiteTalentHelper::isAgent ( $user )) {
