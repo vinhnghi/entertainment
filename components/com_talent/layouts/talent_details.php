@@ -14,7 +14,6 @@ $agent = SiteTalentHelper::getAgentByUserId ( $user->id );
 $canShow = SiteTalentHelper::canShowTalentInfo ( $user, $talent );
 $prefix = $user->guest ? 'public' : 'agent';
 //
-$favourite = SiteTalentHelper::getFavourite ( $talent->id, $agent->id );
 ?>
 <?php if ($user_details && count($user_details)):?>
 <div class="detail_talendetail">
@@ -26,7 +25,7 @@ $favourite = SiteTalentHelper::getFavourite ( $talent->id, $agent->id );
 <?php endforeach?>
 <?php if ($canShow):?>
 	<div style="display: none !important"><?php echo JHtml::_('grid.id', $displayData->index, $talent->id)?></div>
-	<?php echo JHtml::_('jgrid.published', $favourite ? 2 : 0, $displayData->index, 'favourites.', true, 'cb')?>
+	<?php echo SiteTalentHelper::getAddRemoveTalentButton($displayData->index, $talent)?>
 <?php endif ?>
 </div>
 <?php endif ?>

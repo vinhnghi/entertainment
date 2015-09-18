@@ -35,9 +35,6 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 				<th width="5%">
 				<?php echo JHtml::_('grid.sort', 'COM_TALENT_COUNT', 'published', $listDirn, $listOrder); ?>
 			</th>
-				<th width="5%">
-				<?php echo JHtml::_('grid.sort', 'COM_TALENT_PUBLISHED', 'published', $listDirn, $listOrder); ?>
-			</th>
 				<th width="2%">
 				<?php echo JHtml::_('grid.sort', 'COM_TALENT_ID', 'id', $listDirn, $listOrder); ?>
 			</th>
@@ -45,7 +42,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="5">
+				<td colspan="4">
 					<?php echo $this->pagination->getListFooter(); ?>
 				</td>
 			</tr>
@@ -68,9 +65,6 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 							</a></td>
 				<td align="center">
 							<?php echo $row->count; ?>
-						</td>
-				<td align="center">
-							<?php echo JHtml::_('jgrid.published', $row->published, $i, 'favourites.', true, 'cb'); ?>
 						</td>
 				<td align="center">
 							<?php echo $row->id; ?>

@@ -34,10 +34,9 @@ class TalentModelAgent extends JModelAdmin {
 		if (empty ( $table->id )) {
 			// Set ordering to the last item if not set
 			if (empty ( $table->ordering )) {
-				$db = JFactory::getDbo ();
-				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__agent' );
-				$db->setQuery ( $query );
-				$max = $db->loadResult ();
+				$query = $this->_db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__agent' );
+				$this->_db->setQuery ( $query );
+				$max = $this->_db->loadResult ();
 				$table->ordering = $max + 1;
 			}
 		}
@@ -190,18 +189,17 @@ class TalentModelAgent extends JModelAdmin {
 	}
 	public function saveProfile($data) {
 		$userId = ( int ) $this->getState ( 'user.id' );
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__user_profiles' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $db->quoteName ( 'profile_key' ) . ' LIKE ' . $db->quote ( 'profile.%' ) );
-		$db->setQuery ( $query );
-		$db->execute ();
+		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__user_profiles' ) )->where ( $this->_db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $this->_db->quoteName ( 'profile_key' ) . ' LIKE ' . $this->_db->quote ( 'profile.%' ) );
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
 		
 		$tuples = array ();
 		$order = 1;
 		foreach ( $data as $k => $v ) {
-			$tuples [] = '(' . $userId . ', ' . $db->quote ( 'profile.' . $k ) . ', ' . $db->quote ( json_encode ( $v ) ) . ', ' . ($order ++) . ')';
+			$tuples [] = '(' . $userId . ', ' . $this->_db->quote ( 'profile.' . $k ) . ', ' . $this->_db->quote ( json_encode ( $v ) ) . ', ' . ($order ++) . ')';
 		}
-		$db->setQuery ( 'INSERT INTO #__user_profiles VALUES ' . implode ( ', ', $tuples ) );
-		$db->execute ();
+		$this->_db->setQuery ( 'INSERT INTO #__user_profiles VALUES ' . implode ( ', ', $tuples ) );
+		$this->_db->execute ();
 		return true;
 	}
 	public function saveAgent($data) {
@@ -256,17 +254,15 @@ class TalentModelAgent extends JModelAdmin {
 		return true;
 	}
 	public function deleteProfile($userId) {
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__user_profiles' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $db->quoteName ( 'profile_key' ) . ' LIKE ' . $db->quote ( 'profile.%' ) );
-		$db->setQuery ( $query );
-		$db->execute ();
+		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__user_profiles' ) )->where ( $this->_db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $this->_db->quoteName ( 'profile_key' ) . ' LIKE ' . $this->_db->quote ( 'profile.%' ) );
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
 	}
 	public function deleteAgent($userId) {
 		$agent = TalentHelper::getAgentByUserId ( $userId );
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__agent' ) )->where ( $db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId );
-		$db->setQuery ( $query );
-		$db->execute ();
+		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__agent' ) )->where ( $this->_db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId );
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
 	}
 	public function getScript() {
 		return 'administrator/components/com_talent/src/js/talent.js';

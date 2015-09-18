@@ -58,11 +58,10 @@ class TalentModelType extends JModelAdmin {
 			$table->created_by = $user->get ( 'id' );
 			// Set ordering to the last item if not set
 			if (empty ( $table->ordering )) {
-				$db = JFactory::getDbo ();
-				$query = $db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__talent_type' );
+				$query = $this->_db->getQuery ( true )->select ( 'MAX(ordering)' )->from ( '#__talent_type' );
 				
-				$db->setQuery ( $query );
-				$max = $db->loadResult ();
+				$this->_db->setQuery ( $query );
+				$max = $this->_db->loadResult ();
 				
 				$table->ordering = $max + 1;
 			}

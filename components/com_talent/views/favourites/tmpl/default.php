@@ -47,7 +47,7 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 					title="<?php echo $row->title ?>">
 								<?php echo $row->title?>
 							</a></td>
-				<td align="center"><?php echo JHtml::_('jgrid.published', 2, $i, 'favourites.', true, 'cb') ?></td>
+				<td align="center"><?php echo SiteTalentHelper::getAddRemoveTalentButton($i, $row)?></td>
 			</tr>
 				<?php endforeach ?>
 			<?php endif ?>

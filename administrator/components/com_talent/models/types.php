@@ -4,13 +4,12 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelTypes extends JModelList {
 	protected function getListQuery() {
 		$jinput = JFactory::getApplication ()->input;
-		$db = JFactory::getDbo ();
 		// Initialize variables.
 		$query = TalentHelper::getListTalentTypesQuery ();
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
-			$like = $db->quote ( '%' . $search . '%' );
+			$like = $this->_db->quote ( '%' . $search . '%' );
 			$query->where ( 'title LIKE ' . $like );
 		}
 		
@@ -28,7 +27,7 @@ class TalentModelTypes extends JModelList {
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
-		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
+		$query->order ( $this->_db->escape ( $orderCol ) . ' ' . $this->_db->escape ( $orderDirn ) );
 		$query->order ( 'id asc' );
 		
 		return $query;

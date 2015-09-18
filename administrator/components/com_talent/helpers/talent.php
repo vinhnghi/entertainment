@@ -362,8 +362,8 @@ abstract class TalentHelper {
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__agent_favourite AS a' );
-		$query->innerJoin ( '#__agent AS b ON b.id=a.agent_id' );
-		$query->innerJoin ( '#__users AS d ON d.id=b.user_id' );
+		$query->leftJoin ( '#__agent AS b ON b.id=a.agent_id' );
+		$query->leftJoin ( '#__users AS d ON d.id=b.user_id' );
 		$query->group ( 'agent_id' );
 		
 		return $query;
@@ -379,6 +379,11 @@ abstract class TalentHelper {
 		$query->select ( 'a.id' )->from ( '#__agent_favourite AS a' );
 		$query->where ( 'a.talent_id = ' . ( int ) $talent_id );
 		$query->where ( 'a.agent_id = ' . ( int ) $agent_id );
-		return $db->setQuery($query)->loadResult();
+		return $db->setQuery ( $query )->loadResult ();
+	}
+	//
+	public static function getAddRemoveTalentButton($i, $talent) {
+		print_r($talent);
+		return JHtml::_ ( 'jgrid.action', $i, $talent->favourite ? 'remove' : 'add', 'favourites.', $talent->title, 'COM_TALENT_ADD_TO_FAVOURITE', 'COM_TALENT_REMOVE_FROM_FAVOURITE', true, 'plus-2', 'remove', true );
 	}
 }

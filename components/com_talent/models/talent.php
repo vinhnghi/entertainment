@@ -7,7 +7,10 @@ class TalentModelTalent extends JModelAdmin {
 		return SiteTalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
 	public function getItem($pk = null) {
-		return SiteTalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
+		$item = SiteTalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
+		$agent = SiteTalentHelper::getAgentByUserId ( JFactory::getUser ()->id );
+		$item->favourite = SiteTalentHelper::getFavourite ( $item->id, $agent->id );
+		return $item;
 	}
 	public function getForm($data = array(), $loadData = true) {
 		// Get the form.

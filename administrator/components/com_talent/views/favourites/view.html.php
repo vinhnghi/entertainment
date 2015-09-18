@@ -15,10 +15,11 @@ class TalentViewFavourites extends JViewLegacy {
 		$this->filter_order_Dir = $app->getUserStateFromRequest ( $context . 'filter_order_Dir', 'filter_order_Dir', 'asc', 'cmd' );
 		$this->filterForm = $this->get ( 'FilterForm' );
 		$this->activeFilters = $this->get ( 'ActiveFilters' );
-		
+		$this->return_page = base64_encode ( JURI::current () );
 		// What Access Permissions does this user have? What can (s)he do?
 		$this->canDo = TalentHelper::getActions ();
-		
+		$jinput = JFactory::getApplication ()->input;
+		$this->id = $jinput->get ( 'id', 0 );
 		// Check for errors.
 		if (count ( $errors = $this->get ( 'Errors' ) )) {
 			JError::raiseError ( 500, implode ( '<br />', $errors ) );

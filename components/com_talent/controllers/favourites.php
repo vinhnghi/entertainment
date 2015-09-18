@@ -8,7 +8,7 @@ class TalentControllerFavourites extends JControllerForm {
 		return $model;
 	}
 	//
-	public function unpublish() {
+	public function remove() {
 		// Check for request forgeries
 		JSession::checkToken () or jexit ( JText::_ ( 'JINVALID_TOKEN' ) );
 		
@@ -42,7 +42,7 @@ class TalentControllerFavourites extends JControllerForm {
 		$this->setRedirect ( JRoute::_ ( $return_page, false ), $message );
 	}
 	//
-	public function publish() {
+	public function add() {
 		// Check for request forgeries
 		JSession::checkToken () or jexit ( JText::_ ( 'JINVALID_TOKEN' ) );
 		

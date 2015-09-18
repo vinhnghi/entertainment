@@ -8,6 +8,10 @@ class TalentModelFavourites extends JModelList {
 		$jinput = JFactory::getApplication ()->input;
 		$id = $jinput->get ( 'id', 0 );
 		if ($id) { // List all talents
+			$agent = TalentHelper::getAgentByUserId ( $id );
+			foreach ( $items as $item ) {
+				$item->favourite = TalentHelper::getFavourite ( $item->id, $agent->id );
+			}
 		}
 		return $items;
 	}
@@ -21,14 +25,14 @@ class TalentModelFavourites extends JModelList {
 			return $this->getListTalentQuery ( $id );
 		}
 	}
+	//
 	private function getListAgentQuery() {
-		$db = JFactory::getDbo ();
 		// Initialize variables.
-		$query = TalentHelper::getListFavouritesQuery ( null );
+		$query = TalentHelper::getListAgentsQuery ( null );
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
-			$like = $db->quote ( '%' . $search . '%' );
+			$like = $this->_db->quote ( '%' . $search . '%' );
 			$query->where ( 'title LIKE ' . $like );
 		}
 		// Filter by published state
@@ -39,16 +43,16 @@ class TalentModelFavourites extends JModelList {
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
-		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
+		$query->order ( $this->_db->escape ( $orderCol ) . ' ' . $this->_db->escape ( $orderDirn ) );
 		return $query;
 	}
+	//
 	private function getListTalentQuery($id) {
-		$db = JFactory::getDbo ();
 		$query = TalentHelper::getListTalentsQuery ( null );
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
-			$like = $db->quote ( '%' . $search . '%' );
+			$like = $this->_db->quote ( '%' . $search . '%' );
 			$query->where ( 'title LIKE ' . $like );
 		}
 		// Filter by published state
@@ -59,7 +63,30 @@ class TalentModelFavourites extends JModelList {
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
-		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
+		$query->order ( $this->_db->escape ( $orderCol ) . ' ' . $this->_db->escape ( $orderDirn ) );
 		return $query;
+	}
+	//
+	public function removeTalentsFromFavourite($ids) {
+		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__agent_favourite' ) )->where ( $this->_db->quoteName ( 'talent_id' ) . ' IN (' . implode ( ',', $ids ) . ')' );
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
+	}
+	//
+	public function addTalentsToFavourite($ids) {
+		$this->removeTalentsFromFavourite ( $ids );
+		$query = $this->_db->getQuery ( true );
+		$query->insert ( $this->_db->quoteName ( '#__agent_favourite' ) )->columns ( $this->_db->quoteName ( array (
+				'agent_id',
+				'talent_id' 
+		) ) );
+		$jinput = JFactory::getApplication ()->input;
+		$id = $jinput->get ( 'id', 0 );
+		$agent = TalentHelper::getAgentByUserId ( $id );
+		foreach ( $ids as $talent_id ) {
+			$query->values ( $agent->id . ',' . $talent_id );
+		}
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
 	}
 }

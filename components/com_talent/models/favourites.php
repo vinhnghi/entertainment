@@ -2,6 +2,14 @@
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelFavourites extends JModelList {
+	public function getItems() {
+		$items = parent::getItems ();
+		foreach ( $items as $item ) {
+			$item->favourite = 1;
+		}
+		return $items;
+	}
+	//
 	protected function getListQuery() {
 		$user = JFactory::getUser ();
 		if (! SiteTalentHelper::isAgent ( $user )) {
@@ -11,13 +19,12 @@ class TalentModelFavourites extends JModelList {
 		
 		$agent = SiteTalentHelper::getAgentByUserId ( $user->id );
 		
-		$db = JFactory::getDbo ();
 		$query = TalentHelper::getListTalentsQuery ( null );
 		$query->innerJoin ( '#__agent_favourite AS z ON z.talent_id = a.id AND z.agent_id = ' . $agent->id );
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
-			$like = $db->quote ( '%' . $search . '%' );
+			$like = $this->_db->quote ( '%' . $search . '%' );
 			$query->where ( 'title LIKE ' . $like );
 		}
 		// Filter by published state
@@ -28,22 +35,20 @@ class TalentModelFavourites extends JModelList {
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );
-		$query->order ( $db->escape ( $orderCol ) . ' ' . $db->escape ( $orderDirn ) );
+		$query->order ( $this->_db->escape ( $orderCol ) . ' ' . $this->_db->escape ( $orderDirn ) );
 		return $query;
 	}
 	//
 	public function removeTalentsFromFavourite($ids) {
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->delete ( $db->quoteName ( '#__agent_favourite' ) )->where ( $db->quoteName ( 'talent_id' ) . ' IN (' . implode ( ',', $ids ) . ')' );
-		$db->setQuery ( $query );
-		$db->execute ();
+		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__agent_favourite' ) )->where ( $this->_db->quoteName ( 'talent_id' ) . ' IN (' . implode ( ',', $ids ) . ')' );
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
 	}
 	//
 	public function addTalentsToFavourite($ids) {
-		static::removeTalentsFromFavourite ( $ids );
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true );
-		$query->insert ( $db->quoteName ( '#__agent_favourite' ) )->columns ( $db->quoteName ( array (
+		$this->removeTalentsFromFavourite ( $ids );
+		$query = $this->_db->getQuery ( true );
+		$query->insert ( $this->_db->quoteName ( '#__agent_favourite' ) )->columns ( $this->_db->quoteName ( array (
 				'agent_id',
 				'talent_id' 
 		) ) );
@@ -52,7 +57,7 @@ class TalentModelFavourites extends JModelList {
 		foreach ( $ids as $talent_id ) {
 			$query->values ( $agent->id . ',' . $talent_id );
 		}
-		$db->setQuery ( $query );
-		$db->execute ();
+		$this->_db->setQuery ( $query );
+		$this->_db->execute ();
 	}
 }
