@@ -7,7 +7,7 @@ foreach ( $list as $i => $row ) :
 	$class = $i == 0 ? 'mod_talent_list_item_first' : '';
 	$class = $class . ($i == count ( $list ) - 1 ? ' mod_talent_list_item_last' : '');
 	$row->index = $i;
-	$link = SiteTalentHelper::getTalentDetailLink ( $row, null );
+	$link = SiteTalentHelper::getTalentDetailLink ( $row, null ) . "&itemId=" . $itemId;
 	$image = SiteTalentHelper::getIntroImage ( $row->images );
 	?>
 <div class="mod_talent_list_item <?php echo $class?>">
