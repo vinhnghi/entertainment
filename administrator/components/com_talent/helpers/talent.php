@@ -3,7 +3,7 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 //
 use Joomla\Registry\Registry;
-JFactory::getLanguage()->load('com_talent');
+JFactory::getLanguage ()->load ( 'com_talent' );
 //
 abstract class TalentHelper {
 	public static function addSubmenu($submenu) {
@@ -407,5 +407,13 @@ abstract class TalentHelper {
 				'prefix' => 'favourites.' 
 		);
 		return JHtml::_ ( 'jgrid.action', $i, $favourite ? 'remove' : 'add', $options );
+	}
+	//
+	public static function countTalentInFavourite($talent_id) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		$query->select ( 'count(a.talent_id)' )->from ( '#__agent_favourite AS a' );
+		$query->where ( 'a.talent_id = ' . ( int ) $talent_id );
+		return $db->setQuery ( $query )->loadResult ();
 	}
 }

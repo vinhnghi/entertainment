@@ -1,0 +1,3 @@
+ALTER TABLE `joomla_talent`  ADD `modified` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `published`,  ADD `modified_by` INT(10) NOT NULL DEFAULT '0'  AFTER `modified`;
+ALTER TABLE `joomla_client`  ADD `modified` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `published`,  ADD `modified_by` INT(10) NOT NULL DEFAULT '0'  AFTER `modified`;
+ALTER TABLE `joomla_agent`  ADD `modified` DATE NOT NULL DEFAULT '0000-00-00 00:00:00'  AFTER `published`,  ADD `modified_by` INT(10) NOT NULL DEFAULT '0'  AFTER `modified`;

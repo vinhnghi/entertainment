@@ -1,0 +1,36 @@
+.page-header {
+	font-weight: 100;
+}
+
+.mod_talent_list_item {
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.mod_talent_list_item_first {
+	
+}
+
+.mod_talent_list_item_last {
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	border-bottom: none;
+}
+
+.mod_talent_list_item_image_intro {
+	float: left;
+	margin-right: 10px;
+}
+
+.mod_talent_list_item_image_intro img {
+	width: 80px;
+}
+
+.mod_talent_list_item_title {
+	
+}
+
+.mod_talent_list_item_introtext {
+	
+}

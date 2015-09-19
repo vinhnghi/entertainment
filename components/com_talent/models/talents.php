@@ -7,6 +7,9 @@ class TalentModelTalents extends JModelList {
 	}
 	protected function getListQuery() {
 		$query = SiteTalentHelper::getListTalentsQuery ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+		$query->where ( 'a.published = 1' );
+		$query->where ( 'd.block = 0' );
+		$query->where ( 'd.activation = ""' );
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'name' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );

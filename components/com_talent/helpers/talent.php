@@ -84,7 +84,8 @@ class SiteTalentHelper extends TalentHelper {
 	}
 	//
 	public static function getTalentDetailLink($talent, $type) {
+		$cid = $type ? $type->id : 0;
 		$base_url = 'index.php?option=com_talent&view=talent&cid=';
-		return JRoute::_ ( "{$base_url}{$type->id}&id={$talent->id}" );
+		return JRoute::_ ( "{$base_url}{$cid}&id={$talent->id}" );
 	}
 }
