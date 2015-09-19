@@ -66,7 +66,7 @@ class TalentRouter extends JComponentRouterBase {
 				if ($cid && $type = SiteTalentHelper::getTalentType ( $cid )) {
 					$segments [] = "{$cid}t{$this->_separator}{$type->alias}";
 				} else {
-					return $segments;
+					$segments [] = "0t{$this->_separator}0t";
 				}
 			}
 			

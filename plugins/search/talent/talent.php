@@ -104,7 +104,7 @@ class PlgSearchTalent extends JPlugin {
 		$talents = $db->loadObjectList ();
 		// The 'output' of the displayed link. Again a demonstration from the newsfeed search plugin
 		foreach ( $talents as $key => $row ) {
-			$talents [$key]->href = 'index.php?option=com_talent&view=talent&id=' . $row->id;
+			$talents [$key]->href = 'index.php?option=com_talent&view=talent&cid=&id=' . $row->id;
 		}
 		
 		$rs = array_merge ( $types, $talents );
