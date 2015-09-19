@@ -1,7 +1,10 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
+//
 use Joomla\Registry\Registry;
+JFactory::getLanguage()->load('com_talent');
+//
 abstract class TalentHelper {
 	public static function addSubmenu($submenu) {
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TYPES' ), 'index.php?option=com_talent&view=types', $submenu == 'types' );
@@ -32,31 +35,27 @@ abstract class TalentHelper {
 			$string = implode ( ' ', array_slice ( $array, 0, $max_words ) ) . '...';
 		return $string;
 	}
-	public static function getListTalentTypesQuery() {
+	public static function getListTalentTypeQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );
 		$fields = array (
-				'a.*' 
+				'a.*',
+				'a.introtext AS text',
+				$db->Quote ( JText::_ ( 'COM_TALENT_SEARCH_SECTION_TYPE' ) ) . ' AS section',
+				'"100" AS browsernav' 
 		);
 		$query->select ( implode ( ",", $fields ) )->from ( '#__talent_type AS a' );
 		return $query;
 	}
+	public static function getListTalentTypesQuery() {
+		return static::getListTalentTypeQuery ();
+	}
 	public static function getTalentType($id) {
-		// Initialize variables.
 		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true );
-		
-		// Create the base select statement.
-		$fields = array (
-				'a.*' 
-		);
-		
-		$query->select ( implode ( ",", $fields ) )->from ( '#__talent_type AS a' );
+		$query = static::getListTalentTypeQuery ();
 		$query->where ( 'a.id = ' . ( int ) $id );
-		
 		$db->setQuery ( $query );
-		
 		return $db->loadObject ();
 	}
 	public static function getTalentQuery() {
@@ -67,6 +66,7 @@ abstract class TalentHelper {
 		// Create the base select statement.
 		$fields = array (
 				'a.*',
+				'a.introtext AS text',
 				'd.name as title',
 				'd.username as alias',
 				'd.name',
@@ -74,7 +74,10 @@ abstract class TalentHelper {
 				'd.email',
 				'd.password',
 				'd.block',
-				'd.activation' 
+				'd.activation',
+				'd.registerDate as created',
+				$db->Quote ( JText::_ ( 'COM_TALENT_SEARCH_SECTION_TALENT' ) ) . ' AS section',
+				'"101" AS browsernav' 
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__talent AS a' );

@@ -10,8 +10,7 @@ $agent = SiteTalentHelper::getAgentByUserId ( $user->id );
 $listOrder = $this->escape ( $this->filter_order );
 $listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
-<form action="index.php?option=com_talent&view=favourites" method="post"
-	id="adminForm" name="adminForm">
+<form method="post" id="adminForm" name="adminForm">
 	<div class="row-fluid">
 			<?php echo JText::_('COM_TALENT_FILTER')?>
 			<?php
@@ -22,18 +21,17 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 					) 
 			) )?>
 	</div>
-	<table class="table table-striped table-hover">
+	<table class="table table-striped table-hover com_talent_list_item">
 		<thead>
 			<tr>
-				<th width="1%"><?php echo JText::_('COM_TALENT_NUM') ?></th>
-				<th width="2%"></th>
-				<th><?php echo JHtml::_('grid.sort', 'COM_TALENT_NAME', 'title', $listDirn, $listOrder) ?></th>
-				<th width="5%"><?php echo JText::_('COM_TALENT_REMOVE')?></th>
+				<th width="15%"><?php echo JText::_('COM_TALENT_IMAGE') ?></th>
+				<th width="30%"><?php echo JText::_('COM_TALENT_DETAIL') ?></th>
+				<th><?php echo JHtml::_('grid.sort', 'COM_TALENT_INTRO', 'title', $listDirn, $listOrder) ?></th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<td colspan="4">
+				<td colspan="3">
 					<?php echo $this->pagination->getListFooter()?>
 				</td>
 			</tr>
@@ -42,15 +40,18 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 			<?php if (!empty($this->items)) : ?>
 				<?php
 				foreach ( $this->items as $i => $row ) :
-					$link = 'index.php?option=com_talent&view=talent&id=' . $row->id?>
+					$link = 'index.php?option=com_talent&view=talent&id=' . $row->id;
+					$image = SiteTalentHelper::getIntroImage ( $row->images );
+					?>
 			<tr>
-				<td><?php echo $this->pagination->getRowOffset($i) ?></td>
-				<td><?php echo JHtml::_('grid.id', $i, $row->id) ?></td>
+				<td><img alt="<?php echo $image->alt?>"
+					src="<?php echo $image->src?>"></td>
+				<td><?php $row->index = $i; echo SiteTalentHelper::getTalentDetailsHtml($row)?></td>
 				<td><a href="<?php echo $link ?>" target="_blank"
 					title="<?php echo $row->title ?>">
 								<?php echo $row->title?>
-							</a></td>
-				<td align="center"><?php echo SiteTalentHelper::getAddRemoveTalentButton($i, $agent->id, $row->id)?></td>
+							</a>
+					<div><?php echo $row->introtext?></div></td>
 			</tr>
 				<?php endforeach ?>
 			<?php endif ?>

@@ -2,6 +2,58 @@
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelFavourites extends JModelList {
+	//
+	public static function hasIntersection($string1, $string2) {
+		$words = array_filter ( explode ( " ", $string2 ) );
+		foreach ( $words as $word ) {
+			if (stripos ( $string1, $word ) !== false) {
+				return true;
+			}
+		}
+		return false;
+	}
+	//
+	public function getItems() {
+		$items = parent::getItems ();
+		
+		global $email, $race, $location, $hair_color, $eye_color, $gender;
+		$email = $this->getState ( 'filter.email' );
+		$race = $this->getState ( 'filter.race' );
+		$location = $this->getState ( 'filter.location' );
+		$hair_color = $this->getState ( 'filter.hair_color' );
+		$eye_color = $this->getState ( 'filter.eye_color' );
+		$gender = $this->getState ( 'filter.gender' );
+		
+		if ($email || $race || $location || $hair_color || $eye_color || strlen ( $gender )) {
+			$items = array_filter ( $items, function ($item) {
+				global $email, $race, $location, $hair_color, $eye_color, $gender;
+				$talent = SiteTalentHelper::getTalent ( $item->id );
+				$user_details = $talent->user_details;
+				if ($email && ! TalentModelFavourites::hasIntersection ( $user_details ['email'], $email )) {
+					return false;
+				}
+				if ($race && ! TalentModelFavourites::hasIntersection ( $user_details ['race'], $race )) {
+					return false;
+				}
+				if ($location && ! TalentModelFavourites::hasIntersection ( $user_details ['location'], $location )) {
+					return false;
+				}
+				if ($hair_color && ! TalentModelFavourites::hasIntersection ( $user_details ['hair_color'], $hair_color )) {
+					return false;
+				}
+				if ($eye_color && ! TalentModelFavourites::hasIntersection ( $user_details ['eye_color'], $eye_color )) {
+					return false;
+				}
+				if (strlen ( $gender ) && $user_details ['gender'] != $gender) {
+					return false;
+				}
+				return true;
+			} );
+		}
+		
+		return $items;
+	}
+	//
 	protected function getListQuery() {
 		$user = JFactory::getUser ();
 		if (! SiteTalentHelper::isAgent ( $user )) {
@@ -17,12 +69,7 @@ class TalentModelFavourites extends JModelList {
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
 			$like = $this->_db->quote ( '%' . $search . '%' );
-			$query->where ( 'title LIKE ' . $like );
-		}
-		// Filter by published state
-		$published = $this->getState ( 'filter.published' );
-		if ($published !== null && $published !== '') {
-			$query->where ( 'a.published = ' . ( int ) $published );
+			$query->where ( 'name LIKE ' . $like );
 		}
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
@@ -51,5 +98,9 @@ class TalentModelFavourites extends JModelList {
 		}
 		$this->_db->setQuery ( $query );
 		$this->_db->execute ();
+	}
+	//
+	public function getCss() {
+		return 'components/com_talent/src/css/talent.css';
 	}
 }

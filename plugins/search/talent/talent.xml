@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="3.1" type="plugin" group="search" method="upgrade">
+	<name>plg_search_talent</name>
+	<author>Sam Lee</author>
+	<authorEmail>lixiangmanor@hotmail.com</authorEmail>
+	<creationDate>April 2015</creationDate>
+	<version>1.0.0</version>
+	<description>PLG_SEARCH_TALENT_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="talent">talent.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">en-GB.plg_search_talent.ini</language>
+		<language tag="en-GB">en-GB.plg_search_talent.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+		</fields>
+	</config>
+</extension>
