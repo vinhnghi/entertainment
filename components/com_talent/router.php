@@ -63,11 +63,11 @@ class TalentRouter extends JComponentRouterBase {
 				unset ( $query ['cid'] );
 				if (! $cid && $menuItemGiven && isset ( $menuItem->query ['id'] ))
 					$cid = $menuItem->query ['id'];
-				elseif (! $cid)
-					$cid = 0;
-				$typeAlias = SiteTalentHelper::getTalentType ( $cid )->alias;
-				if ($typeAlias)
-					$segments [] = "{$cid}t{$this->_separator}{$typeAlias}";
+				if ($cid && $type = SiteTalentHelper::getTalentType ( $cid )) {
+					$segments [] = "{$cid}t{$this->_separator}{$type->alias}";
+				} else {
+					return $segments;
+				}
 			}
 			
 			if (isset ( $query ['id'] ) && $query ['id']) {
@@ -86,12 +86,11 @@ class TalentRouter extends JComponentRouterBase {
 					$cid = $menuItem->query ['cid'];
 			}
 			unset ( $query ['cid'] );
-			$typeAlias = SiteTalentHelper::getTalentType ( $cid )->alias;
-			
-			if ($typeAlias)
-				$segments [] = "{$cid}t{$this->_separator}{$typeAlias}";
-			else
+			if ($cid && $type = SiteTalentHelper::getTalentType ( $cid )) {
+				$segments [] = "{$cid}t{$this->_separator}{$type->alias}";
+			} else {
 				return $segments;
+			}
 		} else {
 			$segments [] = $view;
 			$segments [] = isset ( $query ['layout'] ) ? $query ['layout'] : 'default';
@@ -104,7 +103,7 @@ class TalentRouter extends JComponentRouterBase {
 		return $segments;
 	}
 	public function parse(&$segments) {
-		if (!$segments || count($segments) <= 1) {
+		if (! $segments || count ( $segments ) <= 1) {
 			return $segments;
 		}
 		
