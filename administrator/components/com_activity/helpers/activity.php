@@ -21,11 +21,13 @@ abstract class ActivityHelper {
 	}
 	//
 	public static function canSubmit() {
-		$user = JFactory::getUser ();
-		$client = static::getClientByUserId ( $user->id );
-		if (! $client) {
-			JError::raiseError ( 500, JText::_ ( 'COM_ACTIVITY_NO_PERMISSION' ) );
-			return false;
+		if (static::isSite ( 'edit' )) {
+			$user = JFactory::getUser ();
+			$client = static::getClientByUserId ( $user->id );
+			if (! $client) {
+				JError::raiseError ( 500, JText::_ ( 'COM_ACTIVITY_NO_PERMISSION' ) );
+				return false;
+			}
 		}
 		return true;
 	}

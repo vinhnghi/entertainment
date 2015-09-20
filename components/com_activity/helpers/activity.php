@@ -12,7 +12,7 @@ abstract class SiteActivityHelper extends ActivityHelper {
 	public static function getActivityDetailLink($activity, $cid) {
 		$cid = ( int ) $cid;
 		$base_url = 'index.php?option=com_activity&view=activity&cid=';
-		return JRoute::_ ( "{$base_url}{$cid}&id={$activity->id}" );
+		return "{$base_url}{$cid}&id={$activity->id}";
 	}
 	//
 	public static function getImages($obj) {

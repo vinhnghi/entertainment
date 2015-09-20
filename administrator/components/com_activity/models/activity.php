@@ -33,12 +33,13 @@ class ActivityModelActivity extends JModelAdmin {
 	public function getItem($pk = null) {
 		// return true;
 		$app = JFactory::getApplication ();
-		$jinput = $app->input;
-		if ($app->isSite () && $jinput->getCmd ( 'layout', 'default' ) == 'default') {
-			// Initialize variables.
+		if (ActivityHelper::isSite ()) {
+			$jinput = $app->input;
 			$db = JFactory::getDbo ();
-			$query = SiteActivityHelper::getActivityQuery ( $jinput->get ( 'id', 0 ), $jinput->get ( 'cid', 0 ) );
-			$query->where ( 'c.published = 1' );
+			$cid = $jinput->get ( 'cid', 0 );
+			$query = SiteActivityHelper::getActivityQuery ( $jinput->get ( 'id', 0 ), $cid );
+			if ($cid)
+				$query->where ( 'c.published = 1' );
 			$query->where ( 'a.published = 1' );
 			$db->setQuery ( $query );
 			$data = $db->loadObject ();

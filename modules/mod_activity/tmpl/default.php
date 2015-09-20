@@ -7,7 +7,7 @@ foreach ( $list as $i => $row ) :
 	$class = $i == 0 ? 'mod_activity_list_item_first' : '';
 	$class = $class . ($i == count ( $list ) - 1 ? ' mod_activity_list_item_last' : '');
 	$row->index = $i;
-	$link = SiteActivityHelper::getActivityDetailLink ( $row, $parent_id ) . "&itemId=" . $itemId;
+	$link = JRoute::_ ( SiteActivityHelper::getActivityDetailLink ( $row, $parent_id ) . "&itemId=" . $itemId );
 	$image = SiteActivityHelper::getIntroImage ( $row->images );
 	?>
 <div class="mod_activity_list_item <?php echo $class?>">
