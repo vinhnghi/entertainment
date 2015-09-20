@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Talent Profile" option="Create">
+		<help key="Menus_Menu_Item_Talent_Profile" />
+		<message>
+			<![CDATA[Talent Profile]]>
+		</message>
+	</layout>
+	<fields name="params">
+	</fields>
+</metadata>

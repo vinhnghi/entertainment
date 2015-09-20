@@ -7,9 +7,9 @@ JHtml::_ ( 'behavior.core' );
 JHtml::_ ( 'bootstrap.tooltip' );
 
 //
-$image = SiteTalentHelper::getFulltextImage ( $this->type->images );
+$image = SiteTalentHelper::getFulltextImage ( $this->type ? $this->type->images : null );
 //
-$list_description = $this->type->introtext . $this->type->fulltext;
+$list_description = $this->type ? $this->type->introtext . $this->type->fulltext : '';
 $num_row_item = $this->params->get ( 'num_row_item', 3 );
 $item_width = 100 / $num_row_item - 2;
 ?>
@@ -56,11 +56,10 @@ $item_width = 100 / $num_row_item - 2;
 	<?php endif; ?>
 	</div>
 
-	<input type="hidden" name="task" value="" />
-	<input type="hidden" name="view" value="" />
-	<input type="hidden" name="boxchecked" value="0" /> 
-	<input type="hidden" name="filter_order" value="" /> 
-	<input type="hidden" name="filter_order_Dir" value="" />
-	<input type="hidden" name="return" value="<?php echo $this->return_page; ?>" />
+	<input type="hidden" name="task" value="" /> <input type="hidden"
+		name="view" value="" /> <input type="hidden" name="boxchecked"
+		value="0" /> <input type="hidden" name="filter_order" value="" /> <input
+		type="hidden" name="filter_order_Dir" value="" /> <input type="hidden"
+		name="return" value="<?php echo $this->return_page; ?>" />
 	<?php echo JHtml::_('form.token')?>
 </form>

@@ -5,8 +5,6 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 use Joomla\Registry\Registry;
 // Require helper file
 JLoader::register ( 'TalentHelper', JPATH_ADMINISTRATOR . '/components/com_talent/helpers/talent.php' );
-JLoader::register ( 'JToolBarHelper', JPATH_ADMINISTRATOR . '/includes/toolbar.php' );
-JLoader::register ( 'JSubMenuHelper', JPATH_ADMINISTRATOR . '/includes/subtoolbar.php' );
 JLoader::register ( 'TalentRouter', JPATH_SITE . '/components/com_talent/router.php' );
 //
 class SiteTalentHelper extends TalentHelper {

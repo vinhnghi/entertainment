@@ -10,9 +10,7 @@ if (! JFactory::getUser ()->authorise ( 'core.manage', 'com_talent' )) {
 	return JError::raiseWarning ( 404, JText::_ ( 'JERROR_ALERTNOAUTHOR' ) );
 }
 
-// Require helper file
-JLoader::register ( 'TalentHelper', JPATH_COMPONENT . '/helpers/talent.php' );
-JLoader::register ( 'JToolBarHelper', JPATH_ADMINISTRATOR . '/includes/toolbar.php' );
+JLoader::register ( 'TalentHelper', JPATH_ADMINISTRATOR . '/components/com_talent/helpers/talent.php' );
 
 // Get an instance of the controller prefixed by Talent
 $controller = JControllerLegacy::getInstance ( 'Talent' );

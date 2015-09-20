@@ -29,12 +29,6 @@ $params = $this->state->get ( 'params' );
 					<span class="icon-ok"></span><?php echo JText::_('JSAVE')?>
 				</button>
 			</div>
-			<div class="btn-group">
-				<button type="button" class="btn"
-					onclick="Joomla.submitbutton('activity.cancel')">
-					<span class="icon-cancel"></span><?php echo JText::_('JCANCEL')?>
-				</button>
-			</div>
 		</div>
 	<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
 	<?php echo JHtml::_('bootstrap.startTabSet', 'myTab', array('active' => 'general')); ?>

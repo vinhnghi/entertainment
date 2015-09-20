@@ -12,7 +12,7 @@ $params = JComponentHelper::getParams ( 'com_talent' );
 $user = JFactory::getUser ();
 $agent = SiteTalentHelper::getAgentByUserId ( $user->id );
 $canShow = SiteTalentHelper::canShowTalentInfo ( $user, $talent );
-$prefix = $user->guest ? 'public' : 'agent';
+$prefix = $user->guest ? 'public' : $canShow ? 'agent' : 'public';
 //
 ?>
 <?php if ($user_details && count($user_details)):?>
@@ -25,7 +25,9 @@ $prefix = $user->guest ? 'public' : 'agent';
 <?php endforeach?>
 <?php if ($canShow):?>
 	<div style="display: none !important"><?php echo JHtml::_('grid.id', $displayData->index, $talent->id)?></div>
+	<?php if ($talent->user_id != $user->id ):?>
 	<?php echo SiteTalentHelper::getAddRemoveTalentButton($displayData->index, $agent->id, $talent->id)?>
+	<?php endif ?>
 <?php endif ?>
 </div>
 <?php endif ?>

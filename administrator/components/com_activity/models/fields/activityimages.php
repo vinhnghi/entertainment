@@ -22,7 +22,7 @@ class JFormFieldActivityImages extends JFormField
 	{
 		$html = array();
 		$id = "{$this->element ['name']}";
-		$blockclass = $this->getAttribute('blockclass') ? $this->getAttribute('blockclass') : 'span3';
+		$blockclass = $this->getAttribute('blockclass') ? $this->getAttribute('blockclass') : 'span5';
 		$html[] = "<div class='{$this->type}' id='{$id}' blockclass='{$blockclass}'>";
 		$html[] = '<script type="text/javascript">';
 		$html[] = "var {$id}={$this->getJson()};";

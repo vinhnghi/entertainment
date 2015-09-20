@@ -25,7 +25,6 @@ abstract class ActivityHelper {
 			$user = JFactory::getUser ();
 			$client = static::getClientByUserId ( $user->id );
 			if (! $client) {
-				JError::raiseError ( 500, JText::_ ( 'COM_ACTIVITY_NO_PERMISSION' ) );
 				return false;
 			}
 		}

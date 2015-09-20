@@ -3,6 +3,10 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 //
 use Joomla\Registry\Registry;
+//
+JLoader::register ( 'JToolBarHelper', JPATH_ADMINISTRATOR . '/includes/toolbar.php' );
+JLoader::register ( 'JSubMenuHelper', JPATH_ADMINISTRATOR . '/includes/subtoolbar.php' );
+//
 JFactory::getLanguage ()->load ( 'com_talent' );
 //
 abstract class TalentHelper {
@@ -34,6 +38,23 @@ abstract class TalentHelper {
 		if (count ( $array ) > $max_words && $max_words > 0)
 			$string = implode ( ' ', array_slice ( $array, 0, $max_words ) ) . '...';
 		return $string;
+	}
+	//
+	public static function isSite($layout = 'default') {
+		$app = JFactory::getApplication ();
+		$jinput = $app->input;
+		return ($app->isSite () && $jinput->getCmd ( 'layout', 'default' ) == $layout);
+	}
+	//
+	public static function canSubmit() {
+		if (static::isSite ( 'edit' )) {
+			$user = JFactory::getUser ();
+			$talent = static::getTalentByUserId ( $user->id );
+			if (! $talent) {
+				return false;
+			}
+		}
+		return true;
 	}
 	public static function getListTalentTypeQuery() {
 		// Initialize variables.
@@ -124,6 +145,7 @@ abstract class TalentHelper {
 		} else {
 			$talent = new stdClass ();
 			$talent->id = '';
+			$talent->title = '';
 		}
 		return $talent;
 	}
@@ -187,21 +209,29 @@ abstract class TalentHelper {
 		}
 		return false;
 	}
+	//
+	public static function isNullAgent($agent) {
+		return $agent->id == '' && $agent->title = '';
+	}
+	//
+	public static function isNullTalent($talent) {
+		return $talent->id == '' && $talent->title = '';
+	}
+	//
 	public static function canShowTalentInfo($user, $talent) {
-		// echo '<pre>';print_r($user);die;
 		if ($user && $talent) {
 			if ($user->id == $talent->user_id) {
 				return true;
 			}
 			$agentUserGroup = static::getAgentUserGroup ();
 			$groups = isset ( $user->groups ) ? $user->groups : array ();
-			
 			if ($groups && in_array ( $agentUserGroup->id, $groups )) {
 				return true;
 			}
 		}
 		return false;
 	}
+	//
 	public static function getTalentUserGroup() {
 		$groupName = 'Talent';
 		$group = static::getGroupByName ( $groupName );
@@ -339,6 +369,7 @@ abstract class TalentHelper {
 		} else {
 			$agent = new stdClass ();
 			$agent->id = '';
+			$agent->title = '';
 		}
 		return $agent;
 	}

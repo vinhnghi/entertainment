@@ -75,10 +75,9 @@ class ActivityViewActivity extends JViewLegacy {
 	}
 	protected function setDocument() {
 		// return true;
-		$app = JFactory::getApplication ();
-		$jinput = $app->input;
 		$document = JFactory::getDocument ();
 		if (ActivityHelper::isSite ( 'default' )) {
+			$app = JFactory::getApplication ();
 			$title = $this->params->get ( 'page_title', JText::_ ( 'COM_TALENT_ACTIVITY_TITLE' ) );
 			$pathway = JFactory::getApplication ()->getPathWay ();
 			if ($this->activityType) {

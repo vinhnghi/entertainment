@@ -1,8 +1,6 @@
 <?php
 defined ( '_JEXEC' ) or die ();
-class TalentControllerTalent extends JControllerForm {
-	public function getModel($name = 'TalentForm', $prefix = 'TalentModel', $config = array('ignore_request' => true)) {
-		$model = parent::getModel ( $name, $prefix, $config );
-		return $model;
-	}
-}
+
+//
+JLoader::register ( 'TalentControllerTalent', JPATH_ADMINISTRATOR . '/components/com_talent/controllers/talent.php' );
+//

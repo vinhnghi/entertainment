@@ -125,24 +125,18 @@ class TalentRouter extends JComponentRouterBase {
 				$vars ['id'] = ( int ) $segments [2];
 			}
 		} else {
-			$app = JFactory::getApplication ();
-			$pathway = $app->getPathway ();
 			if ($count == 2) { // view is talents
 				if ($segments [0] [count ( $segments ) - 1] == 't') {
 					$vars ['view'] = 'talents';
 					$vars ['cid'] = ( int ) $segments [0];
-					$pathway->addItem ( SiteTalentHelper::getTalentType ( $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talents&cid={$vars['cid']}" ) );
 				} else {
 					$vars ['view'] = 'talent';
 					$vars ['id'] = ( int ) $segments [0];
-					$pathway->addItem ( SiteTalentHelper::getTalent ( $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talent&id={$vars['id']}" ) );
 				}
 			} else {
 				$vars ['view'] = 'talent';
 				$vars ['cid'] = ( int ) $segments [0];
 				$vars ['id'] = ( int ) $segments [2];
-				$pathway->addItem ( SiteTalentHelper::getTalentType ( $vars ['cid'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talents&cid={$vars['cid']}" ) );
-				$pathway->addItem ( SiteTalentHelper::getTalent ( $vars ['id'] )->title, JRoute::_ ( "index.php?option=com_talent&view=talent&cid={$vars['cid']}&id={$vars['id']}" ) );
 			}
 		}
 		return $vars;

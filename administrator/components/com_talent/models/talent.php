@@ -4,8 +4,7 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 
 use Joomla\Registry\Registry;
 class TalentModelTalent extends JModelAdmin {
-	protected $text_prefix = 'COM_TALENT';
-	public $typeAlias = 'com_talent.talent';
+	//
 	protected $profileFields = array (
 			'dob',
 			'tel',
@@ -21,14 +20,21 @@ class TalentModelTalent extends JModelAdmin {
 			'hair_color',
 			'eye_color' 
 	);
+	//
+	public function getTalentType() {
+		return SiteTalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+	}
+	//
 	public function getTable($type = 'Talent', $prefix = 'TalentTable', $config = array()) {
 		return JTable::getInstance ( $type, $prefix, $config );
 	}
+	//
 	protected function canDelete($record) {
 		if (! empty ( $record->id )) {
 			return TalentHelper::getActions ( ( int ) $record->id, 'talent' )->get ( 'core.delete' );
 		}
 	}
+	//
 	protected function canEditState($record) {
 		$user = JFactory::getUser ();
 		// Check for existing article.
@@ -38,6 +44,7 @@ class TalentModelTalent extends JModelAdmin {
 			return parent::canEditState ( 'com_talent' );
 		}
 	}
+	//
 	protected function prepareTable($table) {
 		$date = JFactory::getDate ();
 		$user = JFactory::getUser ();
@@ -52,9 +59,15 @@ class TalentModelTalent extends JModelAdmin {
 			}
 		}
 	}
+	//
 	public function getItem($pk = null) {
+		if (TalentHelper::isSite ( 'edit' )) {
+			$user = JFactory::getUser ();
+			return TalentHelper::getTalentByUserId ( $user->id );
+		}
 		return TalentHelper::getTalent ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
 	}
+	//
 	public function getForm($data = array(), $loadData = true) {
 		$jinput = JFactory::getApplication ()->input;
 		
@@ -133,7 +146,7 @@ class TalentModelTalent extends JModelAdmin {
 				'published' => $data ['published'],
 				'metakey' => $data ['metakey'],
 				'metadesc' => $data ['metadesc'],
-				'talentimages' => $data ['talentimages'] 
+				'talentimages' => isset ( $data ['talentimages'] ) ? $data ['talentimages'] : null 
 		);
 		
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
@@ -158,6 +171,7 @@ class TalentModelTalent extends JModelAdmin {
 		}
 		$data ['talent'] = $talent_data;
 	}
+	//
 	public function save($data) {
 		$this->buildData ( $data );
 		// save user
@@ -168,6 +182,7 @@ class TalentModelTalent extends JModelAdmin {
 		$this->saveTalent ( $data ['talent'] );
 		return true;
 	}
+	//
 	public function saveUser($data) {
 		$pk = (! empty ( $data ['id'] )) ? $data ['id'] : ( int ) $this->getState ( 'user.id' );
 		$user = JUser::getInstance ( $pk );
@@ -199,6 +214,7 @@ class TalentModelTalent extends JModelAdmin {
 		$this->setState ( 'user.id', $user->id );
 		return true;
 	}
+	//
 	public function saveProfile($data) {
 		$userId = ( int ) $this->getState ( 'user.id' );
 		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__user_profiles' ) )->where ( $this->_db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $this->_db->quoteName ( 'profile_key' ) . ' LIKE ' . $this->_db->quote ( 'profile.%' ) );
@@ -214,6 +230,7 @@ class TalentModelTalent extends JModelAdmin {
 		$this->_db->execute ();
 		return true;
 	}
+	//
 	public function saveTalent($data) {
 		$data ['user_id'] = ( int ) $this->getState ( 'user.id' );
 		return parent::save ( $data );
@@ -303,6 +320,6 @@ class TalentModelTalent extends JModelAdmin {
 		return 'administrator/components/com_talent/src/js/talent.js';
 	}
 	public function getCss() {
-		return 'administrator/components/com_talent/src/css/talent.css';
+		return TalentHelper::isSite () ? 'components/com_talent/src/css/talent.css' : 'administrator/components/com_talent/src/css/talent.css';
 	}
 }
