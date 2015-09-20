@@ -20,14 +20,12 @@ $params = $this->state->get ( 'params' );
 	</div>
 	<?php endif; ?>
 
-	<form
-		action="<?php echo JRoute::_('index.php?option=com_activity&a_id=' . (int) $this->item->id); ?>"
-		method="post" name="adminForm" id="adminForm"
-		class="form-validate form-vertical">
+<form method="post" name="adminForm" id="adminForm"
+		class="form-validate">
 		<div class="btn-toolbar">
 			<div class="btn-group">
 				<button type="button" class="btn btn-primary"
-					onclick="Joomla.submitbutton('activity.save')">
+					onclick="Joomla.submitbutton('activity.apply')">
 					<span class="icon-ok"></span><?php echo JText::_('JSAVE')?>
 				</button>
 			</div>
@@ -88,9 +86,8 @@ $params = $this->state->get ( 'params' );
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
 	
-	<?php echo JHtml::_('bootstrap.endTabSet'); ?>		
-	<input type="hidden" name="task" value="" /> <input type="hidden"
-			name="return" value="<?php echo $this->return_page; ?>" />
+	<?php echo JHtml::_('bootstrap.endTabSet'); ?>
+	<input type="hidden" name="task" value="" /> 
 			<?php echo JHtml::_('form.token'); ?>
 	</form>
 </div>

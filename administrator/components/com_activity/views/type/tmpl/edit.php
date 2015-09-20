@@ -3,7 +3,7 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 JHtml::_ ( 'behavior.formvalidation' );
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_activity&layout=edit&id=' . (int) $this->item->id); ?>"
+<form action="<?php echo JRoute::_('index.php?option=com_activity&view=type&layout=edit&id=' . (int) $this->item->id); ?>"
 	method="post" name="adminForm" id="adminForm" class="form-validate">
 	<?php echo JLayoutHelper::render('joomla.edit.title_alias', $this); ?>
 	<div class="form-horizontal">

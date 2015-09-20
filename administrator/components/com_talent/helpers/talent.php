@@ -58,6 +58,7 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return $db->loadObject ();
 	}
+	//
 	public static function getTalentQuery() {
 		// Initialize variables.
 		$db = JFactory::getDbo ();
@@ -86,6 +87,7 @@ abstract class TalentHelper {
 		$query->innerJoin ( '#__users AS d ON d.id=a.user_id' );
 		return $query;
 	}
+	//
 	public static function updateTalentData($talent) {
 		if ($talent) {
 			// Convert the metadata field to an array.
@@ -99,18 +101,17 @@ abstract class TalentHelper {
 			$talent->images = $registry->toArray ();
 			$talent->talenttext = trim ( $talent->fulltext ) != '' ? $talent->introtext . "<hr id=\"system-readmore\" />" . $talent->fulltext : $talent->introtext;
 			// set types
-			$talent->parent_id = TalentHelper::getTalentTypes ( $talent->id );
+			$talent->parent_id = static::getTalentTypes ( $talent->id );
 			
-			$user = JFactory::getUser ( $talent->user_id );
 			$talent->user_details = array (
-					'id' => $user->id,
-					'name' => $user->name,
-					'username' => $user->username,
-					'email' => $user->email 
+					'id' => $talent->user_id,
+					'name' => $talent->name,
+					'username' => $talent->username,
+					'email' => $talent->email 
 			);
 			// Load the profile data from the database.
 			$db = JFactory::getDbo ();
-			$db->setQuery ( 'SELECT profile_key, profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $user->id . " AND profile_key LIKE 'profile.%'" . ' ORDER BY ordering' );
+			$db->setQuery ( 'SELECT profile_key, profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $talent->user_id . " AND profile_key LIKE 'profile.%'" . ' ORDER BY ordering' );
 			$results = $db->loadRowList ();
 			// Merge the profile data.
 			foreach ( $results as $v ) {
@@ -128,17 +129,17 @@ abstract class TalentHelper {
 	}
 	public static function getTalent($id) {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getTalentQuery ();
+		$query = static::getTalentQuery ();
 		$query->where ( 'a.id = ' . ( int ) $id );
 		$db->setQuery ( $query );
-		return TalentHelper::updateTalentData ( $db->loadObject () );
+		return static::updateTalentData ( $db->loadObject () );
 	}
 	public static function getTalentByUserId($userId) {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getTalentQuery ();
+		$query = static::getTalentQuery ();
 		$query->where ( 'a.user_id = ' . ( int ) $userId );
 		$db->setQuery ( $query );
-		return TalentHelper::updateTalentData ( $db->loadObject () );
+		return static::updateTalentData ( $db->loadObject () );
 	}
 	public static function getTalentTypes($id) {
 		$db = JFactory::getDbo ();
@@ -152,7 +153,7 @@ abstract class TalentHelper {
 		return $db->loadColumn ();
 	}
 	public static function getListTalentsQuery($cid) {
-		$query = TalentHelper::getTalentQuery ();
+		$query = static::getTalentQuery ();
 		if ($cid)
 			$query->where ( 'b.talent_type_id = ' . ( int ) $cid );
 		return $query;
@@ -167,7 +168,7 @@ abstract class TalentHelper {
 	}
 	public static function isAgent($user) {
 		if ($user) {
-			$agentUserGroup = TalentHelper::getAgentUserGroup ();
+			$agentUserGroup = static::getAgentUserGroup ();
 			$groups = isset ( $user->groups ) ? $user->groups : array ();
 			if ($groups && in_array ( $agentUserGroup->id, $groups )) {
 				return true;
@@ -181,7 +182,7 @@ abstract class TalentHelper {
 			if ($user->id == $talent->user_id) {
 				return true;
 			}
-			$agentUserGroup = TalentHelper::getAgentUserGroup ();
+			$agentUserGroup = static::getAgentUserGroup ();
 			$groups = isset ( $user->groups ) ? $user->groups : array ();
 			
 			if ($groups && in_array ( $agentUserGroup->id, $groups )) {
@@ -192,33 +193,33 @@ abstract class TalentHelper {
 	}
 	public static function getTalentUserGroup() {
 		$groupName = 'Talent';
-		$group = TalentHelper::getGroupByName ( $groupName );
+		$group = static::getGroupByName ( $groupName );
 		if (! $group) {
-			$registeredGroup = TalentHelper::getGroupByName ( 'Public' );
+			$registeredGroup = static::getGroupByName ( 'Public' );
 			$table = JTable::getInstance ( 'UserGroup' );
 			$table->save ( array (
 					'parent_id' => $registeredGroup->id,
 					'title' => $groupName 
 			) );
 			$table->rebuild ();
-			$group = TalentHelper::getGroupByName ( $groupName );
-			TalentHelper::saveACL ( $group );
+			$group = static::getGroupByName ( $groupName );
+			static::saveACL ( $group );
 		}
 		return $group;
 	}
 	public static function getAgentUserGroup() {
 		$groupName = 'Agent';
-		$group = TalentHelper::getGroupByName ( $groupName );
+		$group = static::getGroupByName ( $groupName );
 		if (! $group) {
-			$registeredGroup = TalentHelper::getGroupByName ( 'Public' );
+			$registeredGroup = static::getGroupByName ( 'Public' );
 			$table = JTable::getInstance ( 'UserGroup' );
 			$table->save ( array (
 					'parent_id' => $registeredGroup->id,
 					'title' => $groupName 
 			) );
 			$table->rebuild ();
-			$group = TalentHelper::getGroupByName ( $groupName );
-			TalentHelper::saveACL ( $group );
+			$group = static::getGroupByName ( $groupName );
+			static::saveACL ( $group );
 		}
 		return $group;
 	}
@@ -306,16 +307,15 @@ abstract class TalentHelper {
 			$agent->images = $registry->toArray ();
 			$agent->agenttext = trim ( $agent->fulltext ) != '' ? $agent->introtext . "<hr id=\"system-readmore\" />" . $agent->fulltext : $agent->introtext;
 			
-			$user = JFactory::getUser ( $agent->user_id );
 			$agent->user_details = array (
-					'id' => $user->id,
-					'name' => $user->name,
-					'username' => $user->username,
-					'email' => $user->email 
+					'id' => $agent->user_id,
+					'name' => $agent->name,
+					'username' => $agent->username,
+					'email' => $agent->email 
 			);
 			// Load the profile data from the database.
 			$db = JFactory::getDbo ();
-			$db->setQuery ( 'SELECT profile_key, profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $user->id . " AND profile_key LIKE 'profile.%'" . ' ORDER BY ordering' );
+			$db->setQuery ( 'SELECT profile_key, profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $agent->user_id . " AND profile_key LIKE 'profile.%'" . ' ORDER BY ordering' );
 			$results = $db->loadRowList ();
 			// Merge the profile data.
 			foreach ( $results as $v ) {
@@ -333,20 +333,20 @@ abstract class TalentHelper {
 	}
 	public static function getAgent($id) {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getAgentQuery ();
+		$query = static::getAgentQuery ();
 		$query->where ( 'a.id = ' . ( int ) $id );
 		$db->setQuery ( $query );
-		return TalentHelper::updateAgentData ( $db->loadObject () );
+		return static::updateAgentData ( $db->loadObject () );
 	}
 	public static function getAgentByUserId($userId) {
 		$db = JFactory::getDbo ();
-		$query = TalentHelper::getAgentQuery ();
+		$query = static::getAgentQuery ();
 		$query->where ( 'a.user_id = ' . ( int ) $userId );
 		$db->setQuery ( $query );
-		return TalentHelper::updateAgentData ( $db->loadObject () );
+		return static::updateAgentData ( $db->loadObject () );
 	}
 	public static function getListAgentsQuery($cid) {
-		$query = TalentHelper::getAgentQuery ();
+		$query = static::getAgentQuery ();
 		return $query;
 	}
 	// for agent favourite
@@ -372,7 +372,7 @@ abstract class TalentHelper {
 		return $query;
 	}
 	public static function getListFavouritesQuery($cid) {
-		$query = TalentHelper::getFavouriteQuery ();
+		$query = static::getFavouriteQuery ();
 		return $query;
 	}
 	//

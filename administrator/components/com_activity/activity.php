@@ -12,8 +12,6 @@ if (! JFactory::getUser ()->authorise ( 'core.manage', 'com_activity' )) {
 
 // Require helper file
 JLoader::register ( 'ActivityHelper', JPATH_COMPONENT_ADMINISTRATOR . '/helpers/activity.php' );
-JLoader::register ( 'JToolBarHelper', JPATH_ADMINISTRATOR . '/includes/toolbar.php' );
-JLoader::register ( 'JSubMenuHelper', JPATH_ADMINISTRATOR . '/includes/subtoolbar.php' );
 
 // Get an instance of the controller prefixed by Activity
 $controller = JControllerLegacy::getInstance ( 'Activity' );

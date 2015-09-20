@@ -171,9 +171,9 @@ class JFormFieldActivitySlideShow extends JFormField {
 					'mov' => 'video/quicktime',
 					'avi' => 'video/x-msvideo',
 					'wmv' => 'video/x-ms-wmv',
-					'zip' => 'application/zip'
+					'zip' => 'application/zip' 
 			);
-				
+			
 			if (isset ( $mimet [$idx] )) {
 				return $mimet [$idx];
 			} else {
@@ -184,15 +184,7 @@ class JFormFieldActivitySlideShow extends JFormField {
 		return false;
 	}
 	protected function getImages() {
-		$jinput = JFactory::getApplication ()->input;
-		
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->select ( 'a.*' );
-		$query->from ( '#__activity_assets AS a' );
-		$query->where ( '(a.activity_id = ' . $jinput->get ( 'id', 0 ) . ')' );
-		$db->setQuery ( $query );
-		
-		return $db->loadObjectList ();
+		return SiteActivityHelper::getActivityImages ( JFactory::getApplication ()->input->get ( 'id', 0 ) );
 	}
 	protected function generateVideoThumbnail($src) {
 		$folder = $_SERVER ['DOCUMENT_ROOT'] . "/" . dirname ( $src );
@@ -231,7 +223,7 @@ class JFormFieldActivitySlideShow extends JFormField {
 		if (count ( $images )) {
 			$app = JFactory::getApplication ( 'site' );
 			$params = $app->getParams ( 'com_activity' );
-			$galleryType = 'pgwSlideshow';//$params->get ( 'gallery_type', 'pgwSlideshow' );
+			$galleryType = 'pgwSlideshow'; // $params->get ( 'gallery_type', 'pgwSlideshow' );
 			$id = strtolower ( "{$this->element ['name']}" );
 			$html [] = "<div class='com_activity_images'>Images:";
 			$html [] = "<ul class='{$galleryType} {$this->type}' id='{$id}'>";

@@ -23,7 +23,7 @@ class ModTalentHelper {
 			} );
 		}
 		
-		$key = "$items.$itemId.$displaytype.$limit";
+		$key = "mode_talent.$itemId.$displaytype.$limit";
 		$cache = JFactory::getCache ( 'mod_talent', '' );
 		$cache->store ( $items, $key );
 		

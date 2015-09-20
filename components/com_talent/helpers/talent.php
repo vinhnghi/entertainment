@@ -31,6 +31,7 @@ class SiteTalentHelper extends TalentHelper {
 	public static function normaliseTalentDetails(&$details) {
 		$details ['gender'] = $details ['gender'] ? JText::_ ( 'COM_TALENT_MALE' ) : JText::_ ( 'COM_TALENT_FEMALE' );
 	}
+	//
 	public static function getImages($obj) {
 		if (is_string ( $obj )) {
 			$registry = new Registry ();

@@ -1,46 +1,45 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-
-class ActivityViewType extends JViewLegacy 
-{
+//
+class ActivityViewType extends JViewLegacy {
+	//
 	protected $form;
 	protected $item;
 	protected $script;
 	protected $canDo;
-
-	public function display($tpl = null) 
-	{
+	//
+	public function display($tpl = null) {
+		// check user permission
+		if (! ActivityHelper::canSubmit ()) {
+			JError::raiseError ( 500, 'COM_ACTIVITY_NO_PERMISSION' );
+			return false;
+		}
 		// Get the Data
-		if (!$this->form) $this->form = $this->get ( 'Form' );
-		if (!$this->item) $this->item = $this->get ( 'Item' );
-		if (!$this->canDo) $this->canDo = ActivityHelper::getActions ( $this->item->id );
+		$this->form = $this->get ( 'Form' );
+		$this->item = $this->get ( 'Item' );
+		$this->canDo = ActivityHelper::getActions ( $this->item ? $this->item->id : null );
+		$this->state = $this->get ( 'State' );
+		$this->params = JFactory::getApplication ()->getParams ();
 		
 		// Check for errors.
 		if (count ( $errors = $this->get ( 'Errors' ) )) {
 			JError::raiseError ( 500, implode ( '<br />', $errors ) );
-			
 			return false;
 		}
-		
 		// Set the toolbar
 		$this->addToolBar ();
 		// Display the template
 		parent::display ( $tpl );
-		
 		// Set the document
 		$this->setDocument ();
 	}
-	
-	protected function addToolBar() 
-	{
+	//
+	protected function addToolBar() {
 		$input = JFactory::getApplication ()->input;
-		
 		// Hide Joomla Administrator Main menu
 		$input->set ( 'hidemainmenu', true );
-		
-		$isNew = ($this->item->id == 0);
-		
+		$isNew = ($this->item ? $this->item->id == 0 : true);
 		JToolBarHelper::title ( $isNew ? JText::_ ( 'COM_ACTIVITY_MANAGER_TYPE_NEW' ) : JText::_ ( 'COM_ACTIVITY_MANAGER_TYPE_EDIT' ), 'type' );
 		// Build the actions for new and existing records.
 		if ($isNew) {
@@ -69,14 +68,12 @@ class ActivityViewType extends JViewLegacy
 			JToolBarHelper::cancel ( 'type.cancel', 'JTOOLBAR_CLOSE' );
 		}
 	}
-
-	protected function setDocument() 
-	{
+	protected function setDocument() {
 		$isNew = ($this->item->id == 0);
 		$document = JFactory::getDocument ();
 		$document->setTitle ( $isNew ? JText::_ ( 'COM_ACTIVITY_TYPE_CREATING' ) : JText::_ ( 'COM_ACTIVITY_TYPE_EDITING' ) );
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
-		$document->addStyleSheet( JURI::root () . $this->get ( 'Css' ) );		
+		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
 		JText::script ( 'COM_ACTIVITY_TYPE_ERROR_UNACCEPTABLE' );
 	}
 }

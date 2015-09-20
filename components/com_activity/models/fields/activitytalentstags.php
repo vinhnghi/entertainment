@@ -1,30 +1,21 @@
 <?php
 // Check to ensure this file is included in Joomla!
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
+//
+JLoader::register ( 'SiteActivityHelper', JPATH_SITE . '/components/com_activity/helpers/activity.php' );
+//
 class JFormFieldActivityTalentsTags extends JFormField {
 	protected $type = 'ActivityTalentsTags';
 	protected $talent_list_url = 'index.php?option=com_talent&view=talent';
+	//
 	protected function getTalents() {
-		$jinput = JFactory::getApplication ()->input;
-		
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->select ( 'DISTINCT b.*, c.name as title, c.email' );
-		$query->from ( '#__activity_talent AS a' );
-		$query->leftJoin ( '#__talent AS b ON a.talent_id=b.id' );
-		$query->leftJoin ( '#__users AS c ON b.user_id=c.id' );
-		$query->where ( 'a.activity_id = ' . $jinput->get ( 'id', 0 ) );
-		$query->where ( 'b.published = 1' );
-		$query->where ( 'c.block = 0' );
-		$query->where ( 'c.activation = ""' );
-		
-		$db->setQuery ( $query );
-		
-		return $db->loadObjectList ();
+		return SiteActivityHelper::getActivityTalents ( JFactory::getApplication ()->input->get ( 'id', 0 ), true );
 	}
+	//
 	protected function getTalentTag($talent) {
 		$html = array ();
-// 		$url = JRoute::_ ( "{$this->talent_detail_url}&id={$talent->id}" );
-		$url = "{$this->talent_detail_url}&id={$talent->id}";
+		$url = JRoute::_ ( "{$this->talent_detail_url}&id={$talent->id}" );
+		// $url = "{$this->talent_detail_url}&id={$talent->id}";
 		$html [] = "<span class='ActivityTalentsTagsItem'>";
 		$html [] = "<a href='{$url}' target='_blank'>";
 		$html [] = $talent->title;
@@ -33,6 +24,7 @@ class JFormFieldActivityTalentsTags extends JFormField {
 		$html [] = $this->element ['separator'];
 		return implode ( $html, '' );
 	}
+	//
 	protected function getInput() {
 		$params = JComponentHelper::getParams ( 'com_activity' );
 		$this->talent_detail_url = $params->get ( 'talent_detail_url', '' );

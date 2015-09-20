@@ -1,8 +1,11 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
+//
 class ActivityControllerType extends JControllerForm 
 {
+	protected $default_view = 'type';
+	
 	protected function allowAdd($data = array()) 
 	{
 		return parent::allowAdd ( $data );

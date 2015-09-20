@@ -1,98 +1,69 @@
 <?php
 // No direct access to this file
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
-abstract class ActivityHelper {
-	public static function truncate($string = "", $max_words) {
-		$array = array_filter ( explode ( ' ', $string ), 'strlen' );
-		if (count ( $array ) > $max_words && $max_words > 0)
-			$string = implode ( ' ', array_slice ( $array, 0, $max_words ) ) . '...';
-		return $string;
+//
+use Joomla\Registry\Registry;
+// Require helper file
+JLoader::register ( 'ActivityHelper', JPATH_ADMINISTRATOR . '/components/com_activity/helpers/activity.php' );
+JLoader::register ( 'ActivityRouter', JPATH_SITE . '/components/com_activity/router.php' );
+//
+abstract class SiteActivityHelper extends ActivityHelper {
+	//
+	public static function getActivityDetailLink($activity, $cid) {
+		$cid = ( int ) $cid;
+		$base_url = 'index.php?option=com_activity&view=activity&cid=';
+		return JRoute::_ ( "{$base_url}{$cid}&id={$activity->id}" );
 	}
-	public static function getListTalentTypesQuery() {
-		// Initialize variables.
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true );
-		$fields = array (
-				'a.*' 
-		);
-		$query->select ( implode ( ",", $fields ) )->from ( '#__talent_type AS a' );
-		$query->where ( 'a.published = 1' );
-		return $query;
-	}
-	public static function getType($id) {
-		if (! $id) {
-			throw new Exception ( JText::_ ( 'Type id not found' ) );
-			return;
+	//
+	public static function getImages($obj) {
+		if (is_string ( $obj )) {
+			$registry = new Registry ();
+			$registry->loadString ( $obj );
+			$obj = $registry->toArray ();
 		}
-		
-		// Initialize variables.
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true );
-		
-		// Create the base select statement.
-		$fields = array (
-				'a.*' 
+		$intro = new stdClass ();
+		$intro->src = $obj ['image_intro'] | $obj ['image_fulltext'];
+		$intro->alt = $obj ['image_intro_alt'] | $obj ['image_fulltext_alt'];
+		$intro->caption = $obj ['image_intro_caption'] | $obj ['image_fulltext_caption'];
+		$fulltext = new stdClass ();
+		$fulltext->src = $obj ['image_intro'] | $obj ['image_fulltext'];
+		$fulltext->alt = $obj ['image_intro_alt'] | $obj ['image_fulltext_alt'];
+		$fulltext->caption = $obj ['image_intro_caption'] | $obj ['image_fulltext_caption'];
+		return array (
+				'intro' => $intro->src ? $intro : null,
+				'fulltext' => $fulltext->src ? $fulltext : null 
 		);
-		
-		$query->select ( implode ( ",", $fields ) )->from ( '#__talent_type AS a' );
-		$query->where ( 'a.id = ' . ( int ) $id );
-		$query->where ( 'a.published = 1' );
-		
-		$db->setQuery ( $query );
-		
-		return $db->loadObject ();
 	}
-	public static function getActivityQuery() {
-		// Initialize variables.
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true );
-		
-		// Create the base select statement.
-		$fields = array (
-				'a.*',
-				'd.email',
-				'd.id AS user_id',
-				'd.name AS title',
-				'd.username AS alias' 
-		);
-		
-		$query->select ( implode ( ",", $fields ) )->from ( '#__talent AS a' );
-		$query->leftJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
-		$query->leftJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
-		$query->leftJoin ( '#__users AS d ON d.id=a.user_id' );
-		$query->where ( 'a.published = 1' );
-		$query->where ( 'c.published = 1' );
-		$query->where ( 'd.block = 0' );
-		$query->where ( 'd.activation = ""' );
-		return $query;
-	}
-	public static function getActivity($id) {
-		if (! $id) {
-			throw new Exception ( JText::_ ( 'Activity id not found' ) );
-			return;
+	//
+	public static function getIntroImage($obj) {
+		if (is_string ( $obj )) {
+			$registry = new Registry ();
+			$registry->loadString ( $obj );
+			$obj = $registry->toArray ();
 		}
-		$db = JFactory::getDbo ();
-		$query = ActivityHelper::getActivityQuery ();
-		$query->where ( 'a.id = ' . ( int ) $id );
-		$db->setQuery ( $query );
-		return $db->loadObject ();
-	}
-	public static function getListActivitysQuery($cid) {
-		if (! $cid) {
-			throw new Exception ( JText::_ ( 'Type id not found' ) );
-			return;
+		$image = new stdClass ();
+		$image->src = $obj ['image_intro'] | $obj ['image_fulltext'];
+		$image->alt = $obj ['image_intro_alt'] | $obj ['image_fulltext_alt'];
+		$image->caption = $obj ['image_intro_caption'] | $obj ['image_fulltext_caption'];
+		if ($image->src) {
+			return $image;
 		}
-		
-		$query = ActivityHelper::getActivityQuery ();
-		$query->where ( 'b.talent_type_id = ' . ( int ) $cid );
-		return $query;
+		return null;
 	}
-	public static function getActivityImages($id) {
-		$db = JFactory::getDbo ();
-		$query = $db->getQuery ( true )->select ( 'a.*' );
-		$query->from ( '#__talent_assets AS a' );
-		$query->where ( '(a.talent_id = ' . ( int ) $id . ')' );
-		$db->setQuery ( $query );
-		return $db->loadObjectList ();
+	//
+	public static function getFulltextImage($obj) {
+		if (is_string ( $obj )) {
+			$registry = new Registry ();
+			$registry->loadString ( $obj );
+			$obj = $registry->toArray ();
+		}
+		$image = new stdClass ();
+		$image->src = $obj ['image_fulltext'] | $obj ['image_intro'];
+		$image->alt = $obj ['image_fulltext_alt'] | $obj ['image_intro_alt'];
+		$image->caption = $obj ['image_fulltext_caption'] | $obj ['image_intro_caption'];
+		if ($image->src) {
+			return $image;
+		}
+		return null;
 	}
 }

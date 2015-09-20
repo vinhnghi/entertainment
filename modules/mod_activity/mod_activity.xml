@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>mod_activity</name>
+	<author>Vinh Nghi</author>
+	<authorEmail>hovnghi@gmail.com</authorEmail>
+	<creationDate>April 2015</creationDate>
+	<version>1.0.0</version>
+	<description>MOD_ACTIVITY_XML_DESCRIPTION</description>
+	<languages>
+		<language tag="en-GB">en-GB.mod_activity.ini</language>
+		<language tag="en-GB">en-GB.mod_activity.sys.ini</language>
+	</languages>
+	<files>
+		<filename module="mod_activity">mod_activity.php</filename>
+		<folder>tmpl</folder>
+		<folder>src</folder>
+		<filename>helper.php</filename>
+		<filename>mod_activity.xml</filename>
+	</files>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_MENU" />
+	<config>
+		<fields name="params">
+			<fieldset name="basic"
+				addfieldpath="/administrator/components/com_activity/models/fields">
+				<field name="itemId" type="menuitem" label="MOD_ACTIVITY_SELECT_MENU_LABEL"
+					description="">
+					<option value="">MOD_ACTIVITY_SELECT_MENU</option>
+				</field>
+				<field name="parent_id" type="activitytypes" label="MOD_ACTIVITY_SELECT_TYPE_LABEL"
+					description="" size="20">
+					<option value="">MOD_ACTIVITY_SELECT_TYPE</option>
+				</field>
+				<field name="limit" type="integer" label="MOD_ACTIVITY_FIELD_NUM_ITEM"
+					description="MOD_ACTIVITY_FIELD_NUM_ITEM_DESC" first="0" last="20"
+					step="1" default="5" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
