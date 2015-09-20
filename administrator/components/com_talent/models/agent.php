@@ -146,6 +146,23 @@ class TalentModelAgent extends JModelAdmin {
 		}
 		$data ['agent'] = $agent_data;
 	}
+	//
+	public function publish(&$pks, $value = 1) {
+		if (parent::publish ( $pks, $value )) {
+			// Access checks.
+			$table = JTable::getInstance ( 'User' );
+			foreach ( $pks as $i => $pk ) {
+				$user_id = TalentHelper::getAgentUserId ( $pk );
+				if ($table->load ( $user_id )) {
+					$table->block = ! $value;
+					$table->store ( true );
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	//
 	public function save($data) {
 		$this->buildData ( $data );
 		// save user

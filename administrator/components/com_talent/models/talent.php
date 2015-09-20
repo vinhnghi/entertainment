@@ -265,6 +265,23 @@ class TalentModelTalent extends JModelAdmin {
 		}
 		return true;
 	}
+	//
+	public function publish(&$pks, $value = 1) {
+		if (parent::publish ( $pks, $value )) {
+			// Access checks.
+			$table = JTable::getInstance ( 'User' );
+			foreach ( $pks as $i => $pk ) {
+				$user_id = TalentHelper::getTalentUserId ( $pk );
+				if ($table->load ( $user_id )) {
+					$table->block = ! $value;
+					$table->store ( true );
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	//
 	public function deleteProfile($userId) {
 		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__user_profiles' ) )->where ( $this->_db->quoteName ( 'user_id' ) . ' = ' . ( int ) $userId )->where ( $this->_db->quoteName ( 'profile_key' ) . ' LIKE ' . $this->_db->quote ( 'profile.%' ) );
 		$this->_db->setQuery ( $query );

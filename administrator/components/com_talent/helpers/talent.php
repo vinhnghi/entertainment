@@ -127,6 +127,7 @@ abstract class TalentHelper {
 		}
 		return $talent;
 	}
+	//
 	public static function getTalent($id) {
 		$db = JFactory::getDbo ();
 		$query = static::getTalentQuery ();
@@ -134,6 +135,16 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return static::updateTalentData ( $db->loadObject () );
 	}
+	//
+	public static function getTalentUserId($id) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		$query->select ( 'a.user_id' )->from ( '#__talent AS a' );
+		$query->where ( 'a.id = ' . ( int ) $id );
+		$db->setQuery ( $query );
+		return $db->loadResult ();
+	}
+	//
 	public static function getTalentByUserId($userId) {
 		$db = JFactory::getDbo ();
 		$query = static::getTalentQuery ();
@@ -331,6 +342,7 @@ abstract class TalentHelper {
 		}
 		return $agent;
 	}
+	//
 	public static function getAgent($id) {
 		$db = JFactory::getDbo ();
 		$query = static::getAgentQuery ();
@@ -338,6 +350,16 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return static::updateAgentData ( $db->loadObject () );
 	}
+	//
+	public static function getAgentUserId($id) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true );
+		$query->select ( 'a.user_id' )->from ( '#__agent AS a' );
+		$query->where ( 'a.id = ' . ( int ) $id );
+		$db->setQuery ( $query );
+		return $db->loadResult ();
+	}
+	//
 	public static function getAgentByUserId($userId) {
 		$db = JFactory::getDbo ();
 		$query = static::getAgentQuery ();
