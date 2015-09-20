@@ -82,12 +82,13 @@ class ActivityViewActivity extends JViewLegacy {
 			$pathway = JFactory::getApplication ()->getPathWay ();
 			if ($this->activityType) {
 				if (! $title) {
-					$title = "{$this->activityType->title} - {$this->item->title}";
+					$title = "{$this->activityType->title}";
 				} else {
-					$title = "{$title} - {$this->activityType->title} - {$this->item->title}";
+					$title = "{$title} - {$this->activityType->title}";
 				}
 				$pathway->addItem ( $this->activityType->title, 'index.php?option=com_activity&view=activities&cid=' . $this->activityType->id . '&Itemid=' . JFactory::getApplication ()->getMenu ()->getActive ()->id );
 			}
+			$title = "{$title} - {$this->item->title}";
 			$document->setTitle ( $title );
 			$pathway->addItem ( $this->item->title, '' );
 			if ($this->params->get ( 'menu-meta_description' )) {

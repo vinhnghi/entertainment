@@ -77,6 +77,9 @@
 	<field name="talentimages" type="talentimages" label="Images"
 		description="" />
 
+	<field name="talentslideshow" type="talentslideshow" label="Images"
+		description="" />
+
 	<fields name="images" label="Image Options">
 		<field name="image_intro" type="media" label="List Image"
 			description="" start="true" directory="com_talent" />

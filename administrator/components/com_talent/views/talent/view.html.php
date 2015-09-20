@@ -78,12 +78,13 @@ class TalentViewTalent extends JViewLegacy {
 			$pathway = JFactory::getApplication ()->getPathWay ();
 			if ($this->type) {
 				if (! $title) {
-					$title = "{$this->type->title} - {$this->item->title}";
+					$title = "{$this->type->title}";
 				} else {
-					$title = "{$title} - {$this->type->title} - {$this->item->title}";
+					$title = "{$title} - {$this->type->title}";
 				}
 				$pathway->addItem ( $this->type->title, 'index.php?option=com_talent&view=talents&cid=' . $this->type->id . '&Itemid=' . JFactory::getApplication ()->getMenu ()->getActive ()->id );
 			}
+			$title = "{$title} - {$this->item->title}";
 			$document->setTitle ( $title );
 			$pathway->addItem ( $this->item->title, '' );
 			if ($params->get ( 'menu-meta_description' )) {
