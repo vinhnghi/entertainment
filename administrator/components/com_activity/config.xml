@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="titles" label="Gallery"
+	<fieldset name="params" label="Params"
 		description="These settings apply for activity gallery">
 
 		<!-- <field name="gallery_type" type="list" default="pgwSlideshow" label="Type" 
@@ -11,8 +11,12 @@
 			default="index.php?option=com_talent&amp;view=talents&amp;layout=modal&amp;tmpl=component" />
 
 		<field name="talent_detail_url" type="text" label="Talent Detail URL"
-			description=""
-			default="index.php?option=com_talent&amp;view=talent&amp;itemId=110" />
+			description="" default="index.php?option=com_talent&amp;view=talent&amp;" />
+
+		<field name="itemId" type="menuitem" label="Menu for display talent"
+			description="">
+			<option value="">Please select menu</option>
+		</field>
 
 		<field name="gallery_height" type="text" label="Height"
 			description="" default="360" />

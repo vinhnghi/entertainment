@@ -64,6 +64,12 @@ JHtml::_ ( 'behavior.formvalidation' );
 			<?php echo $this->form->getInput('talentimages'); ?>
 		</div>
 		<?php echo JHtml::_('bootstrap.endTab'); ?>
+		
+		<?php echo JHtml::_('bootstrap.addTab', 'myTab', 'activities', JText::_('Events', true)); ?>
+		<div class="row-fluid form-horizontal-desktop">
+			<?php echo $this->form->getInput('talentactivities'); ?>
+		</div>
+		<?php echo JHtml::_('bootstrap.endTab'); ?>
 			
 	<?php echo JHtml::_('bootstrap.endTabSet'); ?>
 	</div>

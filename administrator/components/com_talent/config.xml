@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
+	<fieldset name="params" label="Params" description="">
+		<field name="activity_list_url" type="text" label="Activity List URL"
+			description=""
+			default="index.php?option=com_activity&amp;view=activities&amp;layout=modal&amp;tmpl=component" />
+
+		<field name="activity_detail_url" type="text" label="Activity Detail URL"
+			description="" default="index.php?option=com_activity&amp;view=activity&amp;" />
+
+		<field name="itemId" type="menuitem" label="Menu for display activity"
+			description="">
+			<option value="">Please select menu</option>
+		</field>
+
+		<field name="gallery_height" type="text" label="Height"
+			description="" default="360" />
+	</fieldset>
 	<fieldset name="titles" label="Pulic User"
 		description="Display talent information for public user">
 		<field name="public_email" type="radio" class="btn-group btn-group-yesno"

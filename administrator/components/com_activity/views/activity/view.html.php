@@ -125,6 +125,5 @@ class ActivityViewActivity extends JViewLegacy {
 		
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
 		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
-		JText::script ( 'COM_ACTIVITY_ACTIVITY_ERROR_UNACCEPTABLE' );
 	}
 }

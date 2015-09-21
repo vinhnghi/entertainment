@@ -128,18 +128,20 @@ var ActivityTalents = new function() {
 	};
 	this.addItem = function(el, item, i) {
 		var data = this.getData(el);
-		var exists = false;
+		var exists = false, initiating = false;
 		for (var j=0;j<data.length;j++) {
+			if (data[j].added === undefined) {
+				data[j].added = true;
+				jQuery('#'+el.id+' tbody').append(this.buildItemHtml(el, data[j], i));
+				this.bindItemEvents(el,item,i);
+			}
 			if (data[j].id == item.id) {
-				if(data[j].added === undefined)
-					data[j].added = false;
-				exists = data[j].added;
-				break;
+				exists = true;
 			}
 		}
 		if (!exists) {
 			item.added = true;
-			data.push(item);
+			data.push(item);				
 			jQuery('#'+el.id+' tbody').append(this.buildItemHtml(el, item, i));
 			this.bindItemEvents(el,item,i);
 		} 

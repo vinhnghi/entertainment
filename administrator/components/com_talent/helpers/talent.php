@@ -103,8 +103,6 @@ abstract class TalentHelper {
 		);
 		
 		$query->select ( 'DISTINCT ' . implode ( ",", $fields ) )->from ( '#__talent AS a' );
-		$query->innerJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
-		$query->innerJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
 		$query->innerJoin ( '#__users AS d ON d.id=a.user_id' );
 		return $query;
 	}
@@ -174,6 +172,7 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return static::updateTalentData ( $db->loadObject () );
 	}
+	//
 	public static function getTalentTypes($id) {
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true );
@@ -185,12 +184,16 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return $db->loadColumn ();
 	}
+	//
 	public static function getListTalentsQuery($cid) {
 		$query = static::getTalentQuery ();
+		$query->innerJoin ( '#__talent_type_talent AS b ON a.id=b.talent_id' );
+		$query->innerJoin ( '#__talent_type AS c ON c.id=b.talent_type_id' );
 		if ($cid)
 			$query->where ( 'b.talent_type_id = ' . ( int ) $cid );
 		return $query;
 	}
+	//
 	public static function getTalentImages($id) {
 		$db = JFactory::getDbo ();
 		$query = $db->getQuery ( true )->select ( 'a.*' );
@@ -199,6 +202,7 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return $db->loadObjectList ();
 	}
+	//
 	public static function isAgent($user) {
 		if ($user) {
 			$agentUserGroup = static::getAgentUserGroup ();
@@ -468,5 +472,74 @@ abstract class TalentHelper {
 		$query->select ( 'count(a.talent_id)' )->from ( '#__agent_favourite AS a' );
 		$query->where ( 'a.talent_id = ' . ( int ) $talent_id );
 		return $db->setQuery ( $query )->loadResult ();
+	}
+	//
+	public static function getImages($obj) {
+		if ($obj) {
+			if (is_string ( $obj )) {
+				$registry = new Registry ();
+				$registry->loadString ( $obj );
+				$obj = $registry->toArray ();
+			}
+			$intro = new stdClass ();
+			$intro->src = $obj ['image_intro'] | $obj ['image_fulltext'];
+			$intro->alt = $obj ['image_intro_alt'] | $obj ['image_fulltext_alt'];
+			$intro->caption = $obj ['image_intro_caption'] | $obj ['image_fulltext_caption'];
+			$fulltext = new stdClass ();
+			$fulltext->src = $obj ['image_intro'] | $obj ['image_fulltext'];
+			$fulltext->alt = $obj ['image_intro_alt'] | $obj ['image_fulltext_alt'];
+			$fulltext->caption = $obj ['image_intro_caption'] | $obj ['image_fulltext_caption'];
+			return array (
+					'intro' => $intro->src ? $intro : null,
+					'fulltext' => $fulltext->src ? $fulltext : null 
+			);
+		}
+		return null;
+	}
+	//
+	public static function getIntroImage($obj) {
+		if ($obj) {
+			if (is_string ( $obj )) {
+				$registry = new Registry ();
+				$registry->loadString ( $obj );
+				$obj = $registry->toArray ();
+			}
+			$image = new stdClass ();
+			$image->src = $obj ['image_intro'] | $obj ['image_fulltext'];
+			$image->alt = $obj ['image_intro_alt'] | $obj ['image_fulltext_alt'];
+			$image->caption = $obj ['image_intro_caption'] | $obj ['image_fulltext_caption'];
+			if ($image->src) {
+				return $image;
+			}
+		}
+		return null;
+	}
+	//
+	public static function getFulltextImage($obj) {
+		if ($obj) {
+			if (is_string ( $obj )) {
+				$registry = new Registry ();
+				$registry->loadString ( $obj );
+				$obj = $registry->toArray ();
+			}
+			$image = new stdClass ();
+			$image->src = $obj ['image_fulltext'] | $obj ['image_intro'];
+			$image->alt = $obj ['image_fulltext_alt'] | $obj ['image_intro_alt'];
+			$image->caption = $obj ['image_fulltext_caption'] | $obj ['image_intro_caption'];
+			if ($image->src) {
+				return $image;
+			}
+		}
+		return null;
+	}
+	//
+	public static function getTalentActivities($id) {
+		$db = JFactory::getDbo ();
+		$query = $db->getQuery ( true )->select ( 'DISTINCT b.*' );
+		$query->from ( '#__activity_talent AS a' );
+		$query->innerJoin ( '#__activity AS b ON a.activity_id = b.id AND b.published = 1' );
+		$query->where ( 'a.talent_id = ' . ( int ) $id );
+		$db->setQuery ( $query );
+		return $db->loadObjectList ();
 	}
 }

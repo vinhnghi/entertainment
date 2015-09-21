@@ -110,7 +110,13 @@ class TalentViewTalent extends JViewLegacy {
 		}
 		$isNew = ($this->item->id == 0);
 		$document->setTitle ( $isNew ? JText::_ ( 'COM_TALENT_TALENT_CREATING' ) : JText::_ ( 'COM_TALENT_TALENT_EDITING' ) );
+		
+		$params = JComponentHelper::getParams ( 'com_talent' );
+		$activity_list_url = $params->get ( 'activity_list_url', '' );
+		$document->addScriptDeclaration ( "window.activityListURL = '{$activity_list_url}'" );
+		
+		
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
-		JText::script ( 'COM_TALENT_TALENT_ERROR_UNACCEPTABLE' );
+		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );
 	}
 }

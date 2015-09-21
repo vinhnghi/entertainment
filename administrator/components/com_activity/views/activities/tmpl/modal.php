@@ -8,17 +8,17 @@ $listOrder = $this->escape ( $this->filter_order );
 $listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
 <script type='text/javascript'>
-function getSelectedTalents() {
+function getSelectedActivities() {
 	var checkedBoxes = jQuery('input[type=checkbox]:checked');
-	var selectedTalents = [];
+	var selectedActivities = [];
 	if (checkedBoxes) {
 		var k=0;
 		for (var i=0;i<checkedBoxes.length;i++) {
 			var id = parseInt( jQuery(checkedBoxes[i]).val() );
 			if (id) {
-				for (j=k;j<talents.length;j++) {
-					if	(talents[j].id == id) {
-						selectedTalents.push(talents[j]);
+				for (j=k;j<activities.length;j++) {
+					if	(activities[j].id == id) {
+						selectedActivities.push(activities[j]);
 						k=j;
 						break;
 					}
@@ -26,10 +26,10 @@ function getSelectedTalents() {
 			}
 		}
 	}
-	return selectedTalents;
+	return selectedActivities;
 }
-var talents= <?php echo json_encode($this->items);?>;
-var elId= '<?php echo JFactory::getApplication()->input->get('elId', 'activitytalents');?>';
+var activities= <?php echo json_encode($this->items);?>;
+var elId= '<?php echo JFactory::getApplication()->input->get('elId', 'talentactivities');?>';
 </script>
 <form method="post" id="adminForm" name="adminForm">
 	<div class="row-fluid js-stools">
@@ -44,7 +44,7 @@ var elId= '<?php echo JFactory::getApplication()->input->get('elId', 'activityta
 		?>
 		<div class="btn-wrapper">
 			<button type="button"
-				onclick="window.parent.addTalents(elId,getSelectedTalents());"
+				onclick="window.parent.addActivities(elId,getSelectedActivities());"
 				class="btn btn-small btn-success">
 				<span class="icon-new icon-white"></span>Add
 			</button>

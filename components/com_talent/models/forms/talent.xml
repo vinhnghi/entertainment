@@ -77,8 +77,14 @@
 	<field name="talentimages" type="talentimages" label="Images"
 		description="" />
 
+	<field name="talentactivities" type="talentactivities" label="Events"
+		description="" />
+
 	<field name="talentslideshow" type="talentslideshow" label="Images"
 		description="" />
+		
+	<field name="talentactivitiestags" type="talentactivitiestags"
+	label="Events" separator="; " description="" />
 
 	<fields name="images" label="Image Options">
 		<field name="image_intro" type="media" label="List Image"

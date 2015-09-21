@@ -146,7 +146,8 @@ class TalentModelTalent extends JModelAdmin {
 				'published' => $data ['published'],
 				'metakey' => $data ['metakey'],
 				'metadesc' => $data ['metadesc'],
-				'talentimages' => isset ( $data ['talentimages'] ) ? $data ['talentimages'] : null 
+				'talentimages' => isset ( $data ['talentimages'] ) ? $data ['talentimages'] : null,
+				'talentactivities' => isset ( $data ['talentactivities'] ) ? $data ['talentactivities'] : null
 		);
 		
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
@@ -304,6 +305,7 @@ class TalentModelTalent extends JModelAdmin {
 		$this->_db->setQuery ( $query );
 		$this->_db->execute ();
 	}
+	//
 	public function deleteTalent($userId) {
 		$talent = TalentHelper::getTalentByUserId ( $userId );
 		$query = $this->_db->getQuery ( true )->delete ( $this->_db->quoteName ( '#__talent_type_talent' ) )->where ( $this->_db->quoteName ( 'talent_id' ) . ' = ' . ( int ) $talent->id );
@@ -316,9 +318,15 @@ class TalentModelTalent extends JModelAdmin {
 		$this->_db->setQuery ( $query );
 		$this->_db->execute ();
 	}
+	//
+	protected function cleanCache($group = null, $client_id = 0) {
+		parent::cleanCache ( 'com_talent' );
+	}
+	//
 	public function getScript() {
 		return 'administrator/components/com_talent/src/js/talent.js';
 	}
+	//
 	public function getCss() {
 		return TalentHelper::isSite () ? 'components/com_talent/src/css/talent.css' : 'administrator/components/com_talent/src/css/talent.css';
 	}

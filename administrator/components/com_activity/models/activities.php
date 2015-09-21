@@ -19,6 +19,19 @@ class ActivityModelActivities extends JModelList {
 		} elseif ($published === '') {
 			$query->where ( '(published IN (0, 1))' );
 		}
+		$jinput = JFactory::getApplication ()->input;
+		$params = $jinput->getArray ( array () );
+		if (isset ( $params ['id'] )) {
+			$ids = array ();
+			foreach ( $params ['id'] as $id ) {
+				if (is_numeric ( $id )) {
+					array_push ( $ids, $id );
+				}
+			}
+			$ids = implode ( ',', $ids );
+			if ($ids)
+				$query->where ( "(a.id NOT IN ({$ids}))" );
+		}
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'title' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );

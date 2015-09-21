@@ -34,7 +34,7 @@
 	color: black;
 }
 
-.TalentTalents .btn-wrapper, .FavouriteTalents .btn-wrapper {
+.TalentActivities .btn-wrapper, .FavouriteTalents .btn-wrapper {
 	display: inline-block;
 	margin: 0 0 5px 5px;
 }

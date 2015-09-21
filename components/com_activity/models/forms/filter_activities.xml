@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields name="filter">
-		<field name="published" type="status" label="COM_CONTENT_FILTER_PUBLISHED"
-			description="COM_CONTENT_FILTER_PUBLISHED_DESC" onchange="this.form.submit();">
-			<option value="">JOPTION_SELECT_PUBLISHED</option>
-		</field>
+		<field name="search" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
+			hint="JSEARCH_FILTER" class="js-stools-search-string" />
 	</fields>
-	<fields name="list">
+<!-- 	<fields name="list">
 		<field name="fullordering" type="list" label="COM_CONTENT_LIST_FULL_ORDERING"
 			description="COM_CONTENT_LIST_FULL_ORDERING_DESC" onchange="this.form.submit();"
 			default="a.title ASC">
@@ -20,4 +18,5 @@
 			default="25" label="COM_CONTENT_LIST_LIMIT" description="COM_CONTENT_LIST_LIMIT_DESC"
 			onchange="this.form.submit();" />
 	</fields>
-</form>
+ -->
+ </form>

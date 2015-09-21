@@ -7,18 +7,18 @@ JLoader::register ( 'SiteActivityHelper', JPATH_SITE . '/components/com_activity
 class JFormFieldActivityTalentsTags extends JFormField {
 	protected $type = 'ActivityTalentsTags';
 	protected $talent_list_url = 'index.php?option=com_talent&view=talent';
+	protected $itemId = '';
 	//
 	protected function getTalents() {
 		return SiteActivityHelper::getActivityTalents ( JFactory::getApplication ()->input->get ( 'id', 0 ), true );
 	}
 	//
-	protected function getTalentTag($talent) {
+	protected function getTalentTag($item) {
 		$html = array ();
-		$url = JRoute::_ ( "{$this->talent_detail_url}&id={$talent->id}" );
-		// $url = "{$this->talent_detail_url}&id={$talent->id}";
+		$url = JRoute::_ ( "{$this->talent_detail_url}&id={$item->id}" );
 		$html [] = "<span class='ActivityTalentsTagsItem'>";
 		$html [] = "<a href='{$url}' target='_blank'>";
-		$html [] = $talent->title;
+		$html [] = $item->title;
 		$html [] = '</a>';
 		$html [] = '</span>';
 		$html [] = $this->element ['separator'];
@@ -27,16 +27,17 @@ class JFormFieldActivityTalentsTags extends JFormField {
 	//
 	protected function getInput() {
 		$params = JComponentHelper::getParams ( 'com_activity' );
-		$this->talent_detail_url = $params->get ( 'talent_detail_url', '' );
+		$this->itemId = $params->get ( 'itemId', '' );
+		$this->talent_detail_url = $params->get ( 'talent_detail_url', '' ) . '&itemId=' . $this->itemId;
 		
 		$html = array ();
-		$talents = $this->getTalents ();
-		if (count ( $talents )) {
+		$items = $this->getTalents ();
+		if (count ( $items )) {
 			$id = strtolower ( "{$this->element ['name']}" );
 			$html [] = "<div class='com_activity_tags'>Talents:";
 			$html [] = "<div class='{$this->type}' id='{$id}'>";
-			foreach ( $talents as $talent ) {
-				$html [] = $this->getTalentTag ( $talent );
+			foreach ( $items as $item ) {
+				$html [] = $this->getTalentTag ( $item );
 			}
 			$html [] = '</div>';
 			$html [] = '</div>';

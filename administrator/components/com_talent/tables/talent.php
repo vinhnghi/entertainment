@@ -20,6 +20,16 @@ class TalentTableTalent extends JTable {
 		}
 		return $count;
 	}
+	protected function countTalentActivities() {
+		$count = 0;
+		$items = $this->data ['talentactivities'];
+		if ($items && count ( $items )) {
+			foreach ( $items as $item ) {
+				$count ++;
+			}
+		}
+		return $count;
+	}
 	public function store($updateNulls = false) {
 		$result = parent::store ( $updateNulls );
 		if ($result) {
@@ -71,6 +81,27 @@ class TalentTableTalent extends JTable {
 						$db->setQuery ( $query );
 						$db->execute ();
 					}
+				}
+				// save talent's activities
+				$query = $db->getQuery ( true );
+				$query->delete ( $db->quoteName ( '#__activity_talent' ) );
+				$query->where ( array (
+						$db->quoteName ( 'talent_id' ) . '=' . $this->id 
+				) );
+				$db->setQuery ( $query );
+				$db->execute ();
+				if ($this->countTalentActivities ()) {
+					$query->insert ( $db->quoteName ( '#__activity_talent' ) )->columns ( $db->quoteName ( array (
+							'activity_id',
+							'talent_id' 
+					) ) );
+					foreach ( $this->data ['talentactivities'] as $item ) {
+						if (( int ) $item > 0)
+							$query->values ( "{$item},{$this->id}" );
+					}
+					$db->setQuery ( $query );
+// 					die($db->getQuery());
+					$db->execute ();
 				}
 			}
 		}
