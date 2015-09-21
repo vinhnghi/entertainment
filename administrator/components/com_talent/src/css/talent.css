@@ -1,7 +1,8 @@
 .row-fluid .TalentImages .span3, .row-fluid .TalentImages .span4,
 	.row-fluid .TalentImages .span5, .row-fluid .TalentImages .span6,
 	.row-fluid .FavouriteImages .span3, .row-fluid .FavouriteImages .span4,
-	.row-fluid .FavouriteImages .span5, .row-fluid .FavouriteImages .span6 {
+	.row-fluid .FavouriteImages .span5, .row-fluid .FavouriteImages .span6
+	{
 	margin-top: 10px;
 	padding-top: 10px;
 	border-top: 1px solid green;

@@ -13,8 +13,7 @@ $list_description = $this->type ? $this->type->introtext . $this->type->fulltext
 $num_row_item = $this->params->get ( 'num_row_item', 3 );
 $item_width = 100 / $num_row_item - 2;
 ?>
-<form action="index.php?option=com_talent&view=favourites" method="post"
-	id="adminForm" name="adminForm">
+<form method="post" id="adminForm" name="adminForm">
 	<div class="item-page com_talent_content com_talent_list_content">
 		<div class="page-header">
 			<h2 class="com_talent_heading"><?php echo $this->heading?></h2>

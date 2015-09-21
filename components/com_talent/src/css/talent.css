@@ -133,3 +133,20 @@ div.ActivityTalentsTags {
 .pgwSlideshow {
 	margin-top: 10px;
 }
+
+.checkbox-label {
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	margin: 0 0 3px !important;
+}
+
+input[name="checkall-toggle"] {
+	margin-left: 6px !important;
+}
+
+.checkall-label {
+	margin-right: 6px !important;
+}

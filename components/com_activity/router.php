@@ -27,14 +27,25 @@ class ActivityRouter extends JComponentRouterBase {
 		else
 			return $segments;
 			// Are we dealing with an activity that is attached to a menu item?
-		if (($menuItem instanceof stdClass) && $menuItem->query ['view'] == $query ['view'] && $menuItem->query ['view'] == 'activities' && isset ( $query ['cid'] ) && $menuItem->query ['cid'] == ( int ) $query ['cid']) {
+		if (($menuItem instanceof stdClass) && //
+$menuItem->query ['view'] == $query ['view'] && //
+$menuItem->query ['view'] == 'talents' && //
+isset ( $query ['cid'] ) && //
+isset ( $menuItem->query ['cid'] ) && //
+$menuItem->query ['cid'] == ( int ) $query ['cid']) {
 			unset ( $query ['view'] );
 			unset ( $query ['layout'] );
 			unset ( $query ['cid'] );
 			return $segments;
 		}
-		// Are we dealing with an activity that is attached to a menu item?
-		if (($menuItem instanceof stdClass) && $menuItem->query ['view'] == $query ['view'] && $menuItem->query ['view'] == 'activity' && isset ( $query ['id'] ) && $menuItem->query ['id'] == ( int ) $query ['id']) {
+		
+		// Are we dealing with an talent that is attached to a menu item?
+		if (($menuItem instanceof stdClass) && //
+$menuItem->query ['view'] == $query ['view'] && //
+$menuItem->query ['view'] == 'talent' && //
+isset ( $query ['id'] ) && //
+isset ( $menuItem->query ['id'] ) && //
+$menuItem->query ['id'] == ( int ) $query ['id']) {
 			unset ( $query ['view'] );
 			unset ( $query ['layout'] );
 			unset ( $query ['id'] );

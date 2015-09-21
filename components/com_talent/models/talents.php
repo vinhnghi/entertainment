@@ -6,10 +6,23 @@ class TalentModelTalents extends JModelList {
 		return SiteTalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
 	protected function getListQuery() {
-		$query = SiteTalentHelper::getListTalentsQuery ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
+		$jinput = JFactory::getApplication ()->input;
+		$query = SiteTalentHelper::getListTalentsQuery ( $jinput->get ( 'cid', 0 ) );
 		$query->where ( 'a.published = 1' );
 		$query->where ( 'd.block = 0' );
 		$query->where ( 'd.activation = ""' );
+		$params = $jinput->getArray ( array () );
+		if (isset ( $params ['id'] )) {
+			$ids = array ();
+			foreach ( $params ['id'] as $id ) {
+				if (is_numeric ( $id )) {
+					array_push ( $ids, $id );
+				}
+			}
+			$ids = implode ( ',', $ids );
+			if ($ids)
+				$query->where ( "(a.id NOT IN ({$ids}))" );
+		}
 		// Add the list ordering clause.
 		$orderCol = $this->state->get ( 'list.ordering', 'name' );
 		$orderDirn = $this->state->get ( 'list.direction', 'asc' );

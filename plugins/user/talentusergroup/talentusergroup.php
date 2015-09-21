@@ -142,17 +142,16 @@ class PlgUserTalentUserGroup extends JPlugin {
 							$tableName = strtolower ( '#__' . $groupName );
 							$db = JFactory::getDBO ();
 							$query = $db->getQuery ( true );
-							$query->select ( '*' )->from ( $tableName );
+							$query->delete ( $tableName );
 							$query->where ( 'user_id = ' . ( int ) $userId );
 							$db->setQuery ( $query );
-							$user = $db->loadObject ();
-							if (! $user) {
-								$row = new JObject ();
-								$row->user_id = $userId;
-								$row->published = 1;
-								$ret = $db->insertObject ( $tableName, $row );
-								$db->insertid ();
-							}
+							$db->execute ();
+							$query->insert ( $tableName )->columns ( array (
+									'user_id',
+									'published' 
+							) );
+							$query->values ( $userId . ',1' );
+							$db->execute ();
 						}
 					}
 				}
