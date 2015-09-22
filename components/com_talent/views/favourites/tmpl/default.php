@@ -11,16 +11,6 @@ $listOrder = $this->escape ( $this->filter_order );
 $listDirn = $this->escape ( $this->filter_order_Dir );
 ?>
 <form method="post" id="adminForm" name="adminForm">
-	<div class="row-fluid">
-			<?php echo JText::_('COM_TALENT_FILTER')?>
-			<?php
-			echo JLayoutHelper::render ( 'joomla.searchtools.default', array (
-					'view' => $this,
-					'options' => array (
-							'filtersHidden' => false 
-					) 
-			) )?>
-	</div>
 	<table class="table table-striped table-hover com_talent_list_item">
 		<thead>
 			<tr>
@@ -44,8 +34,8 @@ $listDirn = $this->escape ( $this->filter_order_Dir );
 					$image = SiteTalentHelper::getIntroImage ( $row->images );
 					?>
 			<tr>
-				<td><img alt="<?php echo $image->alt?>"
-					src="<?php echo $image->src?>"></td>
+				<td><?php if ($image):?><img alt="<?php echo $image->alt?>"
+					src="<?php echo $image->src?>"><?php endif ?></td>
 				<td><?php $row->index = $i; echo SiteTalentHelper::getTalentDetailsHtml($row)?></td>
 				<td><a href="<?php echo $link ?>" target="_blank"
 					title="<?php echo $row->title ?>">

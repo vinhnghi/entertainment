@@ -80,8 +80,8 @@ $menuItem->query ['id'] == ( int ) $query ['id']) {
 				}
 			}
 			
-			if (isset ( $query ['id'] ) && $query ['id']) {
-				$alias = SiteTalentHelper::getTalent ( $query ['id'] )->alias;
+			if (isset ( $query ['id'] ) && $query ['id'] && $talent = SiteTalentHelper::getTalent ( $query ['id'] )) {
+				$alias = $talent ? $talent->alias : '';
 				$segments [] = "{$query ['id']}a{$this->_separator}{$alias}";
 			} else {
 				return $segments;

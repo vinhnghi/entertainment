@@ -1,0 +1,25 @@
+.page-header {
+	font-weight: 100;
+}
+
+.talentsearch {
+	
+}
+
+.talentsearch input, .mod_talentsearch textarea, .mod_talentsearch .uneditable-input
+	{
+	width: 178px !important;
+}
+
+.talentsearch select {
+	width: 192px !important;
+}
+
+.talentsearch .js-stools-container-bar, .talentsearch .js-stools-field-filter
+	{
+	margin-bottom: 3px;
+}
+
+.talentsearch button.btn, .talentsearch input[type="submit"].btn {
+	float: right;
+}

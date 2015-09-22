@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1" client="site" method="upgrade">
+	<name>mod_talentsearch</name>
+	<author>Sam Lee</author>
+	<authorEmail>lixiangmanor@hotmail.com</authorEmail>
+	<creationDate>April 2015</creationDate>
+	<version>1.0.0</version>
+	<description>MOD_TALENTSEARCH_XML_DESCRIPTION</description>
+	<languages>
+		<language tag="en-GB">en-GB.mod_talentsearch.ini</language>
+		<language tag="en-GB">en-GB.mod_talentsearch.sys.ini</language>
+	</languages>
+	<files>
+		<folder>forms</folder>
+		<folder>layouts</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+		<filename module="mod_talentsearch">mod_talentsearch.php</filename>
+		<filename>helper.php</filename>
+		<filename>mod_talentsearch.xml</filename>
+	</files>
+	<help key="JHELP_EXTENSIONS_MODULE_MANAGER_MENU" />
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="itemId" type="menuitem" required="true"
+					label="MOD_TALENTSEARCH_FIELD_ACTIVE_LABEL" description="MOD_TALENTSEARCH_FIELD_ACTIVE_DESC">
+					<option value="">MOD_TALENTSEARCH_SELECT_MENU</option>
+				</field>
+				<field name="enable_name" type="hidden" value="1" default="1"
+					required="true" />
+				<field name="enable_email" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_EMAIL" description="MOD_TALENTSEARCH_ENABLE_EMAIL_DESC"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_race" type="list" label="MOD_TALENTSEARCH_ENABLE_RACE"
+					description="MOD_TALENTSEARCH_ENABLE_RACE_DESC" default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_location" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_LOCATION" description="MOD_TALENTSEARCH_ENABLE_LOCATION_DESC"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_hair_color" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_HAIR_COLOR" description="MOD_TALENTSEARCH_ENABLE_HAIR_COLOR_DESC"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_eye_color" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_EYE_COLOR" description="MOD_TALENTSEARCH_ENABLE_EYE_COLOR_DESC"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_gender" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_GENDER" description="MOD_TALENTSEARCH_ENABLE_GENDER_DESC"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+			</fieldset>
+			<fieldset name="advanced">
+				<field name="moduleclass_sfx" type="textarea" rows="3"
+					label="MOD_TALENTSEARCH_FIELD_MODULECLASS_SFX" description="MOD_TALENTSEARCH_FIELD_MODULECLASS_SFX_DESC" />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
