@@ -34,6 +34,7 @@ $filter_fields = $displayData->filter_fields;
 			<i class="icon-search"></i>
 		</button>
 		<button type="button" class="btn hasTooltip js-stools-btn-clear"
+			onclick="jQuery(this).closest('form').find('input[type=text], textarea').val('');jQuery(this).closest('form').find('input[type=checkbox]').attr('checked', false);"
 			title="<?php echo JHtml::tooltipText('JSEARCH_FILTER_CLEAR'); ?>">
 				<?php echo JText::_('JSEARCH_FILTER_CLEAR');?>
 				</button>

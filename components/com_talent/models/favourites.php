@@ -3,16 +3,6 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelFavourites extends JModelList {
 	//
-	public static function hasIntersection($string1, $string2) {
-		$words = array_filter ( explode ( " ", $string2 ) );
-		foreach ( $words as $word ) {
-			if (stripos ( $string1, $word ) !== false) {
-				return true;
-			}
-		}
-		return false;
-	}
-	//
 	public function getItems() {
 		$items = parent::getItems ();
 		
@@ -29,19 +19,19 @@ class TalentModelFavourites extends JModelList {
 				global $email, $race, $location, $hair_color, $eye_color, $gender;
 				$talent = SiteTalentHelper::getTalent ( $item->id );
 				$user_details = $talent->user_details;
-				if ($email && ! TalentModelFavourites::hasIntersection ( $user_details ['email'], $email )) {
+				if ($email && ! SiteActivityHelper::hasIntersection ( $user_details ['email'], $email )) {
 					return false;
 				}
-				if ($race && ! TalentModelFavourites::hasIntersection ( $user_details ['race'], $race )) {
+				if ($race && ! SiteActivityHelper::hasIntersection ( $user_details ['race'], $race )) {
 					return false;
 				}
-				if ($location && ! TalentModelFavourites::hasIntersection ( $user_details ['location'], $location )) {
+				if ($location && ! SiteActivityHelper::hasIntersection ( $user_details ['location'], $location )) {
 					return false;
 				}
-				if ($hair_color && ! TalentModelFavourites::hasIntersection ( $user_details ['hair_color'], $hair_color )) {
+				if ($hair_color && ! SiteActivityHelper::hasIntersection ( $user_details ['hair_color'], $hair_color )) {
 					return false;
 				}
-				if ($eye_color && ! TalentModelFavourites::hasIntersection ( $user_details ['eye_color'], $eye_color )) {
+				if ($eye_color && ! SiteActivityHelper::hasIntersection ( $user_details ['eye_color'], $eye_color )) {
 					return false;
 				}
 				if (strlen ( $gender ) && $user_details ['gender'] != $gender) {

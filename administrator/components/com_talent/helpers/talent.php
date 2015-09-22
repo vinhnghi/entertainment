@@ -542,4 +542,15 @@ abstract class TalentHelper {
 		$db->setQuery ( $query );
 		return $db->loadObjectList ();
 	}
+	//
+	//
+	public static function hasIntersection($string1, $string2) {
+		$words = array_filter ( explode ( " ", $string2 ) );
+		foreach ( $words as $word ) {
+			if (stripos ( $string1, $word ) !== false) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

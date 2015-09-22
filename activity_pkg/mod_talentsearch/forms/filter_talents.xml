@@ -13,9 +13,8 @@
 			hint="MOD_TALENTSEARCH_HAIR_COLOR" class="js-stools-search-string" />
 		<field name="eye_color" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
 			hint="MOD_TALENTSEARCH_EYE_COLOR" class="js-stools-search-string" />
-		<field name="gender" type="list" label="MOD_TALENTSEARCH_GENDER"
+		<field name="gender" type="checkboxes" label="MOD_TALENTSEARCH_GENDER"
 			description="" onchange="this.form.submit();">
-			<option value="">MOD_TALENTSEARCH_SELECT_GENDER</option>
 			<option value="1">MOD_TALENTSEARCH_MALE</option>
 			<option value="0">MOD_TALENTSEARCH_FEMALE</option>
 		</field>

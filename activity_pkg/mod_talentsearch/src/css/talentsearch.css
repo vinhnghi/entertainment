@@ -23,3 +23,18 @@
 .talentsearch button.btn, .talentsearch input[type="submit"].btn {
 	float: right;
 }
+
+.talentsearch ul {
+	margin: 3px 0 0;
+}
+
+.talentsearch li {
+	list-style-type: none;
+	display: inline;
+	margin-right: 7px;
+}
+
+.talentsearch  input[type=checkbox], .talentsearch  input[type=radio] {
+	width: auto !important;
+	margin-right: 3px !important;
+}
