@@ -14,10 +14,6 @@ class ModActivityHelper {
 		$db->setQuery ( $query, 0, $limit );
 		$items = $db->loadObjectList ();
 		
-		$key = "$items.$itemId.$parent_id.$limit";
-		$cache = JFactory::getCache ( 'mod_activity', '' );
-		$cache->store ( $items, $key );
-		
 		return $items;
 	}
 }
