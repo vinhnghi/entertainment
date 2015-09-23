@@ -26,7 +26,6 @@ class ModTalentSearchHelper {
 	public static function getDisplayData($params) {
 		static::$params = $params;
 		static::$state = new JObject ();
-		// Protected method to auto-populate the model state.
 		static::populateState ();
 		$view = new stdClass ();
 		$view->state = static::getState ();
@@ -91,7 +90,7 @@ class ModTalentSearchHelper {
 		// Receive & set filters
 		if ($filters = $app->getUserStateFromRequest ( static::$context . '.filter', 'filter', array (), 'array' )) {
 			foreach ( $filters as $name => $value ) {
-				static::setState ( 'filter.' . $name, $value );
+				static::setState ( 'filter.' . $name, null );
 			}
 		}
 		$limit = 0;
@@ -186,5 +185,6 @@ class ModTalentSearchHelper {
 		$value = $app->getUserStateFromRequest ( static::$context . '.limitstart', 'limitstart', 0 );
 		$limitstart = ($limit != 0 ? (floor ( $value / $limit ) * $limit) : 0);
 		static::setState ( 'list.start', $limitstart );
+		$app->setUserState ( static::$context, static::$state );
 	}
 }

@@ -169,6 +169,13 @@ else
 					<jdoc:include type="component" />
 					<jdoc:include type="modules" name="position-2" style="none" />
 					<!-- End Content -->
+					<?php if ($this->countModules('bottom')) : ?>
+					<div class="clearfix"></div>
+					<div class="footer-bottom">
+						<jdoc:include type="modules" name="bottom" style="bottom" />
+						<div class="clearfix">
+					</div>
+					<?php endif; ?>
 				</main>
 				<?php if ($this->countModules('position-7')) : ?>
 					<div id="aside" class="span3">

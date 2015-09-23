@@ -5,6 +5,17 @@ class TalentModelTalents extends JModelList {
 	public function getTalentType() {
 		return SiteTalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
+	//
+	protected $fields = array (
+			'search',
+			'email',
+			'race',
+			'location',
+			'hair_color',
+			'eye_color',
+			'gender' 
+	);
+	//
 	public function getItems() {
 		$items = parent::getItems ();
 		
