@@ -58,6 +58,36 @@
 					<option value="0">JNO</option>
 					<option value="1">JYES</option>
 				</field>
+				<field name="enable_height" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_HEIGHT" description="MOD_TALENTSEARCH_ENABLE_HEIGHT"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_weight" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_WEIGHT" description="MOD_TALENTSEARCH_ENABLE_WEIGHT"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_chest" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_CHEST" description="MOD_TALENTSEARCH_ENABLE_CHEST"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_waist" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_WAIST" description="MOD_TALENTSEARCH_ENABLE_WAIST"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
+				<field name="enable_hip" type="list"
+					label="MOD_TALENTSEARCH_ENABLE_HIP" description="MOD_TALENTSEARCH_ENABLE_HIP"
+					default="0">
+					<option value="0">JNO</option>
+					<option value="1">JYES</option>
+				</field>
 				<field name="enable_gender" type="list"
 					label="MOD_TALENTSEARCH_ENABLE_GENDER" description="MOD_TALENTSEARCH_ENABLE_GENDER_DESC"
 					default="0">

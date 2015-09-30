@@ -14,6 +14,11 @@ class ModTalentSearchHelper {
 			'location',
 			'hair_color',
 			'eye_color',
+			'height',
+			'weight',
+			'chest',
+			'waist',
+			'hip',
 			'gender' 
 	);
 	//

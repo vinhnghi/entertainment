@@ -10,6 +10,24 @@ JLoader::register ( 'JSubMenuHelper', JPATH_ADMINISTRATOR . '/includes/subtoolba
 JFactory::getLanguage ()->load ( 'com_talent' );
 //
 abstract class TalentHelper {
+	//
+	public static $talentProfileFields = array (
+			'dob' => null,
+			'tel' => null,
+			'gender' => null,
+			'race' => null,
+			'location' => null,
+			'height' => null,
+			'weight' => null,
+			'chest' => null,
+			'waist' => null,
+			'hip' => null,
+			'chest' => null,
+			'shoe_size' => null,
+			'hair_color' => null,
+			'eye_color' => null 
+	);
+	//
 	public static function addSubmenu($submenu) {
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TYPES' ), 'index.php?option=com_talent&view=types', $submenu == 'types' );
 		JSubMenuHelper::addEntry ( JText::_ ( 'COM_TALENT_SUBMENU_TALENTS' ), 'index.php?option=com_talent&view=talents', $submenu == 'talents' );
@@ -128,6 +146,9 @@ abstract class TalentHelper {
 					'username' => $talent->username,
 					'email' => $talent->email 
 			);
+			foreach ( TalentHelper::$talentProfileFields as $k => $v ) {
+				$talent->user_details [$k] = $v;
+			}
 			// Load the profile data from the database.
 			$db = JFactory::getDbo ();
 			$db->setQuery ( 'SELECT profile_key, profile_value FROM #__user_profiles' . ' WHERE user_id = ' . ( int ) $talent->user_id . " AND profile_key LIKE 'profile.%'" . ' ORDER BY ordering' );
@@ -140,6 +161,9 @@ abstract class TalentHelper {
 					$talent->user_details [$k] = $v [1];
 				}
 			}
+			$talent->user_details ['chest'] = $talent->user_details ['chest'] ? ( int ) $talent->user_details ['chest'] : 0;
+			$talent->user_details ['waist'] = $talent->user_details ['waist'] ? ( int ) $talent->user_details ['waist'] : 0;
+			$talent->user_details ['hip'] = $talent->user_details ['hip'] ? ( int ) $talent->user_details ['hip'] : 0;
 			$talent->user_details ['chestwaisthip'] = "{$talent->user_details ['chest']}-{$talent->user_details ['waist']}-{$talent->user_details ['hip']}";
 		} else {
 			$talent = new stdClass ();

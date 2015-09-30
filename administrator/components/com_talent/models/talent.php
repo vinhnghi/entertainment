@@ -5,23 +5,6 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 use Joomla\Registry\Registry;
 class TalentModelTalent extends JModelAdmin {
 	//
-	protected $profileFields = array (
-			'dob',
-			'tel',
-			'gender',
-			'race',
-			'location',
-			'height',
-			'weight',
-			'chest',
-			'waist',
-			'hip',
-			'chest',
-			'shoe_size',
-			'hair_color',
-			'eye_color' 
-	);
-	//
 	public function getTalentType() {
 		return SiteTalentHelper::getTalentType ( JFactory::getApplication ()->input->get ( 'cid', 0 ) );
 	}
@@ -136,8 +119,8 @@ class TalentModelTalent extends JModelAdmin {
 		$profile_data = array (
 				'talentusergroup' => 'Talent' 
 		);
-		foreach ( $this->profileFields as $field ) {
-			$profile_data [$field] = $data ['user_details'] [$field];
+		foreach ( TalentHelper::$talentProfileFields as $k => $v ) {
+			$profile_data [$k] = $data ['user_details'] [$k];
 		}
 		$data ['profile'] = $profile_data;
 		
@@ -148,7 +131,7 @@ class TalentModelTalent extends JModelAdmin {
 				'metakey' => $data ['metakey'],
 				'metadesc' => $data ['metadesc'],
 				'talentimages' => isset ( $data ['talentimages'] ) ? $data ['talentimages'] : null,
-				'talentactivities' => isset ( $data ['talentactivities'] ) ? $data ['talentactivities'] : null
+				'talentactivities' => isset ( $data ['talentactivities'] ) ? $data ['talentactivities'] : null 
 		);
 		
 		$pattern = '#<hr\s+id=("|\')system-readmore("|\')\s*\/*>#i';
