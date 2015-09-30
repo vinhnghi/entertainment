@@ -40,16 +40,17 @@
 			<field name="location" type="text" description="" label="Location"
 				size="200" />
 			<field name="height" type="text" description="" label="Height (cm)"
-				size="30" />
+				size="30" class="validate-numeric" />
 			<field name="weight" type="text" description="" label="Weight (kg)"
-				size="30" />
+				size="30" class="validate-numeric" />
 			<field name="chest" type="text" description="" label="Chest (cm)"
-				size="30" />
+				size="30" class="validate-numeric" />
 			<field name="waist" type="text" description="" label="Waist (cm)"
+				size="30" class="validate-numeric" />
+			<field name="hip" type="text" description="" label="Hip (cm)"
 				size="30" />
-			<field name="hip" type="text" description="" label="Hip (cm)" size="30" />
 			<field name="shoe_size" type="text" description="" label="Shoe Size"
-				size="30" />
+				size="30" class="validate-numeric" />
 			<field name="hair_color" type="text" description="" label="Hair Color"
 				size="30" />
 			<field name="eye_color" type="text" description="" label="Eye Color"
@@ -84,9 +85,9 @@
 
 	<field name="talentslideshow" type="talentslideshow" label="Images"
 		description="" />
-		
+
 	<field name="talentactivitiestags" type="talentactivitiestags"
-	label="Events" separator="; " description="" />
+		label="Events" separator="; " description="" />
 
 	<fields name="images" label="Image Options">
 		<field name="image_intro" type="media" label="List Image"

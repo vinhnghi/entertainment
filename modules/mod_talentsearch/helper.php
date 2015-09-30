@@ -9,6 +9,7 @@ class ModTalentSearchHelper {
 	//
 	protected static $fields = array (
 			'name',
+			'cid',
 			'email',
 			'race',
 			'location',
@@ -37,7 +38,7 @@ class ModTalentSearchHelper {
 		$view->filterForm = static::getForm ();
 		static::$filter_fields = array ();
 		foreach ( static::$fields as $field ) {
-			$enable = ( int ) static::$params->get ( 'enable_' . $field, 0 );
+			$enable = ( int ) static::$params->get ( 'enable_' . $field, 1 );
 			if ($enable) {
 				array_push ( static::$filter_fields, 'filter_' . $field );
 			}
@@ -49,7 +50,7 @@ class ModTalentSearchHelper {
 	public static function getForm() {
 		// Get the form.
 		JForm::addFormPath ( JPATH_SITE . '/modules/mod_talentsearch/forms' );
-		// JForm::addFormPath ( JPATH_SITE . '/com_talent/models/fields' );
+		JForm::addFieldPath ( JPATH_SITE . '/modules/mod_talentsearch/fields' );
 		$form = JForm::getInstance ( static::$context, 'filter_talents', array (
 				'control' => '',
 				'load_data' => 1 

@@ -3,6 +3,9 @@
 	<fields name="filter">
 		<field name="search" type="text" label="MOD_TALENTSEARCH_NAME"
 			hint="MOD_TALENTSEARCH_NAME" class="js-stools-search-string" />
+		<field name="cid" type="talenttypes" label="MOD_TALENTSEARCH_TYPE" description="">
+			<option value="">MOD_TALENTSEARCH_SELECT_TYPE</option>
+		</field>
 		<field name="email" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
 			hint="MOD_TALENTSEARCH_EMAIL" class="js-stools-search-string" />
 		<field name="race" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
@@ -13,6 +16,16 @@
 			hint="MOD_TALENTSEARCH_HAIR_COLOR" class="js-stools-search-string" />
 		<field name="eye_color" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
 			hint="MOD_TALENTSEARCH_EYE_COLOR" class="js-stools-search-string" />
+		<field name="height" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
+			hint="MOD_TALENTSEARCH_HEIGHT" class="js-stools-search-string validate-numeric" />
+		<field name="weight" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
+			hint="MOD_TALENTSEARCH_WEIGHT" class="js-stools-search-string validate-numeric" />
+		<field name="chest" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
+			hint="MOD_TALENTSEARCH_CHEST" class="js-stools-search-string validate-numeric" />
+		<field name="waist" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
+			hint="MOD_TALENTSEARCH_WAIST" class="js-stools-search-string validate-numeric" />
+		<field name="hip" type="text" label="COM_BANNERS_SEARCH_IN_TITLE"
+			hint="MOD_TALENTSEARCH_HIP" class="js-stools-search-string validate-numeric" />
 		<field name="gender" type="checkboxes" label="MOD_TALENTSEARCH_GENDER"
 			description="" onchange="this.form.submit();">
 			<option value="1">MOD_TALENTSEARCH_MALE</option>
