@@ -175,7 +175,7 @@ class UsersControllerRegistration extends UsersController
 
 			// Redirect back to the edit screen.
 			$this->setMessage($model->getError(), 'warning');
-			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration', false));
+			$this->setRedirect(JRoute::_('index.php?option=com_users&view=registration&layout=complete', false));
 
 			return false;
 		}
