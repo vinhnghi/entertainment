@@ -140,6 +140,7 @@ abstract class TalentHelper {
 					$talent->user_details [$k] = $v [1];
 				}
 			}
+			$talent->user_details ['chestwaisthip'] = "{$talent->user_details ['chest']}-{$talent->user_details ['waist']}-{$talent->user_details ['hip']}";
 		} else {
 			$talent = new stdClass ();
 			$talent->id = '';

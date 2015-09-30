@@ -45,6 +45,8 @@
 				size="30" />
 			<field name="chest" type="text" description="" label="Chest"
 				size="30" />
+			<field name="waist" type="text" description="" label="Waist"
+				size="30" />
 			<field name="hip" type="text" description="" label="Hip" size="30" />
 			<field name="shoe_size" type="text" description="" label="Shoe Size"
 				size="30" />

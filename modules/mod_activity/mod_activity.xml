@@ -34,6 +34,14 @@
 					description="MOD_ACTIVITY_FIELD_NUM_ITEM_DESC" first="0" last="20"
 					step="1" default="5" />
 			</fieldset>
+			<fieldset name="advanced">
+				<field
+					name="moduleclass_sfx"
+					type="textarea"
+					rows="3"
+					label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+					description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+			</fieldset>
 		</fields>
 	</config>
 </extension>

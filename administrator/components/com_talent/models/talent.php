@@ -14,6 +14,7 @@ class TalentModelTalent extends JModelAdmin {
 			'height',
 			'weight',
 			'chest',
+			'waist',
 			'hip',
 			'chest',
 			'shoe_size',

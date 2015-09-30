@@ -58,13 +58,8 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
-		<field name="public_chest" type="radio" class="btn-group btn-group-yesno"
-			default="0" label="Chest">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-		<field name="public_hip" type="radio" class="btn-group btn-group-yesno"
-			default="0" label="Hip">
+		<field name="public_chestwaisthip" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Chest-Waist-Hip">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
@@ -126,13 +121,8 @@
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
-		<field name="agent_chest" type="radio" class="btn-group btn-group-yesno"
-			default="0" label="Chest">
-			<option value="1">JYES</option>
-			<option value="0">JNO</option>
-		</field>
-		<field name="agent_hip" type="radio" class="btn-group btn-group-yesno"
-			default="0" label="Hip">
+		<field name="agent_chestwaisthip" type="radio" class="btn-group btn-group-yesno"
+			default="0" label="Chest-Waist-Hip">
 			<option value="1">JYES</option>
 			<option value="0">JNO</option>
 		</field>
