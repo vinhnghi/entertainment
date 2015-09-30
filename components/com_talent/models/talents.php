@@ -83,7 +83,7 @@ class TalentModelTalents extends JModelList {
 	}
 	protected function getListQuery() {
 		$jinput = JFactory::getApplication ()->input;
-		$query = SiteTalentHelper::getListTalentsQuery ( $jinput->get ( 'cid', 0 ) );
+		$query = SiteTalentHelper::getListTalentsQuery ( $jinput->get ( 'cid', $this->getState ( 'filter.cid', 0 ) ) );
 		$query->where ( 'a.published = 1' );
 		$query->where ( 'd.block = 0' );
 		$query->where ( 'd.activation = ""' );
