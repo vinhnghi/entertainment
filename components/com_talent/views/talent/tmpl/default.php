@@ -26,7 +26,6 @@ $image = SiteTalentHelper::getFulltextImage ( $this->item->images );
 </div>
 
 	<input type="hidden" name="task" value="" /> <input type="hidden"
-		name="boxchecked" value="0" /> <input type="hidden" name="return"
-		value="<?php echo $this->return_page; ?>" /> 
+		name="boxchecked" value="0" /> 
 	<?php echo JHtml::_('form.token')?>
 </form>

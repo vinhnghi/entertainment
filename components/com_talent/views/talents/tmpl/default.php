@@ -58,7 +58,6 @@ $item_width = 100 / $num_row_item - 2;
 	<input type="hidden" name="task" value="" /> <input type="hidden"
 		name="view" value="" /> <input type="hidden" name="boxchecked"
 		value="0" /> <input type="hidden" name="filter_order" value="" /> <input
-		type="hidden" name="filter_order_Dir" value="" /> <input type="hidden"
-		name="return" value="<?php echo $this->return_page; ?>" />
+		type="hidden" name="filter_order_Dir" value="" />
 	<?php echo JHtml::_('form.token')?>
 </form>

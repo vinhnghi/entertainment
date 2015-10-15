@@ -3,6 +3,11 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentModelTalents extends JModelList {
 	protected function getListQuery() {
+		$uri = JFactory::getURI();
+		$absolute_url = $uri->toString();
+		$mainframe = JFactory::getApplication();
+		$mainframe->setUserState( "favourites.retun_page", $absolute_url );
+				
 		$jinput = JFactory::getApplication ()->input;
 		// Initialize variables.
 		$query = TalentHelper::getListTalentsQuery ( null );
