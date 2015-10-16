@@ -36,10 +36,7 @@ var elId= '<?php echo JFactory::getApplication()->input->get('elId', 'activityta
 		<?php echo JText::_('Filter'); ?>
 		<?php
 		echo JLayoutHelper::render ( 'joomla.searchtools.default', array (
-				'view' => $this,
-				'options' => array (
-						'filtersHidden' => false 
-				) 
+				'view' => $this
 		) );
 		?>
 		<div class="btn-wrapper">

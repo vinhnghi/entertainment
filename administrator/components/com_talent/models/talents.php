@@ -5,13 +5,13 @@ class TalentModelTalents extends JModelList {
 	protected function getListQuery() {
 		$jinput = JFactory::getApplication ()->input;
 		// Initialize variables.
-		$query = TalentHelper::getListTalentsQuery ( null );
+		$query = TalentHelper::getListTalentsQuery ( $jinput->get ( 'cid', $this->getState ( 'filter.cid', 0 ) ) );
 		
 		// Filter: like / search
 		$search = $this->getState ( 'filter.search' );
 		if (! empty ( $search )) {
 			$like = $this->_db->quote ( '%' . $search . '%' );
-			$query->where ( 'title LIKE ' . $like );
+			$query->where ( 'name LIKE ' . $like );
 		}
 		
 		// Filter by published state
