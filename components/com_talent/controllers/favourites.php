@@ -37,12 +37,12 @@ class TalentControllerFavourites extends JControllerForm {
 			
 			$message = JText::_ ( 'COM_TALENT_REMOVE_TALENT_FROM_FAVOURITE_SUCCESSFULLY' );
 		}
-		$this->setRedirect ( $this->getReturnPage(), $message );
+		$this->setRedirect ( $this->getReturnPage (), $message );
 	}
 	//
 	public function getReturnPage() {
-		$mainframe = JFactory::getApplication();
-		return $mainframe->getUserStateFromRequest( "favourites.return_page", 'return_page' );
+		$session = & JFactory::getSession ();
+		return $session->get ( 'retun_page' );
 	}
 	//
 	public function add() {
@@ -74,7 +74,6 @@ class TalentControllerFavourites extends JControllerForm {
 			
 			$message = JText::_ ( 'COM_TALENT_ADD_TALENT_TO_FAVOURITE_SUCCESSFULLY' );
 		}
-		die($this->getReturnPage());
-		$this->setRedirect ( $this->getReturnPage(), $message );
+		$this->setRedirect ( $this->getReturnPage (), $message );
 	}
 }

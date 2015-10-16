@@ -8,6 +8,10 @@ class TalentViewTalent extends JViewLegacy {
 	protected $script;
 	protected $canDo;
 	public function display($tpl = null) {
+		$uri = JFactory::getURI ();
+		$session = & JFactory::getSession ();
+		$session->set ( 'retun_page', $uri->toString () );
+		
 		// Get the Data
 		$this->form = $this->get ( 'Form' );
 		$this->item = $this->get ( 'Item' );
@@ -114,7 +118,6 @@ class TalentViewTalent extends JViewLegacy {
 		$params = JComponentHelper::getParams ( 'com_talent' );
 		$activity_list_url = $params->get ( 'activity_list_url', '' );
 		$document->addScriptDeclaration ( "window.activityListURL = '{$activity_list_url}'" );
-		
 		
 		$document->addScript ( JURI::root () . $this->get ( 'Script' ) );
 		$document->addStyleSheet ( JURI::root () . $this->get ( 'Css' ) );

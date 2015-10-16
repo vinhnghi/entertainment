@@ -45,11 +45,6 @@ class TalentModelTalent extends JModelAdmin {
 	}
 	//
 	public function getItem($pk = null) {
-		$uri = JFactory::getURI();
-		$absolute_url = $uri->toString();
-		$mainframe = JFactory::getApplication();
-		$mainframe->setUserState( "favourites.retun_page", $absolute_url );
-		
 		if (TalentHelper::isSite ( 'edit' )) {
 			$user = JFactory::getUser ();
 			return TalentHelper::getTalentByUserId ( $user->id );

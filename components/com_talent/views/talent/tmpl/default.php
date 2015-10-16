@@ -8,7 +8,7 @@ JHtml::_ ( 'bootstrap.tooltip' );
 
 $image = SiteTalentHelper::getFulltextImage ( $this->item->images );
 ?>
-<form method="post" id="adminForm" name="adminForm">
+<form method="post" id="adminForm" name="adminForm" action="index.php?option=com_talent&view=favourites">
 	<div class="item-page com_talent_content com_talent_list_content">
 		<div class="page-header">
 			<h2 class="com_talent_heading"><?php echo $this->heading?></h2>

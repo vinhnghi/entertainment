@@ -7,6 +7,10 @@ class TalentViewTalents extends JViewLegacy {
 	protected $canDo;
 	//
 	function display($tpl = null) {
+		$uri = JFactory::getURI();
+		$session =& JFactory::getSession();
+		$session->set( 'retun_page', $uri->toString() );
+				
 		if (TalentHelper::isSite ()) {
 			$this->type = $this->get ( 'TalentType' );
 			$this->items = $this->get ( 'Items' );

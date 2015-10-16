@@ -4,6 +4,10 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 class TalentViewFavourites extends JViewLegacy {
 	protected $canDo;
 	function display($tpl = null) {
+		$uri = JFactory::getURI ();
+		$session = & JFactory::getSession ();
+		$session->set ( 'retun_page', $uri->toString () );
+		
 		// Get application
 		$app = JFactory::getApplication ();
 		$context = "talent.list.admin.favourites";
