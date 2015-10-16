@@ -4,7 +4,7 @@ defined ( '_JEXEC' ) or die ();
 ?>
 <div class="talentsearch <?php echo $moduleclass_sfx ?>">
 	<form
-		action="<?php echo JRoute::_('index.php?option=com_talent&view=talents&itemId='.$itemId);?>"
+		action="<?php echo 'index.php?option=com_talent&view=talents&itemId='.$itemId;?>"
 		method="post" class="form-inline">
 
 		<?php echo JLayoutHelper::render('default', $displayData, JPATH_SITE.'/modules/mod_talentsearch/layouts')?>
